@@ -1,0 +1,13 @@
+layout{
+    tab_template name="remote_dev" {
+        pane size=1 borderless=false {
+            plugin location="zellij:tab-bar"
+        }
+        pane split_direction="Vertical" {
+            pane size="50%"{
+                plugin location="zellij:status-bar"
+            }
+        }
+
+    }
+}

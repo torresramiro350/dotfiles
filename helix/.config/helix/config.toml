@@ -1,0 +1,55 @@
+# side project of experimenting with the Helix text editor (which is written in Rust)
+# set the theme
+theme = "catppuccin_mocha"
+
+#configure some niceties
+[editor]
+true-color=true
+line-number = "relative"
+mouse = false
+cursorline = true
+auto-completion = true
+auto-format = true
+bufferline = "multiple"
+auto-pairs = true
+color-modes = true
+
+[editor.indent-guides]
+render = true
+
+[editor.file-picker]
+hidden = false
+
+[editor.statusline]
+separator = "round"
+center = ["diagnostics"]
+left = ["mode", "file-name", "version-control", "spinner"]
+right = ["file-encoding", "file-type", "file-line-ending"]
+# right = ["file-encoding", "file-type", "spinner"]
+# mode.separtor = "round"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "VISUAL"
+
+[editor.lsp]
+enable = true
+display-messages = true
+snippets = true
+goto-reference-include-declaration = true
+
+[keys.normal]
+# S-k = "hover"
+C-h = "jump_view_left"
+C-l = "jump_view_right"
+C-j = "jump_view_down"
+C-k = "jump_view_up"
+# C-h = "swap_with_right_split"
+"|" = ":vsplit"
+"\\" = ":hsplit"
+[keys.normal.space]
+w = ":w"
+q = ":q"
+
+
+[keys.insert]
+j = { k = "normal_mode" }

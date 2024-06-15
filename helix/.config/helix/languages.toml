@@ -1,0 +1,150 @@
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+
+[language-server.pyright.config]
+lint = false
+inlayHint.enable = false
+
+[language-server.ruff-lsp]
+command = "ruff-lsp"
+inlayHint.enable = true
+
+[language-server.ruff-lsp.config]
+format = true
+lint = true
+
+[[language]]
+name = "python"
+comment-token = "#"
+shebangs = ["python"]
+auto-format = true
+file-types = ["py", "pyi", "py3", "pyw", "ptl", "rpy", "cpy", "ipy", "pyt"]
+language-servers = [{ name = "pyright" }, { name = "ruff-lsp" }]
+
+[[language]]
+name = "rust"
+# comment-token = "//"
+file-types = ["rust"]
+auto-format = true
+
+[language-server.clangd.config]
+format = true
+lint = true
+inlayHint.enable = true
+
+[[language]]
+name = "c"
+injection-regex = "c"
+comment-token = "//"
+file-types = ["c", "h"]
+language-servers = ["clangd"]
+auto-format = true
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "cpp"
+language-servers = ["clangd"]
+auto-format = true
+indent = { tab-width = 2, unit = "  " }
+file-types = [
+  "cc",
+  "hh",
+  "c++",
+  "cpp",
+  "hpp",
+  "h",
+  "ipp",
+  "tpp",
+  "cxx",
+  "hxx",
+  "ixx",
+  "txx",
+  "ino",
+  "C",
+  "H",
+  "cu",
+  "cuh",
+  "cppm",
+  "h++",
+  "ii",
+  "inl",
+  # { glob = ".hpp.in" },
+  # { glob = ".h.in" },
+]
+
+[[language]]
+name = "latex"
+# scope = "source.tex"
+injection-regex = "tex"
+file-types = ["tex", "sty", "cls", "Rd", "bbx", "cbx"]
+comment-token = "%"
+language-servers = ["texlab"]
+indent = { tab-width = 4, unit = "\t" }
+
+
+[[language]]
+name = "bibtex"
+scope = "source.bib"
+injection-regex = "bib"
+file-types = ["bib"]
+comment-token = "%"
+language-servers = ["texlab"]
+indent = { tab-width = 4, unit = "\t" }
+auto-format = true
+
+[[language]]
+name = "markdown"
+scope = "source.md"
+injection-regex = "md|markdown"
+file-types = [
+  "md",
+  "markdown",
+  "mkd",
+  "mdwn",
+  "mdown",
+  "markdn",
+  "mdtxt",
+  "mdtext",
+  "workbook",
+  # { glob = "PULLREQ_EDITMSG" },
+]
+roots = [".marksman.toml"]
+language-servers = ["marksman", "markdown-oxide"]
+indent = { tab-width = 2, unit = "  " }
+
+
+[[language]]
+name = "markdown.inline"
+scope = "source.markdown.inline"
+injection-regex = "markdown\\.inline"
+# file-types = []
+grammar = "markdown_inline"
+
+
+[[language]]
+name = "diff"
+scope = "source.diff"
+file-types = ["diff", "patch", "rej"]
+injection-regex = "diff"
+comment-token = "#"
+indent = { tab-width = 2, unit = "  " }
+
+
+[[language]]
+name = "git-commit"
+scope = "git.commitmsg"
+# file-types = [{ glob = "COMMIT_EDITMSG" }]
+comment-token = "#"
+indent = { tab-width = 2, unit = "  " }
+rulers = [51, 73]
+text-width = 72
+
+[[language]]
+name = "yaml"
+scope = "source.yaml"
+file-types = ["yml", "yaml"]
+comment-token = "#"
+indent = { tab-width = 2, unit = "  " }
+language-servers = ["yaml-language-server", "ansible-language-server"]
+injection-regex = "yml|yaml"
