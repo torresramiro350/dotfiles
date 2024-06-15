@@ -1,7 +1,7 @@
 return {
   "nvim-lualine/lualine.nvim",
   event = "UIEnter",
-  enabled = true,
+  enabled = false,
   config = function()
     local lualine = require("lualine")
 
@@ -79,6 +79,8 @@ return {
         lualine_b = { {
           'buffers',
           max_length = vim.o.columns * 2 / 3, -- Maximum width of buffers component,
+          hide_filename_extension = true,
+          use_mode_colors = true,
           -- it can also be a function that returns
           -- the value of `max_length` dynamically.
         }, 'branch', {
@@ -89,7 +91,15 @@ return {
           sections = { 'error', 'warn', 'info', 'hint' },
           sources = { 'nvim_lsp', 'nvim_diagnostic' }
         }, },
-        lualine_c = { 'filename', {
+        lualine_c = { {
+          'filename',
+          symbols = {
+            modified = "", -- Text to show when the file is modified.
+            readonly = "", -- Text to show when the file is non-modifiable or readonly.
+            -- unnamed = '[No Name]', -- Text to show for unnamed buffers.
+            newfile = '󰎔', -- Text to show for newly created file before first write
+          }
+        }, {
           "macro-recording",
           fmt = show_macro_recording,
         },
