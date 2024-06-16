@@ -58,9 +58,11 @@ function fzum -d "View all unmerged commits across all local branches"
 end
 
 
-alias upgrade='sudo dnf5 upgrade --refresh'
-alias uninstall='sudo dnf5 remove'
-alias flatupd='flatpak update' 
+alias upgrade="sudo dnf5 upgrade --refresh"
+alias uninstall="sudo dnf5 remove"
+alias flatupd="flatpak update" 
+
+alias x="exit"
 
 alias nv='nvim'
 alias mkdir='mkdir -pv'
@@ -71,7 +73,21 @@ alias syncfiles='rsync -auzvhP'
 alias kittyconf="nvim $HOME/.config/kitty/kitty.conf"
 alias sshconfig="nvim $HOME/.ssh/config"
 
+# Tmux
+alias txnew="tmux new -s"
+alias txls="tmux list-sessions"
+alias txkill="tmux kill-session -t"
+alias txkillall="tmux kill-server"
+
+# directories 
+alias .1="cd .."
+alias .2="cd ../.."
+alias .3="cd ../../.."
+alias .4="cd ../../../.."
+alias .5="cd ../../../../.."
+
 # Git 
+alias lg="lazygit"
 alias ga="git add"
 alias gs="git status"
 alias gsw="git switch"
@@ -80,6 +96,7 @@ alias gpl="git pull"
 alias gpp="git pull && git push"
 alias gps="git push"
 
+# make it easy to edit and source the config file
 alias fishreload="source $HOME/.config/fish/config.fish"
 alias fishconfig="nvim $HOME/.config/fish/config.fish"
 
@@ -120,9 +137,25 @@ set -gx _ZO_FZF_OPTS $FZF_DEFAULT_OPTS "\
 --layout reverse --border"
 
 set -Ux FZF_COMPLETION_TRIGGER '~~'
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+if test -f /home/rtorres/miniforge3/bin/conda
+    eval /home/rtorres/miniforge3/bin/conda "shell.fish" "hook" $argv | source
+else
+    if test -f "/home/rtorres/miniforge3/etc/fish/conf.d/conda.fish"
+        . "/home/rtorres/miniforge3/etc/fish/conf.d/conda.fish"
+    else
+        set -x PATH "/home/rtorres/miniforge3/bin" $PATH
+    end
+end
+
+if test -f "/home/rtorres/miniforge3/etc/fish/conf.d/mamba.fish"
+    source "/home/rtorres/miniforge3/etc/fish/conf.d/mamba.fish"
+end
+# <<< conda initialize <<<
+
 # Set up fzf key bindings
 fzf --fish | source
-
 
 zoxide init fish | source
 starship init fish | source
