@@ -4,13 +4,13 @@ theme = "catppuccin_mocha"
 
 #configure some niceties
 [editor]
+bufferline = "multiple"
 true-color=true
 line-number = "relative"
 mouse = false
 cursorline = true
 auto-completion = true
 auto-format = true
-bufferline = "multiple"
 auto-pairs = true
 color-modes = true
 

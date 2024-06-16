@@ -5,12 +5,12 @@
 
 -- small utility function to make defining keymaps easier
 local nmap = function(mode, keys, func, additional_args)
-	additional_args = additional_args or {}
-	vim.keymap.set(mode, keys, func, additional_args)
+  additional_args = additional_args or {}
+  vim.keymap.set(mode, keys, func, additional_args)
 end
 local nmap_api = function(mode, keys, func, additional_args)
-	additional_args = additional_args or {}
-	vim.api.nvim_set_keymap(mode, keys, func, additional_args)
+  additional_args = additional_args or {}
+  vim.api.nvim_set_keymap(mode, keys, func, additional_args)
 end
 
 -- navigating buffers
@@ -37,7 +37,7 @@ nmap("i", "jj", "<Esc>", { desc = "Escape insert mode" })
 nmap("n", "|", "<cmd>vsplit<cr>", { desc = "Vertical split" })
 nmap("n", "\\", "<cmd>split<cr>", { desc = "Horizontal split" })
 nmap("n", "<C-q>", "<C-w>q", { desc = "Close split buffer" })
-nmap("n", "<C-s>", "<cmd>w<cr>", { desc = "Save changes" })
+nmap("n", "<leader>sb", "<cmd>w<cr>", { desc = "Save changes" })
 
 -- moving between buffers
 

@@ -31,6 +31,7 @@ return {
 				cmp = true,
 				dap = true,
 				flash = true,
+				fidget = true,
 				gitsigns = true,
 				gitgutter = true,
 				harpoon = true,
