@@ -2,7 +2,8 @@ return {
   "freddiehaddad/feline.nvim",
   enabled = true,
   -- event = "UIEnter",
-  event = "ColorSchemePre",
+  -- event = "ColorSchemePre",
+  event = "ColorScheme",
   config = function()
     local ctp_feline = require("catppuccin.groups.integrations.feline")
 

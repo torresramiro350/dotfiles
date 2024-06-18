@@ -12,12 +12,13 @@ config.term = "xterm-kitty"
 -- config.color_scheme = "Catppuccin Mocha"
 config.color_scheme = "catppuccin-mocha"
 
+-- config.font_size = 11.5
 config.font_size = 11.5
--- config.font_size = 14
 -- config.line_height = 1.3
 config.font = wezterm.font_with_fallback({
-  { family = "JetBrains Mono", weight = "DemiBold" },
-  -- { family = "FantasqueSansM Nerd Font", weight = "Medium" },
+  { family = "JetBrains Mono", weight = "Medium" },
+  -- { family = "CaskaydiaCove Nerd Font", weight = "Medium" },
+  -- { family = "FiraCode Nerd Font", weight = "Medium" },
   -- { family = "JetBrains Mono" },
   "Symbols Nerd Font Mono",
 })
