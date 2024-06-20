@@ -1,6 +1,7 @@
 return {
   "goolord/alpha-nvim",
-  event = "VimEnter",
+  event = { "VimEnter", "UIEnter" },
+  -- enabled = false,
   config = function()
     local status_ok, alpha = pcall(require, "alpha")
     if not status_ok then

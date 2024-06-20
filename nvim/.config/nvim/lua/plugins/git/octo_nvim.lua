@@ -1,9 +1,10 @@
 require("groups.utility_funcs")
 return {
-	priority = 1000,
+	-- priority = 1000,
 	"pwntester/octo.nvim",
 	-- event = "VeryLazy",
-	event = { "BufRead", "BufReadPost" },
+	-- event = { "BufRead", "BufReadPost" },
+	event = { "BufReadPre", "BufReadPost" },
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-telescope/telescope.nvim",

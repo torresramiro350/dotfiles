@@ -17,7 +17,7 @@ return {
           progress = true,
           name = true,
           separator = "  ",
-          exclude_lsp_names = { "null-ls" },
+          exclude_lsp_names = { "null-ls", "GitHub Copilot" },
         },
       },
     })
