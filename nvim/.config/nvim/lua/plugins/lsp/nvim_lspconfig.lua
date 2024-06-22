@@ -240,15 +240,21 @@ return {
     })
 
     -- cmake
-    lspconfig.cmake.setup({
-      capabilities = capabilities,
+    lspconfig.neocmake.setup({
       on_attach = on_attach,
-      init_options = {
-        buildDirectory = "build",
-      },
-      filetypes = "cmake",
+      capabilities = capabilities,
+      filetypes = { "cmake" },
     })
 
+    -- lspconfig.cmake.setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    --   init_options = {
+    --     buildDirectory = "build",
+    --   },
+    --   filetypes = "cmake",
+    -- })
+    --
     -- YAML
     lspconfig.yamlls.setup({
       capabilities = capabilities, -- this line is required for nvim-cmp to work with nvim-lsp

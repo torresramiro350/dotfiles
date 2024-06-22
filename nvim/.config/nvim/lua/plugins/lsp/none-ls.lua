@@ -30,10 +30,11 @@ return {
         }),
         null_ls.builtins.diagnostics.cmake_lint.with({
           filetypes = { "cmake" },
+          command = { "cmake-lint" },
         }),
         -- bash
-        null_ls.builtins.formatting.shfmt.with({
-          filetypes = { "sh", "bash", "zsh" },
+        null_ls.builtins.formatting.shellharden.with({
+          filetypes = { "sh", "bash", "zsh", "fish" },
         }),
         -- null_ls.builtins.diagnostics.vale.with({
         -- 	filetypes = { "tex", "bib" },
