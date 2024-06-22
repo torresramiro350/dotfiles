@@ -34,7 +34,7 @@ return {
         }),
         -- bash
         null_ls.builtins.formatting.shellharden.with({
-          filetypes = { "sh", "bash", "zsh", "fish" },
+          filetypes = { "sh", "bash", "zsh" },
         }),
         -- null_ls.builtins.diagnostics.vale.with({
         -- 	filetypes = { "tex", "bib" },
