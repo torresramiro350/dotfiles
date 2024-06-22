@@ -8,15 +8,17 @@ local mux = wezterm.mux
 local config = {}
 
 config.term = "xterm-kitty"
+-- config.term = "wezterm"
 -- declare fonts for terminal to use
 -- config.color_scheme = "Catppuccin Mocha"
 config.color_scheme = "catppuccin-mocha"
 
--- config.font_size = 11.5
 config.font_size = 11.5
+-- config.font_size = 13.0
 -- config.line_height = 1.3
 config.font = wezterm.font_with_fallback({
   { family = "JetBrains Mono", weight = "Medium" },
+  -- { family = "Fira Code iScript ", weight = "Medium" },
   -- { family = "CaskaydiaCove Nerd Font", weight = "Medium" },
   -- { family = "FiraCode Nerd Font", weight = "Medium" },
   -- { family = "JetBrains Mono" },
@@ -42,7 +44,6 @@ config.ssh_domains = ssh_domains
 -- config.set_environment_variables = {
 --   TERMINFO_DIRS = "/home/rtorres/.config/wezterm",
 -- }
--- config.term = "wezterm"
 
 -- controls the window padding
 config.window_frame = {

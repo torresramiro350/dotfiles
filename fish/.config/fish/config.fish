@@ -63,6 +63,7 @@ alias uninstall="sudo dnf5 remove"
 alias flatupd="flatpak update" 
 
 alias x="exit"
+alias cp="xcp"
 
 alias nv='nvim'
 alias mkdir='mkdir -pv'
