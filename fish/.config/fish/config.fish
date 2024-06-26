@@ -75,6 +75,7 @@ alias kittyconf="nvim $HOME/.config/kitty/kitty.conf"
 alias sshconfig="nvim $HOME/.ssh/config"
 
 # Tmux
+alias txat="tmux attach"
 alias txnew="tmux new -s"
 alias txls="tmux list-sessions"
 alias txkill="tmux kill-session -t"
