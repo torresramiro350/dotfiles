@@ -18,10 +18,6 @@ config.font_size = 11.5
 -- config.line_height = 1.3
 config.font = wezterm.font_with_fallback({
   { family = "JetBrains Mono", weight = "Medium" },
-  -- { family = "Fira Code iScript ", weight = "Medium" },
-  -- { family = "CaskaydiaCove Nerd Font", weight = "Medium" },
-  -- { family = "FiraCode Nerd Font", weight = "Medium" },
-  -- { family = "JetBrains Mono" },
   "Symbols Nerd Font Mono",
 })
 -- start on maximized
