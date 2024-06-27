@@ -1,13 +1,16 @@
 return {
   "folke/flash.nvim",
-  -- name = "flash",
-  -- event = { "BufReadPre", "BufNewFile", "InsertEnter" },
   event = { "InsertEnter", "BufReadPre", "BufReadPost", "BufNewFile" },
   -- @type Flash.Config
   opts = {
     modes = {
       char = {
         jump_labels = true,
+      },
+      search = {
+        enabled = true,
+        highlight = { backdrop = true },
+        jump = { history = true, register = true, nohlsearch = true },
       },
     },
     label = {

@@ -134,7 +134,6 @@ set -gx FZF_ALT_C_OPTS "\
 --preview 'eza --color=always --icons --tree --header --level=1 --group-directories-first {}'"
 
 set -gx _ZO_FZF_OPTS $FZF_DEFAULT_OPTS "\
---preview 'eza --color=always --icons --tree --level=1' \
 --bind 'ctrl-/:toggle-preview' \
 --layout reverse --border"
 
