@@ -117,13 +117,17 @@ return {
       vim.api.nvim_create_user_command("LiveGrepGitRoot", live_grep_git_root, {})
 
       nmap("n", "<leader>?", tel_bin.oldfiles, { desc = "[?] Find recently opened files" })
-      nmap("n", "<leader><space>", tel_bin.buffers, { desc = "[ ] Find existing buffers" })
+      nmap("n", "<leader><space>", function()
+        tel_bin.buffers({ sort_mru = true, ignore_current_buffer = true })
+      end, { desc = "[ ] Find existing buffers" })
       nmap("n", "<leader>/", function()
         tel_bin.current_buffer_fuzzy_find(tel_themes.get_dropdown({
           winblend = 10,
           previewer = true,
         }))
-      end, { desc = "[/] Fuzzily search in current buffer" })
+      end, {
+        desc = "[/] Fuzzily search in current buffer",
+      })
 
       nmap("n", "<leader>fb", tel.extensions.file_browser.file_browser, { desc = "File Browser", noremap = true })
       -- nmap("n", "<leader>sb", tel_bin.buffers, { desc = "[S]earch [B]uffer" })

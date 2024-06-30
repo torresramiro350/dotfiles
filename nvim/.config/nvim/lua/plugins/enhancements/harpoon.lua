@@ -33,7 +33,7 @@ return {
 		end
     -- stylua: ignore start
     nmap("n", "<leader>hl", function() toggle_telescope(harpoon:list()) end, { desc = "Open harpoon window" })
-    nmap("n", "<leader>ha", function() harpoon:list():append() end, { desc = "Append to harpoon list" })
+    nmap("n", "<leader>ha", function() harpoon:list():add() end, { desc = "Append to harpoon list" })
     nmap("n", "<leader>he", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
       { desc = "Toggle harpoon quick menu" })
     nmap("n", "<leader>hj", function() harpoon:list():select(1) end, { desc = "[H]arpoon list item 1" })

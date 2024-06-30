@@ -5,11 +5,9 @@
 
 require("groups.utility_funcs")
 -- navigating buffers
--- nmap_api("n", "bh", "<cmd>bprevious<cr>", { noremap = false })
--- nmap_api("n", "bl", "<cmd>bnext<cr>", { noremap = false })
--- nmap_api("n", "bk", "<cmd>bfirst<cr>", { noremap = false })
--- nmap_api("n", "bj", "<cmd>blast<cr>", { noremap = false })
--- nmap_api("n", "bd", "<cmd>bdelete<cr>", { noremap = false })
+
+nmap("n", "[b", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
+nmap("n", "]b", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
