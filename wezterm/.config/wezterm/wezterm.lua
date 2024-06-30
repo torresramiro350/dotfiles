@@ -13,7 +13,7 @@ config.term = "xterm-kitty"
 -- config.color_scheme = "Catppuccin Mocha"
 config.color_scheme = "catppuccin-mocha"
 
-config.font_size = 11.5
+config.font_size = 11.0
 -- config.font_size = 13.0
 -- config.line_height = 1.3
 config.font = wezterm.font_with_fallback({

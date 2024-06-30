@@ -202,21 +202,26 @@ return {
       on_attach = ruff_attach,
     })
 
-    lspconfig.pyright.setup({
-      cmd = { "pyright-langserver", "--stdio" },
+    lspconfig.pylsp.setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      settings = {
-        python = {
-          analysis = {
-            autoSearchPaths = true,
-            diagnosticMode = "openFilesOnly",
-            useLibraryCodeForTypes = true,
-          },
-        },
-      },
-      single_file_support = true,
     })
+
+    -- lspconfig.pyright.setup({
+    --   cmd = { "pyright-langserver", "--stdio" },
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    --   settings = {
+    --     python = {
+    --       analysis = {
+    --         autoSearchPaths = true,
+    --         diagnosticMode = "openFilesOnly",
+    --         useLibraryCodeForTypes = true,
+    --       },
+    --     },
+    --   },
+    --   single_file_support = true,
+    -- })
 
     -- require("lspconfig").pylyzer.setup({
     --   capabilities = capabilities,
