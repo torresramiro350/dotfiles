@@ -8,12 +8,14 @@ return {
   },
   config = function()
     local barbecue = require("barbecue")
+    local navic = require("nvim-navic").setup({
+      highlight = true,
+    })
     barbecue.setup({
       -- add options here
       show_dirname = true,
       show_basename = true,
       theme = "catppuccin",
-      -- theme = "auto",
       attach_navic = false,
       create_autocmd = false,
     })
