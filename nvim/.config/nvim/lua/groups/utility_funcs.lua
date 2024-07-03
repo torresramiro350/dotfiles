@@ -1,8 +1,7 @@
 -- check whether we are within a git repo
---
+-- search for the `.git` repo in the current working directory, from the current directory
+-- up to through parent directories
 function in_git()
-  -- search for the `.git` repo in the current working directory, from the current directory
-  -- up to through parent directories
   local git_dir = vim.fn.finddir(".git", ".;")
   if git_dir ~= "" then
     return true

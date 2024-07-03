@@ -9,8 +9,6 @@ return {
   -- vim.defer_fn(function()
   -- end, 0)
   config = function()
-    local gs = require("gitsigns")
-    local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
     require("nvim-treesitter.configs").setup({
       -- Add languages to be installed here that you want installed for treesitter
       ensure_installed = { "c", "cpp", "go", "lua", "python", "rust", "vimdoc", "vim", "bash", "cmake" },
@@ -31,7 +29,6 @@ return {
       textobjects = {
         lsp_interop = {
           enable = true,
-          -- border = "none",
           border = "rounded",
           peek_definition_code = {
             ["<leader>df"] = "@function.outer",

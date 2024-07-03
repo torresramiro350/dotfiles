@@ -36,12 +36,6 @@ return {
 				local next_hunk_repeat, prev_hunk_repeat =
 					ts_repeat_move.make_repeatable_move_pair(gitsigns.next_hunk, gitsigns.prev_hunk)
 
-				local nmap = function(mode, keys, func, additional_args)
-					additional_args = additional_args or {}
-					additional_args.buffer = bufnr
-					vim.keymap.set(mode, keys, func, additional_args)
-				end
-
 				nmap({ "n", "x", "o" }, "]h", next_hunk_repeat)
 				nmap({ "n", "x", "o" }, "[h", prev_hunk_repeat)
 

@@ -1,11 +1,7 @@
+require("groups.utility_funcs")
 return {
 	"danymat/neogen",
 	config = function()
-		-- adding some keybindings
-		local nmap = function(mode, keys, func, additional_args)
-			additional_args = additional_args or {}
-			vim.keymap.set(mode, keys, func, additional_args)
-		end
 		-- Neogen keymaps
 		-- leaving the keymappings here, otherwise the plugin is loaded
 		-- unnecessarily at startup

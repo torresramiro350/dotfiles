@@ -1,3 +1,4 @@
+require("groups.utility_funcs")
 return {
 	"ThePrimeagen/harpoon",
 	branch = "harpoon2",
@@ -24,12 +25,6 @@ return {
 					sorter = conf.generic_sorter({}),
 				})
 				:find()
-		end
-		--
-		--
-		local nmap = function(mode, keys, func, additional_args)
-			additional_args = additional_args or {}
-			vim.keymap.set(mode, keys, func, additional_args)
 		end
     -- stylua: ignore start
     nmap("n", "<leader>hl", function() toggle_telescope(harpoon:list()) end, { desc = "Open harpoon window" })

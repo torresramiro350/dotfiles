@@ -11,10 +11,6 @@ return {
 		"nvim-tree/nvim-web-devicons",
 	},
 	config = function()
-		local nmap = function(mode, keys, func, additional_args)
-			additional_args = additional_args or {}
-			vim.keymap.set(mode, keys, func, additional_args)
-		end
 		local octo = require("octo")
 		octo.setup({
 			picker = "telescope",
