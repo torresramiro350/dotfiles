@@ -1,6 +1,6 @@
 return {
   "folke/flash.nvim",
-  event = { "InsertEnter", "BufReadPre", "BufReadPost", "BufNewFile" },
+  event = { "BufReadPre", "BufNewFile" },
   -- @type Flash.Config
   opts = {
     modes = {
@@ -17,7 +17,7 @@ return {
       uppercase = true,
       rainbow = {
         enabled = true,
-        shade = 3,
+        shade = 2,
       },
     },
   },

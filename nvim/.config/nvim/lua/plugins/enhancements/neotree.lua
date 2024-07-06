@@ -2,9 +2,7 @@ require("groups.utility_funcs")
 
 return {
 	"nvim-neo-tree/neo-tree.nvim",
-	-- event = { "BufReadPre", "BufNewFile" },
-	event = { { "BufNewFile", "BufReadPre", "BufReadPre" } },
-	-- keys = { nmap("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "File list" }) },
+	event = { "BufNewFile", "BufReadPre", "BufReadPre" },
 	version = "*",
 	dependencies = {
 		"nvim-lua/plenary.nvim",

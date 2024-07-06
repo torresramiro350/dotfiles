@@ -1,8 +1,14 @@
 -- [[ Setting options ]]
+
+-- Preview substitutions live, as you type!
+vim.opt.inccommand = "split"
+
 -- nerd fonts
 vim.g.have_nerd_font = true
+
 -- copilot settings
 vim.g.copilot_no_tab_map = false
+
 -- Place all the general Neovim options
 vim.g.gitblame_display_virtual_text = 1
 vim.g.mapleader = " "

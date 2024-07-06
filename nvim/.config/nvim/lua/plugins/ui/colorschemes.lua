@@ -36,6 +36,13 @@ return {
         gitgutter = true,
         harpoon = true,
         mason = true,
+        mini = {
+          enabled = true,
+          -- indentscope_color = "",
+          indentscope_color = function(mocha)
+            return mocha.lavender
+          end,
+        },
         navic = {
           enabled = true,
         },

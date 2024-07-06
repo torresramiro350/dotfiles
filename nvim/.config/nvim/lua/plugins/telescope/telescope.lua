@@ -9,6 +9,7 @@ return {
   },
   {
     "crispgm/telescope-heading.nvim",
+    ft = { "markdown", "vimwiki" },
     event = { "BufReadPre", "BufNewFile" },
     config = function() end,
   },
@@ -39,11 +40,11 @@ return {
             i = {
               ["<C-u>"] = false,
               ["<C-d>"] = false,
-              ["<C-j>"] = {
+              ["<C-n>"] = {
                 actions.move_selection_next,
                 type = "action",
               },
-              ["<C-k>"] = {
+              ["<C-p>"] = {
                 actions.move_selection_previous,
                 type = "action",
               },
@@ -133,7 +134,8 @@ return {
       nmap("n", "<leader>sg", tel_bin.live_grep, { desc = "[S]earch by [G]rep" })
       nmap("n", "<leader>sd", tel_bin.diagnostics, { desc = "[S]earch [D]iagnostics" })
       nmap("n", "<leader>sr", tel_bin.resume, { desc = "[S]earch [R]esume" })
-      nmap("n", "<leader>sG", ":LiveGrepGitRoot<cr>", { desc = "[S]earch by [G]rep on Git Root" })
+      nmap("n", "<leader>sG", "<cmd>LiveGrepGitRoot<cr>", { desc = "[S]earch by [G]rep on Git Root" })
+      nmap("n", "<leader>sH", "<cmd>Telescope heading<cr>", { desc = "[S]earch by [H]eading" })
     end,
     branch = "0.1.x",
     dependencies = {
