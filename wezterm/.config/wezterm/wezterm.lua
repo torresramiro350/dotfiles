@@ -14,10 +14,11 @@ config.term = "xterm-kitty"
 config.color_scheme = "catppuccin-mocha"
 
 config.font_size = 11.0
--- config.font_size = 13.0
--- config.line_height = 1.3
+-- config.font_size = 12
+config.line_height = 1.1
 config.font = wezterm.font_with_fallback({
   { family = "JetBrains Mono", weight = "Medium" },
+  -- { family = "CaskaydiaCove Nerd Font", weight = "Regular" },
   "Symbols Nerd Font Mono",
 })
 -- start on maximized
