@@ -1,6 +1,5 @@
 return {
   "nvim-lualine/lualine.nvim",
-  -- event = "UIEnter",
   event = "ColorScheme",
   enabled = false,
   config = function()
@@ -61,33 +60,35 @@ return {
         table.insert(c, client.name)
         ::continue::
       end
-      return table.concat(c, "  ")
+      return table.concat(c, "| ")
     end
 
     -- Color table for highlights
     -- stylua: ignore
     lualine.setup({
       options = {
-        theme = "auto",
-        -- theme = "catppuccin",
-        component_separators = { left = '', right = '' },
+        -- theme = "auto",
+        theme = "catppuccin",
+        component_separators = { left = '|', right = '|' },
         section_separators = { left = '', right = '' },
-        -- section_separators = { left = '', right = '' },
-        -- component_separators = { left = '', right = '' },
       },
+      always_divide_middle = true,
+      globalstatus = false,
       sections = {
 
-        lualine_b = { {
-          'buffers',
-          max_length = vim.o.columns * 2 / 3, -- Maximum width of buffers component,
-          hide_filename_extension = true,
-          use_mode_colors = true,
-          -- it can also be a function that returns
-          -- the value of `max_length` dynamically.
-        }, 'branch', {
-          'diff',
-          symbols = { added = '+', modified = '~', removed = '-' },
-        }, {
+        lualine_b = {
+          {
+            'buffers',
+            max_length = vim.o.columns * 2 / 3, -- Maximum width of buffers component,
+            hide_filename_extension = true,
+            use_mode_colors = false,
+            -- it can also be a function that returns
+            -- the value of `max_length` dynamically.
+          }, 'branch',
+          {
+            'diff',
+            symbols = { added = '+', modified = '~', removed = '-' },
+          }, {
           'diagnostics',
           sections = { 'error', 'warn', 'info', 'hint' },
           sources = { 'nvim_lsp', 'nvim_diagnostic' }

@@ -1,7 +1,16 @@
 -- [[ Setting options ]]
+--
+-- Sets how neovim will display certain whitespace characters in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+vim.opt.list = true
+
+-- Don't show the mode, since it's already in the status line
+vim.opt.showmode = false
 
 -- Preview substitutions live, as you type!
-vim.opt.inccommand = "split"
+-- vim.opt.inccommand = "split"
+vim.opt.icm = "split"
 
 -- nerd fonts
 vim.g.have_nerd_font = true
@@ -81,7 +90,13 @@ vim.wo.signcolumn = "yes"
 
 -- Decrease update time
 vim.o.updatetime = 250
+
+-- Decrease mapped sequence wait time
+-- Displays which-key popup sooner
 vim.o.timeoutlen = 300
+
+-- Minimal number of screen lines to keep above and below the cursor.
+vim.opt.scrolloff = 10
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menuone,noselect"

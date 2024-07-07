@@ -49,6 +49,7 @@ return {
     })
 
     cmp.setup({
+
       view = {
         entries = { name = "custom", selection_order = "near_cursor" },
       },
@@ -109,8 +110,8 @@ return {
       -- source completion list
       sources = cmp.config.sources({
         { name = "nvim_lsp", group_index = 2 },
-        { name = "buffer",   group_index = 2 },
         { name = "luasnip",  group_index = 2 },
+        { name = "buffer",   group_index = 2 },
         { name = "path",     group_index = 2 },
       }),
       -- configure lspkind for vs-code like pictograms in completion menu

@@ -1,8 +1,8 @@
 return {
-  -- event = "UIEnter",
   "rcarriga/nvim-notify",
-  -- event = { "BufReadPre", "BufNewFile" },
-  event = "VeryLazy",
+  -- event = "VeryLazy",
+  -- event = "UIEnter",
+  event = { "BufReadPre", "BufNewFile" },
   config = function()
     vim.notify = require("notify")
     local notify = require("notify")

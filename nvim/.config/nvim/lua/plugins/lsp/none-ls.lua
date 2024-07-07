@@ -1,4 +1,6 @@
 return {
+  -- TODO: testing out the conform plugin
+  enabled = false,
   "nvimtools/none-ls.nvim",
   config = function()
     local null_ls = require("null-ls")
