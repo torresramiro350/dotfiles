@@ -45,9 +45,6 @@ return {
         })
       end,
     },
-
-    -- -- Additional lua configuration, makes nvim stuff amazing!
-    -- "folke/neodev.nvim",
   },
   config = function()
     --import lspconfig plugin
@@ -164,35 +161,6 @@ return {
     })
 
     -- configure python server
-    -- NOTE: only available for free with open source projects (hope to use
-    -- it in the future)
-
-    local sourcery_file = io.open(vim.fn.expand("~/.config/nvim/sourcery_token.txt"), "r")
-    if sourcery_file then
-      MYTOKEN = sourcery_file:read("*line")
-      sourcery_file.close()
-    else
-      print("No sourcery file found")
-    end
-
-    lspconfig.sourcery.setup({
-      capabilities = capabilities,
-      on_attach = ruff_attach,
-      init_options = {
-        token = MYTOKEN,
-        editor_version = "vim",
-      },
-      filetypes = { "python" },
-      cmd = { "sourcery", "lsp" },
-      single_file_support = true,
-    })
-
-    -- lspconfig.ruff_lsp.setup({
-    --   capabilities = capabilities,
-    --   on_attach = ruff_attach,
-    --   filetypes = { "python" },
-    -- })
-
     lspconfig.ruff.setup({
       cmd = { "ruff", "server", "--preview" },
       filetypes = { "python" },
@@ -215,24 +183,6 @@ return {
       },
       single_file_support = true,
     })
-
-    -- lspconfig.pylyzer.setup({
-    --   capabilities = capabilities,
-    --   -- on_attach = on_attach,
-    --   filetypes = { "python" },
-    --   on_attach = ruff_attach,
-    --   cmd = { "pylyzer", "--server" },
-    --   settings = {
-    --     python = {
-    --       checkOnType = false,
-    --       diagnostics = true,
-    --       inlayHints = true,
-    --       smartCompletion = true,
-    --     },
-    --   },
-    -- })
-    --
-    --
     --bash
     lspconfig.bashls.setup({
       capabilities = capabilities,
@@ -247,15 +197,6 @@ return {
       filetypes = { "cmake" },
     })
 
-    -- lspconfig.cmake.setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    --   init_options = {
-    --     buildDirectory = "build",
-    --   },
-    --   filetypes = "cmake",
-    -- })
-    --
     -- YAML
     lspconfig.yamlls.setup({
       capabilities = capabilities, -- this line is required for nvim-cmp to work with nvim-lsp
@@ -323,7 +264,7 @@ return {
     local _augroups = {}
     local get_augroup = function(client)
       if not _augroups[client.id] then
-        local group_name = "kickstart-lsp-format-" .. client.name
+        local group_name = "lsp-format-" .. client.name
         local id = vim.api.nvim_create_augroup(group_name, { clear = true })
         _augroups[client.id] = id
       end
@@ -335,7 +276,7 @@ return {
     --
     -- See `:help LspAttach` for more information about this autocmd event.
     vim.api.nvim_create_autocmd("LspAttach", {
-      group = vim.api.nvim_create_augroup("kickstart-lsp-attach-format", { clear = true }),
+      group = vim.api.nvim_create_augroup("lsp-attach-format", { clear = true }),
       -- This is where we attach the autoformatting for reasonable clients
       callback = function(args)
         local client_id = args.data.client_id
