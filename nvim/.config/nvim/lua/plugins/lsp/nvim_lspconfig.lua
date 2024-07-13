@@ -75,6 +75,15 @@ return {
         vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
       end
       local builtins = require("telescope.builtin")
+      local function diagnostic_goto(direction, severity)
+        local go = vim.diagnostic["goto_" .. (direction and "next" or "prev")]
+        if type(severity) == "string" then
+          severity = vim.diagnostic.severity[severity]
+        end
+        return function()
+          go({ severity = severity })
+        end
+      end
 
       nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
       nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
@@ -88,6 +97,30 @@ return {
       -- See `:help K` for why this keymap
       nmap("K", vim.lsp.buf.hover, "Hover Documentation")
       nmap("<leader>k", vim.lsp.buf.signature_help, "Signature Documentation")
+
+      -- Diagnostic keymaps
+      nmap("[d", diagnostic_goto(false), "Go to previous diagnostic message")
+      nmap("]d", diagnostic_goto(true), "Go to next diagnostic message")
+
+      nmap("[e", diagnostic_goto(false, "ERROR"), "Go to previous error")
+      nmap("]e", diagnostic_goto(true, "ERROR"), "Go to next error")
+      nmap("[w", diagnostic_goto(false, "WARN"), "Go to previous warning")
+      nmap("]w", diagnostic_goto(true, "WARN"), "Go to next warning")
+
+      nmap("]q", vim.cmd.cnext, "Go to next quickfix item")
+      nmap("[q", vim.cmd.cnext, "Go to previous quickfix item")
+      nmap("]Q", vim.cmd.clast, "End of quickfix list")
+      nmap("[Q", vim.cmd.cfirst, "Beginning of quickfix list")
+
+      nmap("[l", vim.cmd.lnext, "Next loclist")
+      nmap("]l", vim.cmd.lprev, "Previous loclist")
+      nmap("]L", vim.cmd.llast, "End of loclist")
+      nmap("[L", vim.cmd.lfirst, "Beginning of loclist")
+
+      nmap("<leader>e", vim.diagnostic.open_float, "Open [F]loating [D]iagnostic message")
+
+      nmap("<leader>xl", vim.diagnostic.setloclist, "Open [D]iagnostics [L]ist")
+      nmap("<leader>xq", vim.diagnostic.setqflist, "Open [Q]uickfix [L]ist")
 
       -- Lesser used LSP functionality
       nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
@@ -161,7 +194,9 @@ return {
     })
 
     -- configure python server
-    lspconfig.ruff.setup({
+    -- since it's in alpha stage, we need to use the ruff-lsp server
+    -- lspconfig.ruff.setup({
+    lspconfig.ruff_lsp.setup({
       cmd = { "ruff", "server", "--preview" },
       filetypes = { "python" },
       capabilities = capabilities,

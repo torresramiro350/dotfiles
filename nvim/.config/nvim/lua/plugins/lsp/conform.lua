@@ -12,7 +12,8 @@ return {
         cmake = { "cmake_format" },
         python = function(bufnr)
           if conform.get_formatter_info("ruff_format", bufnr).available then
-            return { "ruff_format" }
+            -- return { "ruff_format" } -- not supported by ruff as of yet
+            return { "isort", "ruff_format" }
           else
             return { "isort", "black" }
           end

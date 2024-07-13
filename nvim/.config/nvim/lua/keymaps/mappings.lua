@@ -33,12 +33,6 @@ nmap("n", "<leader>w", "<cmd>w<cr>", { desc = "Save changes" })
 nmap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 nmap("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
--- Diagnostic keymaps
-nmap("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-nmap("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
-nmap("n", "<leader>fd", vim.diagnostic.open_float, { desc = "Open [F]loating [D]iagnostic message" })
-nmap("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Open [D]iagnostics [L]ist" })
-
 -- NOTE: these keybindings are for usage without smart-splits
 nmap("n", "<C-j>", "<c-w>j", { desc = "Move to lower split" })
 nmap("n", "<C-k>", "<c-w>k", { desc = "Move to upper split" })

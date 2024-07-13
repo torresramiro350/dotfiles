@@ -8,13 +8,13 @@ return {
     ctp_feline.setup({
       --- default setup
       inactive = {
-        -- "file_info",
+        "file_info",
       },
       view = {
         lsp = {
           progress = true,
           name = true,
-          -- separator = "",
+          separator = "|",
           exclude_lsp_names = { "null-ls", "GitHub Copilot" },
         },
       },

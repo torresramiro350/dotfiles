@@ -35,6 +35,7 @@ return {
         gitsigns = true,
         gitgutter = true,
         harpoon = true,
+        headlines = true,
         mason = true,
         mini = {
           enabled = true,
@@ -45,6 +46,26 @@ return {
         },
         navic = {
           enabled = true,
+        },
+        native_lsp = {
+          enabled = true,
+          virtual_text = {
+            errors = { "italic" },
+            hints = { "italic" },
+            warnings = { "italic" },
+            information = { "italic" },
+            ok = { "italic" },
+          },
+          underlines = {
+            errors = { "underline" },
+            hints = { "underline" },
+            warnings = { "underline" },
+            information = { "underline" },
+            ok = { "underline" },
+          },
+          inlay_hints = {
+            background = true,
+          },
         },
         noice = true,
         neotree = true,
@@ -57,6 +78,7 @@ return {
         treesitter = true,
         ts_rainbow = true,
         which_key = true,
+        ufo = true,
       },
       highlight_overrides = {
         mocha = function(mocha)
