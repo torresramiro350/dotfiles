@@ -5,9 +5,16 @@ return {
   config = function()
     -- icons
     -- TODO: maybe later
-    -- require("mini.icons").setup({
-    --   style = "glyph",
-    -- })
+    require("mini.icons").setup({
+      style = "glyph",
+    })
+    --
+    local ts_context = require("ts_context_commentstring.internal")
+    require("mini.comment").setup({
+      custom_commentstring = function()
+        return ts_context.calculate_commentstring() or vim.bo.commentstring
+      end,
+    })
 
     -- pairs
     require("mini.pairs").setup()
@@ -20,8 +27,31 @@ return {
     --  - ci'  - [C]hange [I]nside [']quote
 
     -- Better text objects
-    require("mini.ai").setup({
+    local ai = require("mini.ai")
+    ai.setup({
       n_lines = 500,
+      custom_textobjects = {
+        o = ai.gen_spec.treesitter({
+          a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+          i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+        }),
+        f = ai.gen_spec.treesitter({
+          a = { "@function.outer" },
+          i = { "@function.inner" },
+        }),
+        c = ai.gen_spec.treesitter({
+          a = { "@class.outer" },
+          i = { "@class.inner" },
+        }),
+        t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" }, -- tags
+        d = { "%f[%d]%d+" },                                            -- digits
+        e = {                                                           -- Word with case
+          { "%u[%l%d]+%f[^%l%d]", "%f[%S][%l%d]+%f[^%l%d]", "%f[%P][%l%d]+%f[^%l%d]", "^[%l%d]+%f[^%l%d]" },
+          "^().*()$",
+        },
+        u = ai.gen_spec.function_call(),                       -- u for "Usage"
+        U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
+      },
       mappings = {
         -- Main textobject prefixes
         around = "a",
@@ -46,12 +76,12 @@ return {
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require("mini.surround").setup({
       mappings = {
-        add = "sa",
-        delete = "ds",
-        find = "sf",  -- find surrounding to the right
-        find_left = "sF", -- find surrounding to the left
-        replace = "rs",
-        highlight = "sh",
+        add = "gsa",
+        delete = "gsd",
+        find = "gsf",  -- find surrounding to the right
+        find_left = "gsF", -- find surrounding to the left
+        replace = "gsr",
+        highlight = "gsh",
       },
       n_lines = 500,
     })

@@ -3,6 +3,9 @@
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
+
+--  set the cmdheight to 0 to avoid the extra space
+vim.opt.cmdheight = 0
 vim.opt.list = true
 
 -- Don't show the mode, since it's already in the status line
@@ -28,8 +31,7 @@ vim.o.background = "dark"
 -- These options were reccommended by nvim-ufo
 -- See: https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
 vim.opt.foldcolumn = "0"
--- vim.opt.foldlevel = 99
-vim.opt.foldlevel = 20
+vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 10
 vim.opt.foldenable = true
 -- draw the status line over the whole window
@@ -56,6 +58,7 @@ vim.opt.breakindent = true
 -- Better splitting
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+vim.opt.splitkeep = "screen"
 
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!

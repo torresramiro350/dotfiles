@@ -36,6 +36,10 @@ return {
         gitgutter = true,
         harpoon = true,
         headlines = true,
+        illuminate = {
+          enabled = true,
+          lsp = false,
+        },
         mason = true,
         mini = {
           enabled = true,

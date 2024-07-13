@@ -33,6 +33,6 @@ return {
         },
       },
     })
-    nmap("n", "<leader>E", "<cmd>Neotree toggle<cr>", { desc = "File list" })
+    nmap("n", "<leader>fe", "<cmd>Neotree toggle<cr>", { desc = "File list" })
   end,
 }

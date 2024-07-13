@@ -156,11 +156,11 @@ return {
     end
 
     -- julia
-    -- lspconfig.julials.setup({
-    --   capabilities = capabilities,
-    --   filetypes = { "julia" },
-    --   on_attach = on_attach,
-    -- })
+    lspconfig.julials.setup({
+      capabilities = capabilities,
+      filetypes = { "julia" },
+      on_attach = on_attach,
+    })
 
     --latex
     lspconfig.texlab.setup({
