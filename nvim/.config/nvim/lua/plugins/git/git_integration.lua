@@ -46,7 +46,8 @@ return {
         changedelete = { text = "▎" },
       },
       on_attach = function(bufnr)
-        local gs = require("gitsigns")
+        -- local gs = require("gitsigns")
+        local gs = package.loaded.gitsigns
         local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
         local next_hunk_repeat, prev_hunk_repeat =
             ts_repeat_move.make_repeatable_move_pair(gs.next_hunk, gs.prev_hunk)
@@ -72,7 +73,6 @@ return {
         -- stylua: ignore stop
 
         -- don't override the built-in and fugitive keymaps
-        local gs = package.loaded.gitsigns
         nmap({ "n", "v" }, "]h", function()
           if vim.wo.diff then
             return "]h"
