@@ -21,3 +21,32 @@ Structure of the configuration:
 └──  sourcery_token.txt
 
 ```
+
+## Lazy loading
+
+I try to keep to lazy load as many plugins as possible.
+Here's a breakdown of my current plugins:
+
+### UI
+
+- [ ] nvim-tree
+- [ ] aerial
+- [ ] barbecue
+- [ ] noice
+- [ ] feline
+- [ ] rainbow color pairs
+- [ ] ufo
+- [ ] alpha
+
+### colorscheme
+
+Using the `catppuccin` colorscheme. I love the `mocha` variant
+
+### LSP
+
+Formatting:
+
+> formatting is only provided for the LSPs that don't have a built-in formatter
+
+- conform.nvim
+- nvim-lspconfig

@@ -77,7 +77,10 @@ return {
         notify = true,
         octo = true,
         rainbow_delimiters = true,
-        telescope = true,
+        telescope = {
+          enabled = true,
+          -- style = "nvchad",
+        },
         lsp_trouble = true,
         treesitter = true,
         ts_rainbow = true,

@@ -22,6 +22,7 @@ return {
       -- See `:help telescope` and `:help telescope.setup()`
       local actions = require("telescope.actions")
       require("telescope").setup({
+
         extensions = {
           file_browser = {
             -- theme = "catppuccin",
@@ -35,6 +36,15 @@ return {
           },
         },
         defaults = {
+          layout_config = {
+            horizontal = { preview_cutoff = 80, preview_width = 0.55 },
+            vertical = { mirror = true, preview_cutoff = 25 },
+            prompt_position = "top",
+            width = 0.87,
+            height = 0.80,
+          },
+          sorting_strategy = "ascending",
+          layout_strategy = "flex",
           mappings = {
             -- add mappings in insert mode
             i = {

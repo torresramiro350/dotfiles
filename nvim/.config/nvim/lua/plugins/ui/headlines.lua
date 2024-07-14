@@ -5,6 +5,10 @@ return {
   event = { "BufRead", "BufNewFile" },
   config = function()
     local headlines = require("headlines")
-    headlines.setup({})
+    headlines.setup({
+      markdown = {
+        fat_headlines = true,
+      },
+    })
   end,
 }
