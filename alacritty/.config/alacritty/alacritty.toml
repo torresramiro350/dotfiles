@@ -34,8 +34,9 @@ opacity = 1
 decorations = "full"
 blur = false
 decorations_theme_variant = "None"
-dynamic_padding = false
+dynamic_padding = true
 dynamic_title = true
+padding = { x = 3, y = 3 }
 title = "Alacritty"
 
 [window.class]
@@ -45,7 +46,3 @@ instance = "Alacritty"
 [window.dimensions]
 columns = 180
 lines = 45
-
-[window.padding]
-x = 0
-y = 0

@@ -1,7 +1,14 @@
 -- Basing myself heavily on others' configuration files
 
--- Configure ssh domains
+function scheme_for_appearance(appearance)
+  if appearance:find("Dark") then
+    return "Catppuccin Mocha"
+  else
+    return "Catppuccin Latte"
+  end
+end
 
+-- Configure ssh domains
 local ssh_domains = {}
 local wezterm = require("wezterm")
 local mux = wezterm.mux
@@ -11,7 +18,8 @@ config.term = "xterm-kitty"
 -- config.term = "wezterm"
 -- declare fonts for terminal to use
 -- config.color_scheme = "Catppuccin Mocha"
-config.color_scheme = "catppuccin-mocha"
+-- config.color_scheme = "catppuccin-mocha"
+config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
 
 config.font_size = 11.0
 -- config.font_size = 12
@@ -21,6 +29,7 @@ config.font = wezterm.font_with_fallback({
   -- { family = "CaskaydiaCove Nerd Font", weight = "Regular" },
   "Symbols Nerd Font Mono",
 })
+
 -- start on maximized
 -- wezterm.on("gui-startup", function(cmd)
 --   local tab, pane, window = mux.spawn_window(cmd or {})

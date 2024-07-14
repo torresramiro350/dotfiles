@@ -19,6 +19,46 @@ return {
     -- pairs
     require("mini.pairs").setup()
 
+    init = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = {
+          "alpha",
+          "dashboard",
+          "fzf",
+          "help",
+          "lazy",
+          "lazyterm",
+          "mason",
+          "neo-tree",
+          "notify",
+          "toggleterm",
+          "Trouble",
+          "trouble",
+        },
+        callback = function()
+          vim.b.miniindentscope_disable = true
+        end,
+      })
+    end
+    -- indent
+    -- local mini_indent = require("mini.indentscope")
+    -- mini_indent.setup({
+    --   draw = {
+    --     animation = mini_indent.gen_animation.none(),
+    --   },
+    --   symbol = "│",
+    --   options = { try_as_border = true },
+    --   mappings = {
+    --     -- Textobjects
+    --     object_scope = "ii",
+    --     object_scope_with_border = "ai",
+    --
+    --     -- Motions (jump to respective border line; if not present - body line)
+    --     goto_top = "[i",
+    --     goto_bottom = "]i",
+    --   },
+    -- })
+
     -- Better Around/Inside textobjects
     --
     -- Examples:

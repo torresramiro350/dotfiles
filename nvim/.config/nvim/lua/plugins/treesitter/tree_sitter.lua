@@ -50,6 +50,11 @@ return {
             ["aF"] = "@custom.capture",
           },
         },
+        selection_modes = {
+          ["@parameter.outer"] = "v", -- charwise
+          ["@function.outer"] = "V", -- linewise
+          ["@class.outer"] = "<c-v>", -- blockwise
+        },
         move = {
           enable = true,
           set_jumps = true, -- whether to set jumps in the jumplist

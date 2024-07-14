@@ -4,7 +4,7 @@ return {
   priority = 1000,
   config = function()
     local cat = require("catppuccin")
-    -- local mocha = require("catppuccin.palettes").get_palette("mocha")
+    local mocha = require("catppuccin.palettes").get_palette("mocha")
     cat.setup({
       dim_inactive = {
         enabled = true,
@@ -44,8 +44,9 @@ return {
         mini = {
           enabled = true,
           -- indentscope_color = "",
-          indentscope_color = function(mocha)
-            return mocha.lavender
+          indentscope_color = function()
+            -- return mocha.lavender
+            return mocha.sapphire
           end,
         },
         navic = {
