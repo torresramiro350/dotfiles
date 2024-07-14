@@ -23,13 +23,6 @@ return {
     event = { "BufReadPre", "BufReadPost" },
     cond = in_git(),
     opts = {
-      -- signs = {
-      --   -- add = { text = "+" },
-      --   -- change = { text = "~" },
-      --   -- delete = { text = "|" },
-      --   -- topdelete = { text = "‾" },
-      --   -- changedelete = { text = "~" },
-      -- },
       signs = {
         add = { text = "▎" },
         change = { text = "▎" },
@@ -55,18 +48,21 @@ return {
         nmap({ "n", "x", "o" }, "]h", next_hunk_repeat)
         nmap({ "n", "x", "o" }, "[h", prev_hunk_repeat)
 
+        -- stylua: ignore start
+        nmap("n", "]H", function() gs.nav_hunk("last") end, { desc = "Last Hunk" })
+        nmap("n", "[H", function() gs.nav_hunk("first") end, { desc = "First Hunk" })
+
         nmap("n", "<leader>td", gs.toggle_deleted, { desc = "[T]oggle deleted lines" })
         nmap("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "[T]oggle git show [b]lame line" })
         nmap("n", "<leader>tD", gs.toggle_deleted, { desc = "[T]oggle git show [D]eleted" })
 
         nmap("n", "<leader>ghp", gs.preview_hunk, { desc = "git [p]review hunk" })
-        nmap("n", "<leader>ghS", gs.stage_hunk, { desc = "git [s]tage hunk" })
+        nmap("n", "<leader>ghs", gs.stage_hunk, { desc = "git [s]tage hunk" })
         nmap("n", "<leader>ghr", gs.reset_hunk, { desc = "git [r]eset hunk" })
         nmap("n", "<leader>ghS", gs.stage_buffer, { desc = "git [S]tage buffer" })
         nmap("n", "<leader>ghu", gs.undo_stage_hunk, { desc = "git [u]ndo stage hunk" })
         nmap("n", "<leader>ghR", gs.reset_buffer, { desc = "git [R]eset buffer" })
 
-        -- stylua: ignore start
         nmap("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, { desc = "git [b]lame line" })
         nmap("n", "<leader>ghd", gs.diffthis, { desc = "git [d]iff against index" })
         nmap("n", "<leader>ghD", function() gs.diffthis("@") end, { desc = "git [D]iff against last commit" })
