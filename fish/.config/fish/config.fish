@@ -1,6 +1,7 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+  # Commands to run in interactive sessions can go here
 
+  # atuin init fish | source
 end
 
 function starship_transient_prompt_func
