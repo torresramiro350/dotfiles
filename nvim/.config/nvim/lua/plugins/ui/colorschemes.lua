@@ -4,8 +4,13 @@ return {
   priority = 1000,
   config = function()
     local cat = require("catppuccin")
-    local mocha = require("catppuccin.palettes").get_palette("mocha")
+    -- local mocha = require("catppuccin.palettes").get_palette("mocha")
     cat.setup({
+      background = { -- :h background
+        light = "latte",
+        dark = "mocha",
+      },
+      flavour = "auto",
       dim_inactive = {
         enabled = true,
         shade = "dark",
@@ -29,6 +34,7 @@ return {
       integrations = {
         --defaults
         cmp = true,
+        diffview = true,
         dap = true,
         flash = true,
         fidget = true,
@@ -40,14 +46,11 @@ return {
           enabled = true,
           lsp = false,
         },
+        markdown = true,
         mason = true,
         mini = {
           enabled = true,
-          -- indentscope_color = "",
-          indentscope_color = function()
-            -- return mocha.lavender
-            return mocha.sapphire
-          end,
+          indentscope_color = "peach",
         },
         navic = {
           enabled = true,
@@ -75,6 +78,7 @@ return {
         noice = true,
         neotree = true,
         neogit = true,
+        nvim_surround = true,
         notify = true,
         octo = true,
         rainbow_delimiters = true,

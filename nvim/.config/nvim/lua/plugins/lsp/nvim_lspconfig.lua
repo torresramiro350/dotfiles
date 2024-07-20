@@ -144,10 +144,16 @@ return {
       client.server_capabilities.hoverProvider = false
     end
 
-    -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-    -- local capabilities = vim.lsp.protocol.make_client_capabilities()
-    -- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-    local capabilities = cmp_nvim_lsp.default_capabilities()
+    -- LSP servers and clients are able to communicate to each other what features they support.
+    --  By default, Neovim doesn't support everything that is in the LSP specification.
+    --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
+    --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = vim.tbl_deep_extend("force", capabilities, cmp_nvim_lsp.default_capabilities())
+    capabilities.textDocument.foldingRange = {
+      dynamicRegistration = false,
+      lineFoldingOnly = true,
+    }
 
     -- Change the Diagnostic symbols in the sign column (gutter)
     -- (not in youtube nvim video)
@@ -197,8 +203,8 @@ return {
 
     -- configure python server
     -- since it's in alpha stage, we need to use the ruff-lsp server
-    -- lspconfig.ruff.setup({
-    lspconfig.ruff_lsp.setup({
+    lspconfig.ruff.setup({
+      -- lspconfig.ruff_lsp.setup({
       cmd = { "ruff", "server", "--preview" },
       filetypes = { "python" },
       capabilities = capabilities,
@@ -234,12 +240,6 @@ return {
       filetypes = { "cmake" },
     })
 
-    -- YAML
-    lspconfig.yamlls.setup({
-      capabilities = capabilities, -- this line is required for nvim-cmp to work with nvim-lsp
-      on_attach = on_attach,
-    })
-
     -- markdown
     lspconfig.marksman.setup({
       capabilities = capabilities,
@@ -259,6 +259,28 @@ return {
       },
       on_attach = on_attach,
       filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+    })
+
+    -- json
+    lspconfig.jsonls.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
+    -- yaml
+    lspconfig.yamlls.setup({
+      capabilities = yaml_capabilities,
+      on_attach = on_attach,
+      settings = {
+        -- yaml = {
+        --   schemas = {
+        --     -- kubernetes = "/*.yaml",
+        --     -- ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+        --     ["https://raw.githubusercontent.com/instrumenta/kubernetes-json-schema/master/v1.18.0-standalone-strict/all.json"] =
+        --     "/*.k8s.yaml",
+        --   },
+        -- },
+      },
     })
 
     -- Lua

@@ -18,6 +18,9 @@ return {
         checkout_pr = { lhs = "<C-o>", desc = "Checkout pull request" },
         merge_pr = { lhs = "<C-r>", desc = "Merge pull request" },
       },
+      suppress_missing_scope = {
+        projects_v2 = true,
+      },
     })
     -- PR
     nmap("n", "<leader>pa", "<cmd>Octo pr create<cr>", { desc = "Create PR" })
@@ -27,9 +30,11 @@ return {
     nmap("n", "<leader>pc", "<cmd>Octo pr commits<cr>", { desc = "List PR commits" })
     nmap("n", "<leader>pf", "<cmd>Octo pr changes<cr>", { desc = "List PR files" })
     nmap("n", "<leader>pm", "<cmd>Octo pr merge<cr>", { desc = "Merge PR" })
+    nmap("n", "<leader>ac", "<cmd>Octo comment add<cr>", { desc = "Add comment" })
     -- Issues
     nmap("n", "<leader>il", "<cmd>Octo issue list<cr>", { desc = "List issues" })
     nmap("n", "<leader>io", "<cmd>Octo issue create<cr>", { desc = "Create issue" })
+    nmap("n", "<leader>ir", "<cmd>Octo issue reload<cr>", { desc = "Reload issue" })
     nmap("n", "<leader>ic", "<cmd>Octo issue close<cr>", { desc = "Close issue" })
     nmap("n", "<leader>ib", "<cmd>Octo issue browser<cr>", { desc = "Open issue in browser" })
     nmap("n", "<leader>ca", "<cmd>Octo comment add<cr>", { desc = "Add comment" })

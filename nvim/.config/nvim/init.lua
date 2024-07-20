@@ -4,7 +4,8 @@ require("vim_options.essential")
 -- Load lazyvim's configuration
 require("lazyvim.init")
 
-vim.cmd.colorscheme("catppuccin-mocha")
+-- vim.cmd.colorscheme("catppuccin-mocha")
+vim.cmd.colorscheme("catppuccin")
 
 -- load all the keymaps to a separate file
 require("keymaps.mappings")

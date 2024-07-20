@@ -14,7 +14,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
-  -- { import = "custom.plugins" },
+  checker = { enabled = true },
+  -- { import = "plugins" }, -- enough if all plugins live in a single directory
   { import = "plugins.enhancements" },
   { import = "plugins.tmux" },
   { import = "plugins.completion" },

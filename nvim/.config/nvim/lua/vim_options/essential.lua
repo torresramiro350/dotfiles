@@ -12,8 +12,6 @@ vim.opt.list = true
 vim.opt.showmode = false
 
 -- Preview substitutions live, as you type!
--- vim.opt.inccommand = "split"
-vim.opt.icm = "split"
 
 -- nerd fonts
 vim.g.have_nerd_font = true
@@ -26,6 +24,7 @@ vim.g.gitblame_display_virtual_text = 1
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.o.background = "dark"
+-- vim.o.background = "light"
 
 -- Set fold settings
 -- These options were reccommended by nvim-ufo
@@ -38,7 +37,7 @@ vim.opt.foldenable = true
 vim.opt.laststatus = 3
 
 -- Place a column line
--- vim.opt.colorcolumn = "99"
+-- vim.opt.colorcolumn = "90"
 
 -- Enable cursor line highlight
 vim.opt.cursorline = true
@@ -107,7 +106,14 @@ vim.o.timeoutlen = 300
 vim.opt.scrolloff = 10
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = "menuone,noselect"
+vim.o.completeopt = "menu,menuone,noselect"
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+-- Fix markdown indentation settings
+vim.g.markdown_recommended_style = 0
+--
+vim.opt.jumpoptions = "view"
+vim.opt.inccommand = "nosplit"
+-- vim.opt.icm = "split"

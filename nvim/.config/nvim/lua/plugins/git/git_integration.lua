@@ -23,6 +23,7 @@ return {
     event = { "BufReadPre", "BufReadPost" },
     cond = in_git(),
     opts = {
+      current_line_blame = true,
       signs = {
         add = { text = "▎" },
         change = { text = "▎" },

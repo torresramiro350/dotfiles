@@ -1,4 +1,5 @@
 return {
+  enabled = true,
   -- Add indentation guides even on blank lines
   "lukas-reineke/indent-blankline.nvim",
   -- See `:help ibl`
@@ -29,9 +30,9 @@ return {
 
     vim.g.rainbow_delimiters = { highlight = highlight }
     ibl.setup({
-      scope = { highlight = highlight, show_start = false, show_end = false },
+      -- scope = { highlight = highlight, show_start = false, show_end = false },
+      scope = { enabled = false },
       -- scope = { show_start = false, show_end = false },
-      -- scope = { enabled = false },
       exclude = {
         filetypes = {
           "help",
