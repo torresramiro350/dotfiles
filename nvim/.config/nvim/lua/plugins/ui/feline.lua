@@ -8,6 +8,21 @@ return {
     local U = require("catppuccin.utils.colors")
     local mocha = require("catppuccin.palettes").get_palette("mocha")
     ctp_feline.setup({
+      assets = {
+        lsp = {
+          server = "",
+          error = "",
+          warning = "",
+          info = "",
+          hint = "",
+        },
+        git = {
+          branch = "",
+          added = "",
+          changed = "",
+          removed = "",
+        },
+      },
       --- default setup
       sett = {
         text = U.vary_color({ mocha = mocha.base }, clrs.surface0),

@@ -1,26 +1,39 @@
 require("groups.utility_funcs")
 return {
-  event = { "BufReadPost", "InsertEnter" },
+  event = { "BufNewFile ", "BufReadPre", "InsertEnter" },
   "danymat/neogen",
-  config = function()
-    -- Neogen keymaps
-    -- leaving the keymappings here, otherwise the plugin is loaded
-    -- unnecessarily at startup
-    local neogen = require("neogen")
-    nmap("n", "<leader>nf", "<cmd>Neogen func<cr>", { desc = "Generate func docs", noremap = true, silent = true })
-    nmap(
-      "n",
+  cmd = "Neogen",
+  keys = {
+    {
       "<leader>nc",
-      "<cmd>Neogen class<cr>",
-      { desc = "Generate class docs", noremap = true, silent = true }
-    )
-    nmap("n", "<leader>nF", "<cmd>Neogen class<cr>", { desc = "Generate file docs", noremap = true, silent = true })
-    nmap("i", "<C-l>", neogen.jump_next, { desc = "Jump to next annotation", noremap = true, silent = true })
-    nmap("i", "<C-h>", neogen.jump_prev, { desc = "Jump to previous annotation", noremap = true, silent = true })
-
-    require("neogen").setup({
-      -- snippet_engine = "luasnip",
-      enabled = true,
+      function()
+        require("neogen").generate()
+      end,
+      desc = "Generate annotations (Neogen)",
+    },
+  },
+  config = function()
+    local neogen = require("neogen")
+    neogen.setup({
+      -- took this snipped from lazyvim's documentation
+      opts = function(_, opts)
+        if opts.snippet_engine ~= nil then
+          return
+        end
+        local map = {
+          ["LuaSnip"] = "luasnip",
+          ["nvim-snippy"] = "snippy",
+          ["vim-vsnip"] = "vsnip",
+        }
+        for plugin, engine in pairs(map) do
+          if vim.fn.exists("*" .. plugin) == 1 then
+            opts.snippet_engine = engine
+          end
+        end
+        if vim.snippet then
+          opts.snippet_engine = "nvim"
+        end
+      end,
       input_after_comment = true,
       languages = {
         lua = {

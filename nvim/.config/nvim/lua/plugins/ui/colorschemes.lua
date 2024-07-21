@@ -33,6 +33,7 @@ return {
       },
       integrations = {
         --defaults
+        alpha = true,
         cmp = true,
         diffview = true,
         dap = true,
@@ -91,6 +92,12 @@ return {
         ts_rainbow = true,
         which_key = true,
         ufo = true,
+      },
+      color_overrides = {
+        mocha = {
+          -- base = "#1e1e2e",
+          -- base = "#181825",
+        },
       },
       highlight_overrides = {
         mocha = function(mocha)

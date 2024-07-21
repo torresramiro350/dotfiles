@@ -2,7 +2,7 @@
 return {
   "akinsho/bufferline.nvim",
   -- load after catppuccin to ensure the correct highlighting
-  enabled = false,
+  enabled = true,
   event = { "BufNewFile", "BufReadPre", "BufReadPost" },
   config = function()
     -- local nmap = function(mode, keys, func, additional_args)
@@ -25,8 +25,9 @@ return {
       options = {
 
         -- style_preset = bufferline.style_preset.no_bold,
-        separator_style = "slant",
-        -- indicator = { style = "underline" },
+        -- separator_style = "slant",
+        separator_style = "thin",
+        indicator = { style = "icon" },
         diagnostics = "nvim_lsp",
         hover = {
           enabled = true,
