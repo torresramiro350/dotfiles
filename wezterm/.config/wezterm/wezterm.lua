@@ -17,9 +17,9 @@ local config = {}
 config.term = "xterm-kitty"
 -- config.term = "wezterm"
 -- declare fonts for terminal to use
--- config.color_scheme = "Catppuccin Mocha"
+config.color_scheme = "Catppuccin Mocha"
 -- config.color_scheme = "catppuccin-mocha"
-config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
+-- config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
 
 config.font_size = 11.0
 -- config.font_size = 12
@@ -30,26 +30,7 @@ config.font = wezterm.font_with_fallback({
   "Symbols Nerd Font Mono",
 })
 
--- start on maximized
--- wezterm.on("gui-startup", function(cmd)
---   local tab, pane, window = mux.spawn_window(cmd or {})
---   window:gui_window():maximize()
--- end)
-
--- for host, cconfig in pairs(wezterm.enumerate_ssh_hosts()) do
---   table.insert(ssh_domains, {
---     name = host,
---     remote_address = host,
---     assume_shell = "Posix",
---     multiplexing = "None",
---   })
--- end
 config.ssh_domains = ssh_domains
--- config.ssh_backend = "LibSsh"
---
--- config.set_environment_variables = {
---   TERMINFO_DIRS = "/home/rtorres/.config/wezterm",
--- }
 
 -- controls the window padding
 config.window_frame = {

@@ -156,6 +156,7 @@ return {
           find_left = "gsF", -- find surrounding to the left
           replace = "gsr",
           highlight = "gsh",
+          update_n_lines = "gsn",
         },
         n_lines = 500,
       })
