@@ -18,7 +18,6 @@ config.term = "xterm-kitty"
 -- config.term = "wezterm"
 -- declare fonts for terminal to use
 config.color_scheme = "Catppuccin Mocha"
--- config.color_scheme = "catppuccin-mocha"
 -- config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
 
 config.font_size = 11.0
@@ -26,7 +25,6 @@ config.font_size = 11.0
 config.line_height = 1.1
 config.font = wezterm.font_with_fallback({
   { family = "JetBrains Mono", weight = "Medium" },
-  -- { family = "CaskaydiaCove Nerd Font", weight = "Regular" },
   "Symbols Nerd Font Mono",
 })
 
@@ -39,7 +37,6 @@ config.window_frame = {
   button_bg = "#11111B",
 }
 config.window_decorations = "TITLE | RESIZE"
--- config.window_decorations = "NONE"
 config.window_padding = {
   left = 1,
   right = 1,

@@ -26,6 +26,7 @@ return {
     local neogen = require("neogen")
     require("luasnip.loaders.from_vscode").lazy_load()
     luasnip.config.setup({})
+    luasnip.add_snippets(require("cppguard").snippet_luasnip("guard"))
 
     -- sets up auto completion for the command line
     cmp.setup.cmdline({ "/", "?" }, {
