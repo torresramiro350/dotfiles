@@ -1,7 +1,7 @@
 return {
   -- LSP Configuration & Plugins
   "neovim/nvim-lspconfig",
-  event = { "BufReadPre", "BufReadPost", "BufNewFile" },
+  event = { "InsertEnter", "BufReadPre", "BufReadPost", "BufNewFile" },
   dependencies = {
     -- Automatically install LSPs to stdpath for neovim
     {
@@ -204,15 +204,16 @@ return {
 
     -- configure python server
     -- since it's in alpha stage, we need to use the ruff-lsp server
-    lspconfig.ruff.setup({
-      -- lspconfig.ruff_lsp.setup({
+    -- lspconfig.ruff.setup({
+    lspconfig.ruff_lsp.setup({
       cmd = { "ruff", "server", "--preview" },
       filetypes = { "python" },
       capabilities = capabilities,
       on_attach = ruff_attach,
     })
     -- pyright
-    lspconfig.pyright.setup({
+    -- lspconfig.pyright.setup({
+    lspconfig.basedpyright.setup({
       cmd = { "pyright-langserver", "--stdio" },
       capabilities = capabilities,
       on_attach = on_attach,
