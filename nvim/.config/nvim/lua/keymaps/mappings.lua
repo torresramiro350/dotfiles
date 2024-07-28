@@ -43,3 +43,18 @@ nmap("n", "<C-up>", "<cmd>resize -2<cr>", { desc = "Increase buffer size" })
 nmap("n", "<C-down>", "<cmd>resize +2<cr>", { desc = "Increase buffer size down" })
 nmap("n", "<C-left>", "<cmd>vertical resize -2<cr>", { desc = "Resize split left" })
 nmap("n", "<C-right>", "<cmd>vertical resize +2<cr>", { desc = "Resize split right" })
+
+-- commenting
+nmap("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
+nmap("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
+
+-- new file
+nmap("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
+
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+nmap("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
+nmap("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
+nmap("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
+nmap("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search Result" })
+nmap("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
+nmap("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })

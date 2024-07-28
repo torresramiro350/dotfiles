@@ -1,7 +1,7 @@
 return {
   -- Autocompletion
   "hrsh7th/nvim-cmp",
-  event = { "InsertEnter", "BufReadPre", "BufNewFile" },
+  event = { "InsertEnter" },
   dependencies = {
     -- Snippet Engine & its associated nvim-cmp source
     "L3MON4D3/LuaSnip",
@@ -17,6 +17,7 @@ return {
     "onsails/lspkind.nvim",
   },
 
+  --- configuration for nvim-cmp
   config = function()
     -- [[ Configure nvim-cmp ]]
     -- See `:help cmp`
@@ -92,30 +93,63 @@ return {
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete({}),
+        ["<C-CR>"] = function(fallback)
+          cmp.abort()
+          fallback()
+        end,
+        ["<S-CR>"] = function()
+          return cmp.confirm(cmp.ConfirmBehavior.Replace)
+        end,
+        ["<CR>"] = function(fallback)
+          if cmp.visible() then
+            cmp.confirm({ select = true })
+          else
+            fallback()
+          end
+        end,
+        ["<C-l>"] = cmp.mapping(function()
+          if luasnip.expand_or_locally_jumpable() then
+            luasnip.expand_or_jump()
+          elseif neogen.jumpable() then
+            neogen.jump_next()
+          end
+        end, { "i", "s" }),
+        ["<C-h>"] = cmp.mapping(function()
+          if luasnip.locally_jumpable(-1) then
+            luasnip.jump(-1)
+          elseif neogen.jumpable(true) then
+            neogen.jump_prev()
+          end
+        end, { "i", "s" }),
         -- ["<Tab>"] = cmp.mapping.select_next_item(),
         -- ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if neogen.jumpable() then
-            neogen.jump_next()
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if neogen.jumpable(true) then
-            neogen.jump_prev()
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-        ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        --   ["<Tab>"] = cmp.mapping(function(fallback)
+        --     if neogen.jumpable() then
+        --       neogen.jump_next()
+        --     else
+        --       fallback()
+        --     end
+        --   end, { "i", "s" }),
+        --   ["<S-Tab>"] = cmp.mapping(function(fallback)
+        --     if neogen.jumpable(true) then
+        --       neogen.jump_prev()
+        --     else
+        --       fallback()
+        --     end
+        --   end, { "i", "s" }),
+        --   ["<CR>"] = cmp.mapping.confirm({ select = true }),
       }),
       -- source completion list
       sources = cmp.config.sources({
-        { name = "nvim_lsp", group_index = 2 },
-        { name = "luasnip",  group_index = 2 },
-        { name = "buffer",   group_index = 2 },
-        { name = "path",     group_index = 2 },
+        {
+          name = "lazydev",
+          -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
+          group_index = 0,
+        },
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+        { name = "buffer" },
+        { name = "path" },
       }),
       -- configure lspkind for vs-code like pictograms in completion menu
       formatting = {

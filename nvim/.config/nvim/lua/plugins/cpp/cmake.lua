@@ -1,5 +1,12 @@
 return {
   "Civitasv/cmake-tools.nvim",
+  init = function()
+    -- load the plugin only if the current directory contains a CMakeLists.txt file
+    local cwd = vim.uv.cwd()
+    if vim.fn.filereadable(cwd .. "/CMakeLists.txt") == 1 then
+      return true
+    end
+  end,
   config = function()
     local home = os.getenv("HOME")
     require("cmake-tools").setup({
@@ -14,6 +21,6 @@ return {
     vim.keymap.set("n", "<leader>cc", "<cmd>CMakeClean<cr>", { desc = "CMake Clean" })
     vim.keymap.set("n", "<leader>ci", "<cmd>CMakeInstall<cr>", { desc = "CMake Install" })
   end,
-  ft = { "cmake" },
-  -- event = { "BufEnter CMake*" },
+  -- ft = { "cmake" },
+  event = { "BufReadPre", "BufReadPost", "BufNewFile" },
 }

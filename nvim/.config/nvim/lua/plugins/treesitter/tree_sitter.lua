@@ -22,6 +22,8 @@ return {
         "luap",
         "markdown",
         "markdown_inline",
+        "ninja",
+        "rst",
         "python",
         "printf",
         "rust",
@@ -34,7 +36,7 @@ return {
 
       -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
       auto_install = false,
-      highlight = { enable = true },
+      highlight = { enable = true, additional_vim_regex_highlighting = true },
       indent = { enable = true },
       incremental_selection = {
         enable = true,
@@ -82,6 +84,10 @@ return {
             ["]f"] = "@function.outer",
             ["]c"] = "@class.outer",
             ["]a"] = "@parameter.inner",
+            -- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
+            -- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
+            ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
+            ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
           },
           goto_next_end = {
             ["]F"] = "@function.outer",

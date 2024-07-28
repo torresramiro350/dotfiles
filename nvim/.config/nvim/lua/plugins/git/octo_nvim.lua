@@ -37,7 +37,6 @@ return {
     nmap("n", "<leader>ir", "<cmd>Octo issue reload<cr>", { desc = "Reload issue" })
     nmap("n", "<leader>ic", "<cmd>Octo issue close<cr>", { desc = "Close issue" })
     nmap("n", "<leader>ib", "<cmd>Octo issue browser<cr>", { desc = "Open issue in browser" })
-    nmap("n", "<leader>ca", "<cmd>Octo comment add<cr>", { desc = "Add comment" })
   end,
   cond = in_git(),
 }

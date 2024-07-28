@@ -1,4 +1,5 @@
 -- "gc" to comment visual regions/lines
+--
 return {
   enabled = false,
   "numToStr/Comment.nvim",

@@ -1,8 +1,6 @@
 require("groups.utility_funcs")
 return {
   "folke/noice.nvim",
-  -- event = "CmdlineEnter",
-  -- event = "UIEnter",
   event = "VimEnter",
   priority = 1000,
   config = function()
@@ -29,15 +27,28 @@ return {
           },
         },
         presets = {
-          lsp_doc_border = true,
-          bottom_search = true,
+          bottom_search = true,    -- use a classic bottom cmdline for search
+          command_palette = true,  -- position the cmdline and popupmenu together
+          long_message_to_split = true, -- long messages will be sent to a split
+          inc_rename = false,      -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = true,   -- add a border to hover docs and signature help
           long_message_split = true,
         },
       },
     })
-    nmap("c", "<S-Enter>", function()
-      noice.redirective(vim.fn.getcmdline())
-    end, { desc = "Redirect cmdline" })
+
+    -- stylua: ignore start
+    nmap(
+      "n", "<leader>nl", function() noice.cmd("last") end,
+      { desc = "Show last message in popup" }
+    )
+    nmap(
+      "n", "<leader>nh", function() noice.cmd("history") end,
+      { desc = "Show history of messages in popup" }
+    )
+    nmap("c", "<S-Enter>", function() noice.redirective(vim.fn.getcmdline()) end,
+      { desc = "Redirect cmdline" }
+    )
 
     nmap({ "n", "i", "s" }, "<c-f>", function()
       if not require("noice.lsp").scroll(4) then
@@ -51,6 +62,7 @@ return {
       end
     end, { silent = true, expr = true })
   end,
+  -- stylua: ignore end
 
   dependencies = {
     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
