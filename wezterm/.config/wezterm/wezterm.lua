@@ -21,10 +21,12 @@ config.color_scheme = "Catppuccin Mocha"
 -- config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
 
 config.font_size = 11.0
+-- config.font_size = 10.5
 -- config.font_size = 12
 config.line_height = 1.1
 config.font = wezterm.font_with_fallback({
-  { family = "JetBrains Mono", weight = "Medium" },
+  -- { family = "JetBrains Mono", weight = "Medium" },
+  { family = "JetBrains Mono", weight = "DemiBold" },
   "Symbols Nerd Font Mono",
 })
 

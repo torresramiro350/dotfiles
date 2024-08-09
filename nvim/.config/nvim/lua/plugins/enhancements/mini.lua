@@ -37,6 +37,7 @@ return {
           "neo-tree",
           "notify",
           "toggleterm",
+          "fterm",
           "Trouble",
           "trouble",
         },
