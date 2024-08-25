@@ -1,6 +1,7 @@
 return {
   "goolord/alpha-nvim",
   event = { "VimEnter", "UIEnter" },
+  dependencies = { "echasnovski/mini.icons" },
   -- enabled = false,
   config = function()
     local status_ok, alpha = pcall(require, "alpha")
@@ -9,7 +10,7 @@ return {
     end
 
     local alpha = require("alpha")
-    local dashboard = require("alpha.themes.theta")
+    -- local dashboard = require("alpha.themes.theta")
     local dboard_base = require("alpha.themes.dashboard")
 
     dboard_base.section.header.val = {

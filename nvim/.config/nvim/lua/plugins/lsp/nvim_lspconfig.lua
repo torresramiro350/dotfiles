@@ -1,7 +1,7 @@
 return {
   -- LSP Configuration & Plugins
   "neovim/nvim-lspconfig",
-  event = { "InsertEnter", "BufReadPre", "BufReadPost", "BufNewFile" },
+  event = { "BufNewFile", "BufReadPre", "BufReadPost" },
   dependencies = {
     -- Automatically install LSPs to stdpath for neovim
     {

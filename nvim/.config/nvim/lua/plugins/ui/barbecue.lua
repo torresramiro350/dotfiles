@@ -21,7 +21,7 @@ return {
     })
 
     vim.api.nvim_create_autocmd({
-      "WinScrolled", -- or WinResized on NVIM-v0.9 and higher
+      "WinResized", -- or WinResized on NVIM-v0.9 and higher
       "BufWinEnter",
       "CursorHold",
       "InsertLeave",
@@ -38,5 +38,4 @@ return {
   -- lazy loading to prevent slowdown
   -- load when buffer has been loaded for reading
   event = { "BufRead", "BufReadPost" },
-  -- event = { "BufWinEnter" },
 }

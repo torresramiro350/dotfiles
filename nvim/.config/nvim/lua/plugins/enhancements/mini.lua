@@ -48,15 +48,31 @@ return {
     end,
   },
   {
+    "echasnovski/mini.icons",
+    lazy = true,
+    config = function()
+      local mini = require("mini.icons")
+      mini.setup({
+        style = "glyph",
+      })
+    end,
+    init = function()
+      package.preload["nvim-web-devicons"] = function()
+        require("mini.icons").mock_nvim_web_devicons()
+        return package.loaded["nvim-web-devicons"]
+      end
+    end,
+  },
+  {
     "echasnovski/mini.nvim",
     version = false,
-    event = { "InsertEnter", "BufReadPre", "BufNewFile" },
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       -- icons
       -- TODO: maybe later
-      require("mini.icons").setup({
-        style = "glyph",
-      })
+      -- require("mini.icons").setup({
+      --   style = "glyph",
+      -- })
 
       -- mini.comment
       local minicomment = require("mini.comment")
