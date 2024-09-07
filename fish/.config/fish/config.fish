@@ -74,6 +74,7 @@ alias syncfiles='rsync -auzvhP'
 
 alias kittyconf="nvim $HOME/.config/kitty/kitty.conf"
 alias sshconfig="nvim $HOME/.ssh/config"
+alias icat="kitten icat"
 
 # Tmux
 alias txat="tmux attach"
@@ -112,12 +113,13 @@ set -gx EDITOR "/usr/bin/nvim"
 set -gx FZF_DEFAULT_COMMAND "fd --type f --strip-cwd-prefix"
 
 set -gx FZF_DEFAULT_OPTS "\
---height 40% --tmux bottom,80%,40% --layout reverse --border \
+--height 40% --tmux top,60%,40% --layout reverse --border \
 --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
 --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 
-# --preview 'echo {}' --preview-window up:3:hidden:wrap \
+set -gx FZF_COMPLETION_OPTS "--border --info=inline" 
+
 set -gx FZF_CTRL_R_OPTS "\
 --preview 'echo {}' --preview-window up:3:hidden:wrap \
 --bind 'ctrl-/:toggle-preview' \
@@ -137,6 +139,12 @@ set -gx FZF_ALT_C_OPTS "\
 set -gx _ZO_FZF_OPTS $FZF_DEFAULT_OPTS "\
 --bind 'ctrl-/:toggle-preview' \
 --layout reverse --border"
+
+set -gx SKIM_DEFAULT_OPTIONS "\
+--border --height 20 --layout reverse"
+
+set -gx SKIM_DEFAULT_OPTIONS $SKIM_DEFAULT_OPTIONS "\
+--color=fg:#cdd6f4,bg:#1e1e2e,matched:#313244,matched_bg:#f2cdcd,current:#cdd6f4,current_bg:#45475a,current_match:#1e1e2e,current_match_bg:#f5e0dc,spinner:#a6e3a1,info:#cba6f7,prompt:#89b4fa,cursor:#f38ba8,selected:#eba0ac,header:#94e2d5,border:#6c7086"
 
 set -Ux FZF_COMPLETION_TRIGGER '~~'
 # >>> conda initialize >>>
