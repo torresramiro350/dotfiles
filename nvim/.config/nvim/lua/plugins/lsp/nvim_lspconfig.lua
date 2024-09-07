@@ -85,6 +85,26 @@ return {
         end
       end
 
+      -- allow inlay hints for clangd
+      local group = vim.api.nvim_create_augroup("clangd_no_inlay_hints_insert", { clear = true })
+      nmap("<leader>lh", function()
+        -- if require("clangd.extensions.inlay_hints")
+        if require("clangd_extensions.inlay_hints").toggle_inlay_hints() then
+          vim.api.nvim_create_autocmd("InsertEnter", {
+            group = group,
+            buffer = bufnr,
+            callback = require("clangd_extensions.inlay_hints").disable_inlay_hints,
+          })
+          vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave" }, {
+            group = group,
+            buffer = bufnr,
+            callback = require("clangd_extensions.inlay_hints").set_inlay_hints,
+          })
+        else
+          vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
+        end
+      end, "[l]sp [h]ints toggle")
+
       nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
       nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
       nmap("gd", builtins.lsp_definitions, "[G]oto [D]efinition")
@@ -108,7 +128,7 @@ return {
       nmap("]w", diagnostic_goto(true, "WARN"), "Go to next warning")
 
       nmap("]q", vim.cmd.cnext, "Go to next quickfix item")
-      nmap("[q", vim.cmd.cnext, "Go to previous quickfix item")
+      nmap("[q", vim.cmd.cprev, "Go to previous quickfix item")
       nmap("]Q", vim.cmd.clast, "End of quickfix list")
       nmap("[Q", vim.cmd.cfirst, "Beginning of quickfix list")
 
@@ -273,16 +293,8 @@ return {
     lspconfig.yamlls.setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      settings = {
-        -- yaml = {
-        --   schemas = {
-        --     -- kubernetes = "/*.yaml",
-        --     -- ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-        --     ["https://raw.githubusercontent.com/instrumenta/kubernetes-json-schema/master/v1.18.0-standalone-strict/all.json"] =
-        --     "/*.k8s.yaml",
-        --   },
-        -- },
-      },
+      -- settings = {
+      -- },
     })
 
     -- Lua

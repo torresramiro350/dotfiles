@@ -28,7 +28,7 @@ return {
       },
       indent_blankline = {
         enabled = true,
-        scope_color = "lavender",
+        -- scope_color = "lavender",
         color_indent_levels = true,
       },
       integrations = {
@@ -48,10 +48,12 @@ return {
           lsp = false,
         },
         markdown = true,
+        render_markdown = true,
         mason = true,
         mini = {
           enabled = true,
-          indentscope_color = "peach",
+          indentscope_color = "lavender",
+          -- indentscope_color = "peach",
         },
         navic = {
           enabled = true,

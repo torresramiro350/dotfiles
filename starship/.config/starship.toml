@@ -9,6 +9,7 @@ $directory\
 $git_branch\
 $git_status\
 $fill\
+$memory_usage\
 $python\
 $conda\
 $cmake\
@@ -172,7 +173,10 @@ symbol = " "
 symbol = " "
 
 [memory_usage]
+format = '$symbol [${ram}( | ${swap})]($style) '
+threshold = 75                                   # usage percentage
 symbol = "󰍛 "
+disabled = false
 
 [meson]
 symbol = "󰔷 "

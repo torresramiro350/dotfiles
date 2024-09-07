@@ -8,12 +8,11 @@ return {
         lua = { "stylua" },
         yaml = { "prettierd", "prettier" },
         json = { "prettierd", "prettier" },
-        markdown = { "markdownlint" },
+        markdown = { "markdownlint", "markdown-toc" },
         cmake = { "cmake_format" },
         python = function(bufnr)
           if conform.get_formatter_info("ruff_format", bufnr).available then
-            -- return { "ruff_format" } -- not supported by ruff as of yet
-            return { "isort", "ruff_format" }
+            return { "ruff_fix", "ruff_format", "ruff_organize_imports" }
           else
             return { "isort", "black" }
           end
