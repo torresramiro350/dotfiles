@@ -38,6 +38,7 @@ return {
           "notify",
           "toggleterm",
           "fterm",
+          "Fterm",
           "Trouble",
           "trouble",
         },
@@ -68,12 +69,6 @@ return {
     version = false,
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      -- icons
-      -- TODO: maybe later
-      -- require("mini.icons").setup({
-      --   style = "glyph",
-      -- })
-
       -- mini.comment
       local minicomment = require("mini.comment")
       local ts_context = require("ts_context_commentstring.internal")

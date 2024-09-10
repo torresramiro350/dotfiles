@@ -232,9 +232,10 @@ return {
       on_attach = ruff_attach,
     })
     -- pyright
-    -- lspconfig.pyright.setup({
-    lspconfig.basedpyright.setup({
+    lspconfig.pyright.setup({
       cmd = { "pyright-langserver", "--stdio" },
+      -- lspconfig.basedpyright.setup({
+      --   cmd = { "basedpyright-langserver", "--stdio" },
       capabilities = capabilities,
       on_attach = on_attach,
       settings = {
