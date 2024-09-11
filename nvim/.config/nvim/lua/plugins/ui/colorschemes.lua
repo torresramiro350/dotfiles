@@ -12,7 +12,7 @@ return {
       },
       flavour = "auto",
       dim_inactive = {
-        enabled = true,
+        enabled = false,
         shade = "dark",
         percentage = 0.15,
       },

@@ -4,41 +4,42 @@ return {
   branch = "harpoon2",
   dependencies = { "nvim-lua/plenary.nvim" },
   lazy = true,
-  config = function()
-    local harpoon = require("harpoon")
-    harpoon.setup({})
-    -- basic telescope configuration
-    local conf = require("telescope.config").values
-    local function toggle_telescope(harpoon_files)
-      local file_paths = {}
-      for _, item in ipairs(harpoon_files.items) do
-        table.insert(file_paths, item.value)
-      end
-
-      require("telescope.pickers")
-          .new({}, {
-            prompt_title = "Harpoon",
-            finder = require("telescope.finders").new_table({
-              results = file_paths,
-            }),
-            previewer = conf.file_previewer({}),
-            sorter = conf.generic_sorter({}),
-          })
-          :find()
+  opts = {
+    menu = {
+      width = vim.api.nvim_win_get_width(0) - 4,
+    },
+    settings = {
+      save_on_toggle = true,
+    },
+  },
+  keys = function()
+    local keys = {
+      {
+        "<leader>H",
+        function()
+          require("harpoon"):list():add()
+        end,
+        desc = "Harpoon File",
+      },
+      {
+        "<leader>h",
+        function()
+          local harpoon = require("harpoon")
+          harpoon.ui:toggle_quick_menu(harpoon:list())
+        end,
+        desc = "Harpoon Quick Menu",
+      },
+    }
+    for i = 1, 5 do
+      table.insert(keys, {
+        "<leader>" .. i,
+        function()
+          require("harpoon"):list():select(i)
+        end,
+        desc = "Harpoon list item " .. i,
+      })
     end
-    -- stylua: ignore start
-    nmap("n", "<leader>hl", function() toggle_telescope(harpoon:list()) end, { desc = "Open harpoon window" })
-    nmap("n", "<leader>ha", function() harpoon:list():add() end, { desc = "Append to harpoon list" })
-    nmap("n", "<leader>he", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
-      { desc = "Toggle harpoon quick menu" })
-    nmap("n", "<leader>1", function() harpoon:list():select(1) end, { desc = "[H]arpoon list item 1" })
-    nmap("n", "<leader>2", function() harpoon:list():select(2) end, { desc = "[H]arpoon list item 2" })
-    nmap("n", "<leader>3", function() harpoon:list():select(3) end, { desc = "[H]arpoon list item 3" })
-    nmap("n", "<leader>4", function() harpoon:list():select(4) end, { desc = "[H]arpoon list item 4" })
-    -- Toggle previous & next buffers stored within Harpoon list
-    nmap("n", "<c-p>", function() harpoon:list():prev() end)
-    nmap("n", "<c-n>", function() harpoon:list():next() end)
-    -- stylua: ignore end
+    return keys
   end,
   event = { "BufReadPre", "BufReadPost" },
 }

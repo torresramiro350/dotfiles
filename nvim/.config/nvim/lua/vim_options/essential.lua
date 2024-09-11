@@ -116,6 +116,6 @@ vim.g.markdown_recommended_style = 0
 --
 vim.opt.jumpoptions = "view"
 -- preview substitutions live
-vim.opt.inccommand = "split"
--- vim.opt.inccommand = "nosplit"
+-- vim.opt.inccommand = "split"
+vim.opt.inccommand = "nosplit"
 -- vim.opt.icm = "split"

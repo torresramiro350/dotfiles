@@ -224,8 +224,8 @@ return {
 
     -- configure python server
     -- since it's in alpha stage, we need to use the ruff-lsp server
-    -- lspconfig.ruff.setup({
-    lspconfig.ruff_lsp.setup({
+    lspconfig.ruff.setup({
+      -- lspconfig.ruff_lsp.setup({
       cmd = { "ruff", "server", "--preview" },
       filetypes = { "python" },
       capabilities = capabilities,
