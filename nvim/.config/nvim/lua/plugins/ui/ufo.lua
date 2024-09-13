@@ -2,9 +2,10 @@ require("groups.utility_funcs")
 return {
   "kevinhwang91/nvim-ufo",
   dependencies = { "kevinhwang91/promise-async" },
-  event = { "BufRead" },
+  event = { "BufRead", "BufNewFile" },
   enabled = true,
   config = function()
+    -- add fancy fold text
     local handler = function(virtual_text, line_number, end_line_number, width, truncate)
       local new_viruatl_text = {}
       local suffix = (" 󰁂 %d "):format(end_line_number - line_number)
@@ -43,6 +44,9 @@ return {
 
     ufo.setup({
       fold_virt_text_handler = handler,
+      provider_selector = function(bufnr, filetype, buftype)
+        return { "treesitter", "indent" }
+      end,
     })
     nmap("n", "zR", ufo.openAllFolds, { desc = "Open all folds" })
     nmap("n", "zM", ufo.closeAllFolds, { desc = "Close all folds" })

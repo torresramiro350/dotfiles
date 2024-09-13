@@ -1,6 +1,6 @@
 return {
   "freddiehaddad/feline.nvim",
-  enabled = true,
+  enabled = false,
   event = "ColorScheme",
   config = function()
     local ctp_feline = require("catppuccin.groups.integrations.feline")

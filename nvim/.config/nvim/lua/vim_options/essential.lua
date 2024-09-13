@@ -31,8 +31,9 @@ vim.o.background = "dark"
 -- See: https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
 vim.opt.foldcolumn = "0"
 vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 10
+vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
+
 -- draw the status line over the whole window
 vim.opt.laststatus = 3
 

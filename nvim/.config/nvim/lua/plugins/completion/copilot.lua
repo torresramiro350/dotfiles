@@ -103,13 +103,33 @@ return {
   },
   {
     "folke/edgy.nvim",
-    optional = true,
+    event = "VeryLazy",
+    -- optional = true,
+    keys = {
+      {
+        "<leader>ue",
+        function()
+          require("edgy").toggle()
+        end,
+        desc = "Edgy Toggle",
+      },
+      -- stylua: ignore
+      { "<leader>uE", function() require("edgy").select() end, desc = "Edgy Select Window" },
+    },
     opts = function(_, opts)
       opts.right = opts.right or {}
       table.insert(opts.right, {
         ft = "copilot-chat",
         title = "Copilot Chat",
-        size = { width = 50 },
+        size = { width = 40 },
+      })
+      opts.bottom = opts.bottom or {}
+      table.insert(opts.bottom, {
+        ft = "noice",
+        size = { height = 0.4 },
+        filter = function(buf, win)
+          return vim.api.nvim_win_get_config(win).relative == ""
+        end,
       })
     end,
   },
