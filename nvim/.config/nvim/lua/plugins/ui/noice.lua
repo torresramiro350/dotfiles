@@ -1,5 +1,6 @@
 return {
   "folke/noice.nvim",
+  event = "VeryLazy",
   dependencies = {
     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
     {
@@ -21,8 +22,6 @@ return {
     --   If not available, we use `mini` as the fallback
     "rcarriga/nvim-notify",
   },
-  event = "VimEnter",
-  -- event = "VeryLazy",
   priority = 1000,
   opts = {
     lsp = {
@@ -53,11 +52,6 @@ return {
       lsp_doc_border = false,    -- add a border to hover docs and signature help
       long_message_split = false,
     },
-    -- views = {
-    --   split = {
-    --     enter = false,
-    --   },
-    -- },
   },
   -- stylua: ignore start
   keys = {

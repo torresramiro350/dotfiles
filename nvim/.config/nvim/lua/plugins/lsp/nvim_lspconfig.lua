@@ -110,7 +110,7 @@ return {
       nmap("gd", builtins.lsp_definitions, "[G]oto [D]efinition")
       nmap("gr", builtins.lsp_references, "[G]oto [R]eferences")
       nmap("gI", builtins.lsp_implementations, "[G]oto [I]mplementation")
-      nmap("<leader>D", builtins.lsp_type_definitions, "Type [D]efinition")
+      nmap("gy", builtins.lsp_type_definitions, "Type [D]efinition")
       nmap("<leader>ds", builtins.lsp_document_symbols, "[D]ocument [S]ymbols")
       nmap("<leader>Ws", builtins.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
@@ -127,8 +127,8 @@ return {
       nmap("[w", diagnostic_goto(false, "WARN"), "Go to previous warning")
       nmap("]w", diagnostic_goto(true, "WARN"), "Go to next warning")
 
-      nmap("]q", vim.cmd.cnext, "Go to next quickfix item")
       nmap("[q", vim.cmd.cprev, "Go to previous quickfix item")
+      nmap("]q", vim.cmd.cnext, "Go to next quickfix item")
       nmap("]Q", vim.cmd.clast, "End of quickfix list")
       nmap("[Q", vim.cmd.cfirst, "Beginning of quickfix list")
 
@@ -139,8 +139,10 @@ return {
 
       nmap("<leader>e", vim.diagnostic.open_float, "Open [F]loating [D]iagnostic message")
 
+      -- stylua: ignore start
       nmap("<leader>xl", vim.diagnostic.setloclist, "Open [D]iagnostics [L]ist")
       nmap("<leader>xq", vim.diagnostic.setqflist, "Open [Q]uickfix [L]ist")
+      -- stylua: ignore end
       nmap("<leader>Q", "<cmd>cclose<cr>", "Close quickfix list")
       nmap("<leader>L", "<cmd>lclose<cr>", "Close location list")
 
@@ -225,17 +227,17 @@ return {
     -- configure python server
     -- since it's in alpha stage, we need to use the ruff-lsp server
     lspconfig.ruff.setup({
-      -- lspconfig.ruff_lsp.setup({
-      cmd = { "ruff", "server", "--preview" },
-      filetypes = { "python" },
       capabilities = capabilities,
       on_attach = ruff_attach,
     })
+    --pylyzer (maybe in the future)
+    -- lspconfig.pylyzer.setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    -- })
     -- pyright
     lspconfig.pyright.setup({
       cmd = { "pyright-langserver", "--stdio" },
-      -- lspconfig.basedpyright.setup({
-      --   cmd = { "basedpyright-langserver", "--stdio" },
       capabilities = capabilities,
       on_attach = on_attach,
       settings = {
@@ -350,10 +352,7 @@ return {
       filetypes = { "toml" },
     })
 
-    -- add more server configurations below
-
     -- autoformat.lua
-    --
     -- Use your language server to automatically format your code on save.
     -- Adds additional commands as well to manage the behavior
     local format_is_enabled = true
@@ -363,8 +362,8 @@ return {
     end, {})
 
     -- Create an augroup that is used for managing our formatting autocmds.
-    --      We need one augroup per client to make sure that multiple clients
-    --      can attach to the same buffer without interfering with each other.
+    -- We need one augroup per client to make sure that multiple clients
+    -- can attach to the same buffer without interfering with each other.
     local _augroups = {}
     local get_augroup = function(client)
       if not _augroups[client.id] then
@@ -377,7 +376,6 @@ return {
     end
 
     -- Whenever an LSP attaches to a buffer, we will run this function.
-    --
     -- See `:help LspAttach` for more information about this autocmd event.
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("lsp-attach-format", { clear = true }),

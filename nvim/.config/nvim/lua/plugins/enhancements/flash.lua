@@ -1,7 +1,6 @@
 return {
   "folke/flash.nvim",
   event = { "BufReadPre", "BufNewFile" },
-  -- @type Flash.Config
   opts = {
     modes = {
       char = {

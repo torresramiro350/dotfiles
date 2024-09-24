@@ -59,6 +59,7 @@ return {
             require("CopilotChat").ask(input)
           end
         end,
+        mode = { "n", "v" },
       },
       {
         "<leader>ad",

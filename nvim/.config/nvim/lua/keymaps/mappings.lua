@@ -6,7 +6,7 @@
 require("groups.utility_funcs")
 -- navigating buffers
 nmap("n", "[b", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
-nmap("n", "]b", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
+nmap("n", "]b", "<cmd>bnext<cr>", { desc = "Previous buffer" })
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
