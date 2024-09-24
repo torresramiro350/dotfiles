@@ -20,30 +20,30 @@ config.font_size = 11.0
 -- config.font_size = 10.5
 -- config.font_size = 12
 config.line_height = 1.1
-config.font = wezterm.font_with_fallback({
-  { family = "JetBrains Mono", weight = "Medium", stretch = "Normal", style = "Normal" },
-  "Symbols Nerd Font Mono",
-})
+config.font = wezterm.font({ family = "JetBrains Mono", weight = "Medium" })
 
 config.ssh_domains = ssh_domains
 
 -- controls the window padding
 config.window_frame = {
-  font = wezterm.font({ family = "Inter", weight = "DemiBold" }),
+  font = wezterm.font({ family = "Inter", weight = "Medium" }),
   font_size = 11,
+  active_titlebar_bg = "#11111B",
+  inactive_titlebar_bg = "#11111B",
+  button_bg = "#11111B",
 }
--- config.window_decorations = "TITLE | RESIZE"
-config.window_decorations = "RESIZE"
+config.window_decorations = "TITLE | RESIZE"
+-- config.window_decorations = "RESIZE"
 config.window_padding = {
   left = 3,
   right = 3,
-  top = 3,    -- wayland
-  bottom = 25, -- wayland
+  top = 0,   -- wayland
+  bottom = 0, -- wayland
 }
 config.check_for_updates = false
 config.use_ime = true
 config.enable_scroll_bar = false
-config.enable_tab_bar = true
+config.enable_tab_bar = false
 config.enable_wayland = true
 
 config.hide_tab_bar_if_only_one_tab = true
