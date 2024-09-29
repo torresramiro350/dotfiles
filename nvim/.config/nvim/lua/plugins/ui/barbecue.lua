@@ -8,13 +8,12 @@ return {
   },
   config = function()
     local barbecue = require("barbecue")
-    local navic = require("nvim-navic").setup({
+    local navic = require("nvim-navic")
+    navic.setup({
       highlight = true,
     })
     barbecue.setup({
       -- add options here
-      show_dirname = true,
-      show_basename = true,
       theme = "catppuccin",
       attach_navic = false,
       create_autocmd = false,
@@ -37,5 +36,5 @@ return {
   end,
   -- lazy loading to prevent slowdown
   -- load when buffer has been loaded for reading
-  event = { "BufRead", "BufReadPost" },
+  event = { "BufRead", "BufReadPre", "BufNewFile" },
 }

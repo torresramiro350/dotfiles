@@ -6,7 +6,7 @@ return {
     local cat = require("catppuccin")
     -- local mocha = require("catppuccin.palettes").get_palette("mocha")
     cat.setup({
-      background = { -- :h background
+      background = {
         light = "latte",
         dark = "mocha",
       },
@@ -17,8 +17,8 @@ return {
         percentage = 0.15,
       },
       no_italic = false,
-      styles = {             -- Handles the styles of general hi groups (see `:h highlight-args`):
-        comments = { "italic" }, -- Change the style of comments
+      styles = {
+        comments = { "italic" },
         conditionals = { "italic" },
         loops = { "italic" },
         functions = { "italic" },
@@ -34,6 +34,12 @@ return {
       integrations = {
         --defaults
         alpha = true,
+        barbecue = {
+          dim_dirname = true, -- directory name is dimmed by default
+          bold_basename = true,
+          dim_context = false,
+          alt_background = false,
+        },
         cmp = true,
         diffview = true,
         dap = true,
@@ -57,6 +63,8 @@ return {
         },
         navic = {
           enabled = true,
+          -- enabled = false,
+          -- custom_bg = "NONE",
         },
         native_lsp = {
           enabled = true,
