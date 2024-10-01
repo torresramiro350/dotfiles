@@ -1,7 +1,21 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Neovim configuration](#neovim-configuration)
+  - [Configuration overview](#configuration-overview)
+    - [Lazy loading](#lazy-loading)
+    - [UI](#ui)
+    - [colorscheme](#colorscheme)
+    - [LSP](#lsp)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Neovim configuration
 
+## Configuration overview
+
 > First configuration after using other Nvim distros. There's lots of rooms for improvements,
-but this is working for me so far
+> but this is working for me so far
 
 Taking great inspiration from Kickstart
 
@@ -22,7 +36,7 @@ Structure of the configuration:
 
 ```
 
-## Lazy loading
+### Lazy loading
 
 I try to keep to lazy load as many plugins as possible.
 Here's a breakdown of my current plugins:
@@ -50,3 +64,4 @@ Formatting:
 
 - conform.nvim
 - nvim-lspconfig
+- nvim-lint
