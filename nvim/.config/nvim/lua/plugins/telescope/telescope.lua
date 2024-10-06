@@ -14,6 +14,10 @@ return {
     config = function() end,
   },
   {
+    "nvim-telescope/telescope-frecency.nvim",
+    event = "VeryLazy",
+  },
+  {
     "nvim-telescope/telescope.nvim",
     -- event = "VimEnter"
     event = "VeryLazy",
@@ -21,11 +25,17 @@ return {
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       local actions = require("telescope.actions")
-      require("telescope").setup({
-
+      local telescope = require("telescope")
+      telescope.setup({
         extensions = {
           file_browser = {
             -- theme = "catppuccin",
+          },
+          frecency = {
+            auto_validate = false,
+            matcher = "fuzzy",
+            path_display = { "filename_first" },
+            ignore_patterns = { "*/.git", "*/.git/*", "*/.cache", "*/.cache/*", "*/__pycache__/*" },
           },
           heading = {
             treesitter = true,
@@ -65,14 +75,6 @@ return {
                 actions.close,
                 type = "action",
               },
-              ["j"] = {
-                actions.move_selection_next,
-                type = "action",
-              },
-              ["k"] = {
-                actions.move_selection_previous,
-                type = "action",
-              },
             },
           },
         },
@@ -105,9 +107,10 @@ return {
 
       -- mappings
       -- TELESCOPE
-      local tel_bin = require("telescope.builtin")
+      local builtin = require("telescope.builtin")
       local tel = require("telescope")
       local tel_themes = require("telescope.themes")
+      local frecency = tel.extensions.frecency
       local heading = require("telescope").load_extension("heading")
       -- Enable telescope fzf native, if installed
       pcall(tel.load_extension, "fzf")
@@ -116,36 +119,64 @@ return {
       local function live_grep_git_root()
         local git_root = find_git_root()
         if git_root then
-          tel_bin.live_grep({ search_dirs = { git_root } })
+          builtin.live_grep({ search_dirs = { git_root } })
         end
       end
 
       vim.api.nvim_create_user_command("LiveGrepGitRoot", live_grep_git_root, {})
 
-      nmap("n", "<leader>?", tel_bin.oldfiles, { desc = "[?] Find recently opened files" })
+      -- stylua: ignore start
       nmap("n", "<leader><space>", function()
-        tel_bin.buffers({ sort_mru = true, ignore_current_buffer = true })
+        builtin.buffers({ sort_mru = true, ignore_current_buffer = true })
       end, { desc = "[ ] Find existing buffers" })
       nmap("n", "<leader>/", function()
-        tel_bin.current_buffer_fuzzy_find(tel_themes.get_dropdown({
+        builtin.current_buffer_fuzzy_find(tel_themes.get_dropdown({
           winblend = 10,
-          previewer = true,
+          previewer = false,
         }))
       end, {
         desc = "[/] Fuzzily search in current buffer",
       })
 
+      nmap("n", "<leader>s/", function()
+        builtin.live_grep({
+          search_dirs = frecency.query({}),
+          grep_open_files = true,
+          path_display = { "shorten" },
+          prompt_title = "Live Grep in Open Files",
+        })
+      end, { desc = "[s/] Live grep in open files" })
+
+
+      nmap("n", "<leader>?", function()
+        builtin.oldfiles({
+          path_display = { "shorten" },
+        })
+      end, { desc = "[?] Find recently opened files" })
       nmap("n", "<leader>fb", tel.extensions.file_browser.file_browser, { desc = "File Browser", noremap = true })
-      -- nmap("n", "<leader>sb", tel_bin.buffers, { desc = "[S]earch [B]uffer" })
-      nmap("n", "<leader>gf", tel_bin.git_files, { desc = "Search [G]it [F]iles" })
-      nmap("n", "<leader>ff", tel_bin.find_files, { desc = "[S]earch [F]iles" })
-      nmap("n", "<leader>sh", tel_bin.help_tags, { desc = "[S]earch [H]elp" })
-      nmap("n", "<leader>sw", tel_bin.grep_string, { desc = "[S]earch current [W]ord" })
-      nmap("n", "<leader>sg", tel_bin.live_grep, { desc = "[S]earch by [G]rep" })
-      nmap("n", "<leader>sd", tel_bin.diagnostics, { desc = "[S]earch [D]iagnostics" })
-      nmap("n", "<leader>sr", tel_bin.resume, { desc = "[S]earch [R]esume" })
+      nmap("n", "<leader>gf", builtin.git_files, { desc = "Search [G]it [F]iles" })
+      -- nmap("n", "<leader>ff", builtin.find_files, { desc = "[S]earch [F]iles" })
+      -- nmap("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+      nmap("n", "<leader>ff",
+        function()
+          frecency.frecency({
+            workspace = "CWD",
+            path_display = { "shorten" },
+            prompt_prefix =
+            '🔍'
+          })
+        end,
+        { desc = "[F]ind [F]iles" })
+      nmap("n", "<leader>sg",
+        function() builtin.live_grep({ search_dirs = frecency.query({}), path_display = { "shorten" } }) end,
+        { desc = "[S]earch by [G]rep" })
+      nmap("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
+      nmap("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
+      nmap("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
+      nmap("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
       nmap("n", "<leader>sG", "<cmd>LiveGrepGitRoot<cr>", { desc = "[S]earch by [G]rep on Git Root" })
       nmap("n", "<leader>sH", "<cmd>Telescope heading<cr>", { desc = "[S]earch by [H]eading" })
+      -- stylua: ignore end
     end,
     branch = "0.1.x",
     dependencies = {
@@ -162,8 +193,8 @@ return {
         "nvim-telescope/telescope-fzf-native.nvim",
         -- event = { "VimEnter", "UIEnter" },
         event = { "VeryLazy" },
-        -- NOTE: If you are having trouble with this installation,
-        --       refer to the README for telescope-fzf-native for more instructions.
+        -- If you are having trouble with this installation,
+        -- refer to the README for telescope-fzf-native for more instructions.
         build = "make",
         cond = function()
           return vim.fn.executable("make") == 1

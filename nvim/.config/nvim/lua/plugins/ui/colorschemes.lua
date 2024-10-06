@@ -4,7 +4,6 @@ return {
   priority = 1000,
   config = function()
     local cat = require("catppuccin")
-    -- local mocha = require("catppuccin.palettes").get_palette("mocha")
     cat.setup({
       background = {
         light = "latte",
@@ -58,7 +57,7 @@ return {
         mason = true,
         mini = {
           enabled = true,
-          indentscope_color = "lavender",
+          indentscope_color = "red",
           -- indentscope_color = "peach",
         },
         navic = {

@@ -6,9 +6,9 @@ return {
     conform.setup({
       formatters_by_ft = {
         lua = { "stylua" },
-        yaml = { "prettierd", "prettier" },
+        yaml = { "yamlfmt" },
         json = { "prettierd", "prettier" },
-        markdown = { "markdownlint", "markdown-toc" },
+        markdown = { "doctoc" },
         cmake = { "cmake_format" },
         python = function(bufnr)
           if conform.get_formatter_info("ruff_format", bufnr).available then

@@ -1,12 +1,11 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  build = ":TSUpdate",
   event = { "BufReadPre", "BufReadPost" },
-  -- Highlight, edit, and navigate code
-  -- [[ Configure Treesitter ]]
-  -- See `:help nvim-treesitter`
-  -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
-  -- vim.defer_fn(function()
-  -- end, 0)
+  init = function(plugin)
+    require("lazy.core.loader").add_to_rtp(plugin)
+    require("nvim-treesitter.query_predicates")
+  end,
   config = function()
     require("nvim-treesitter.configs").setup({
       -- Add languages to be installed here that you want installed for treesitter
@@ -84,8 +83,6 @@ return {
             ["]f"] = "@function.outer",
             ["]c"] = "@class.outer",
             ["]a"] = "@parameter.inner",
-            -- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
-            -- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
             ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
             ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
           },
@@ -126,5 +123,4 @@ return {
       },
     },
   },
-  build = ":TSUpdate",
 }

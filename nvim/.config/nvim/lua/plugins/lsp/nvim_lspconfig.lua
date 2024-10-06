@@ -52,19 +52,15 @@ return {
 
     -- import cmp-nvim-lsp plugin
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
+    local navic = require("nvim-navic")
     -- [[ Configure LSP ]]
     --  This function gets run when an LSP connects to a particular buffer.
     local on_attach = function(client, bufnr)
-      -- declared here to avoid the automatic enabling of nvim-navic which raises
-      -- a warning for rust
-      if client.server_capabilities["documentSymbolProvider"] then
-        require("nvim-navic").attach(client, bufnr)
+      -- attach navic only if the server supports documentSymbolProvider
+      if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr)
       end
 
-      -- NOTE: Remember that lua is a real programming language, and as such it is possible
-      -- to define small helper and utility functions so you don't have to repeat yourself
-      -- many times.
-      --
       -- In this case, we create a function that lets us more easily define mappings specific
       -- for LSP related items. It sets the mode, buffer and description for us each time.
       local nmap = function(keys, func, desc)

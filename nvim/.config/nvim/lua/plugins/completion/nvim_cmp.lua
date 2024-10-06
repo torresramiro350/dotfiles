@@ -88,6 +88,7 @@ return {
           cmp.config.compare.sort_text,
           cmp.config.compare.length,
           cmp.config.compare.order,
+          require("clangd_extensions.cmp_scores"),
         },
       },
       completion = {
@@ -146,8 +147,7 @@ return {
       -- configure lspkind for vs-code like pictograms in completion menu
       formatting = {
         -- format = lspkind.cmp_format({
-        --   -- mode = "symbol_text",
-        --   -- mode = "symbol",
+        --   mode = "symbol",
         -- }),
         format = function(entry, vim_item)
           -- replace with mini nvim icons

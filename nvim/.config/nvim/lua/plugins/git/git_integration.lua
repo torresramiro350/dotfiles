@@ -4,22 +4,16 @@ return {
   {
     "tpope/vim-rhubarb",
     event = { "BufReadPre", "BufReadPost" },
-    -- priority = 1000,
     cond = in_git(),
   },
   -- allows the integration of git functionality within neovim
   {
     "tpope/vim-fugitive",
-    -- event = { "BufRead", "BufReadPost" },
     event = { "BufReadPre", "BufReadPost" },
-    -- priority = 1000,
     cond = in_git(),
   },
   {
-    -- priority = 1000,
-    -- Adds git related signs to the gutter, as well as utilities for managing changes
     "lewis6991/gitsigns.nvim",
-    -- event = { "BufRead", "BufReadPost" },
     event = { "BufReadPre", "BufReadPost" },
     cond = in_git(),
     opts = {

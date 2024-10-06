@@ -20,7 +20,8 @@ config.font_size = 11.0
 -- config.font_size = 10.5
 -- config.font_size = 12
 config.line_height = 1.1
-config.font = wezterm.font({ family = "JetBrains Mono", weight = "Medium" })
+-- config.font = wezterm.font({ family = "JetBrains Mono", weight = "Medium" })
+config.font = wezterm.font({ family = "JetBrainsMono Nerd Font", weight = "Medium" })
 
 config.ssh_domains = ssh_domains
 

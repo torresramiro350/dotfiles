@@ -103,9 +103,9 @@ return {
     },
   },
   {
-    "folke/edgy.nvim",
-    event = "VeryLazy",
     -- optional = true,
+    "folke/edgy.nvim",
+    event = { "BufNewFile", "BufReadPre" },
     keys = {
       {
         "<leader>ue",

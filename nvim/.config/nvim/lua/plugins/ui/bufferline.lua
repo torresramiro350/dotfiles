@@ -2,7 +2,7 @@
 return {
   "akinsho/bufferline.nvim",
   -- load after catppuccin to ensure the correct highlighting
-  enabled = true,
+  enabled = false,
   event = { "BufNewFile", "BufReadPre", "BufReadPost" },
   config = function()
     -- local nmap = function(mode, keys, func, additional_args)
@@ -36,12 +36,11 @@ return {
         },
         offsets = {
           {
-            filetype = "NvimTree",
-            -- filetype = "Neo-tree",
-            -- text = "File Explorer",
-            text = function()
-              return vim.fn.getcwd()
-            end,
+            filetype = "neo-tree",
+            text = "Neo-tree",
+            -- text = function()
+            --   return vim.fn.getcwd()
+            -- end,
             highlight = "Directory",
             separator = true,
             text_align = "center",
