@@ -2,6 +2,7 @@ return {
   {
     "github/copilot.vim",
     event = "InsertEnter",
+    enabled = true,
     config = function()
       vim.g.copilot_filetypes = {
         latex = false,
@@ -12,9 +13,10 @@ return {
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    event = { "BufReadPre" },
+    event = { "BufReadPost" },
     branch = "canary",
     cmd = "CopilotChat",
+    enabled = true,
     opts = function()
       local user = vim.env.USER or "User"
       user = user:sub(1, 1):upper() .. user:sub(2)

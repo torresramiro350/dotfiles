@@ -143,6 +143,7 @@ return {
         { name = "luasnip" },
         { name = "buffer" },
         { name = "path" },
+        -- { name = "codeium", group_index = 1, priority = 100 }, -- in case we can no longer use copilot
       }),
       -- configure lspkind for vs-code like pictograms in completion menu
       formatting = {

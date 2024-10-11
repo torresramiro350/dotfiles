@@ -1,7 +1,8 @@
 require("groups.utility_funcs")
 return {
-  event = { "BufNewFile ", "BufReadPre", "InsertEnter" },
   "danymat/neogen",
+  dependencies = { "nvim-treesitter/nvim-treesitter" },
+  event = { "BufNewFile ", "BufReadPre", "InsertEnter" },
   cmd = "Neogen",
   keys = {
     {
@@ -65,5 +66,4 @@ return {
       },
     })
   end,
-  dependencies = { "nvim-treesitter/nvim-treesitter" },
 }
