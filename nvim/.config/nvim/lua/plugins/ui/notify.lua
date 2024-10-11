@@ -2,7 +2,6 @@ return {
   "rcarriga/nvim-notify",
   event = "VeryLazy",
   -- event = "UIEnter",
-  -- event = { "BufReadPre", "BufNewFile" },
   keys = {
     {
       "<leader>un",

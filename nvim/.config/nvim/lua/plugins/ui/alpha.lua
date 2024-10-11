@@ -2,6 +2,8 @@ return {
   "goolord/alpha-nvim",
   event = "VimEnter",
   enabled = true,
+  dependencies = { "echasnovski/mini.icons" },
+  -- enabled = true,
   init = false,
   opts = function()
     local dashboard = require("alpha.themes.dashboard")
@@ -30,16 +32,15 @@ return {
 
     -- dashboard.buttons.val = {
     dashboard.section.buttons.val = {
-      dashboard.button("f", "󰈞  Find file", "<cmd>Telescope find_files path_display={'shorten'}<CR>"),
-      dashboard.button("t", "󱄽  Find text", "<cmd>Telescope live_grep<CR>"),
-      dashboard.button("n", "  New file", "<cmd> ene <BAR> startinsert <CR>"),
-      dashboard.button("d", "  Show current directory", "<cmd>Telescope file_browser<CR>"),
-      dashboard.button("r", "󰄉  Recently used files", "<cmd>Telescope oldfiles<CR>"),
-      dashboard.button("c", "  Configuration", "<cmd>e ~/.config/nvim/init.lua<CR>"),
-      dashboard.button("l", "󰒲   Lazy", "<cmd>Lazy<CR>"),
-      dashboard.button("m", "  Mason", "<cmd>Mason<CR>"),
-      dashboard.button("u", "󰂖   Update plugins", "<cmd>Lazy sync <CR>"),
-      dashboard.button("q", "󰅚  Quit Neovim", "<cmd>qa<CR>"),
+      dashboard.button("f", "󰈞  Find file", "<cmd>Telescope find_files path_display={'shorten'}<cr>"),
+      dashboard.button("t", "󱄽  Find text", "<cmd>Telescope live_grep<cr>"),
+      dashboard.button("n", "  New file", "<cmd> ene <BAR> startinsert<cr>"),
+      dashboard.button("r", "󰄉  Recently used files", "<cmd>Telescope oldfiles cwd_only=true<cr>"),
+      dashboard.button("c", "  Configuration", "<cmd>e ~/.config/nvim/init.lua<cr>"),
+      dashboard.button("l", "󰒲   Lazy", "<cmd>Lazy<cr>"),
+      dashboard.button("u", "󰂖   Update plugins", "<cmd>Lazy sync <cr>"),
+      dashboard.button("m", "  Mason", "<cmd>Mason<cr>"),
+      dashboard.button("q", "󰅚  Quit Neovim", "<cmd>qa<cr>"),
     }
     for _, button in ipairs(dashboard.section.buttons.val) do
       button.opts.hl = "AlphaButtons"
@@ -78,7 +79,7 @@ return {
             .. stats.count
             .. " plugins in "
             .. ms
-            .. " ms"
+            .. "ms"
         pcall(vim.cmd.AlphaRedraw)
       end,
     })
