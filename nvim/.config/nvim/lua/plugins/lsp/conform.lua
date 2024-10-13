@@ -17,7 +17,7 @@ return {
             return { "isort", "black" }
           end
         end,
-        sh = { "shfmt" },
+        sh = { "shfmt", "shellharden" },
         toml = { "taplo" },
         tex = { "latexindent" },
       },

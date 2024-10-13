@@ -1,22 +1,19 @@
 return {
   "echasnovski/mini.indentscope",
   version = false,
-  event = { "BufReadPre", "BufNewFile" },
+  -- event = { "BufReadPre", "BufNewFile" },
+  event = { "BufReadPre", "BufReadPost", "BufNewFile" },
   config = function()
     -- indent
     local mini_indent = require("mini.indentscope")
     mini_indent.setup({
-      draw = {
-        -- animation = mini_indent.gen_animation.none(),
-      },
-      symbol = "│",
+      -- symbol = "│",
+      symbol = "▏",
+      draw = { priority = 3 },
       options = { try_as_border = true, border = "both", indent_at_cursor = true },
       mappings = {
-        -- Textobjects
         object_scope = "ii",
         object_scope_with_border = "ai",
-
-        -- Motions (jump to respective border line; if not present - body line)
         goto_top = "[i",
         goto_bottom = "]i",
       },

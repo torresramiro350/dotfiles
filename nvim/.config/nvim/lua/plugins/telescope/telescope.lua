@@ -91,11 +91,9 @@ return {
       end
 
       -- mappings
-      -- TELESCOPE
       local builtin = require("telescope.builtin")
       local tel = require("telescope")
       local tel_themes = require("telescope.themes")
-      -- local frecency = tel.extensions.frecency
       -- Enable telescope fzf native, if installed
       pcall(tel.load_extension, "fzf")
 

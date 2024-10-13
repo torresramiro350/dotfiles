@@ -30,9 +30,9 @@ return {
 
     vim.g.rainbow_delimiters = { highlight = highlight }
     ibl.setup({
-      -- scope = { highlight = highlight, show_start = false, show_end = false },
       scope = { enabled = false },
       -- scope = { show_start = false, show_end = false },
+      -- scope = { highlight = highlight, show_start = false, show_end = false },
       exclude = {
         filetypes = {
           "help",

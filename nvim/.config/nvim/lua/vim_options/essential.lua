@@ -1,8 +1,4 @@
 -- [[ Setting options ]]
---
--- Sets how neovim will display certain whitespace characters in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
 
 --  set the cmdheight to 0 to avoid the extra space
 vim.opt.cmdheight = 0
@@ -38,7 +34,7 @@ vim.opt.foldenable = true
 vim.opt.laststatus = 3
 
 -- Place a column line
--- vim.opt.colorcolumn = "90"
+vim.opt.colorcolumn = "90"
 
 -- Enable cursor line highlight
 vim.opt.cursorline = true

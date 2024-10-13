@@ -23,42 +23,24 @@ return {
       minicomment.setup({
         options = {
           custom_commentstring = function()
-            -- return ts_context.calculate_commentstring() or vim.bo.commentstring
             return ts_context.calculate_commentstring() or vim.bo.commentstring
           end,
         },
-        -- Module mappings. Use `''` (empty string) to disable one.
         mappings = {
-          -- Toggle comment (like `gcip` - comment inner paragraph) for both
-          -- Normal and Visual modes
           comment = "gc",
-
-          -- Toggle comment on current line
           comment_line = "gcc",
-
-          -- Toggle comment on visual selection
           comment_visual = "gc",
-
-          -- Define 'comment' textobject (like `dgc` - delete whole comment block)
-          -- Works also in Visual mode if mapping differs from `comment_visual`
           textobject = "gc",
         },
       })
-
       -- pairs
       require("mini.pairs").setup({
         modes = { insert = true, command = true, terminal = false },
-        -- skip autopair when next character is one of these
         skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
-        -- skip autopair when the cursor is inside these treesitter nodes
         skip_ts = { "string" },
-        -- skip autopair when next character is closing pair
-        -- and there are more closing pairs than opening pairs
         skip_unbalanced = true,
-        -- better deal with markdown code blocks
         markdown = true,
       })
-
       -- Better Around/Inside textobjects
       -- Examples:
       --  - "va")  - [V]isually select [A]round [)]paren
@@ -81,9 +63,9 @@ return {
             a = { "@class.outer" },
             i = { "@class.inner" },
           }),
-          t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" }, -- tags
-          d = { "%f[%d]%d+" },                                           -- digits
-          e = {                                                          -- Word with case
+          t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },
+          d = { "%f[%d]%d+" },
+          e = {
             {
               "%u[%l%d]+%f[^%l%d]",
               "%f[%S][%l%d]+%f[^%l%d]",
@@ -92,21 +74,18 @@ return {
             },
             "^().*()$",
           },
-          u = ai.gen_spec.function_call(),                      -- u for "Usage"
-          U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
+          u = ai.gen_spec.function_call(),
+          U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }),
         },
         mappings = {
           -- Main textobject prefixes
           around = "a",
           inside = "i",
-
           -- Next/last variants
           around_next = "an",
           inside_next = "in",
           around_last = "al",
           inside_last = "il",
-
-          -- Move cursor to corresponding edge of `a` textobject
           goto_left = "[g",
           goto_right = "]g",
         },
@@ -115,14 +94,13 @@ return {
   },
   {
     "echasnovski/mini.surround",
-    -- Add/delete/replace surroundings (brackets, quotes, etc.)
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       mappings = {
         add = "gsa",
         delete = "gsd",
-        find = "gsf",  -- find surrounding to the right
-        find_left = "gsF", -- find surrounding to the left
+        find = "gsf",
+        find_left = "gsF",
         replace = "gsr",
         highlight = "gsh",
         update_n_lines = "gsn",

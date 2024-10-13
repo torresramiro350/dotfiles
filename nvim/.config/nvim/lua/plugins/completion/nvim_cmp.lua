@@ -1,42 +1,44 @@
 return {
   -- Autocompletion
   "hrsh7th/nvim-cmp",
-  event = { "InsertEnter" },
+  event = "InsertEnter",
+  -- enabled = function()
+  --   -- only enable cmp when not in comment or treesitter comment
+  --   local context = require("cmp.config.context")
+  --   if vim.api.nvim_get_mode().mode == "c" then
+  --     return true
+  --   else
+  --     return not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
+  --   end
+  -- end,
   dependencies = {
     {
       "garymjr/nvim-snippets",
       opts = {
         friendly_snippets = true,
       },
-      dependencies = { -- Adds a number of user-friendly snippets
+      dependencies = {
         "rafamadriz/friendly-snippets",
       },
     },
     -- Snippet Engine & its associated nvim-cmp source
     "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
-    -- Adds LSP completion capabilities
     "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-path", -- source for file system paths
-    "hrsh7th/cmp-buffer", -- source for text in buffer
-
-    -- Adds a number of user-friendly snippets
-    "rafamadriz/friendly-snippets",
-    -- vs-code like picograms
+    "hrsh7th/cmp-path",           -- source for file system paths
+    "hrsh7th/cmp-buffer",         -- source for text in buffer
+    "rafamadriz/friendly-snippets", -- vs-code like picograms
     "onsails/lspkind.nvim",
   },
-
-  --- configuration for nvim-cmp
   config = function()
-    -- [[ Configure nvim-cmp ]]
-    -- See `:help cmp`
     local cmp = require("cmp")
     local luasnip = require("luasnip")
-    local lspkind = require("lspkind")
     local neogen = require("neogen")
+    -- local lspkind = require("lspkind")
     require("luasnip.loaders.from_vscode").lazy_load()
     luasnip.config.setup({})
     luasnip.add_snippets(require("cppguard").snippet_luasnip("guard"))
+    vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 
     -- sets up auto completion for the command line
     cmp.setup.cmdline({ "/", "?" }, {
@@ -47,7 +49,6 @@ return {
     })
 
     cmp.setup.cmdline(":", {
-      -- mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
         { name = "path" },
       }, {
@@ -61,23 +62,19 @@ return {
     })
 
     cmp.setup({
-
+      auto_brackets = { "python" },
       view = {
         entries = { name = "custom", selection_order = "near_cursor" },
       },
-      -- setup the window style for code completion (I like the window rounded style)
-      -- with borders for both code completion and documentation
       window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
       },
-      -- setup snopped completions
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
         end,
       },
-      -- will update this with more information once I know what this is doing
       sorting = {
         priority_weight = 2,
         comparators = {
@@ -93,10 +90,8 @@ return {
       },
       completion = {
         completeopt = "menu,menuone,noinsert",
-        -- rounded style (my preference)
         border = "rounded",
       },
-      -- setup some keybindings for the selection of code completions
       mapping = cmp.mapping.preset.insert({
         ["<C-p>"] = cmp.mapping.select_prev_item(),
         ["<C-n>"] = cmp.mapping.select_next_item(),
@@ -156,8 +151,22 @@ return {
           if icon ~= nil then
             vim_item.kind = icon
           end
+          local widths = {
+            abbr = vim.g.cmp_widths and vim.g.cmp_widths.abbr or 40,
+            menu = vim.g.cmp_widths and vim.g.cmp_widths.menu or 30,
+          }
+          for key, width in pairs(widths) do
+            if vim_item[key] and vim.fn.strdisplaywidth(vim_item[key]) > width then
+              vim_item[key] = vim.fn.strcharpart(vim_item[key], 0, width - 1) .. "…"
+            end
+          end
           return vim_item
         end,
+      },
+      experimental = {
+        ghost_text = {
+          hl_group = "CmpGhostText",
+        },
       },
     })
   end,
