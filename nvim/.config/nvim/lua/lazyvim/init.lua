@@ -21,6 +21,7 @@ require("lazy").setup({
   { import = "plugins.completion" },
   { import = "plugins.cpp" },
   { import = "plugins.documentation" },
+  { import = "plugins.notes" },
   { import = "plugins.git" },
   { import = "plugins.lsp" },
   { import = "plugins.rust" },

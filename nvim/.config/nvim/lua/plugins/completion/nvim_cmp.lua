@@ -67,6 +67,11 @@ return {
         entries = { name = "custom", selection_order = "near_cursor" },
       },
       window = {
+        -- completion = {
+        --   winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+        --   col_offset = -3,
+        --   side_padding = 0,
+        -- },
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
       },

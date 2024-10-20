@@ -1,25 +1,28 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [Neovim configuration](#neovim-configuration)
-  - [Configuration overview](#configuration-overview)
-    - [Lazy loading](#lazy-loading)
-    - [UI](#ui)
-    - [colorscheme](#colorscheme)
-    - [LSP](#lsp)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # Neovim configuration
+
+<!-- toc -->
+
+- [Configuration overview](#configuration-overview)
+  * [Acknowledgements](#acknowledgements)
+  * [Structure of the configuration](#structure-of-the-configuration)
+  * [Lazy loading](#lazy-loading)
+  * [UI](#ui)
+  * [colorscheme](#colorscheme)
+  * [LSP](#lsp)
+
+<!-- tocstop -->
 
 ## Configuration overview
 
+### Acknowledgements
+
+> [!NOTE]
 > First configuration after using other Nvim distros. There's lots of rooms for improvements,
 > but this is working for me so far
 
 Taking great inspiration from Kickstart
 
-Structure of the configuration:
+### Structure of the configuration
 
 ```bash
  .

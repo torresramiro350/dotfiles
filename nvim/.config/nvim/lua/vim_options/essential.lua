@@ -1,5 +1,8 @@
 -- [[ Setting options ]]
 
+-- backspace
+vim.opt.backspace = "indent,eol,start"
+
 --  set the cmdheight to 0 to avoid the extra space
 vim.opt.cmdheight = 0
 vim.opt.list = true
@@ -20,7 +23,6 @@ vim.g.gitblame_display_virtual_text = 1
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.o.background = "dark"
--- vim.o.background = "light"
 
 -- Set fold settings
 -- These options were reccommended by nvim-ufo
@@ -76,7 +78,6 @@ vim.o.mouse = "a"
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
 vim.o.clipboard = "unnamedplus"
 
 -- Enable break indent
