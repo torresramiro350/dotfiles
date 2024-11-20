@@ -17,11 +17,9 @@ config.term = "xterm-kitty"
 config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
 
 config.font_size = 11.0
--- config.font_size = 10.5
--- config.font_size = 12
 config.line_height = 1.1
--- config.font = wezterm.font({ family = "JetBrains Mono", weight = "Medium" })
-config.font = wezterm.font({ family = "JetBrainsMono Nerd Font", weight = "Medium" })
+config.font = wezterm.font({ family = "JetBrains Mono", weight = "Medium" })
+-- config.font = wezterm.font({ family = "JetBrainsMono Nerd Font", weight = "Medium" })
 
 config.ssh_domains = ssh_domains
 
@@ -45,7 +43,7 @@ config.check_for_updates = false
 config.use_ime = true
 config.enable_scroll_bar = false
 config.enable_tab_bar = false
-config.enable_wayland = true
+config.enable_wayland = false
 
 config.hide_tab_bar_if_only_one_tab = true
 
@@ -55,6 +53,7 @@ config.exit_behavior = "CloseOnCleanExit"
 
 -- specify the shell to use with wezterm
 config.default_prog = { "/usr/bin/fish" }
+-- config.default_prog = {"/usr/bin/nu"}
 config.scrollback_lines = 5000
 config.default_workspace = "main"
 config.use_fancy_tab_bar = true

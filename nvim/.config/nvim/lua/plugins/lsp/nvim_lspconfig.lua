@@ -213,6 +213,12 @@ return {
     -- configure python server
     -- since it's in alpha stage, we need to use the ruff-lsp server
     lspconfig.ruff.setup({
+      cmd_env = { RUFF_TRACE = "messages" },
+      init_options = {
+        settings = {
+          logLevel = "error",
+        },
+      },
       capabilities = capabilities,
       on_attach = ruff_attach,
     })
@@ -252,10 +258,20 @@ return {
     })
 
     -- markdown
-    lspconfig.marksman.setup({
-      capabilities = capabilities,
+    lspconfig.markdown_oxide.setup({
       on_attach = on_attach,
+      capabilities = vim.tbl_deep_extend("force", capabilities, {
+        workspace = {
+          didChangeWatchedFiles = {
+            dynamicRegistration = true,
+          },
+        },
+      }),
     })
+    -- lspconfig.marksman.setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    -- })
 
     -- C/C++
     lspconfig.clangd.setup({

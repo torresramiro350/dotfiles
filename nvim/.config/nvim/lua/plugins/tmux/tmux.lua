@@ -10,6 +10,7 @@ return {
     "TmuxNavigatePrevious",
   },
   keys = {
+    { "<c-a>",  "<C-a>" },
     { "<c-h>",  ":TmuxNavigateLeft<CR>" },
     { "<c-j>",  ":TmuxNavigateDown<CR>" },
     { "<c-k>",  ":TmuxNavigateUp<CR>" },

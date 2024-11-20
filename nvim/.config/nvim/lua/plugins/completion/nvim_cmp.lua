@@ -2,6 +2,7 @@ return {
   -- Autocompletion
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
+  enabled = true,
   -- enabled = function()
   --   -- only enable cmp when not in comment or treesitter comment
   --   local context = require("cmp.config.context")
@@ -67,6 +68,11 @@ return {
         entries = { name = "custom", selection_order = "near_cursor" },
       },
       window = {
+        -- completion = {
+        --   winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+        --   col_offset = -3,
+        --   side_padding = 0,
+        -- },
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
       },
@@ -138,7 +144,7 @@ return {
         { name = "luasnip" },
         { name = "buffer" },
         { name = "path" },
-        -- { name = "codeium", group_index = 1, priority = 100 }, -- in case we can no longer use copilot
+        { name = "codeium", group_index = 1, priority = 100 }, -- in case we can no longer use copilot
       }),
       -- configure lspkind for vs-code like pictograms in completion menu
       formatting = {
@@ -147,10 +153,13 @@ return {
         -- }),
         format = function(entry, vim_item)
           -- replace with mini nvim icons
-          local icon, _ = require("mini.icons").get("lsp", vim_item.kind)
-          if icon ~= nil then
-            vim_item.kind = icon
-          end
+          local icon, hl, is_default = require("mini.icons").get("lsp", vim_item.kind)
+          -- vim_item.kind = icon
+          vim_item.kind = icon .. " " .. vim_item.kind
+          vim_item.kind_hl_group = hl
+          -- if icon ~= nil then
+          --   vim_item.kind = icon
+          -- end
           local widths = {
             abbr = vim.g.cmp_widths and vim.g.cmp_widths.abbr or 40,
             menu = vim.g.cmp_widths and vim.g.cmp_widths.menu or 30,
@@ -162,11 +171,6 @@ return {
           end
           return vim_item
         end,
-      },
-      experimental = {
-        ghost_text = {
-          hl_group = "CmpGhostText",
-        },
       },
     })
   end,

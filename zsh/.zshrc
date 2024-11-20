@@ -353,3 +353,12 @@ eval "$(zoxide init zsh)"
 eval "$(thefuck --alias)"
 eval "$(starship init zsh)" # starship shell
 eval "$(atuin init zsh)"
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+path=('/home/rtorres/.juliaup/bin' $path)
+export PATH
+
+# <<< juliaup initialize <<<

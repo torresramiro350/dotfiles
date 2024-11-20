@@ -11,18 +11,13 @@ return {
     ["yaml.tmpl"] = { glyph = "", hl = "MiniIconsRed" },
     ["zsh.tmpl"] = { glyph = "", hl = "MiniIconsGreen" },
   },
-  config = function()
-    local icons = require("mini.icons")
-    icons.setup({
-      style = "glyph",
-    })
-    -- replace web devicons with mini icons
-    MiniIcons.mock_nvim_web_devicons()
+  opts = {
+    style = "glyph",
+  },
+  init = function()
+    package.preload["nvim-web-devicons"] = function()
+      require("mini.icons").mock_nvim_web_devicons()
+      return package.loaded["nvim-web-devicons"]
+    end
   end,
-  -- init = function()
-  -- package.preload["nvim-web-devicons"] = function()
-  --   icons.mock_nvim_web_devicons()
-  --   return package.loaded["nvim-web-devicons"]
-  -- end
-  -- end,
 }

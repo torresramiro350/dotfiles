@@ -55,3 +55,18 @@ eval "$(starship init bash)"
 eval "$(atuin init bash)"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+case ":$PATH:" in
+    *:/home/rtorres/.juliaup/bin:*)
+        ;;
+
+    *)
+        export PATH=/home/rtorres/.juliaup/bin${PATH:+:${PATH}}
+        ;;
+esac
+
+# <<< juliaup initialize <<<
