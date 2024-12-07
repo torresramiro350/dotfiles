@@ -1,7 +1,7 @@
 return {
   "goolord/alpha-nvim",
   event = "VimEnter",
-  enabled = true,
+  enabled = false,
   dependencies = { "echasnovski/mini.icons" },
   -- enabled = true,
   init = false,
