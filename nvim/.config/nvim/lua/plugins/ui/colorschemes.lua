@@ -39,6 +39,7 @@ return {
           dim_context = false,
           alt_background = false,
         },
+        blink_cmp = true,
         cmp = true,
         diffview = true,
         dap = true,

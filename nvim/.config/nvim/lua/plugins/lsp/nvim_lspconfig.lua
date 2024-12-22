@@ -20,7 +20,8 @@ return {
       end,
     },
     { "antosha417/nvim-lsp-file-operations", config = true },
-
+    { "saghen/blink.cmp" },
+    -- { "hrsh7th/cmp-nvim-lsp" },
     -- Useful status updates for LSP
     {
       "j-hui/fidget.nvim",
@@ -48,10 +49,10 @@ return {
   },
   config = function()
     --import lspconfig plugin
+    -- local cmp_nvim_lsp = require("cmp_nvim_lsp")
     local lspconfig = require("lspconfig")
-    local cmp_nvim_lsp = require("cmp_nvim_lsp")
     local navic = require("nvim-navic")
-    -- [[ Configure LSP ]]
+    local capabilities = require("blink.cmp").get_lsp_capabilities()
     local on_attach = function(client, bufnr)
       if client.server_capabilities.documentSymbolProvider then
         navic.attach(client, bufnr)
@@ -161,8 +162,8 @@ return {
     --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
     --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
     --
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend("force", capabilities, cmp_nvim_lsp.default_capabilities())
+    -- local capabilities = vim.lsp.protocol.make_client_capabilities()
+    -- capabilities = vim.tbl_deep_extend("force", capabilities, cmp_nvim_lsp.default_capabilities())
 
     -- Change the Diagnostic symbols in the sign column (gutter)
     -- (not in youtube nvim video)

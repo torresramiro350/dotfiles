@@ -6,5 +6,6 @@ return {
     "hrsh7th/cmp-path",
   },
   -- event = "BufReadPre",
-  event = "CmdLineEnter",
+  -- event = "CmdLineEnter",
+  enabled = false,
 }
