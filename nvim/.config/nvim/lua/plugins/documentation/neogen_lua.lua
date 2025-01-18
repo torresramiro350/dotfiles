@@ -6,7 +6,7 @@ return {
   cmd = "Neogen",
   keys = {
     {
-      "<leader>nc",
+      "<leader>cn",
       function()
         require("neogen").generate()
       end,
@@ -16,30 +16,13 @@ return {
   config = function()
     local neogen = require("neogen")
     neogen.setup({
-      -- took this snipped from lazyvim's documentation
-      opts = function(_, opts)
-        if opts.snippet_engine ~= nil then
-          return
-        end
-        local map = {
-          ["LuaSnip"] = "luasnip",
-          ["nvim-snippy"] = "snippy",
-          ["vim-vsnip"] = "vsnip",
-        }
-        for plugin, engine in pairs(map) do
-          if vim.fn.exists("*" .. plugin) == 1 then
-            opts.snippet_engine = engine
-          end
-        end
-        if vim.snippet then
-          opts.snippet_engine = "nvim"
-        end
-      end,
+      snippet_engine = "luasnip",
       input_after_comment = true,
       languages = {
         lua = {
           template = {
-            annotation_convention = "emmylua",
+            -- annotation_convention = "emmylua",
+            annotation_convention = "ldoc",
           },
         },
         python = {
