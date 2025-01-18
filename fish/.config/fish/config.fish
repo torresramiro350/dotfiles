@@ -66,7 +66,9 @@ alias flatupd="flatpak update"
 alias x="exit"
 alias cp="xcp"
 
-alias nv='/home/rtorres/nvim-linux64/bin/nvim'
+alias nv='/usr/bin/nvim'
+# alias nv='/home/rtorres/nvim-linux64/bin/nvim'
+
 alias mkdir='mkdir -pv'
 
 alias syncdir='rsync -r -auzvhP'
@@ -110,8 +112,8 @@ alias ll="eza --icons --long --header --git --all"
 alias lt="eza --icons --long --tree --header --level=1 --hyperlink --group-directories-first"
 alias ltt="eza --icons --long --tree --header --level=2 --hyperlink --group-directories-first"
 
-# set -gx EDITOR "/usr/bin/nvim"
-set -gx EDITOR "/home/rtorres/nvim-linux64/bin/nvim"
+set -gx EDITOR "/usr/bin/nvim"
+# set -gx EDITOR "/home/rtorres/nvim-linux64/bin/nvim"
 set -gx FZF_DEFAULT_COMMAND "fd --type f --strip-cwd-prefix"
 
 set -gx FZF_DEFAULT_OPTS "\
