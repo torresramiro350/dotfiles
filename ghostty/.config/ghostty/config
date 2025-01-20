@@ -1,0 +1,20 @@
+# controlling the font appearance
+font-family = "JetBrains Mono"
+font-style = "Medium"
+font-style-bold = "Bold"
+font-style-italic = "Italic"
+font-style-bold-italic = "BoldItalic"
+
+theme = "catppuccin-mocha"
+shell-integration = fish
+# adds a +20% -> 1
+adjust-cell-height = 3 
+adjust-cell-width = -1
+
+# font-variation-wght = 600
+
+font-size = 12.5
+macos-option-as-alt = true
+
+# keybindings
+keybind = super+shift+comma=reload_config

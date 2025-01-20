@@ -3,6 +3,7 @@ return {
   version = false,
   -- event = { "BufReadPre", "BufNewFile" },
   event = { "BufReadPre", "BufReadPost", "BufNewFile" },
+  enabled = false,
   config = function()
     -- indent
     local mini_indent = require("mini.indentscope")

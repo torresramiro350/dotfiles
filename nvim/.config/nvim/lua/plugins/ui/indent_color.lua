@@ -1,5 +1,5 @@
 return {
-  enabled = true,
+  enabled = false,
   -- Add indentation guides even on blank lines
   "lukas-reineke/indent-blankline.nvim",
   -- See `:help ibl`

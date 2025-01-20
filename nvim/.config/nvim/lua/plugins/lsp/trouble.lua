@@ -1,6 +1,6 @@
 return {
-  event = { "BufReadPost", "BufNewFile" },
   "folke/trouble.nvim",
+  event = { "BufReadPost", "BufNewFile" },
   dependencies = { "nvim-tree/nvim-web-devicons" },
   opts = {
     modes = {

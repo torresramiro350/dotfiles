@@ -1,5 +1,6 @@
 -- [[ Setting options ]]
 
+vim.opt.conceallevel = 2
 -- backspace
 vim.opt.backspace = "indent,eol,start"
 

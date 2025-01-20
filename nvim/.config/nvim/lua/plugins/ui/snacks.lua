@@ -15,88 +15,76 @@ return {
     },
 
     bigfile = { enabled = true },
+    indent = {
+      priority = 1,
+      only_scope = true,
+      only_current = true,
+      enabled = true,
+      chunk = {
+        -- when enabled, scopes will be rendered as chunks, except for the
+        -- top-level scope which will be rendered as a scope.
+        enabled = true,
+        -- only show chunk scopes in the current window
+        only_current = false,
+        priority = 200,
+        hl = "SnacksIndentChunk",
+        char = {
+          -- corner_top = "┌",
+          -- corner_bottom = "└",
+          corner_top = "╭",
+          corner_bottom = "╰",
+          horizontal = "─",
+          vertical = "│",
+          arrow = ">",
+        },
+      },
+    },
+    input = { enabled = true },
     notifier = { enabled = true },
     quickfile = { enabled = true },
     statuscolumn = { enabled = true },
     words = { enabled = true },
   },
   keys = {
+    -- stylua: ignore start
+    { "<leader>z", function() Snacks.zen() end,      desc = "Toggle Zen Mode" },
+    { "<leader>Z", function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
     {
-      "<leader>.",
-      function()
-        Snacks.scratch()
-      end,
-      desc = "Toggle Scratch Buffer",
+      "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer",
     },
     {
       "<leader>S",
-      function()
-        Snacks.scratch.select()
-      end,
-      desc = "Select Scratch Buffer",
+      function() Snacks.scratch.select() end,
+      desc = "Select Scratch Buffer"
     },
     {
-      "<leader>bd",
-      function()
-        Snacks.bufdelete()
-      end,
-      desc = "Delete Buffer",
+      "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer",
     },
     {
-      "<leader>cR",
-      function()
-        Snacks.rename.rename_file()
-      end,
-      desc = "Rename File",
+      "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File",
     },
     {
-      "<leader>gB",
-      function()
-        Snacks.gitbrowse()
-      end,
-      desc = "Git Browse",
+      "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse",
     },
     {
       "<leader>gb",
-      function()
-        Snacks.git.blame_line()
-      end,
+      function() Snacks.git.blame_line() end,
       desc = "Git Blame Line",
     },
     {
-      "<leader>gf",
-      function()
-        Snacks.lazygit.log_file()
-      end,
-      desc = "Lazygit Current File History",
+      "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Lazygit Current File History"
     },
     {
-      "<leader>gg",
-      function()
-        Snacks.lazygit()
-      end,
-      desc = "Lazygit",
+      "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit",
     },
     {
-      "<leader>gl",
-      function()
-        Snacks.lazygit.log()
-      end,
-      desc = "Lazygit Log (cwd)",
+      "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit Log (cwd)",
     },
     {
-      "<leader>un",
-      function()
-        Snacks.notifier.hide()
-      end,
-      desc = "Dismiss All Notifications",
+      "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications",
     },
     {
-      "<c-/>",
-      function()
-        Snacks.terminal()
-      end,
-      desc = "Toggle Terminal",
+      "<c-/>", function() Snacks.terminal() end, desc = "Toggle Terminal",
     },
     -- {
     --   "<c-_>",
@@ -107,17 +95,13 @@ return {
     -- },
     {
       "]]",
-      function()
-        Snacks.words.jump(vim.v.count1)
-      end,
+      function() Snacks.words.jump(vim.v.count1) end,
       desc = "Next Reference",
       mode = { "n", "t" },
     },
     {
       "[[",
-      function()
-        Snacks.words.jump(-vim.v.count1)
-      end,
+      function() Snacks.words.jump(-vim.v.count1) end,
       desc = "Prev Reference",
       mode = { "n", "t" },
     },
@@ -139,6 +123,7 @@ return {
         })
       end,
     },
+    -- stylua: ignore end
   },
   init = function()
     -- taken from snack.nvim github
@@ -213,6 +198,8 @@ return {
             .option("background", { off = "light", on = "dark", name = "Dark Background" })
             :map("<leader>ub")
         Snacks.toggle.inlay_hints():map("<leader>uh")
+        Snacks.toggle.indent():map("<leader>ug")
+        Snacks.toggle.dim():map("<leader>uD")
       end,
     })
   end,

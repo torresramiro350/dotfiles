@@ -25,6 +25,7 @@ require("lazy").setup({
   { import = "plugins.git" },
   { import = "plugins.lsp" },
   { import = "plugins.rust" },
+  { import = "plugins.sessions" },
   { import = "plugins.treesitter" },
   { import = "plugins.telescope" },
   { import = "plugins.ui" },

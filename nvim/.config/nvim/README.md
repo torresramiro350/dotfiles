@@ -3,12 +3,12 @@
 <!-- toc -->
 
 - [Configuration overview](#configuration-overview)
-  * [Acknowledgements](#acknowledgements)
-  * [Structure of the configuration](#structure-of-the-configuration)
-  * [Lazy loading](#lazy-loading)
-  * [UI](#ui)
-  * [colorscheme](#colorscheme)
-  * [LSP](#lsp)
+  - [Acknowledgements](#acknowledgements)
+  - [Structure of the configuration](#structure-of-the-configuration)
+  - [Lazy loading](#lazy-loading)
+  - [UI](#ui)
+  - [colorscheme](#colorscheme)
+  - [LSP](#lsp)
 
 <!-- tocstop -->
 
