@@ -4,8 +4,9 @@ return {
     "rafamadriz/friendly-snippets",
     "echasnovski/mini.snippets",
     -- { "L3MON4D3/LuaSnip", version = "v2.*" },
-    version = false,
   },
+  event = { "InsertEnter" },
+  enabled = true,
   version = "*",
   opts = {
     appearance = {
@@ -82,11 +83,23 @@ return {
         -- show_documentation = true,
       },
     },
-    -- snippets = { preset = "luasnip" },
-    snippets = { preset = "mini_snippets" },
+    snippets = {
+      preset = "mini_snippets",
+      -- Function to use when expanding LSP provided snippets
+      expand = function(snippet)
+        vim.snippet.expand(snippet)
+      end,
+      -- Function to use when checking if a snippet is active
+      active = function(filter)
+        return vim.snippet.active(filter)
+      end,
+      -- Function to use when jumping between tab stops in a snippet, where direction can be negative or positive
+      jump = function(direction)
+        vim.snippet.jump(direction)
+      end,
+    },
     sources = {
       default = { "lsp", "path", "snippets", "buffer" },
-      -- cmdline = {},
       cmdline = function()
         local type = vim.fn.getcmdtype()
         -- Search forward and backward
