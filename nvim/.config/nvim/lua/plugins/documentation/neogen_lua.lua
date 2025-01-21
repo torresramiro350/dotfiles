@@ -2,7 +2,7 @@ require("groups.utility_funcs")
 return {
   "danymat/neogen",
   dependencies = { "nvim-treesitter/nvim-treesitter" },
-  event = { "BufNewFile ", "BufReadPre", "InsertEnter" },
+  event = { "BufNewFile ", "BufReadPre" },
   cmd = "Neogen",
   keys = {
     {
@@ -16,7 +16,8 @@ return {
   config = function()
     local neogen = require("neogen")
     neogen.setup({
-      snippet_engine = "luasnip",
+      -- snippet_engine = "luasnip",
+      snippet_engine = "mini",
       input_after_comment = true,
       languages = {
         lua = {
