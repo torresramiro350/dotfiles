@@ -1,4 +1,7 @@
 return {
   "echasnovski/mini.sessions",
-  version = false,
+  version = "*",
+  config = function()
+    require("mini.sessions").setup({})
+  end,
 }

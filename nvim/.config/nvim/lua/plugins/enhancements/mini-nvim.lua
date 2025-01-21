@@ -47,7 +47,8 @@ return {
       -- Better text objects
       local ai = require("mini.ai")
       ai.setup({
-        n_lines = 500,
+        n_lines = 50,
+        search_method = "cover_or_next",
         custom_textobjects = {
           o = ai.gen_spec.treesitter({
             a = { "@block.outer", "@conditional.outer", "@loop.outer" },

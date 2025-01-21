@@ -3,8 +3,6 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
     "echasnovski/mini.snippets",
-    -- { "L3MON4D3/LuaSnip", version = "v2.*" },
-    version = false,
   },
   version = "*",
   opts = {
@@ -21,7 +19,7 @@ return {
         },
       },
       ghost_text = {
-        enabled = true,
+        enabled = false,
         -- enabled = vim.g.ai_cmp,
       },
       menu = {
