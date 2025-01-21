@@ -3,9 +3,8 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
     "echasnovski/mini.snippets",
-    -- { "L3MON4D3/LuaSnip", version = "v2.*" },
   },
-  event = { "InsertEnter" },
+  event = "InsertEnter",
   enabled = true,
   version = "*",
   opts = {
@@ -83,11 +82,11 @@ return {
         -- show_documentation = true,
       },
     },
-    snippets = {
-      preset = "mini_snippets",
-    },
+    -- snippets = { preset = "luasnip" },
+    snippets = { preset = "mini_snippets" },
     sources = {
       default = { "lsp", "path", "snippets", "buffer" },
+      -- cmdline = {},
       cmdline = function()
         local type = vim.fn.getcmdtype()
         -- Search forward and backward
