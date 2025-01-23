@@ -16,7 +16,8 @@ vim.opt.showmode = false
 -- nerd fonts
 vim.g.have_nerd_font = true
 
--- copilot settings
+-- ai settings
+vim.g.ai_cmp = true
 vim.g.copilot_no_tab_map = false
 
 -- Place all the general Neovim options

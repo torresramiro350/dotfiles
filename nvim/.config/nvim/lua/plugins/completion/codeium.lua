@@ -1,23 +1,19 @@
 require("groups.utility_funcs")
 return {
-  "Exafunction/codeium.vim",
+  "Exafunction/codeium.nvim",
+  dependencies = { "nvim-lua/plenary.nvim" },
   enabled = true,
   event = { "InsertEnter" },
   build = ":Codeium Auth",
-  config = function()
-    -- Change '<C-g>' here to any keycode you like.
-    -- stylua: ignore start
-    nmap("i", "<tab>",
-      function() return vim.fn["codeium#Accept"]() end, { expr = true, silent = true })
-    nmap("i", "<c-;>",
-      function() return vim.fn["codeium#CycleCompletions"](1) end,
-      { expr = true, silent = true })
-    nmap("i", "<c-,>", function()
-        return vim.fn["codeium#CycleCompletions"](-1)
-      end,
-      { expr = true, silent = true })
-    nmap("i", "<c-x>", function() return vim.fn["codeium#Clear"]() end,
-      { expr = true, silent = true })
-    -- stylua: ignore end
-  end,
+  opts = {
+    enable_cmp_source = not vim.g.ai_cmp,
+    virtual_text = {
+      enabled = vim.g.ai_cmp,
+      key_bindings = {
+        accept = "<Tab>", -- handled by nvim-cmp / blink.cmp
+        next = "<M-]>",
+        prev = "<M-[>",
+      },
+    },
+  },
 }

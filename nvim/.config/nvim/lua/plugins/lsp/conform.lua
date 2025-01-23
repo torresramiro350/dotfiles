@@ -41,8 +41,10 @@ return {
         tex = { "latexindent" },
       },
       format_on_save = {
-        timeout_ms = 500,
-        lsp_format = "fallback",
+        timeout_ms = 3000,
+        async = false,       -- not recommended to change
+        quiet = false,       -- not recommended to change
+        lsp_format = "fallback", -- not recommended to change
       },
     })
   end,

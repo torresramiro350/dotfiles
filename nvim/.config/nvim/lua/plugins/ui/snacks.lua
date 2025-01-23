@@ -3,6 +3,8 @@ return {
   priority = 1000,
   lazy = false,
   opts = {
+    dim = {},
+    picker = {},
     input = { enabled = false },
     notifier = { enabled = true },
     quickfile = { enabled = true },
@@ -20,7 +22,6 @@ return {
         { section = "startup" },
       },
     },
-
     scope = {
       enabled = true,
       opts = {
@@ -100,10 +101,18 @@ return {
         -- only show chunk scopes in the current window
         only_current = false,
         priority = 200,
-        hl = "SnacksIndentChunk",
+        -- hl = "SnacksIndentChunk",
+        hl = {
+          "SnacksIndent1",
+          "SnacksIndent2",
+          "SnacksIndent3",
+          "SnacksIndent4",
+          "SnacksIndent5",
+          "SnacksIndent6",
+          "SnacksIndent7",
+          "SnacksIndent8",
+        },
         char = {
-          -- corner_top = "┌",
-          -- corner_bottom = "└",
           corner_top = "╭",
           corner_bottom = "╰",
           horizontal = "─",
@@ -198,8 +207,7 @@ return {
             break
           end
         end
-
-        local msg = {} ---@type string[]
+        local msg = {}
         progress[client.id] = vim.tbl_filter(function(v)
           return table.insert(msg, v.msg) or not v.done
         end, p)
