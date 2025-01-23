@@ -54,6 +54,8 @@ vim.opt.shiftwidth = 2
 -- Enable smart indenting (see https://stackoverflow.com/questions/1204149/smart-wrap-in-vim)
 vim.opt.breakindent = true
 
+vim.opt.ruler = false -- Disable the default ruler
+
 -- pop settings
 vim.opt.pumblend = 10  -- Popup blend
 vim.opt.pumheight = 10 -- Maximum number of entries in a popup

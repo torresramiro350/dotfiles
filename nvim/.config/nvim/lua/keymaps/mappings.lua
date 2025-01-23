@@ -1,8 +1,3 @@
----@module Mappings for neovim
----@author R. Torres-Escobedo
----@date Feb 23, 2024
----@version
-
 require("groups.utility_funcs")
 -- navigating buffers
 nmap("n", "[b", "<cmd>bprevious<cr>", { desc = "Previous buffer" })

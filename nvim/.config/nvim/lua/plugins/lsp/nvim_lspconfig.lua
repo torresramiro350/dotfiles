@@ -119,8 +119,8 @@ return {
       nmap("[w", diagnostic_goto(false, "WARN"), "Go to previous warning")
       nmap("]w", diagnostic_goto(true, "WARN"), "Go to next warning")
 
-      nmap("[q", vim.cmd.cprev, "Go to previous quickfix item")
-      nmap("]q", vim.cmd.cnext, "Go to next quickfix item")
+      -- nmap("[q", vim.cmd.cprev, "Go to previous quickfix item")
+      -- nmap("]q", vim.cmd.cnext, "Go to next quickfix item")
       nmap("]Q", vim.cmd.clast, "End of quickfix list")
       nmap("[Q", vim.cmd.cfirst, "Beginning of quickfix list")
 
