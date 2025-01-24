@@ -1,8 +1,8 @@
 return {
   "saghen/blink.cmp",
   dependencies = {
-    -- "rafamadriz/friendly-snippets",
     "echasnovski/mini.snippets",
+    -- "rafamadriz/friendly-snippets",
     -- "Exafunction/codeium.nvim",
     -- "saghen/blink.compat",
   },

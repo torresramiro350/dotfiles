@@ -108,28 +108,28 @@ return {
       vim.api.nvim_create_user_command("LiveGrepGitRoot", live_grep_git_root, {})
 
       -- stylua: ignore start
-      nmap("n", "<leader><space>", function() builtin.buffers({ sort_mru = true, ignore_current_buffer = true }) end,
-        { desc = "[ ] Find existing buffers" })
-      nmap("n", "<leader>/",
-        function()
-          builtin.current_buffer_fuzzy_find(tel_themes.get_dropdown({ winblend = 10, previewer = false, }))
-        end, {
-          desc = "[/] Fuzzily search in current buffer",
-        })
-      nmap('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      nmap('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
+      -- nmap("n", "<leader><space>", function() builtin.buffers({ sort_mru = true, ignore_current_buffer = true }) end,
+      --   { desc = "[ ] Find existing buffers" })
+      -- nmap("n", "<leader>/",
+      --   function()
+      --     builtin.current_buffer_fuzzy_find(tel_themes.get_dropdown({ winblend = 10, previewer = false, }))
+      --   end, {
+      --     desc = "[/] Fuzzily search in current buffer",
+      --   })
+      -- nmap('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+      -- nmap('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       nmap("n", "<leader>s/", builtin.live_grep, { desc = "[s/] Live grep in open files" })
-      nmap("n", "<leader>?", function() builtin.oldfiles({ cwd = vim.uv.cwd() }) end,
-        { desc = "[?] Find recently opened files" })
-      nmap("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-      nmap("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
-      nmap("n", "<leader>gf", builtin.git_files, { desc = "Search [G]it [F]iles" })
-      nmap("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
-      nmap("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-      nmap("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
-      nmap("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
-      nmap("n", "<leader>sq", "<cmd>Telescope quickfix<cr>", { desc = "Quickfix List" })
-      nmap("n", "<leader>sG", "<cmd>LiveGrepGitRoot<cr>", { desc = "[S]earch by [G]rep on Git Root" })
+      -- nmap("n", "<leader>?", function() builtin.oldfiles({ cwd = vim.uv.cwd() }) end,
+      --   { desc = "[?] Find recently opened files" })
+      -- nmap("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
+      -- nmap("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+      -- nmap("n", "<leader>gf", builtin.git_files, { desc = "Search [G]it [F]iles" })
+      -- nmap("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
+      -- nmap("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
+      -- nmap("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
+      -- nmap("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
+      -- nmap("n", "<leader>sq", "<cmd>Telescope quickfix<cr>", { desc = "Quickfix List" })
+      -- nmap("n", "<leader>sG", "<cmd>LiveGrepGitRoot<cr>", { desc = "[S]earch by [G]rep on Git Root" })
       -- stylua: ignore end
     end,
     branch = "0.1.x",
