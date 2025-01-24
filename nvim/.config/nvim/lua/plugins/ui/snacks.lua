@@ -128,11 +128,23 @@ return {
     { "<leader><space>", function() Snacks.picker.buffers() end,         desc = "Buffers" },
     { "<leader>:",       function() Snacks.picker.command_history() end, desc = "Command History" },
     { "<leader>?",       function() Snacks.picker.files() end,           desc = "Find Files" },
-    { "<leader>/",       function() Snacks.picker.lines() end,           desc = "Buffer Lines" },
+    {
+      "<leader>/",
+      function()
+        Snacks.picker.lines({
+          layout = {
+            preview = "main",
+            -- preset = "ivy",
+            preset = "vertical",
+          },
+        })
+      end,
+      desc = "Buffer Lines"
+    },
     -- find
-    { "<leader>fb",      function() Snacks.picker.buffers() end,         desc = "Buffers" },
-    { "<leader>ff",      function() Snacks.picker.files() end,           desc = "Find Files" },
-    { "<leader>fg",      function() Snacks.picker.git_files() end,       desc = "Find Git Files" },
+    { "<leader>fb", function() Snacks.picker.buffers() end,   desc = "Buffers" },
+    { "<leader>ff", function() Snacks.picker.files() end,     desc = "Find Files" },
+    { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
     {
       "<leader>fc",
       function()
@@ -142,7 +154,21 @@ return {
     },
     { "<leader>fr", function() Snacks.picker.recent() end,                desc = "Recent" },
     -- Grep
-    { "<leader>sb", function() Snacks.picker.lines() end,                 desc = "Buffer Lines" },
+    {
+      "<leader>sb",
+      function()
+        Snacks.picker.lines(
+          {
+            layout = {
+              preview = "main",
+              -- preset = "ivy",
+              preset = "vertical",
+            },
+          }
+        )
+      end,
+      desc = "Buffer Lines"
+    },
     { "<leader>sB", function() Snacks.picker.grep_buffers() end,          desc = "Grep Open Buffers" },
     { "<leader>sg", function() Snacks.picker.grep() end,                  desc = "Grep" },
     { "<leader>sw", function() Snacks.picker.grep_word() end,             desc = "Visual selection or word",    mode = { "n", "x" } },
