@@ -4,7 +4,6 @@ return {
   event = { "VimEnter" },
   config = function()
     local statusline = require("mini.statusline")
-
     -- Autocmd to track macro recording, And redraw statusline, which trigger
     -- macro function of mini.statusline
     vim.api.nvim_create_autocmd("RecordingEnter", {
@@ -13,7 +12,6 @@ return {
         vim.cmd("redrawstatus")
       end,
     })
-
     -- Autocmd to track the end of macro recording
     vim.api.nvim_create_autocmd("RecordingLeave", {
       pattern = "*",
@@ -21,7 +19,6 @@ return {
         vim.cmd("redrawstatus")
       end,
     })
-
     statusline.setup({
       use_icons = true,
       set_vim_settings = true,
@@ -34,7 +31,6 @@ return {
               return ""
             end
           end
-
           local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
           local git = MiniStatusline.section_git({ trunc_width = 40 })
           local diff = MiniStatusline.section_diff({ trunc_width = 75 })
