@@ -107,6 +107,7 @@ return {
   {
     -- optional = true,
     "folke/edgy.nvim",
+    enabled = false,
     event = { "BufNewFile", "BufReadPre" },
     keys = {
       {
