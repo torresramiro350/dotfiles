@@ -3,9 +3,10 @@ return {
   priority = 1000,
   lazy = false,
   opts = {
+    animate = {},
     dim = {},
     picker = {},
-    input = { enabled = false },
+    input = { enabled = true },
     notifier = { enabled = true },
     quickfile = { enabled = true },
     statuscolumn = { enabled = true },
