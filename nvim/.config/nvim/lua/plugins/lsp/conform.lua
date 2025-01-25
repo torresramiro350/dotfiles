@@ -27,7 +27,7 @@ return {
         lua = { "stylua" },
         yaml = { "yamlfmt" },
         json = { "prettierd", "prettier" },
-        markdown = { "markdown-toc", "markdownlint-cli2", "prettier" },
+        markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
         cmake = { "cmake_format" },
         python = function(bufnr)
           if conform.get_formatter_info("ruff_format", bufnr).available then
