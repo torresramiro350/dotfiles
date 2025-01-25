@@ -2,22 +2,6 @@ return {
   "echasnovski/mini.files",
   event = { "BufNewFile", "BufReadPre" },
   version = false,
-  keys = {
-    {
-      "<leader>fm",
-      function()
-        require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
-      end,
-      desc = "Open mini.files (Directory of Current File)",
-    },
-    {
-      "<leader>fM",
-      function()
-        require("mini.files").open(vim.uv.cwd(), true)
-      end,
-      desc = "Open mini.files (cwd)",
-    },
-  },
   opts = {
     options = {
       -- Whether to use for editing directories
@@ -31,7 +15,6 @@ return {
   },
   config = function(_, opts)
     require("mini.files").setup(opts)
-
     local show_dotfiles = true
     local filter_show = function(fs_entry)
       return true
@@ -106,4 +89,20 @@ return {
       end,
     })
   end,
+  keys = {
+    {
+      "<leader>fm",
+      function()
+        require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
+      end,
+      desc = "Open mini.files (Directory of Current File)",
+    },
+    {
+      "<leader>fM",
+      function()
+        require("mini.files").open(vim.uv.cwd(), true)
+      end,
+      desc = "Open mini.files (cwd)",
+    },
+  },
 }
