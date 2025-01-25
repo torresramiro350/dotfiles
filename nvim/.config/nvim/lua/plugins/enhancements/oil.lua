@@ -1,6 +1,7 @@
 require("groups.utility_funcs")
 return {
   "stevearc/oil.nvim",
+  enabled = false,
   event = { "BufRead", "BufNewFile", "BufReadPost" },
   -- opts = {},
   config = function()
@@ -30,5 +31,5 @@ return {
     })
   end,
   -- Optional dependencies
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+  -- dependencies = { "nvim-tree/nvim-web-devicons" },
 }
