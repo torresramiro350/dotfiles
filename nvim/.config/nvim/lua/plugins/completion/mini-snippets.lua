@@ -2,6 +2,7 @@ return {
   "echasnovski/mini.snippets",
   event = "InsertEnter",
   dependencies = "rafamadriz/friendly-snippets",
+  version = false,
   opts = function()
     local mini_snippets = require("mini.snippets")
     local expand_select_override = function(snippets, insert)
