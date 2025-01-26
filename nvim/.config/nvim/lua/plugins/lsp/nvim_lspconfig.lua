@@ -63,20 +63,29 @@ return {
         },
       },
       clangd = {
+        filetypes = { "c", "cxx", "h", "hxx", "objc", "objcpp", "cuda", "proto" },
+        keys = {
+          { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
+        },
+        cmd = {
+          "clangd",
+          "--background-index",
+          "--clang-tidy",
+          "--header-insertion=iwyu",
+          "--completion-style=detailed",
+          "--function-arg-placeholders",
+          "--fallback-style=llvm",
+        },
         init_options = {
           usePlaceholders = true,
           completeunimported = true,
           clangdFileStatus = true,
         },
-        filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
       },
-      cmake = {},
       bashls = {
         filetypes = { "sh" },
       },
-      neocmake = {
-        filetypes = { "cmake" },
-      },
+      neocmake = {},
       markdown_oxide = {},
       jsonls = { filetypes = { "json" } },
       yamlls = { filetypes = { "yaml", "yml" } },

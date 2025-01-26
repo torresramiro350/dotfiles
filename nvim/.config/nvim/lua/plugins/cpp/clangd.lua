@@ -1,9 +1,27 @@
 return {
   "p00f/clangd_extensions.nvim",
-  event = { "BufNewFile", "BufReadPre", "BufReadPost" },
-  ft = { "c", "cxx", "h", "hxx", "cpp", "objc", "objcpp", "cuda", "proto" },
-  -- config = function()
-  --   require("clangd_extensions.inlay_hints").setup_autocmd()
-  --   require("clangd_extensions.inlay_hints").set_inlay_hints()
-  -- end,
+  lazy = true,
+  config = function() end,
+  opts = {
+    ast = {
+      --These require codicons (https://github.com/microsoft/vscode-codicons)
+      role_icons = {
+        type = "",
+        declaration = "",
+        expression = "",
+        specifier = "",
+        statement = "",
+        ["template argument"] = "",
+      },
+      kind_icons = {
+        Compound = "",
+        Recovery = "",
+        TranslationUnit = "",
+        PackExpansion = "",
+        TemplateTypeParm = "",
+        TemplateTemplateParm = "",
+        TemplateParamObject = "",
+      },
+    },
+  },
 }
