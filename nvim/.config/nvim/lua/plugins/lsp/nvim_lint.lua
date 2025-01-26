@@ -7,6 +7,7 @@ return {
       markdown = { "markdownlint-cli2" },
       python = { "ruff" },
       bash = { "shellcheck" },
+      cmake = { "cmakelint" },
     }
 
     -- Create autocommand which carries out the actual linting
