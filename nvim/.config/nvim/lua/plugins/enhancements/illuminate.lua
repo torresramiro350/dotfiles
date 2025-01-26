@@ -1,6 +1,7 @@
 return {
   "RRethy/vim-illuminate",
   event = { "BufReadPre", "BufNewFile" },
+  enabled = false,
   config = function()
     -- illuminates all the instances of the current word under the cursor
     local illuminate = require("illuminate")
