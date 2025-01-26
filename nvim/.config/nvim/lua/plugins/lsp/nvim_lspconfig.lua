@@ -31,8 +31,9 @@ return {
         cmd = { "lua-language-server" },
         single_file_support = true,
       },
-      pyright = {
-        cmd = { "pyright-langserver", "--stdio" },
+      basedpyright = {
+        disableOrganizeImports = true,
+        cmd = { "basedpyright-langserver", "--stdio" },
         settings = {
           python = {
             analysis = {
@@ -46,6 +47,22 @@ return {
         },
         single_file_support = true,
       },
+      -- pyright = {
+      --   disableOrganizeImports = true,
+      --   cmd = { "pyright-langserver", "--stdio" },
+      --   settings = {
+      --     python = {
+      --       analysis = {
+      --         -- Ignore all files for analysis to exclusively use Ruff for linting
+      --         ignore = { "*" },
+      --         autoSearchPaths = true,
+      --         diagnosticMode = "openFilesOnly",
+      --         useLibraryCodeForTypes = true,
+      --       },
+      --     },
+      --   },
+      --   single_file_support = true,
+      -- },
       ruff = {
         cmd_env = { RUFF_TRACE = "messages" },
         init_options = {
@@ -261,7 +278,7 @@ return {
     })
 
     -- pyright
-    lspconfig.pyright.setup({
+    lspconfig.basedpyright.setup({
       capabilities = capabilities,
       on_attach = on_attach,
     })
