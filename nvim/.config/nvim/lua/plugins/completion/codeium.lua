@@ -5,12 +5,13 @@ return {
   enabled = true,
   event = { "InsertEnter" },
   build = ":Codeium Auth",
+  cmd = "Codeium",
   opts = {
-    enable_cmp_source = not vim.g.ai_cmp,
+    enable_cmp_source = vim.g.ai_cmp,
     virtual_text = {
-      enabled = vim.g.ai_cmp,
+      enabled = not vim.g.ai_cmp,
       key_bindings = {
-        accept = "<Tab>", -- handled by nvim-cmp / blink.cmp
+        accept = false, -- handled by nvim-cmp / blink.cmp
         next = "<M-]>",
         prev = "<M-[>",
       },

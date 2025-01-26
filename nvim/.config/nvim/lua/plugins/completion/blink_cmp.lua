@@ -3,8 +3,8 @@ return {
   dependencies = {
     "echasnovski/mini.snippets",
     -- "rafamadriz/friendly-snippets",
-    -- "Exafunction/codeium.nvim",
-    -- "saghen/blink.compat",
+    "Exafunction/codeium.nvim",
+    { "saghen/blink.compat", opts = {} },
   },
   event = "InsertEnter",
   enabled = true,
@@ -47,9 +47,13 @@ return {
             { "kind_icon", "kind" },
           },
         },
-        border = "padded",
+        -- border = "padded",
+        -- border = "single",
+        border = "rounded",
       },
       documentation = {
+        -- window = { border = "single" },
+        window = { border = "rounded" },
         auto_show = true,
         auto_show_delay_ms = 200,
         update_delay_ms = 50,
@@ -66,7 +70,7 @@ return {
       default = function(ctx)
         local success, node = pcall(vim.treesitter.get_node)
         if vim.bo.filetype == "lua" then
-          return { "lsp", "path" }
+          return { "lsp", "path", "codeium" }
         elseif
             success
             and node
@@ -74,17 +78,19 @@ return {
         then
           return { "buffer" }
         else
-          return { "lsp", "path", "snippets", "buffer" }
+          return { "lsp", "path", "snippets", "buffer", "codeium" }
         end
       end,
       -- compat = { "codeium" },
-      -- providers = {
-      --   codeium = {
-      --     kind = "Codeium",
-      --     score_offset = 100,
-      --     async = true,
-      --   },
-      -- },
+      providers = {
+        codeium = {
+          name = "codeium",
+          -- kind = "Codeium",
+          module = "blink.compat.source",
+          score_offset = 100,
+          async = true,
+        },
+      },
       cmdline = function()
         local type = vim.fn.getcmdtype()
         -- Search forward and backward
