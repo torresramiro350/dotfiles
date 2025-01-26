@@ -2,7 +2,93 @@ return {
   -- LSP Configuration & Plugins
   "neovim/nvim-lspconfig",
   event = { "BufNewFile", "BufReadPre", "BufReadPost" },
-
+  opts = {
+    servers = {
+      lua_ls = {
+        settings = {
+          Lua = {
+            runtime = { version = "LuaJit" },
+            workspace = { checkThirdParty = false, library = { vim.env.VIMRUNTIME } },
+            telemetry = { enable = false },
+            codeLens = { enable = true },
+            completion = {
+              callSnippet = "Replace",
+            },
+            doc = {
+              privateName = { "^_" },
+            },
+            hint = {
+              enable = true,
+              setType = false,
+              paramType = true,
+              paramName = "Disable",
+              semicolon = "Disable",
+              arrayIndex = "Disable",
+            },
+          },
+        },
+        filetypes = { "lua" },
+        cmd = { "lua-language-server" },
+        single_file_support = true,
+      },
+      pyright = {
+        cmd = { "pyright-langserver", "--stdio" },
+        settings = {
+          python = {
+            analysis = {
+              -- Ignore all files for analysis to exclusively use Ruff for linting
+              ignore = { "*" },
+              autoSearchPaths = true,
+              diagnosticMode = "openFilesOnly",
+              useLibraryCodeForTypes = true,
+            },
+          },
+        },
+        single_file_support = true,
+      },
+      ruff = {
+        cmd_env = { RUFF_TRACE = "messages" },
+        init_options = {
+          settings = {
+            logLevel = "error",
+          },
+        },
+        keys = {
+          -- {
+          --   "<leader>co",
+          --   vim.lsp.buf.code_action["source.organizeImports"],
+          --   -- vim.lsp.action["source.organizeImports"],
+          --   desc = "Organize Imports",
+          -- },
+        },
+      },
+      clangd = {
+        init_options = {
+          usePlaceholders = true,
+          completeunimported = true,
+          clangdFileStatus = true,
+        },
+        filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+      },
+      cmake = {},
+      bashls = {
+        filetypes = { "sh" },
+      },
+      neocmake = {
+        filetypes = { "cmake" },
+      },
+      markdown_oxide = {},
+      jsonls = { filetypes = { "json" } },
+      yamlls = { filetypes = { "yaml", "yml" } },
+      julials = {
+        filetypes = { "julia" },
+      },
+      -- vimls = {},
+      taplo = {
+        filetypes = { "toml" },
+      },
+    },
+  },
   dependencies = {
     -- Automatically install LSPs to stdpath for neovim
     {
@@ -16,7 +102,7 @@ return {
       "williamboman/mason-lspconfig.nvim",
       config = function()
         require("mason-lspconfig").setup({
-          -- ensure_installed = {}
+          ensure_installed = { "lua_ls" },
         })
       end,
     },
@@ -24,29 +110,7 @@ return {
     { "saghen/blink.cmp" },
     -- { "hrsh7th/cmp-nvim-lsp" },
     -- Useful status updates for LSP
-    {
-      "j-hui/fidget.nvim",
-      dependencies = {
-        {
-          "folke/neodev.nvim",
-          event = "BufRead *.lua",
-        },
-      },
-      event = { "BufReadPre", "BufReadPost", "BufNewFile" },
-      config = function()
-        require("fidget").setup({
-          progress = {
-            suppress_on_insert = true,
-            ignore_done_already = true,
-          },
-          notification = {
-            window = {
-              winblend = 0,
-            },
-          },
-        })
-      end,
-    },
+    { "j-hui/fidget.nvim" },
   },
   config = function()
     --import lspconfig plugin
@@ -66,7 +130,7 @@ return {
 
         vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
       end
-      local builtins = require("telescope.builtin")
+      -- local builtins = require("telescope.builtin")
       local function diagnostic_goto(direction, severity)
         local go = vim.diagnostic["goto_" .. (direction and "next" or "prev")]
         if type(severity) == "string" then
@@ -177,86 +241,31 @@ return {
     -- julia
     lspconfig.julials.setup({
       capabilities = capabilities,
-      filetypes = { "julia" },
       on_attach = on_attach,
-    })
-
-    --latex
-    lspconfig.texlab.setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      filetypes = { "tex", "plaintex", "bib" },
-      settings = {
-        texlab = {
-          build = {
-            args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
-            executable = "latexmk",
-            forwardSearchAfter = false,
-            onSave = false,
-          },
-          chktex = {
-            onEdit = false,
-            onOpenAndSave = false,
-          },
-          diagnosticsDelay = 300,
-          forwardSearch = {
-            args = {},
-          },
-          formatterLineLength = 80,
-          bibtexFormatter = "texlab",
-          latexFormatter = "latexindent",
-          latexindent = {
-            modifyLineBreaks = false,
-          },
-        },
-      },
     })
 
     -- configure python server
     -- since it's in alpha stage, we need to use the ruff-lsp server
     lspconfig.ruff.setup({
-      cmd_env = { RUFF_TRACE = "messages" },
-      init_options = {
-        settings = {
-          logLevel = "error",
-        },
-      },
       capabilities = capabilities,
       on_attach = ruff_attach,
     })
-    --pylyzer (maybe in the future)
-    -- lspconfig.pylyzer.setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    -- })
+
     -- pyright
     lspconfig.pyright.setup({
-      cmd = { "pyright-langserver", "--stdio" },
       capabilities = capabilities,
       on_attach = on_attach,
-      settings = {
-        python = {
-          analysis = {
-            autoSearchPaths = true,
-            diagnosticMode = "openFilesOnly",
-            useLibraryCodeForTypes = true,
-          },
-        },
-      },
-      single_file_support = true,
     })
     --bash
     lspconfig.bashls.setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      filetypes = { "sh" },
     })
 
     -- cmake
     lspconfig.neocmake.setup({
       on_attach = on_attach,
       capabilities = capabilities,
-      filetypes = { "cmake" },
     })
 
     -- markdown
@@ -270,10 +279,6 @@ return {
         },
       }),
     })
-    -- lspconfig.marksman.setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    -- })
 
     -- C/C++
     lspconfig.clangd.setup({
@@ -281,13 +286,7 @@ return {
         capabilities,
         offsetEncoding = "utf-8",
       },
-      init_options = {
-        usePlaceholders = true,
-        completeunimported = true,
-        clangdFileStatus = true,
-      },
       on_attach = on_attach,
-      filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
     })
 
     -- json
@@ -300,60 +299,18 @@ return {
     lspconfig.yamlls.setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      -- settings = {
-      -- },
     })
 
     -- Lua
     lspconfig.lua_ls.setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      -- provide the completion for neovim
-      on_init = function(client)
-        local path = client.workspace_folders[1].name
-
-        if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
-          return
-        end
-
-        client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
-          runtime = {
-            -- Tell the language server which version of Lua you're using
-            -- (most likely LuaJIT in the case of Neovim)
-            version = "LuaJIT",
-          },
-          -- Make the server aware of Neovim runtime files
-          workspace = {
-            checkThirdParty = false,
-            library = {
-              vim.env.VIMRUNTIME,
-              -- Depending on the usage, you might want to add additional paths here.
-              -- "${3rd}/luv/library"
-              -- "${3rd}/busted/library",
-            },
-            -- or pull in all of 'runtimepath'.
-            -- NOTE: this is a lot slower
-            --
-            -- library = vim.api.nvim_get_runtime_file("", true)
-          },
-        })
-      end,
-      settings = {
-        Lua = {
-          workspace = { checkThirdParty = false },
-          telemetry = { enable = false },
-        },
-      },
-      filetypes = { "lua" },
-      cmd = { "lua-language-server" },
-      single_file_support = true,
     })
 
     -- TOML
     lspconfig.taplo.setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      filetypes = { "toml" },
     })
 
     -- autoformat.lua
