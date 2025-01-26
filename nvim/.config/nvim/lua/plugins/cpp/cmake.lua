@@ -1,11 +1,29 @@
 return {
   "Civitasv/cmake-tools.nvim",
+  -- ft = { "cmake" },
+  -- event = { "BufRead CMakeLists.txt" },
+  lazy = true,
   init = function()
     -- load the plugin only if the current directory contains a CMakeLists.txt file
-    local cwd = vim.uv.cwd()
-    if vim.fn.filereadable(cwd .. "/CMakeLists.txt") == 1 then
-      return true
+    local loaded = false
+    local function check()
+      local cwd = vim.uv.cwd()
+      if vim.fn.filereadable(cwd .. "/CMakeLists.txt") == 1 then
+        -- return true
+        require("lazy").load({ plugins = { "cmake-tools.nvim" } })
+        loaded = true
+      end
     end
+
+    check()
+
+    vim.api.nvim_create_autocmd("DirChanged", {
+      callback = function()
+        if not loaded then
+          check()
+        end
+      end,
+    })
   end,
   config = function()
     local home = os.getenv("HOME")
@@ -21,6 +39,4 @@ return {
     vim.keymap.set("n", "<leader>cc", "<cmd>CMakeClean<cr>", { desc = "CMake Clean" })
     vim.keymap.set("n", "<leader>ci", "<cmd>CMakeInstall<cr>", { desc = "CMake Install" })
   end,
-  -- ft = { "cmake" },
-  event = { "BufReadPre", "BufReadPost", "BufNewFile" },
 }
