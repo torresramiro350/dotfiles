@@ -11,26 +11,26 @@ function scheme_for_appearance(appearance)
   end
 end
 
-config.term = "xterm-kitty"
+-- config.term = "xterm-kitty"
 -- config.term = "wezterm"
 -- declare fonts for terminal to use
 config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
 
-config.font_size = 11.0
-config.line_height = 1.1
+config.font_size = 10.0
+config.line_height = 1.2
 config.font = wezterm.font({ family = "JetBrains Mono", weight = "Medium" })
 -- config.font = wezterm.font({ family = "JetBrainsMono Nerd Font", weight = "Medium" })
 
 config.ssh_domains = ssh_domains
 
 -- controls the window padding
-config.window_frame = {
-  font = wezterm.font({ family = "Inter", weight = "Medium" }),
-  font_size = 11,
-  active_titlebar_bg = "#11111B",
-  inactive_titlebar_bg = "#11111B",
-  button_bg = "#11111B",
-}
+-- config.window_frame = {
+--   font = wezterm.font({ family = "Inter", weight = "Medium" }),
+--   font_size = 11,
+--   active_titlebar_bg = "#11111B",
+--   inactive_titlebar_bg = "#11111B",
+--   button_bg = "#11111B",
+-- }
 config.window_decorations = "TITLE | RESIZE"
 -- config.window_decorations = "RESIZE"
 config.window_padding = {
