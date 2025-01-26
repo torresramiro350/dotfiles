@@ -35,10 +35,13 @@ return {
         disableOrganizeImports = true,
         cmd = { "basedpyright-langserver", "--stdio" },
         settings = {
-          python = {
+          basedpyright = {
             analysis = {
               -- Ignore all files for analysis to exclusively use Ruff for linting
               ignore = { "*" },
+              inlayHints = {
+                callArgumentNames = true,
+              },
               autoSearchPaths = true,
               diagnosticMode = "openFilesOnly",
               useLibraryCodeForTypes = true,
