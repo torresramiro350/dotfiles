@@ -4,7 +4,42 @@ return {
   "nvim-neo-tree/neo-tree.nvim",
   cmd = "Neotree",
   event = { "BufNewFile", "BufReadPre" },
-  opts = function(_, opts)
+  opts = {
+    open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
+    filesystem = {
+      bind_to_cwd = false,
+      follow_current_file = { enabled = true },
+      use_libuv_file_watcher = true,
+    },
+    window = {
+      mappings = {
+        ["l"] = "open",
+        ["h"] = "close_node",
+        ["<space>"] = "none",
+        ["Y"] = {
+          function(state)
+            local node = state.tree:get_node()
+            local path = node:get_id()
+            vim.fn.setreg("+", path, "c")
+          end,
+          desc = "Copy path to clipboard",
+        },
+        ["P"] = { "toggle_preview", config = { use_float = false } },
+      },
+    },
+    sources = {
+      "filesystem",
+      "buffers",
+      "git_status",
+    },
+    source_selector = {
+      winbar = true,
+      statusline = false,
+      show_scrolled_off_parent_node = false,
+      pop_up_border_style = "rounded",
+    },
+  },
+  config = function(_, opts)
     local function on_move(data)
       Snacks.rename.on_rename_file(data.source, data.destination)
     end
@@ -14,6 +49,9 @@ return {
       { event = events.FILE_MOVED,   handler = on_move },
       { event = events.FILE_RENAMED, handler = on_move },
     })
+
+    -- call the setup function with the passed opts
+    require("neo-tree").setup(opts)
   end,
   -- config = function(_, opts)
   --   require("neo-tree").setup(opts)
@@ -78,39 +116,4 @@ return {
       end,
     })
   end,
-  opts = {
-    open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
-    filesystem = {
-      bind_to_cwd = false,
-      follow_current_file = { enabled = true },
-      use_libuv_file_watcher = true,
-    },
-    window = {
-      mappings = {
-        ["l"] = "open",
-        ["h"] = "close_node",
-        ["<space>"] = "none",
-        ["Y"] = {
-          function(state)
-            local node = state.tree:get_node()
-            local path = node:get_id()
-            vim.fn.setreg("+", path, "c")
-          end,
-          desc = "Copy path to clipboard",
-        },
-        ["P"] = { "toggle_preview", config = { use_float = false } },
-      },
-    },
-    sources = {
-      "filesystem",
-      "buffers",
-      "git_status",
-    },
-    source_selector = {
-      winbar = true,
-      statusline = false,
-      show_scrolled_off_parent_node = false,
-      pop_up_border_style = "rounded",
-    },
-  },
 }
