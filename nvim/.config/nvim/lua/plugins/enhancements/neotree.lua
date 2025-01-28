@@ -11,6 +11,20 @@ return {
       follow_current_file = { enabled = true },
       use_libuv_file_watcher = true,
     },
+    default_component_configs = {
+      indent = {
+        with_expanders = true,
+        expander_collapsed = "",
+        expander_expanded = "",
+        expander_highlight = "NeoTreeExpander",
+      },
+      git_status = {
+        symbols = {
+          unstaged = "󰄱",
+          staged = "󰱒",
+        },
+      },
+    },
     window = {
       mappings = {
         ["l"] = "open",
@@ -23,6 +37,12 @@ return {
             vim.fn.setreg("+", path, "c")
           end,
           desc = "Copy path to clipboard",
+        },
+        ["O"] = {
+          function(state)
+            require("lazy.util").open(state.tree:get_node().path, { system = true })
+          end,
+          desc = "Open with system application",
         },
         ["P"] = { "toggle_preview", config = { use_float = false } },
       },
