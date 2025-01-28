@@ -23,7 +23,7 @@ vim.g.copilot_no_tab_map = false
 -- Place all the general Neovim options
 vim.g.gitblame_display_virtual_text = 1
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = " "
 vim.o.background = "dark"
 
 -- Set fold settings
