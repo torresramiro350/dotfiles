@@ -71,11 +71,15 @@ return {
         local success, node = pcall(vim.treesitter.get_node)
         if vim.bo.filetype == "lua" then
           return { "lsp", "path", "codeium" }
+        elseif vim.bo.filetype == "markdown" then
+          -- don't need ai completion for markdown files
+          return { "lsp", "path", "snippets", "buffer" }
         elseif
             success
             and node
             and vim.tbl_contains({ "comment", "line_comment", "block_comment" }, node:type())
         then
+          -- don't need ai auto completion for comments either
           return { "buffer" }
         else
           return { "lsp", "path", "snippets", "buffer", "codeium" }
