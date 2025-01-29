@@ -7,10 +7,16 @@ return {
     local mini_snippets = require("mini.snippets")
     local expand_select_override = function(snippets, insert)
       -- stylua: ignore
-      if cmp.visible() then cmp.close() end
-      MiniSnippets.default_select(snippets, insert)
+      -- if cmp.visible() then cmp.close() end
+      -- Schedule, otherwise blink's virtual text is not removed on vim.ui.select
+      require('blink.cmp').cancel()
+      vim.schedule(function()
+        MiniSnippets.default_select(snippets, insert)
+        -- MiniSnippets.default_select(snippets, insert)
+      end)
     end
-    local ret = {
+    -- return ret
+    return {
       snippets = { mini_snippets.gen_loader.from_lang() },
       expand = {
         select = function(snippets, insert)
@@ -21,6 +27,5 @@ return {
         end,
       },
     }
-    return ret
   end,
 }
