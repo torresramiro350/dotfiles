@@ -59,8 +59,9 @@ function fzum -d "View all unmerged commits across all local branches"
 end
 
 
-alias upgrade="sudo dnf5 upgrade --refresh"
-alias uninstall="sudo dnf5 remove"
+alias dnfin="sudo dnf in"
+alias dnfup="sudo dnf up --refresh"
+alias dnfrm="sudo dnf remove"
 alias flatupd="flatpak update" 
 
 alias x="exit"
@@ -111,6 +112,8 @@ alias ls="eza --icons --git"
 alias ll="eza --icons --long --header --git --all"
 alias lt="eza --icons --long --tree --header --level=1 --hyperlink --group-directories-first"
 alias ltt="eza --icons --long --tree --header --level=2 --hyperlink --group-directories-first"
+
+set -gx PATH $PATH "/home/rtorres/.local/bin"
 
 set -gx EDITOR "/usr/bin/nvim"
 # set -gx EDITOR "/home/rtorres/nvim-linux64/bin/nvim"
