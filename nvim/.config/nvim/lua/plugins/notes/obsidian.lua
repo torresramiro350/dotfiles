@@ -7,6 +7,10 @@ return {
     "nvim-lua/plenary.nvim",
   },
   opts = {
+    -- disabling this in favor of the ui from render markdown as they might not play ncie
+    -- with eachother:
+    -- https://github.com/MeanderingProgrammer/render-markdown.nvim
+    ui = { enable = false },
     workspaces = {
       {
         name = "work",
