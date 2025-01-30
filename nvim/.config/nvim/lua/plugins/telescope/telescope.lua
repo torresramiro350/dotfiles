@@ -3,15 +3,6 @@ require("groups.utility_funcs")
 -- Fuzzy Finder (files, lsp, etc)
 return {
   {
-    "crispgm/telescope-heading.nvim",
-    ft = { "markdown", "vimwiki" },
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("telescope").load_extension("heading")
-      nmap("n", "<leader>sH", "<cmd>Telescope heading<cr>", { desc = "[S]earch by [H]eading" })
-    end,
-  },
-  {
     "nvim-telescope/telescope.nvim",
     event = "VeryLazy",
     config = function()
