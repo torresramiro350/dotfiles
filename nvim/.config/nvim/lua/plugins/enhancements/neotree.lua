@@ -3,6 +3,7 @@ require("groups.utility_funcs")
 return {
   "nvim-neo-tree/neo-tree.nvim",
   cmd = "Neotree",
+  enabled = false,
   event = { "BufNewFile", "BufReadPre" },
   opts = {
     open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
