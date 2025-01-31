@@ -14,8 +14,8 @@ nmap("i", "jj", "<Esc>", { desc = "Escape insert mode" })
 
 -- split buffers
 nmap("n", "|", "<cmd>vsplit<cr>", { desc = "Vertical split" })
-nmap("n", "-", "<cmd>split<cr>", { desc = "Horizontal split" })
--- nmap("n", "\\", "<cmd>split<cr>", { desc = "Horizontal split" })
+-- nmap("n", "-", "<cmd>split<cr>", { desc = "Horizontal split" })
+nmap("n", "\\", "<cmd>split<cr>", { desc = "Horizontal split" })
 
 -- close split buffer
 nmap("n", "<C-q>", "<C-w>q", { desc = "Close split buffer" })
