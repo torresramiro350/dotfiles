@@ -2,6 +2,7 @@ return {
   "echasnovski/mini.icons",
   -- event = "VimEnter",
   lazy = true,
+  version = false,
   files = {
     ["bash.tmpl"] = { glyph = "", hl = "MiniIconsGreen" },
     ["json.tmpl"] = { glyph = "", hl = "MiniIconsGrey" },
@@ -11,13 +12,16 @@ return {
     ["yaml.tmpl"] = { glyph = "", hl = "MiniIconsRed" },
     ["zsh.tmpl"] = { glyph = "", hl = "MiniIconsGreen" },
   },
-  opts = {
-    style = "glyph",
-  },
-  init = function()
-    package.preload["nvim-web-devicons"] = function()
-      require("mini.icons").mock_nvim_web_devicons()
-      return package.loaded["nvim-web-devicons"]
-    end
+  -- opts = {
+  --   style = "glyph",
+  -- },
+  opts = function()
+    require("mini.icons").mock_nvim_web_devicons()
   end,
+  -- init = function()
+  --   package.preload["nvim-web-devicons"] = function()
+  --     require("mini.icons").mock_nvim_web_devicons()
+  --     return package.loaded["nvim-web-devicons"]
+  --   end
+  -- end,
 }

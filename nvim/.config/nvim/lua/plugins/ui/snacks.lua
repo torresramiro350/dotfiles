@@ -6,6 +6,9 @@ return {
     animate = {},
     dim = {},
     picker = {},
+    -- explorer = {
+    --   replace_netrw = true,
+    -- },
     input = { enabled = true },
     notifier = { enabled = true },
     quickfile = { enabled = true },
@@ -113,6 +116,8 @@ return {
       end,
       desc = "Buffer Lines"
     },
+    -- { "<leader>fe", function() Snacks.explorer() end,                     desc = "Explorer snacks (current dir)" },
+    -- { "<leader>fe", function() Snacks.explorer() end,                           desc = "Explorer snacks (current directory)" },
     { "<leader>sB", function() Snacks.picker.grep_buffers() end,          desc = "Grep Open Buffers" },
     { "<leader>sg", function() Snacks.picker.grep() end,                  desc = "Grep" },
     { "<leader>sw", function() Snacks.picker.grep_word() end,             desc = "Visual selection or word",    mode = { "n", "x" } },
