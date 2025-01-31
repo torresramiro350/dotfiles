@@ -5,7 +5,7 @@ return {
   opts = {
     options = {
       -- Whether to use for editing directories
-      use_as_default_explorer = false, -- use neotree for that
+      use_as_default_explorer = true, -- use neotree for that
     },
     windows = {
       true,
@@ -22,12 +22,13 @@ return {
     local filter_hide = function(fs_entry)
       return not vim.startswith(fs_entry.name, ".")
     end
+    -- whether to see or hide the files with '.' at the beginning
     local toggle_dotfiles = function()
       show_dotfiles = not show_dotfiles
       local new_filter = show_dotfiles and filter_show or filter_hide
       require("mini.files").refresh({ content = { filter = new_filter } })
     end
-
+    -- splitting of buffers
     local map_split = function(buf_id, lhs, direction, close_on_file)
       local rhs = function()
         local new_target_window
@@ -61,7 +62,6 @@ return {
       pattern = "MiniFilesBufferCreate",
       callback = function(args)
         local buf_id = args.data.buf_id
-
         nmap(
           "n",
           opts.mappings and opts.mappings.toggle_hidden or "g.",
@@ -72,7 +72,6 @@ return {
           buffer = buf_id,
           desc = "Set cwd",
         })
-
         map_split(buf_id, opts.mappings and opts.mappings.go_in_horizontal or "<C-s>", "horizontal", false)
         map_split(buf_id, opts.mappings and opts.mappings.go_in_vertical or "<C-v>", "vertical", false)
         map_split(buf_id, opts.mappings and opts.mappings.go_in_horizontal_plus or "<C-S>", "horizontal", true)
@@ -83,9 +82,6 @@ return {
     vim.api.nvim_create_autocmd("User", {
       pattern = "MiniFilesActionRename",
       callback = function(event)
-        -- local entry = event.data.from
-        -- local new_name = event.data.to
-        -- vim.fn.rename(entry.path, new_name)
         Snacks.rename.on_rename_file(event.data.from, event.data.to)
       end,
     })
@@ -99,7 +95,7 @@ return {
       desc = "Open mini.files (Directory of Current File)",
     },
     {
-      "<leader>fM",
+      "-",
       function()
         require("mini.files").open(vim.uv.cwd(), true)
       end,
