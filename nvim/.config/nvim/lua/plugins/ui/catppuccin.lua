@@ -26,7 +26,6 @@ return {
     },
     integrations = {
       --defaults
-      alpha = true,
       blink_cmp = true,
       cmp = true,
       diffview = true,
@@ -37,22 +36,11 @@ return {
       gitgutter = true,
       harpoon = true,
       headlines = true,
-      illuminate = {
-        enabled = true,
-        lsp = false,
-      },
       markdown = true,
       render_markdown = true,
       mason = true,
       mini = {
         enabled = true,
-        indentscope_color = "red",
-        -- indentscope_color = "peach",
-      },
-      navic = {
-        enabled = true,
-        -- enabled = false,
-        -- custom_bg = "NONE",
       },
       native_lsp = {
         enabled = true,
@@ -73,10 +61,9 @@ return {
       nvim_surround = true,
       notify = true,
       octo = true,
-      rainbow_delimiters = true,
+      snacks = true,
       telescope = {
         enabled = true,
-        -- style = "nvchad",
       },
       lsp_trouble = true,
       treesitter = true,
