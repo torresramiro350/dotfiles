@@ -145,13 +145,8 @@ return {
     --import lspconfig plugin
     -- local cmp_nvim_lsp = require("cmp_nvim_lsp")
     local lspconfig = require("lspconfig")
-    local navic = require("nvim-navic")
     local capabilities = require("blink.cmp").get_lsp_capabilities()
     local on_attach = function(client, bufnr)
-      if client.server_capabilities.documentSymbolProvider then
-        navic.attach(client, bufnr)
-      end
-
       local nmap = function(keys, func, desc)
         if desc then
           desc = "LSP: " .. desc
