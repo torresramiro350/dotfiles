@@ -38,7 +38,10 @@ return {
         enabled = vim.g.ai_cmp,
       },
       menu = {
-        auto_show = true,
+        -- don't show completion when searching
+        auto_show = function(ctx)
+          return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
+        end,
         draw = {
           padding = 1,
           treesitter = { "lsp" },
