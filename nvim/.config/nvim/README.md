@@ -3,12 +3,12 @@
 <!-- toc -->
 
 - [Configuration overview](#configuration-overview)
-  - [Acknowledgements](#acknowledgements)
-  - [Structure of the configuration](#structure-of-the-configuration)
-  - [Lazy loading](#lazy-loading)
-  - [UI](#ui)
-  - [colorscheme](#colorscheme)
-  - [LSP](#lsp)
+  * [Acknowledgements](#acknowledgements)
+  * [Structure of the configuration](#structure-of-the-configuration)
+  * [Lazy loading](#lazy-loading)
+  * [UI](#ui)
+  * [colorscheme](#colorscheme)
+  * [LSP](#lsp)
 
 <!-- tocstop -->
 
@@ -35,8 +35,6 @@ Taking great inspiration from Kickstart
 ├──  init.lua
 ├──  lazy-lock.json
 ├──  README.md
-└──  sourcery_token.txt
-
 ```
 
 ### Lazy loading
@@ -47,13 +45,14 @@ Here's a breakdown of my current plugins:
 ### UI
 
 - [ ] nvim-tree
-- [ ] aerial
-- [ ] barbecue
 - [ ] noice
-- [ ] feline
-- [ ] rainbow color pairs
 - [ ] ufo
-- [ ] alpha
+- [ ] mini.comments
+- [ ] mini.files
+- [ ] mini.ai
+
+> [!NOTE]
+> Now using more plugins from the `mini.nvim` and `snacks.nvim` plugin libraries.
 
 ### colorscheme
 
