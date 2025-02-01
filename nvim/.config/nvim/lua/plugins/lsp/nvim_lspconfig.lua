@@ -278,10 +278,16 @@ return {
 		})
 
 		-- pyright
-		lspconfig.basedpyright.setup({
+		-- lspconfig.basedpyright.setup({
+		-- 	capabilities = capabilities,
+		-- 	on_attach = on_attach,
+		-- })
+
+		lspconfig.pyright.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 		})
+
 		--bash
 		lspconfig.bashls.setup({
 			capabilities = capabilities,
