@@ -92,7 +92,7 @@ return {
 					return { "lsp", "path", "codeium" }
 				elseif vim.bo.filetype == "markdown" then
 					-- don't need ai completion for markdown files
-					return { "lsp", "path", "snippets", "buffer" }
+					return { "snippets", "path", "buffer" }
 				elseif
 					success
 					and node
