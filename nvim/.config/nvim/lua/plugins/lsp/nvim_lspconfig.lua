@@ -31,40 +31,43 @@ return {
 				cmd = { "lua-language-server" },
 				single_file_support = true,
 			},
-			-- basedpyright = {
-			--   disableOrganizeImports = true,
-			--   cmd = { "basedpyright-langserver", "--stdio" },
-			--   settings = {
-			--     basedpyright = {
-			--       analysis = {
-			--         -- Ignore all files for analysis to exclusively use Ruff for linting
-			--         ignore = { "*" },
-			--         inlayHints = {
-			--           callArgumentNames = true,
-			--         },
-			--         autoSearchPaths = true,
-			--         diagnosticMode = "openFilesOnly",
-			--         useLibraryCodeForTypes = true,
-			--       },
-			--     },
-			--   },
-			--   single_file_support = true,
-			-- },
-			pyright = {
-				disableOrganizeImports = true,
-				cmd = { "pyright-langserver", "--stdio" },
+			basedpyright = {
+				single_file_support = true,
+				filetypes = "python",
+				cmd = { "basedpyright-langserver", "--stdio" },
 				settings = {
-					python = {
+					disableOrganizeImports = true,
+					basedpyright = {
 						analysis = {
 							-- Ignore all files for analysis to exclusively use Ruff for linting
 							ignore = { "*" },
-							autoSearchPaths = true,
-							diagnosticMode = "openFilesOnly",
-							useLibraryCodeForTypes = true,
+							-- inlayHints = {
+							-- 	callArgumentNames = true,
+							-- },
+							-- autoSearchPaths = true,
+							-- diagnosticMode = "openFilesOnly",
+							-- useLibraryCodeForTypes = true,
 						},
 					},
 				},
+			},
+			pyright = {
 				single_file_support = true,
+				filetypes = "python",
+				cmd = { "pyright-langserver", "--stdio" },
+				settings = {
+					pyright = { disableOrganizeImports = true },
+					python = {
+						analysis = {
+							-- Ignore all files for analysis to exclusively
+							-- use Ruff for linting
+							ignore = { "*" },
+							-- autoSearchPaths = true,
+							-- diagnosticMode = "openFilesOnly",
+							-- useLibraryCodeForTypes = true,
+						},
+					},
+				},
 			},
 			ruff = {
 				cmd_env = { RUFF_TRACE = "messages" },
@@ -73,13 +76,11 @@ return {
 						logLevel = "error",
 					},
 				},
-				keys = {
-					"<leader>ca",
-					function()
-						vim.lsp.buf.code_action()
-					end,
-					desc = "Code actions",
-				},
+				-- keys = {
+				-- 	"<leader>ca",
+				-- 	vim.lsp.buf.code_action(),
+				-- 	desc = "Code actions",
+				-- },
 			},
 			clangd = {
 				filetypes = { "c", "cxx", "h", "hxx", "objc", "objcpp", "cuda", "proto" },
@@ -248,11 +249,6 @@ return {
 			nmap("<leader>lf", "<cmd>Format<cr>", "[L]format")
 		end
 
-		local ruff_attach = function(client, bufnr)
-			-- Disable hover in favor of Pyright
-			client.server_capabilities.hoverProvider = false
-		end
-
 		-- Change the Diagnostic symbols in the sign column (gutter)
 		-- (not in youtube nvim video)
 		if vim.g.have_nerd_font then
@@ -274,19 +270,21 @@ return {
 		-- since it's in alpha stage, we need to use the ruff-lsp server
 		lspconfig.ruff.setup({
 			capabilities = capabilities,
-			on_attach = ruff_attach,
+			on_attach = function(client, _)
+				client.server_capabilities.hoverProvider = false
+			end,
 		})
 
 		-- pyright
-		-- lspconfig.basedpyright.setup({
-		-- 	capabilities = capabilities,
-		-- 	on_attach = on_attach,
-		-- })
-
-		lspconfig.pyright.setup({
+		lspconfig.basedpyright.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 		})
+
+		-- lspconfig.pyright.setup({
+		-- 	capabilities = capabilities,
+		-- 	on_attach = on_attach,
+		-- })
 
 		--bash
 		lspconfig.bashls.setup({
