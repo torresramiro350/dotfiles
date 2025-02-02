@@ -1,57 +1,61 @@
 return {
-  "echasnovski/mini.ai",
-  version = false,
-  event = "BufReadPost",
-  config = function()
-    local ai = require("mini.ai")
-    -- Better Around/Inside textobjects
-    -- Examples:
-    --  - "va")  - [V]isually select [A]round [)]paren
-    --  - yinq - [Y]ank [I]nside [N]ext [']quote
-    --  - ci'  - [C]hange [I]nside [']quote
-    -- Better text objects
-    ai.setup({
-      n_lines = 50,
-      search_method = "cover_or_next",
-      custom_textobjects = {
-        o = ai.gen_spec.treesitter({
-          a = { "@block.outer", "@conditional.outer", "@loop.outer" },
-          i = { "@block.inner", "@conditional.inner", "@loop.inner" },
-        }),
-        f = ai.gen_spec.treesitter({
-          a = { "@function.outer" },
-          i = { "@function.inner" },
-        }),
-        c = ai.gen_spec.treesitter({
-          a = { "@class.outer" },
-          i = { "@class.inner" },
-        }),
-        t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },
-        d = { "%f[%d]%d+" },
-        e = {
-          {
-            "%u[%l%d]+%f[^%l%d]",
-            "%f[%S][%l%d]+%f[^%l%d]",
-            "%f[%P][%l%d]+%f[^%l%d]",
-            "^[%l%d]+%f[^%l%d]",
-          },
-          "^().*()$",
-        },
-        u = ai.gen_spec.function_call(),
-        U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }),
-      },
-      mappings = {
-        -- Main textobject prefixes
-        around = "a",
-        inside = "i",
-        -- Next/last variants
-        around_next = "an",
-        inside_next = "in",
-        around_last = "al",
-        inside_last = "il",
-        goto_left = "[g",
-        goto_right = "]g",
-      },
-    })
-  end,
+	"echasnovski/mini.ai",
+	version = false,
+	event = "BufReadPost",
+	opts = function()
+		local ai = require("mini.ai")
+		return {
+			n_lines = 50,
+			search_method = "cover_or_next",
+			custom_textobjects = {
+				-- Better Around/Inside textobjects
+				-- Examples:
+				--  - "va")  - [V]isually select [A]round [)]paren
+				--  - yinq - [Y]ank [I]nside [N]ext [']quote
+				--  - ci'  - [C]hange [I]nside [']quote
+				-- Better text objects
+				o = ai.gen_spec.treesitter({
+					a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+					i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+				}),
+				f = ai.gen_spec.treesitter({
+					a = { "@function.outer" },
+					i = { "@function.inner" },
+				}),
+				c = ai.gen_spec.treesitter({
+					a = { "@class.outer" },
+					i = { "@class.inner" },
+				}),
+				t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },
+				d = { "%f[%d]%d+" },
+				e = {
+					{
+						"%u[%l%d]+%f[^%l%d]",
+						"%f[%S][%l%d]+%f[^%l%d]",
+						"%f[%P][%l%d]+%f[^%l%d]",
+						"^[%l%d]+%f[^%l%d]",
+					},
+					"^().*()$",
+				},
+				u = ai.gen_spec.function_call(),
+				U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }),
+			},
+			mappings = {
+				-- Main textobject prefixes
+				around = "a",
+				inside = "i",
+				-- Next/last variants
+				around_next = "an",
+				inside_next = "in",
+				around_last = "al",
+				inside_last = "il",
+				goto_left = "[g",
+				goto_right = "]g",
+			},
+		}
+	end,
+	config = function(_, opts)
+		local ai = require("mini.ai")
+		ai.setup(opts)
+	end,
 }
