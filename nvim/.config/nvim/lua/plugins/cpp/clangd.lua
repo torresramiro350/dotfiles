@@ -6,6 +6,9 @@ return {
 		{ "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
 	},
 	opts = {
+		inlay_hints = {
+			inline = false,
+		},
 		ast = {
 			--These require codicons (https://github.com/microsoft/vscode-codicons)
 			role_icons = {
