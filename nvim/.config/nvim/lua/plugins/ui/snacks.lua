@@ -1,80 +1,82 @@
 return {
-  "folke/snacks.nvim",
-  priority = 1000,
-  lazy = false,
-  opts = {
-    animate = {},
-    dim = {},
-    picker = {},
-    -- explorer = {
-    --   replace_netrw = true,
-    -- },
-    input = { enabled = true },
-    notifier = { enabled = true },
-    quickfile = { enabled = true },
-    statuscolumn = { enabled = true },
-    scroll = { enabled = true },
-    words = { enabled = true },
-    layout = {
-      opts = {},
-    },
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-    dashboard = {
-      sections = {
-        { section = "header" },
-        { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
-        { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-        { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
-        { section = "startup" },
-      },
-    },
-    scope = {
-      enabled = true,
-      opts = {}, -- defaults are good enough
-    },
+	"folke/snacks.nvim",
+	priority = 1000,
+	lazy = false,
+	opts = {
+		animate = {},
+		dim = {},
+		picker = {},
+		-- explorer = {
+		--   replace_netrw = true,
+		-- },
+		input = { enabled = true },
+		notifier = { enabled = true },
+		quickfile = { enabled = true },
+		statuscolumn = { enabled = true },
+		scroll = { enabled = true },
+		words = { enabled = true },
+		layout = {
+			opts = {},
+		},
+		-- your configuration comes here
+		-- or leave it empty to use the default settings
+		-- refer to the configuration section below
+		dashboard = {
+			sections = {
+				{ section = "header" },
+				{ icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
+				{ icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+				{ icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+				{ section = "startup" },
+			},
+		},
+		scope = {
+			enabled = true,
+			opts = {}, -- defaults are good enough
+		},
 
-    bigfile = { enabled = true },
-    indent = {
-      priority = 1,
-      only_scope = true,
-      only_current = true,
-      enabled = true,
-      chunk = {
-        -- when enabled, scopes will be rendered as chunks, except for the
-        -- top-level scope which will be rendered as a scope.
-        enabled = true,
-        -- only show chunk scopes in the current window
-        only_current = false,
-        priority = 200,
-        -- hl = "SnacksIndentChunk",
-        hl = {
-          "SnacksIndent1",
-          "SnacksIndent2",
-          "SnacksIndent3",
-          "SnacksIndent4",
-          "SnacksIndent5",
-          "SnacksIndent6",
-          "SnacksIndent7",
-          "SnacksIndent8",
-        },
-        char = {
-          corner_top = "╭",
-          corner_bottom = "╰",
-          horizontal = "─",
-          vertical = "│",
-          arrow = ">",
-        },
-      },
-    },
-  },
-  keys = {
+		bigfile = { enabled = true },
+		indent = {
+			priority = 1,
+			only_scope = true,
+			only_current = true,
+			enabled = true,
+			chunk = {
+				-- when enabled, scopes will be rendered as chunks, except for the
+				-- top-level scope which will be rendered as a scope.
+				enabled = true,
+				-- only show chunk scopes in the current window
+				only_current = false,
+				priority = 200,
+				-- hl = "SnacksIndentChunk",
+				hl = {
+					"SnacksIndent1",
+					"SnacksIndent2",
+					"SnacksIndent3",
+					"SnacksIndent4",
+					"SnacksIndent5",
+					"SnacksIndent6",
+					"SnacksIndent7",
+					"SnacksIndent8",
+				},
+				char = {
+					corner_top = "╭",
+					corner_bottom = "╰",
+					horizontal = "─",
+					vertical = "│",
+					arrow = ">",
+				},
+			},
+		},
+	},
+	keys = {
     -- stylua: ignore start
     { "<leader>,",       function() Snacks.picker.grep() end,            desc = "Grep" },
     { "<leader><space>", function() Snacks.picker.buffers() end,         desc = "Buffers" },
     { "<leader>:",       function() Snacks.picker.command_history() end, desc = "Command History" },
-    { "<leader>?",       function() Snacks.picker.files() end,           desc = "Find Files" },
+    -- { "<leader>?",       function() Snacks.picker.files() end,           desc = "Find Files" },
+    { "<leader>n",       function() Snacks.picker.notifications() end,   desc = "Notification History" },
+    { "<leader>;",       function() Snacks.picker.smart() end,           desc = "Smart Find Files" },
     {
       "<leader>/",
       function()
@@ -194,90 +196,89 @@ return {
         })
       end,
     },
-    -- {
-    --   "<c-_>",
-    --   function()
-    --     Snacks.terminal()
-    --   end,
-    --   desc = "which_key_ignore",
-    -- },
-    -- stylua: ignore end
-  },
-  init = function()
-    -- taken from snack.nvim github
-    ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
-    local progress = vim.defaulttable()
-    vim.api.nvim_create_autocmd("LspProgress", {
-      ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
-      callback = function(ev)
-        local client = vim.lsp.get_client_by_id(ev.data.client_id)
-        local value = ev.data.params
-        .value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
-        if not client or type(value) ~= "table" then
-          return
-        end
-        local p = progress[client.id]
+		-- {
+		--   "<c-_>",
+		--   function()
+		--     Snacks.terminal()
+		--   end,
+		--   desc = "which_key_ignore",
+		-- },
+		-- stylua: ignore end
+	},
+	init = function()
+		-- taken from snack.nvim github
+		---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
+		local progress = vim.defaulttable()
+		vim.api.nvim_create_autocmd("LspProgress", {
+			---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
+			callback = function(ev)
+				local client = vim.lsp.get_client_by_id(ev.data.client_id)
+				local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
+				if not client or type(value) ~= "table" then
+					return
+				end
+				local p = progress[client.id]
 
-        for i = 1, #p + 1 do
-          if i == #p + 1 or p[i].token == ev.data.params.token then
-            p[i] = {
-              token = ev.data.params.token,
-              msg = ("[%3d%%] %s%s"):format(
-                value.kind == "end" and 100 or value.percentage or 100,
-                value.title or "",
-                value.message and (" **%s**"):format(value.message) or ""
-              ),
-              done = value.kind == "end",
-            }
-            break
-          end
-        end
-        local msg = {}
-        progress[client.id] = vim.tbl_filter(function(v)
-          return table.insert(msg, v.msg) or not v.done
-        end, p)
+				for i = 1, #p + 1 do
+					if i == #p + 1 or p[i].token == ev.data.params.token then
+						p[i] = {
+							token = ev.data.params.token,
+							msg = ("[%3d%%] %s%s"):format(
+								value.kind == "end" and 100 or value.percentage or 100,
+								value.title or "",
+								value.message and (" **%s**"):format(value.message) or ""
+							),
+							done = value.kind == "end",
+						}
+						break
+					end
+				end
+				local msg = {}
+				progress[client.id] = vim.tbl_filter(function(v)
+					return table.insert(msg, v.msg) or not v.done
+				end, p)
 
-        local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-        vim.notify(table.concat(msg, "\n"), "info", {
-          id = "lsp_progress",
-          title = client.name,
-          opts = function(notif)
-            notif.icon = #progress[client.id] == 0 and " "
-                or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-          end,
-        })
-      end,
-    })
-    -- User autocmd
-    vim.api.nvim_create_autocmd("User", {
-      pattern = "VeryLazy",
-      callback = function()
-        -- Setup some globals for debugging (lazy-loaded)
-        _G.dd = function(...)
-          Snacks.debug.inspect(...)
-        end
-        _G.bt = function()
-          Snacks.debug.backtrace()
-        end
-        vim.print = _G.dd -- Override print to use snacks for `:=` command
+				local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+				vim.notify(table.concat(msg, "\n"), "info", {
+					id = "lsp_progress",
+					title = client.name,
+					opts = function(notif)
+						notif.icon = #progress[client.id] == 0 and " "
+							or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+					end,
+				})
+			end,
+		})
+		-- User autocmd
+		vim.api.nvim_create_autocmd("User", {
+			pattern = "VeryLazy",
+			callback = function()
+				-- Setup some globals for debugging (lazy-loaded)
+				_G.dd = function(...)
+					Snacks.debug.inspect(...)
+				end
+				_G.bt = function()
+					Snacks.debug.backtrace()
+				end
+				vim.print = _G.dd -- Override print to use snacks for `:=` command
 
-        -- Create some toggle mappings
-        Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
-        Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
-        Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
-        Snacks.toggle.diagnostics():map("<leader>ud")
-        Snacks.toggle.line_number():map("<leader>ul")
-        Snacks.toggle
-            .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
-            :map("<leader>uc")
-        Snacks.toggle.treesitter():map("<leader>uT")
-        Snacks.toggle
-            .option("background", { off = "light", on = "dark", name = "Dark Background" })
-            :map("<leader>ub")
-        Snacks.toggle.inlay_hints():map("<leader>uh")
-        Snacks.toggle.indent():map("<leader>ug")
-        Snacks.toggle.dim():map("<leader>uD")
-      end,
-    })
-  end,
+				-- Create some toggle mappings
+				Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+				Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+				Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+				Snacks.toggle.diagnostics():map("<leader>ud")
+				Snacks.toggle.line_number():map("<leader>ul")
+				Snacks.toggle
+					.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+					:map("<leader>uc")
+				Snacks.toggle.treesitter():map("<leader>uT")
+				Snacks.toggle
+					.option("background", { off = "light", on = "dark", name = "Dark Background" })
+					:map("<leader>ub")
+				Snacks.toggle.inlay_hints():map("<leader>uh")
+				Snacks.toggle.indent():map("<leader>ug")
+				Snacks.toggle.dim():map("<leader>uD")
+			end,
+		})
+	end,
 }
