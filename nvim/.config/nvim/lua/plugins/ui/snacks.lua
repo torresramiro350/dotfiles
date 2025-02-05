@@ -208,8 +208,6 @@ return {
 		-- stylua: ignore end
 	},
 	init = function()
-		-- taken from snack.nvim github
-		---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
 		local progress = vim.defaulttable()
 		vim.api.nvim_create_autocmd("LspProgress", {
 			---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
