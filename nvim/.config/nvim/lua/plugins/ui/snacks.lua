@@ -83,8 +83,8 @@ return {
         Snacks.picker.lines({
           layout = {
             preview = "main",
-            -- preset = "ivy",
-            preset = "vertical",
+            preset = "ivy",
+            -- preset = "vertical",
           },
         })
       end,
