@@ -1,11 +1,28 @@
 return {
 	"stevearc/conform.nvim",
-	-- event = { "BufReadPost", "BufNewFile" },
+	dependencies = { "mason.nvim" },
+	lazy = true,
 	event = { "BufWritePre" },
 	command = { "ConformInfo" },
-	config = function()
-		local conform = require("conform")
-		conform.setup({
+	keys = {
+		{
+			"<leader>cF",
+			function()
+				require("conform").format({ formatters = { "injected" }, timeout_ms = 3000 })
+			end,
+			mode = { "n", "v" },
+			desc = "Format Injected Langs",
+		},
+	},
+	opts = function()
+		local opts = {
+			default_format_opts = {
+				timeout_ms = 3000,
+				async = false, -- not recommended to change
+				quiet = false, -- not recommended to change
+				lsp_format = "fallback", -- not recommended to change
+			},
+			format_on_save = { lsp_format = "fallback" },
 			formatters = {
 				["markdown-toc"] = {
 					condition = function(_, ctx)
@@ -30,18 +47,15 @@ return {
 				yaml = { "yamlfmt" },
 				json = { "prettierd", "prettier" },
 				markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
+				["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
+				fish = { "fish_indent" },
 				cmake = { "cmake_format" },
 				python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
 				sh = { "shfmt", "shellharden" },
 				toml = { "taplo" },
 				tex = { "latexindent" },
 			},
-			format_on_save = {
-				timeout_ms = 3000,
-				async = false, -- not recommended to change
-				quiet = false, -- not recommended to change
-				lsp_format = "fallback", -- not recommended to change
-			},
-		})
+		}
+		return opts
 	end,
 }
