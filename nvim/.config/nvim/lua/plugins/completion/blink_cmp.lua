@@ -8,7 +8,7 @@ return {
 	},
 	event = "InsertEnter",
 	enabled = true,
-	version = "*",
+	-- version = "*",
 	build = "cargo build --release",
 	opts_extend = {
 		"sources.completion.enabled_providers",
@@ -128,6 +128,12 @@ return {
 			end,
 		},
 		keymap = {
+			preset = "default",
+			["<C-space>"] = {
+				function(cmp)
+					cmp.show({ providers = { "snippets" } })
+				end,
+			},
 			["<C-y>"] = { "select_and_accept" },
 			["<C-p>"] = { "select_prev", "fallback" },
 			["<C-n>"] = { "select_next", "fallback" },
