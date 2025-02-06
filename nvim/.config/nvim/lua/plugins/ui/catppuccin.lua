@@ -14,6 +14,7 @@ return {
 			shade = "dark",
 			percentage = 0.15,
 		},
+		term_colors = true,
 		no_italic = false,
 		styles = {
 			comments = { "italic" },
