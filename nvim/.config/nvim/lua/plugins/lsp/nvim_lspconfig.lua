@@ -86,14 +86,10 @@ return {
 					single_file_support = true,
 				},
 				basedpyright = {
-					single_file_support = true,
-					filetypes = "python",
-					cmd = { "basedpyright-langserver", "--stdio" },
+					filetypes = { "python" },
 					settings = {
 						basedpyright = {
 							analysis = {
-								autoSearchPaths = true,
-								useLibraryCodeForTypes = true,
 								diagnosticMode = "openFilesOnly",
 								inlayHints = {
 									callArgumentNames = true,
@@ -198,7 +194,7 @@ return {
 					nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 					nmap("<leader>ca", vim.lsp.buf.code_action, "Code Actions")
 					nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-					nmap("<leader>k", vim.lsp.buf.signature_help, "Signature Documentation")
+					nmap("gk", vim.lsp.buf.signature_help, "Signature Documentation")
 					nmap("[d", diagnostic_goto(false), "Go to previous diagnostic message")
 					nmap("]d", diagnostic_goto(true), "Go to next diagnostic message")
 					nmap("[e", diagnostic_goto(false, "ERROR"), "Go to previous error")
