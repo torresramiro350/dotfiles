@@ -22,18 +22,6 @@ return {
 			-- nerd_font_variant = "mono",
 		},
 		completion = {
-			accept = {
-				-- experimental auto-brackets support
-				auto_brackets = {
-					enabled = true,
-				},
-			},
-			list = {
-				cycle = {
-					from_bottom = true,
-					from_top = true,
-				},
-			},
 			ghost_text = {
 				enabled = vim.g.ai_cmp,
 			},
@@ -66,12 +54,9 @@ return {
 						},
 					},
 				},
-				-- border = "padded",
-				-- border = "single",
 				border = "rounded",
 			},
 			documentation = {
-				-- window = { border = "single" },
 				window = { border = "rounded" },
 				auto_show = true,
 				auto_show_delay_ms = 200,
