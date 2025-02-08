@@ -10,7 +10,7 @@ return {
 		--   replace_netrw = true,
 		-- },
 		input = { enabled = true },
-		notifier = { enabled = true },
+		notifier = { enabled = true, timeout = 3000 },
 		quickfile = { enabled = true },
 		statuscolumn = { enabled = true },
 		scroll = { enabled = true },
