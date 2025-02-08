@@ -26,6 +26,10 @@ return {
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 		},
+		keys = {
+			{ "<c-space>", desc = "Increment Selection" },
+			{ "<bs>", desc = "Decrement Selection", mode = "x" },
+		},
 		init = function(plugin)
 			require("lazy.core.loader").add_to_rtp(plugin)
 			require("nvim-treesitter.query_predicates")
@@ -63,10 +67,14 @@ return {
 			incremental_selection = {
 				enable = true,
 				keymaps = {
-					init_selection = "gnn",
-					node_incremental = "grn",
-					scope_incremental = "grc",
-					node_decremental = "grm",
+					init_selection = "<C-space>",
+					node_incremental = "<C-space>",
+					scope_incremental = false,
+					node_decremental = "<bs>",
+					-- init_selection = "gnn",
+					-- node_incremental = "grn",
+					-- scope_incremental = "grc",
+					-- node_decremental = "grm",
 				},
 			},
 			textobjects = {
@@ -137,7 +145,7 @@ return {
 			},
 		},
 		config = function(_, opts)
-			require("nvim-treesitter.configs").setup({ opts })
+			require("nvim-treesitter.configs").setup(opts)
 		end,
 	},
 }
