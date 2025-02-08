@@ -86,14 +86,12 @@ return {
 					single_file_support = true,
 				},
 				basedpyright = {
-					filetypes = { "python" },
 					settings = {
 						basedpyright = {
 							analysis = {
+								autoSearchPaths = true,
 								diagnosticMode = "openFilesOnly",
-								inlayHints = {
-									callArgumentNames = true,
-								},
+								useLibraryCodeForTypes = true,
 							},
 						},
 					},
@@ -116,6 +114,7 @@ return {
 						},
 					},
 				},
+				pylyzer = {},
 				ruff = {
 					cmd_env = { RUFF_TRACE = "messages" },
 					init_options = {
@@ -295,6 +294,10 @@ return {
 			lspconfig.basedpyright.setup({
 				capabilities = capabilities,
 			})
+
+			-- lspconfig.pylyzer.setup({
+			-- 	capabilities = capabilities,
+			-- })
 
 			-- lspconfig.pyright.setup({
 			-- 	capabilities = capabilities,
