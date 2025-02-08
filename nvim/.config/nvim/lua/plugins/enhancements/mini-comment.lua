@@ -2,7 +2,7 @@ return {
 	{
 		"echasnovski/mini.comment",
 		version = false,
-		event = "BufReadPost",
+		event = "VeryLazy",
 		config = function()
 			local minicomment = require("mini.comment")
 			local ts_context = require("ts_context_commentstring.internal")
