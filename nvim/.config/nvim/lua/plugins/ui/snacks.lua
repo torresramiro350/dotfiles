@@ -15,6 +15,7 @@ return {
 		statuscolumn = { enabled = true },
 		scroll = { enabled = true },
 		words = { enabled = true },
+		image = {},
 		layout = {
 			opts = {},
 		},
