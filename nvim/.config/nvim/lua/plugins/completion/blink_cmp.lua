@@ -8,8 +8,8 @@ return {
 	},
 	event = "InsertEnter",
 	enabled = true,
-	-- version = "*",
-	build = "cargo build --release",
+	version = "*",
+	-- build = "cargo build --release",
 	opts_extend = {
 		"sources.completion.enabled_providers",
 		"sources.compat",
@@ -70,6 +70,21 @@ return {
 			enabled = false,
 		},
 		snippets = { preset = "mini_snippets" },
+		cmdline = {
+			enabled = true,
+			sources = function()
+				local type = vim.fn.getcmdtype()
+				-- Search forward and backward
+				if type == "/" or type == "?" then
+					return { "buffer" }
+				end
+				-- Commands
+				if type == ":" or type == "@" then
+					return { "cmdline" }
+				end
+				return {}
+			end,
+		},
 		sources = {
 			default = function(ctx)
 				local success, node = pcall(vim.treesitter.get_node)
@@ -99,18 +114,7 @@ return {
 					async = true,
 				},
 			},
-			cmdline = function()
-				local type = vim.fn.getcmdtype()
-				-- Search forward and backward
-				if type == "/" or type == "?" then
-					return { "buffer" }
-				end
-				-- Commands
-				if type == ":" or type == "@" then
-					return { "cmdline" }
-				end
-				return {}
-			end,
+			-- cmdline = function() end,
 		},
 		keymap = {
 			preset = "default",
