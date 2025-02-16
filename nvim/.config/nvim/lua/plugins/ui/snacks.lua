@@ -118,6 +118,7 @@ return {
     { "<leader>sp", function() Snacks.picker.lazy() end, desc = "Search for Plugin Spec" },
     { "<leader>sr", function() Snacks.picker.resume() end, desc = "Resume" },
     { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
+    { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
     { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },
     { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
     -- LSP
