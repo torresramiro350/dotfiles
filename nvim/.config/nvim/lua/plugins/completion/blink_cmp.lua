@@ -89,7 +89,7 @@ return {
 			default = function(ctx)
 				local success, node = pcall(vim.treesitter.get_node)
 				if vim.bo.filetype == "lua" then
-					return { "lsp", "path", "codeium" }
+					return { "lazydev", "lsp", "path", "codeium" }
 				elseif vim.bo.filetype == "markdown" then
 					-- don't need ai completion for markdown files
 					return { "snippets", "path", "buffer" }
@@ -106,6 +106,11 @@ return {
 			end,
 			-- compat = { "codeium" },
 			providers = {
+				lazydev = {
+					name = "LazyDev",
+					module = "lazydev.integrations.blink",
+					score_offset = 100, -- show at a higher priority than lsp
+				},
 				codeium = {
 					name = "codeium",
 					-- kind = "Codeium",
