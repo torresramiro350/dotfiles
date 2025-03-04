@@ -4,7 +4,8 @@ require("groups.utility_funcs")
 return {
 	{
 		"nvim-telescope/telescope.nvim",
-		event = "VeryLazy",
+		-- event = "VeryLazy",
+		enabled = false,
 		config = function()
 			local actions = require("telescope.actions")
 			local telescope = require("telescope")
