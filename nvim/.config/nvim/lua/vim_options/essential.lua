@@ -34,6 +34,11 @@ vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
 
+vim.opt.pumblend = 10 -- Popup blend
+vim.opt.pumheight = 10 -- Maximum number of entries in a popup
+
+vim.opt.autowrite = true -- enable autowrite
+
 -- draw the status line over the whole window
 vim.opt.laststatus = 3
 
@@ -58,7 +63,7 @@ vim.opt.breakindent = true
 vim.opt.ruler = false -- Disable the default ruler
 
 -- pop settings
-vim.opt.pumblend = 10  -- Popup blend
+vim.opt.pumblend = 10 -- Popup blend
 vim.opt.pumheight = 10 -- Maximum number of entries in a popup
 
 -- Better splitting
@@ -119,5 +124,5 @@ vim.g.markdown_recommended_style = 0
 vim.opt.jumpoptions = "view"
 -- preview substitutions live
 -- vim.opt.inccommand = "split"
-vim.opt.inccommand = "nosplit"
+vim.opt.inccommand = "nosplit" -- preview incremental substitute
 -- vim.opt.icm = "split"
