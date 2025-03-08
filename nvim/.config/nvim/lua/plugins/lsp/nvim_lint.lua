@@ -8,6 +8,7 @@ return {
 			python = { "ruff" },
 			bash = { "shellcheck" },
 			cmake = { "cmakelint" },
+			restructuredtext = { "rstcheck", "rstlint" },
 		},
 		linters = {},
 	},

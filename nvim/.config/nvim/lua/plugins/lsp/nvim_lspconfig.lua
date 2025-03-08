@@ -123,6 +123,7 @@ return {
 						},
 					},
 				},
+				-- C++
 				clangd = {
 					filetypes = { "c", "cxx", "h", "hxx", "objc", "objcpp", "cuda", "proto" },
 					cmd = {
@@ -140,18 +141,29 @@ return {
 						clangdFileStatus = true,
 					},
 				},
+				-- Bash
 				bashls = {
 					filetypes = { "sh" },
 				},
+				-- CMake
 				neocmake = {},
+				-- Markdown
 				markdown_oxide = {},
+				-- Json
 				jsonls = { filetypes = { "json" } },
+				-- Yaml
 				yamlls = { filetypes = { "yaml", "yml" } },
+				-- Julia (not really using it)
 				julials = {
 					filetypes = { "julia" },
 				},
+				-- TOML files
 				taplo = {
 					filetypes = { "toml" },
+				},
+				-- RST
+				ltex = {
+					filetypes = { "restructuredtext", "tex", "bib" },
 				},
 			},
 		},
@@ -344,6 +356,11 @@ return {
 
 			-- TOML
 			lspconfig.taplo.setup({
+				capabilities = capabilities,
+			})
+
+			-- RST, LaTex, Bib
+			lspconfig.ltex.setup({
 				capabilities = capabilities,
 			})
 		end,
