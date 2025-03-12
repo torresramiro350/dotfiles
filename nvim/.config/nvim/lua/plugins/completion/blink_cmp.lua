@@ -31,14 +31,7 @@ return {
 					return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
 				end,
 				draw = {
-					align_to = "label",
-					padding = 1,
-					gap = 1,
 					treesitter = { "lsp" },
-					columns = {
-						{ "kind_icon" },
-						{ "label", "label_description", gap = 1 },
-					},
 					components = {
 						kind_icon = {
 							ellipsis = false,
