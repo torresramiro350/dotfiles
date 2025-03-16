@@ -46,11 +46,9 @@ return {
 		event = { "BufNewFile", "BufReadPre", "BufReadPost" },
 		dependencies = {
 			-- Automatically install LSPs to stdpath for neovim
-			"williamboman/mason.nvim",
-			{
-				"williamboman/mason-lspconfig.nvim",
-				config = function() end,
-			},
+			{ "williamboman/mason.nvim", opts = {} },
+			{ "williamboman/mason-lspconfig.nvim" },
+			{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 			{ "antosha417/nvim-lsp-file-operations", config = true },
 			{ "saghen/blink.cmp" },
 			-- { "hrsh7th/cmp-nvim-lsp" },
@@ -163,11 +161,11 @@ return {
 				},
 				-- RST
 				ltex = {
-					filetypes = { "restructuredtext", "tex", "bib" },
+					filetypes = { "rst", "tex", "bib" },
 				},
 			},
 		},
-		config = function()
+		config = function(_, opts)
 			--import lspconfig plugin
 			-- LSP servers and clients are able to communicate to each other what features they support.
 			--  By default, Neovim doesn't support everything that is in the LSP specification.
@@ -182,7 +180,16 @@ return {
 				-- This is where we attach the autoformatting for reasonable clients
 				callback = function(event)
 					local client_id = event.data.client_id
+					-- local client = vim.lsp.get_client_by_id(client_id)
 					local client = vim.lsp.get_client_by_id(client_id)
+					if client == nil then
+						return
+					end
+					if client.name == "ruff" then
+						-- Disable hover in favor of Pyright
+						client.server_capabilities.hoverProvider = false
+					end
+
 					local bufnr = event.buf
 					local nmap = function(keys, func, desc)
 						if desc then
@@ -282,86 +289,24 @@ return {
 				})
 			end
 
+			local servers = opts.servers
 			local lspconfig = require("lspconfig")
-			local capabilities = require("blink.cmp").get_lsp_capabilities()
-			-- local cmp_nvim_lsp = require("cmp_nvim_lsp")
-			-- local capabilities = vim.lsp.protocol.make_client_capabilities()
-			-- capabilities = vim.tbl_deep_extend("force", capabilities, cmp_nvim_lsp.default_capabilities())
-			--
-			-- julia
-			lspconfig.julials.setup({
-				capabilities = capabilities,
-			})
-
-			-- configure python server
-			-- since it's in alpha stage, we need to use the ruff-lsp server
-			lspconfig.ruff.setup({
-				capabilities = capabilities,
-				on_attach = function(client, _)
-					client.server_capabilities.hoverProvider = false
-				end,
-			})
-
-			-- pyright
-			lspconfig.basedpyright.setup({
-				capabilities = capabilities,
-			})
-
-			-- lspconfig.pylyzer.setup({
-			-- 	capabilities = capabilities,
-			-- })
-
-			-- lspconfig.pyright.setup({
-			-- 	capabilities = capabilities,
-			-- 	on_attach = on_attach,
-			-- })
-
-			--bash
-			lspconfig.bashls.setup({
-				capabilities = capabilities,
-			})
-
-			-- cmake
-			lspconfig.neocmake.setup({
-				capabilities = capabilities,
-			})
-
-			-- markdown
-			lspconfig.markdown_oxide.setup({
-				capabilities = capabilities,
-			})
-
-			-- C/C++
-			lspconfig.clangd.setup({
-				capabilities = {
-					capabilities,
-					offsetEncoding = "utf-8",
+			-- local capabilities = require("blink.cmp").get_lsp_capabilities()
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
+			local ensure_installed = vim.tbl_keys(servers or {})
+			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+			require("mason-lspconfig").setup({
+				ensure_installed = {},
+				automatic_installation = false,
+				handlers = {
+					function(server_name)
+						local server = servers[server_name] or {}
+						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+						-- don't forget to call this, otherwise the servers won't be loaded
+						lspconfig[server_name].setup(server)
+					end,
 				},
-			})
-
-			-- json
-			lspconfig.jsonls.setup({
-				capabilities = capabilities,
-			})
-
-			-- yaml
-			lspconfig.yamlls.setup({
-				capabilities = capabilities,
-			})
-
-			-- Lua
-			lspconfig.lua_ls.setup({
-				capabilities = capabilities,
-			})
-
-			-- TOML
-			lspconfig.taplo.setup({
-				capabilities = capabilities,
-			})
-
-			-- RST, LaTex, Bib
-			lspconfig.ltex.setup({
-				capabilities = capabilities,
 			})
 		end,
 	},
