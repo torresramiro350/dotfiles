@@ -260,12 +260,6 @@ return {
 							vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
 						end
 					end, "[l]sp [h]ints toggle")
-
-					-- nmap("gd", builtins.lsp_definitions, "[G]oto [D]efinition")
-					-- nmap("gr", builtins.lsp_references, "[G]oto [R]eferences")
-					-- nmap("gI", builtins.lsp_implementations, "[G]oto [I]mplementation")
-					-- nmap("gy", builtins.lsp_type_definitions, "Type [D]efinition")
-					-- nmap("<leader>ds", builtins.lsp_document_symbols, "[D]ocument [S]ymbols")
 					-- nmap("<leader>Ws", builtins.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 				end,
 			})
