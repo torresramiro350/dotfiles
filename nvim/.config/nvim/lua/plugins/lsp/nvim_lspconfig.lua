@@ -94,25 +94,26 @@ return {
 						},
 					},
 				},
-				pyright = {
-					single_file_support = true,
-					filetypes = "python",
-					cmd = { "pyright-langserver", "--stdio" },
-					settings = {
-						pyright = { disableOrganizeImports = true },
-						python = {
-							analysis = {
-								-- Ignore all files for analysis to exclusively
-								-- use Ruff for linting
-								ignore = { "*" },
-								-- autoSearchPaths = true,
-								-- diagnosticMode = "openFilesOnly",
-								-- useLibraryCodeForTypes = true,
-							},
-						},
-					},
-				},
-				pylyzer = {},
+				-- NOTE: using basedpyright instead
+				-- pyright = {
+				-- 	single_file_support = true,
+				-- 	filetypes = "python",
+				-- 	cmd = { "pyright-langserver", "--stdio" },
+				-- 	settings = {
+				-- 		pyright = { disableOrganizeImports = true },
+				-- 		python = {
+				-- 			analysis = {
+				-- 				-- Ignore all files for analysis to exclusively
+				-- 				-- use Ruff for linting
+				-- 				ignore = { "*" },
+				-- 				-- autoSearchPaths = true,
+				-- 				-- diagnosticMode = "openFilesOnly",
+				-- 				-- useLibraryCodeForTypes = true,
+				-- 			},
+				-- 		},
+				-- 	},
+				-- },
+				-- pylyzer = {},
 				ruff = {
 					cmd_env = { RUFF_TRACE = "messages" },
 					init_options = {
@@ -123,7 +124,16 @@ return {
 				},
 				-- C++
 				clangd = {
-					filetypes = { "c", "cxx", "h", "hxx", "objc", "objcpp", "cuda", "proto" },
+					root_dir = function(fname)
+						return require("lspconfig.util").root_pattern(
+							"Makefile",
+							"compile_commands.json",
+							"compile_flags.txt"
+						)(fname)
+					end,
+					capabilities = {
+						offsetEncoding = { "utf-16" },
+					},
 					cmd = {
 						"clangd",
 						"--background-index",
@@ -188,6 +198,11 @@ return {
 					if client.name == "ruff" then
 						-- Disable hover in favor of Pyright
 						client.server_capabilities.hoverProvider = false
+					end
+
+					-- load the clangd extensions plugin for CXX code
+					if client.name == "clangd" then
+						require("clangd_extensions")
 					end
 
 					local bufnr = event.buf
