@@ -47,6 +47,13 @@ return {
 			},
 			native_lsp = {
 				enabled = true,
+				virtual_text = {
+					errors = { "italic" },
+					hints = { "italic" },
+					warnings = { "italic" },
+					information = { "italic" },
+					ok = { "italic" },
+				},
 				underlines = {
 					errors = { "undercurl" },
 					hints = { "undercurl" },
