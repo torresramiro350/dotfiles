@@ -5,15 +5,9 @@ return {
 	opts = function()
 		local ai = require("mini.ai")
 		return {
-			n_lines = 50,
+			n_lines = 500,
 			search_method = "cover_or_next",
 			custom_textobjects = {
-				-- Better Around/Inside textobjects
-				-- Examples:
-				--  - "va")  - [V]isually select [A]round [)]paren
-				--  - yinq - [Y]ank [I]nside [N]ext [']quote
-				--  - ci'  - [C]hange [I]nside [']quote
-				-- Better text objects
 				o = ai.gen_spec.treesitter({
 					a = { "@block.outer", "@conditional.outer", "@loop.outer" },
 					i = { "@block.inner", "@conditional.inner", "@loop.inner" },
