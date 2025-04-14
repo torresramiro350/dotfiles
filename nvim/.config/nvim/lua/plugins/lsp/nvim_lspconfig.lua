@@ -55,6 +55,7 @@ return {
 			-- { "j-hui/fidget.nvim" },
 		},
 		opts = {
+			inlay_hints = { enabled = true },
 			servers = {
 				lua_ls = {
 					settings = {
@@ -173,6 +174,7 @@ return {
 				ltex = {
 					filetypes = { "rst", "tex", "bib" },
 				},
+				tinymist = {},
 			},
 		},
 		config = function(_, opts)
@@ -289,7 +291,9 @@ return {
 					underline = true,
 					update_in_insert = false,
 					severity_sort = true,
+					-- virtual_lines = { current_line = true },
 					virtual_text = {
+						current_line = true,
 						spacing = 4,
 						source = "if_many",
 						prefix = "●",
