@@ -21,7 +21,8 @@ nmap("n", "\\", "<cmd>split<cr>", { desc = "Horizontal split" })
 nmap("n", "<C-q>", "<C-w>q", { desc = "Close split buffer" })
 
 -- save changes
-nmap("n", "<leader>w", "<cmd>w<cr>", { desc = "Save changes" })
+-- nmap("n", "<leader>w", "<cmd>w<cr>", { desc = "Save changes" })
+nmap("n", "<leader>fs", "<cmd>w<cr>", { desc = "Save changes" })
 
 -- moving between buffers
 
