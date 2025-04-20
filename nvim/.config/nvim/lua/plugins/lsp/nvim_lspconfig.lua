@@ -192,8 +192,11 @@ return {
 				-- This is where we attach the autoformatting for reasonable clients
 				callback = function(event)
 					local client_id = event.data.client_id
-					-- local client = vim.lsp.get_client_by_id(client_id)
 					local client = vim.lsp.get_client_by_id(client_id)
+					-- enables the neovim lsp client
+					-- if client:supports_method("textDocument/completion") then
+					-- 	vim.lsp.completion.enable(true, client_id, event.buf, { autotrigger = true })
+					-- end
 					if client == nil then
 						return
 					end
