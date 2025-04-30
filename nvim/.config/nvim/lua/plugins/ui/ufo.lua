@@ -4,7 +4,7 @@ return {
 	dependencies = { "kevinhwang91/promise-async" },
 	event = { "BufRead", "BufNewFile" },
 	enabled = true,
-	config = function()
+	opts = function()
 		-- add fancy fold text
 		local handler = function(virtText, lnum, endLnum, width, truncate)
 			local newVirtText = {}
@@ -33,21 +33,23 @@ return {
 			table.insert(newVirtText, { suffix, "MoreMsg" })
 			return newVirtText
 		end
-		local ufo = require("ufo")
 
+		return {
+			fold_virt_text_handler = handler,
+			provider_selector = function(bufnr, filetype, buftype)
+				return { "treesitter", "indent" }
+			end,
+		}
+	end,
+	config = function(_, opts)
+		local ufo = require("ufo")
+		ufo.setup(opts)
 		local peek_under_cursor = function()
 			local winid = ufo.peekFoldedLinesUnderCursor()
 			if not winid then
 				vim.lsp.buf.hover()
 			end
 		end
-
-		ufo.setup({
-			fold_virt_text_handler = handler,
-			provider_selector = function(bufnr, filetype, buftype)
-				return { "treesitter", "indent" }
-			end,
-		})
 		nmap("n", "zR", ufo.openAllFolds, { desc = "Open all folds" })
 		nmap("n", "zM", ufo.closeAllFolds, { desc = "Close all folds" })
 		nmap("n", "zr", ufo.openFoldsExceptKinds, { desc = "Open all folds except kinds" })
