@@ -58,11 +58,11 @@ return {
     { "<leader>sna", function() require("noice").cmd("all") end, desc = "Noice all" },
     { "<leader>snd", function() require("noice").cmd("dismis") end,  desc = "Noice dismiss" },
     { "<leader>snt", function() require("noice").cmd("pick") end, desc = "Noice Picker (Telescope/FzfLua)" },
-    { "<c-f>", 
-      function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, 
-      silent = true, expr = true, desc = "Scroll Forward", mode = {"i", "n", "s"} 
+    { "<c-f>",
+      function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end,
+      silent = true, expr = true, desc = "Scroll Forward", mode = {"i", "n", "s"}
     },
-    { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, 
+    { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end,
       silent = true, expr = true, desc = "Scroll Backward", mode = {"i", "n", "s"}
     },
 		-- stylua: ignore end
