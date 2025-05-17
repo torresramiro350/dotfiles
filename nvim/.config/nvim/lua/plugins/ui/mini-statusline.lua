@@ -3,6 +3,8 @@ return {
 	version = false,
 	event = { "VimEnter" },
 	opts = function()
+		-- Autocmd to track macro recording, And redraw statusline, which trigger
+		-- macro function of mini.statusline
 		vim.api.nvim_create_autocmd("RecordingEnter", {
 			pattern = "*",
 			callback = function()
@@ -54,8 +56,6 @@ return {
 	end,
 	config = function(_, opts)
 		local statusline = require("mini.statusline")
-		-- Autocmd to track macro recording, And redraw statusline, which trigger
-		-- macro function of mini.statusline
 		statusline.setup(opts)
 	end,
 }
