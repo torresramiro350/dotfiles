@@ -2,24 +2,28 @@ return {
 	{
 		"echasnovski/mini.comment",
 		version = false,
-		event = "VeryLazy",
-		config = function()
-			local minicomment = require("mini.comment")
+		-- event = "VeryLazy",
+		event = { "BufEnter" },
+		opts = function()
 			local ts_context = require("ts_context_commentstring.internal")
-			-- mini.comment
-			minicomment.setup({
-				options = {
-					custom_commentstring = function()
-						return ts_context.calculate_commentstring() or vim.bo.commentstring
-					end,
-				},
+			return {
 				mappings = {
 					comment = "gc",
 					comment_line = "gcc",
 					comment_visual = "gc",
 					textobject = "gc",
 				},
-			})
+				options = {
+					custom_commentstring = function()
+						return ts_context.calculate_commentstring() or vim.bo.commentstring
+					end,
+				},
+			}
+		end,
+		config = function(_, opts)
+			local minicomment = require("mini.comment")
+			-- mini.comment
+			minicomment.setup(opts)
 		end,
 	},
 	{
