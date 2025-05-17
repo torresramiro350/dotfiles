@@ -1,25 +1,25 @@
 return {
-  "folke/trouble.nvim",
-  event = { "BufReadPost", "BufNewFile" },
-  dependencies = { "nvim-tree/nvim-web-devicons" },
-  opts = {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-    modes = {
-      lsp = {
-        win = { position = "right" },
-      },
-    },
-  },
-  keys = {
+	"folke/trouble.nvim",
+	event = { "BufReadPost", "BufNewFile" },
+	dependencies = { "nvim-tree/nvim-web-devicons" },
+	opts = {
+		-- your configuration comes here
+		-- or leave it empty to use the default settings
+		-- refer to the configuration section below
+		modes = {
+			lsp = {
+				win = { position = "right" },
+			},
+		},
+	},
+	keys = {
     -- stylua: ignore start
-    { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>",              desc = "Diagnostics (Trouble)" },
+    { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
     { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
-    { "<leader>cs", "<cmd>Trouble symbols toggle<cr>",                  desc = "Symbols (Trouble)" },
-    { "<leader>cS", "<cmd>Trouble lsp toggle<cr>",                      desc = "LSP references/definitions/... (Trouble)" },
-    { "<leader>xL", "<cmd>Trouble loclist toggle<cr>",                  desc = "Location List (Trouble)" },
-    { "<leader>xQ", "<cmd>Trouble qflist toggle<cr>",                   desc = "Quickfix List (Trouble)" },
+    { "<leader>cs", "<cmd>Trouble symbols toggle<cr>", desc = "Symbols (Trouble)" },
+    { "<leader>cS", "<cmd>Trouble lsp toggle<cr>", desc = "LSP references/definitions/... (Trouble)" },
+    { "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
+    { "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
     {
       "[q",
       function()
@@ -48,6 +48,6 @@ return {
       end,
       desc = "Next Trouble/Quickfix Item",
     },
-    -- stylua: ignore end
-  },
+		-- stylua: ignore end
+	},
 }
