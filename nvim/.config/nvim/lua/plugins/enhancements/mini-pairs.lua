@@ -11,8 +11,6 @@ return {
 	},
 	config = function(_, opts)
 		-- pairs
-		require("mini.pairs").setup({
-			opts,
-		})
+		require("mini.pairs").setup({ opts })
 	end,
 }
