@@ -95,26 +95,6 @@ return {
 						},
 					},
 				},
-				-- NOTE: using basedpyright instead
-				-- pyright = {
-				-- 	single_file_support = true,
-				-- 	filetypes = "python",
-				-- 	cmd = { "pyright-langserver", "--stdio" },
-				-- 	settings = {
-				-- 		pyright = { disableOrganizeImports = true },
-				-- 		python = {
-				-- 			analysis = {
-				-- 				-- Ignore all files for analysis to exclusively
-				-- 				-- use Ruff for linting
-				-- 				ignore = { "*" },
-				-- 				-- autoSearchPaths = true,
-				-- 				-- diagnosticMode = "openFilesOnly",
-				-- 				-- useLibraryCodeForTypes = true,
-				-- 			},
-				-- 		},
-				-- 	},
-				-- },
-				-- pylyzer = {},
 				ruff = {
 					cmd_env = { RUFF_TRACE = "messages" },
 					init_options = {
@@ -178,12 +158,19 @@ return {
 			},
 		},
 		config = function(_, opts)
-			--import lspconfig plugin
-			-- LSP servers and clients are able to communicate to each other what features they support.
-			--  By default, Neovim doesn't support everything that is in the LSP specification.
-			--  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
-			--  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-			--
+			-- local function setup_codelens(client, bufnr)
+			-- 	if client.supports_method("textDocuments/codeLens") then
+			-- 		vim.lsp.codelens.refresh()
+			-- 		local group = vim.api.nvim_create_augroup("LSPCodeLens", { clear = true })
+			-- 		vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+			-- 			buffer = bufnr,
+			-- 			group = group,
+			-- 			callback = function()
+			-- 				vim.lsp.codelens.refresh()
+			-- 			end,
+			-- 		})
+			-- 	end
+			-- end
 
 			-- Whenever an LSP attaches to a buffer, we will run this function.
 			-- See `:help LspAttach` for more information about this autocmd event.
@@ -191,12 +178,11 @@ return {
 				group = vim.api.nvim_create_augroup("lsp-attach-format", { clear = true }),
 				-- This is where we attach the autoformatting for reasonable clients
 				callback = function(event)
+					local bufnr = event.buf
 					local client_id = event.data.client_id
 					local client = vim.lsp.get_client_by_id(client_id)
-					-- enables the neovim lsp client
-					-- if client:supports_method("textDocument/completion") then
-					-- 	vim.lsp.completion.enable(true, client_id, event.buf, { autotrigger = true })
-					-- end
+
+					-- setup_codelens(client, bufnr)
 					if client == nil then
 						return
 					end
@@ -210,7 +196,6 @@ return {
 						require("clangd_extensions")
 					end
 
-					local bufnr = event.buf
 					local nmap = function(keys, func, desc)
 						if desc then
 							desc = "LSP: " .. desc
