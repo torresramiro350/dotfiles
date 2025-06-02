@@ -2,6 +2,9 @@ return {
 	"p00f/clangd_extensions.nvim",
 	lazy = true,
 	config = function() end,
+	keys = {
+		{ "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
+	},
 	opts = {
 		inlay_hints = {
 			inline = false,

@@ -105,15 +105,19 @@ return {
 				},
 				-- C++
 				clangd = {
-					keys = {
-						{ "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
-					},
 					root_dir = function(fname)
 						return require("lspconfig.util").root_pattern(
 							"Makefile",
+							"configure.ac",
+							"configure.in",
+							"config.h.in",
+							"meson.build",
+							"meson_options.txt",
+							"build.ninja"
+						)(fname) or require("lspconfig.util").root_pattern(
 							"compile_commands.json",
 							"compile_flags.txt"
-						)(fname)
+						)(fname) or vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1])
 					end,
 					capabilities = {
 						offsetEncoding = { "utf-16" },
@@ -129,7 +133,7 @@ return {
 					},
 					init_options = {
 						usePlaceholders = true,
-						completeunimported = true,
+						completeUnimported = true,
 						clangdFileStatus = true,
 					},
 				},
@@ -192,11 +196,6 @@ return {
 					if client.name == "ruff" then
 						-- Disable hover in favor of Pyright
 						client.server_capabilities.hoverProvider = false
-					end
-
-					-- load the clangd extensions plugin for CXX code
-					if client.name == "clangd" then
-						require("clangd_extensions")
 					end
 
 					local nmap = function(keys, func, desc)
@@ -297,20 +296,38 @@ return {
 			local lspconfig = require("lspconfig")
 			-- local capabilities = require("blink.cmp").get_lsp_capabilities()
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
+			capabilities = vim.tbl_deep_extend(
+				"force",
+				{},
+				capabilities,
+				require("blink.cmp").get_lsp_capabilities(),
+				opts.capabilities or {}
+			)
 			local ensure_installed = vim.tbl_keys(servers or {})
+			local function setup(server)
+				local server_opts = vim.tbl_deep_extend("force", {
+					capabilities = vim.deepcopy(capabilities),
+				}, servers[server] or {})
+				if server_opts.enabled == false then
+					return
+				end
+
+				if opts.setup[server] then
+					if opts.setup[server](server, server_opts) then
+						return
+					end
+				elseif opts.setup["*"] then
+					if opts.setup["*"](server, server_opts) then
+						return
+					end
+				end
+				lspconfig[server].setup(server_opts)
+			end
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 			require("mason-lspconfig").setup({
 				ensure_installed = {},
 				automatic_installation = false,
-				handlers = {
-					function(server_name)
-						local server = servers[server_name] or {}
-						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-						-- don't forget to call this, otherwise the servers won't be loaded
-						lspconfig[server_name].setup(server)
-					end,
-				},
+				handlers = { setup },
 			})
 		end,
 	},
