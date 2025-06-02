@@ -51,41 +51,43 @@ return {
 	},
 	config = function()
 		vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+		local dap = require("dap")
+		local dapui = require("dapui")
+		if not dap.adapters["codelldb"] then
+			require("dap").adapters["codelldb"] = {
+				type = "server",
+				host = "localhost",
+				port = "${port}",
+				executable = {
+					command = "codelldb",
+					args = {
+						"--port",
+						"${port}",
+					},
+				},
+			}
+		end
 
-		local dap, dapui = require("dap"), require("dapui")
-		dap.adapters.gdb = {
-			type = "executable",
-			command = "gdb",
-			args = { "-i", "dap" },
-		}
-
-		-- C
-		dap.configurations.c = {
-			{
-				name = "Launch",
-				type = "gdb",
-				request = "launch",
-				program = function()
-					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-				end,
-				cwd = "${workspaceFolder}",
-				stopAtBeginningOfMainSubprogram = false,
-			},
-		}
-
-		-- C++
-		dap.configurations.cpp = {
-			{
-				name = "Launch",
-				type = "gdb",
-				request = "launch",
-				program = function()
-					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-				end,
-				cwd = "${workspaceFolder}",
-				stopAtBeginningOfMainSubprogram = false,
-			},
-		}
+		for _, lang in ipairs({ "c", "cpp" }) do
+			dap.configurations[lang] = {
+				{
+					type = "codelldb",
+					request = "launch",
+					name = "Launch file",
+					program = function()
+						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+					end,
+					cwd = "${workspaceFolder}",
+				},
+				{
+					type = "codelldb",
+					request = "attach",
+					name = "Attach to process",
+					pid = require("dap.utils").pick_process,
+					cwd = "${workspaceFolder}",
+				},
+			}
+		end
 
 		dap.listeners.before.attach.dapui_config = function()
 			dapui.open()
@@ -99,12 +101,7 @@ return {
 		dap.listeners.before.event_exited.dapui_config = function()
 			dapui.close()
 		end
-    -- stylua: ignore
-    vim.keymap.set("n", "<Leader>dt", function() dap.toggle_breakpoint() end, { desc = "Toggle break point" })
-    -- stylua: ignore
-    vim.keymap.set("n", "<leader>dc", function() dap.continue() end, { desc = "Continue debugging" })
 	end,
-	-- event = "VeryLazy",
 	keys = {
     -- stylua: ignore start
     { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
