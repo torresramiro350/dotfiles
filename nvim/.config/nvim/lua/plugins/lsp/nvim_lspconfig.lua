@@ -238,12 +238,12 @@ return {
 					nmap("<leader>Q", "<cmd>cclose<cr>", "Close quickfix list")
 					nmap("<leader>L", "<cmd>lclose<cr>", "Close location list")
 					nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-					nmap("<leader>Wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
-					nmap("<leader>Wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
-					nmap("<leader>Wl", function()
-						print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-					end, "[W]orkspace [L]ist Folders")
-					nmap("<leader>lf", "<cmd>Format<cr>", "[L]format")
+					-- nmap("<leader>Wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
+					-- nmap("<leader>Wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
+					-- nmap("<leader>Wl", function()
+					-- 	print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+					-- end, "[W]orkspace [L]ist Folders")
+					-- nmap("<leader>lf", "<cmd>Format<cr>", "[L]format")
 
 					-- allow inlay hints for clangd
 					-- nmap("<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", "Switch Source/Header (C/C++)")
