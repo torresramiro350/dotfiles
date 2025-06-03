@@ -165,25 +165,8 @@ return {
 			},
 		},
 		config = function(_, opts)
-			-- local function setup_codelens(client, bufnr)
-			-- 	if client.supports_method("textDocuments/codeLens") then
-			-- 		vim.lsp.codelens.refresh()
-			-- 		local group = vim.api.nvim_create_augroup("LSPCodeLens", { clear = true })
-			-- 		vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-			-- 			buffer = bufnr,
-			-- 			group = group,
-			-- 			callback = function()
-			-- 				vim.lsp.codelens.refresh()
-			-- 			end,
-			-- 		})
-			-- 	end
-			-- end
-
-			-- Whenever an LSP attaches to a buffer, we will run this function.
-			-- See `:help LspAttach` for more information about this autocmd event.
 			vim.api.nvim_create_autocmd("LspAttach", {
-				group = vim.api.nvim_create_augroup("lsp-attach-format", { clear = true }),
-				-- This is where we attach the autoformatting for reasonable clients
+				group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 				callback = function(event)
 					local bufnr = event.buf
 					local client_id = event.data.client_id
@@ -226,8 +209,6 @@ return {
 					nmap("]e", diagnostic_goto(true, "ERROR"), "Go to next error")
 					nmap("[w", diagnostic_goto(false, "WARN"), "Go to previous warning")
 					nmap("]w", diagnostic_goto(true, "WARN"), "Go to next warning")
-					-- nmap("[q", vim.cmd.cprev, "Go to previous quickfix item")
-					-- nmap("]q", vim.cmd.cnext, "Go to next quickfix item")
 					nmap("]Q", vim.cmd.clast, "End of quickfix list")
 					nmap("[Q", vim.cmd.cfirst, "Beginning of quickfix list")
 					nmap("[l", vim.cmd.lnext, "Next loclist")
@@ -240,34 +221,6 @@ return {
 					nmap("<leader>Q", "<cmd>cclose<cr>", "Close quickfix list")
 					nmap("<leader>L", "<cmd>lclose<cr>", "Close location list")
 					nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-					-- nmap("<leader>Wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
-					-- nmap("<leader>Wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
-					-- nmap("<leader>Wl", function()
-					-- 	print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-					-- end, "[W]orkspace [L]ist Folders")
-					-- nmap("<leader>lf", "<cmd>Format<cr>", "[L]format")
-
-					-- allow inlay hints for clangd
-					-- nmap("<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", "Switch Source/Header (C/C++)")
-					local group = vim.api.nvim_create_augroup("clangd_no_inlay_hints_insert", { clear = true })
-					nmap("<leader>lh", function()
-						-- if require("clangd.extensions.inlay_hints")
-						if require("clangd_extensions.inlay_hints").toggle_inlay_hints() then
-							vim.api.nvim_create_autocmd("InsertEnter", {
-								group = group,
-								buffer = bufnr,
-								callback = require("clangd_extensions.inlay_hints").disable_inlay_hints,
-							})
-							vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave" }, {
-								group = group,
-								buffer = bufnr,
-								callback = require("clangd_extensions.inlay_hints").set_inlay_hints,
-							})
-						else
-							vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
-						end
-					end, "[l]sp [h]ints toggle")
-					-- nmap("<leader>Ws", builtins.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 				end,
 			})
 			-- Change the Diagnostic symbols in the sign column (gutter)
