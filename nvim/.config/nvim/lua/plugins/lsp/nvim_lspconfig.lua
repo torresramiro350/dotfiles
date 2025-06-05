@@ -51,37 +51,41 @@ return {
 			-- { "j-hui/fidget.nvim" },
 		},
 		opts = {
-			capabilities = function()
-				local capabilities = vim.lsp.protocol.make_client_capabilities()
-				local has_blink, blink = pcall(require, "blink.cmp")
-				return vim.tbl_deep_extend("force", capabilities, has_blink and blink.get_lsp_capabilities() or {}, {
-					textDocument = {
-						foldingRange = {
-							dynamicRegistration = false,
-							lineFoldingOnly = true,
-						},
+			capabilities = {
+				workspace = {
+					fileOperations = {
+						didRename = true,
+						willRename = true,
 					},
-				})
-			end,
-			diagnostics = function()
-				local signs = { ERROR = " ", WARN = " ", HINT = "󰠠 ", INFO = " " }
-				local diagnostic_signs = {}
-				for type, icon in pairs(signs) do
-					diagnostic_signs[vim.diagnostic.severity[type]] = icon
-				end
-				return {
-					underline = true,
-					update_in_insert = false,
-					severity_sort = true,
-					virtual_text = {
-						current_line = true,
-						spacing = 4,
-						source = "if_many",
-						prefix = "●",
+				},
+			},
+			diagnostics = {
+				severity_sort = true,
+				float = { border = "rounded", source = "if_many" },
+				underline = { severity = vim.diagnostic.severity.ERROR },
+				signs = vim.g.have_nerd_font and {
+					text = {
+						[vim.diagnostic.severity.ERROR] = "󰅚 ",
+						[vim.diagnostic.severity.WARN] = "󰀪 ",
+						[vim.diagnostic.severity.INFO] = "󰋽 ",
+						[vim.diagnostic.severity.HINT] = "󰌶 ",
 					},
-					signs = { text = diagnostic_signs },
-				}
-			end,
+				} or {},
+				virtual_text = {
+					current_line = true,
+					source = "if_many",
+					spacing = 2,
+					format = function(diagnostic)
+						local diagnostic_message = {
+							[vim.diagnostic.severity.ERROR] = diagnostic.message,
+							[vim.diagnostic.severity.WARN] = diagnostic.message,
+							[vim.diagnostic.severity.INFO] = diagnostic.message,
+							[vim.diagnostic.severity.HINT] = diagnostic.message,
+						}
+						return diagnostic_message[diagnostic.severity]
+					end,
+				},
+			},
 			inlay_hints = { enabled = true },
 			servers = {
 				lua_ls = {
@@ -251,11 +255,18 @@ return {
 				end,
 			})
 
-			vim.diagnostic.config(opts.diagnostics())
+			vim.diagnostic.config(opts.diagnostics)
 
 			local servers = opts.servers
 			local lspconfig = require("lspconfig")
-			local capabilities = opts.capabilities()
+			local has_blink, blink = pcall(require, "blink.cmp")
+			local capabilities = vim.tbl_deep_extend(
+				"force",
+				{},
+				vim.lsp.protocol.make_client_capabilities(),
+				has_blink and blink.get_lsp_capabilities() or {},
+				opts.capabilities or {}
+			)
 			local ensure_installed = vim.tbl_keys(servers or {})
 			local function setup(server)
 				local server_opts = vim.tbl_deep_extend("force", {
