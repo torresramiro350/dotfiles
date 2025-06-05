@@ -1,9 +1,5 @@
 return {
 	{
-		"williamboman/mason-lspconfig.nvim",
-		config = function() end,
-	},
-	{
 		"williamboman/mason.nvim",
 		cmd = "Mason",
 		event = "VeryLazy",
@@ -47,7 +43,7 @@ return {
 		dependencies = {
 			-- Automatically install LSPs to stdpath for neovim
 			{ "williamboman/mason.nvim", opts = {} },
-			{ "williamboman/mason-lspconfig.nvim" },
+			{ "williamboman/mason-lspconfig.nvim", config = function() end },
 			{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 			{ "antosha417/nvim-lsp-file-operations", config = true },
 			{ "saghen/blink.cmp" },
@@ -55,6 +51,37 @@ return {
 			-- { "j-hui/fidget.nvim" },
 		},
 		opts = {
+			capabilities = function()
+				local capabilities = vim.lsp.protocol.make_client_capabilities()
+				local has_blink, blink = pcall(require, "blink.cmp")
+				return vim.tbl_deep_extend("force", capabilities, has_blink and blink.get_lsp_capabilities() or {}, {
+					textDocument = {
+						foldingRange = {
+							dynamicRegistration = false,
+							lineFoldingOnly = true,
+						},
+					},
+				})
+			end,
+			diagnostics = function()
+				local signs = { ERROR = " ", WARN = " ", HINT = "󰠠 ", INFO = " " }
+				local diagnostic_signs = {}
+				for type, icon in pairs(signs) do
+					diagnostic_signs[vim.diagnostic.severity[type]] = icon
+				end
+				return {
+					underline = true,
+					update_in_insert = false,
+					severity_sort = true,
+					virtual_text = {
+						current_line = true,
+						spacing = 4,
+						source = "if_many",
+						prefix = "●",
+					},
+					signs = { text = diagnostic_signs },
+				}
+			end,
 			inlay_hints = { enabled = true },
 			servers = {
 				lua_ls = {
@@ -223,39 +250,12 @@ return {
 					nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 				end,
 			})
-			-- Change the Diagnostic symbols in the sign column (gutter)
-			if vim.g.have_nerd_font then
-				local signs = { ERROR = " ", WARN = " ", HINT = "󰠠 ", INFO = " " }
-				local diagnostic_signs = {}
-				for type, icon in pairs(signs) do
-					diagnostic_signs[vim.diagnostic.severity[type]] = icon
-				end
-				vim.diagnostic.config({
-					underline = true,
-					update_in_insert = false,
-					severity_sort = true,
-					-- virtual_lines = { current_line = true },
-					virtual_text = {
-						current_line = true,
-						spacing = 4,
-						source = "if_many",
-						prefix = "●",
-					},
-					signs = { text = diagnostic_signs },
-				})
-			end
+
+			vim.diagnostic.config(opts.diagnostics())
 
 			local servers = opts.servers
 			local lspconfig = require("lspconfig")
-			-- local capabilities = require("blink.cmp").get_lsp_capabilities()
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = vim.tbl_deep_extend(
-				"force",
-				{},
-				capabilities,
-				require("blink.cmp").get_lsp_capabilities(),
-				opts.capabilities or {}
-			)
+			local capabilities = opts.capabilities()
 			local ensure_installed = vim.tbl_keys(servers or {})
 			local function setup(server)
 				local server_opts = vim.tbl_deep_extend("force", {
@@ -276,10 +276,10 @@ return {
 				end
 				lspconfig[server].setup(server_opts)
 			end
+			-- get all the servers that are available through mason-lspconfig
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 			require("mason-lspconfig").setup({
-				ensure_installed = {},
-				automatic_installation = false,
+				ensure_installed = ensure_installed,
 				handlers = { setup },
 			})
 		end,
