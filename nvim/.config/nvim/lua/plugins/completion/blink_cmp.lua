@@ -58,6 +58,9 @@ return {
 			},
 		},
 		signature = {
+			window = {
+				show_documentation = false,
+			},
 			-- NOTE: this feature is experimental and may change in the future,
 			-- so I'll leave it as disabled for now
 			enabled = false,
