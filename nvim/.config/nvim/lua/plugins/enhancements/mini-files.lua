@@ -5,7 +5,7 @@ return {
 	opts = {
 		options = {
 			-- Whether to use for editing directories
-			use_as_default_explorer = true, -- use neotree for that
+			use_as_default_explorer = false, -- use neotree for that
 		},
 		windows = {
 			true,
