@@ -2,6 +2,9 @@ require("groups.utility_funcs")
 -- navigating buffers
 nmap("n", "[b", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
 nmap("n", "]b", "<cmd>bnext<cr>", { desc = "Previous buffer" })
+nmap("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+nmap("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+nmap("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
