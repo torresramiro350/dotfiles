@@ -6,9 +6,9 @@ return {
 		animate = {},
 		dim = {},
 		picker = {},
-		-- explorer = {
-		--   replace_netrw = true,
-		-- },
+		explorer = {
+			replace_netrw = true,
+		},
 		input = { enabled = true },
 		notifier = { enabled = true, timeout = 3000 },
 		quickfile = { enabled = true },
@@ -78,6 +78,7 @@ return {
     { "<leader>n",       function() Snacks.picker.notifications() end, desc = "Notification History" },
     { "<leader>;",       function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<leader>/",       function() Snacks.picker.lines({}) end, desc = "Buffer Lines" },
+    { "<leader>e",       function() Snacks.explorer() end, desc = "File Explorer" },
     -- { "<leader>?",       function() Snacks.picker.files() end,           desc = "Find Files" },
     -- Find
     { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
@@ -134,8 +135,9 @@ return {
     { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer", },
     { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
     { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer", },
+    { "<leader>bo", function () Snacks.bufdelete.other() end, desc= "Delete Other Buffer", },
     { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File", },
-    { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit", },
+    { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
     { "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit Log (cwd)", },
     { "<c-/>",      function() Snacks.terminal() end, desc = "Toggle Terminal", },
     { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
@@ -217,6 +219,8 @@ return {
 				vim.print = _G.dd -- Override print to use snacks for `:=` command
 
 				-- Create some toggle mappings
+				Snacks.toggle.profiler():map("<leader>dpp")
+				Snacks.toggle.profiler_highlights():map("<leader>dph")
 				Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
 				Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
 				Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
