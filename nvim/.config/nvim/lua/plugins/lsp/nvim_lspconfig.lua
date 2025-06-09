@@ -230,7 +230,7 @@ return {
 						end
 					end
 
-					nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+					nmap("<leader>rn", vim.lsp.buf.rename, "Rename buffer")
 					nmap("<leader>ca", vim.lsp.buf.code_action, "Code Actions")
 					nmap("K", vim.lsp.buf.hover, "Hover Documentation")
 					nmap("gk", vim.lsp.buf.signature_help, "Signature Documentation")
@@ -246,12 +246,12 @@ return {
 					nmap("]l", vim.cmd.lprev, "Previous loclist")
 					nmap("]L", vim.cmd.llast, "End of loclist")
 					nmap("[L", vim.cmd.lfirst, "Beginning of loclist")
-					nmap("<leader>e", vim.diagnostic.open_float, "Open [F]loating [D]iagnostic message")
-					nmap("<leader>xl", vim.diagnostic.setloclist, "Open [D]iagnostics [L]ist")
-					nmap("<leader>xq", vim.diagnostic.setqflist, "Open [Q]uickfix [L]ist")
+					nmap("<leader>cd", vim.diagnostic.open_float, "Line diagnostics")
+					nmap("<leader>xl", vim.diagnostic.setloclist, "Open location list")
+					nmap("<leader>xq", vim.diagnostic.setqflist, "Open quickfix list")
 					nmap("<leader>Q", "<cmd>cclose<cr>", "Close quickfix list")
 					nmap("<leader>L", "<cmd>lclose<cr>", "Close location list")
-					nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+					nmap("gD", vim.lsp.buf.declaration, "Go to declaration")
 				end,
 			})
 
