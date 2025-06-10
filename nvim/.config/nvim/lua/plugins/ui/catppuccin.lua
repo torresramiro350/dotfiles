@@ -27,7 +27,7 @@ return {
 		},
 		integrations = {
 			--defaults
-			blink_cmp = true,
+			blink_cmp = { enabled = true, style = "bordered" },
 			cmp = true,
 			diffview = true,
 			dap = true,
