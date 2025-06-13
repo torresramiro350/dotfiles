@@ -4,7 +4,7 @@ return {
 		"echasnovski/mini.snippets",
 		-- "rafamadriz/friendly-snippets",
 		"Exafunction/codeium.nvim",
-		{ "saghen/blink.compat", opts = {} },
+		{ "saghen/blink.compat", opts = {}, version = "*" },
 	},
 	event = "InsertEnter",
 	enabled = true,
