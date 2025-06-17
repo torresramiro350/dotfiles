@@ -46,7 +46,7 @@ return {
 				lua = { "stylua" },
 				yaml = { "yamlfmt" },
 				json = { "prettierd", "prettier" },
-				markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
+				["markdown"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
 				["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
 				fish = { "fish_indent" },
 				cmake = { "cmake_format" },

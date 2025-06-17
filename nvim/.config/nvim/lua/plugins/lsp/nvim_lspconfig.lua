@@ -10,6 +10,8 @@ return {
 			ensure_installed = {
 				"stylua",
 				"shfmt",
+				"markdownlint-cli2",
+				"markdown-toc",
 			},
 		},
 		keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
@@ -188,10 +190,6 @@ return {
 				taplo = {
 					filetypes = { "toml" },
 				},
-				-- RST
-				ltex = {
-					filetypes = { "rst", "tex", "bib" },
-				},
 				tinymist = {},
 			},
 		},
@@ -260,41 +258,50 @@ return {
 			local servers = opts.servers
 			local lspconfig = require("lspconfig")
 			local has_blink, blink = pcall(require, "blink.cmp")
-			local capabilities = vim.tbl_deep_extend(
-				"force",
-				{},
-				vim.lsp.protocol.make_client_capabilities(),
-				has_blink and blink.get_lsp_capabilities() or {},
-				opts.capabilities or {}
-			)
-			local ensure_installed = vim.tbl_keys(servers or {})
-			local function setup(server)
-				local server_opts = vim.tbl_deep_extend("force", {
-					capabilities = vim.deepcopy(capabilities),
-				}, servers[server] or {})
-				if server_opts.enabled == false then
-					return
-				end
+			local have_mason, mlsp = pcall(require, "mason-lspconfig")
 
-				if opts.setup[server] then
-					if opts.setup[server](server, server_opts) then
-						return
-					end
-				elseif opts.setup["*"] then
-					if opts.setup["*"](server, server_opts) then
-						return
-					end
-				end
-				lspconfig[server].setup(server_opts)
+			-- local capabilities = vim.tbl_deep_extend(
+			-- 	"force",
+			-- 	{},
+			-- 	vim.lsp.protocol.make_client_capabilities(),
+			-- 	has_blink and blink.get_lsp_capabilities() or {},
+			-- 	opts.capabilities or {}
+			-- )
+
+			local ensure_installed = vim.tbl_keys(servers or {})
+
+			local function setup(server)
+				-- adapting this from neovim 0.11+
+				vim.lsp.config(server, server_opts)
+
+				-- for neovim 0.10 and earlier
+				-- local server_opts = vim.tbl_deep_extend("force", {
+				-- 	capabilities = vim.deepcopy(capabilities),
+				-- }, servers[server] or {})
+				-- if server_opts.enabled == false then
+				-- 	return
+				-- end
+				--
+				-- if opts.setup[server] then
+				-- 	if opts.setup[server](server, server_opts) then
+				-- 		return
+				-- 	end
+				-- elseif opts.setup["*"] then
+				-- 	if opts.setup["*"](server, server_opts) then
+				-- 		return
+				-- 	end
+				-- end
+				-- lspconfig[server].setup(server_opts)
 			end
 			-- get all the servers that are available through mason-lspconfig
-			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-			require("mason-lspconfig").setup({
-				ensure_installed = {},
-				automatic_enable = true,
-				automatic_installation = false,
-				handlers = { setup },
-			})
+			if have_mason then
+				mlsp.setup({
+					ensure_installed = vim.tbl_deep_extend("force", ensure_installed, {}),
+					automatic_enable = true,
+					automatic_installation = true,
+					handlers = { setup },
+				})
+			end
 		end,
 	},
 }

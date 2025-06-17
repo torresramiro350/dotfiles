@@ -5,14 +5,11 @@ return {
 	version = false,
 	opts = function()
 		local mini_snippets = require("mini.snippets")
+		local blink = require("blink.cmp")
 		local expand_select_override = function(snippets, insert)
-      -- stylua: ignore
-      -- if cmp.visible() then cmp.close() end
-      -- Schedule, otherwise blink's virtual text is not removed on vim.ui.select
-      require('blink.cmp').cancel()
+			blink.cancel()
 			vim.schedule(function()
 				MiniSnippets.default_select(snippets, insert)
-				-- MiniSnippets.default_select(snippets, insert)
 			end)
 		end
 		-- return ret
@@ -27,5 +24,8 @@ return {
 				end,
 			},
 		}
+	end,
+	config = function(_, opts)
+		require("mini.snippets").setup(opts)
 	end,
 }

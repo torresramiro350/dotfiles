@@ -4,22 +4,36 @@ return {
 		"echasnovski/mini.snippets",
 		-- "rafamadriz/friendly-snippets",
 		"Exafunction/codeium.nvim",
+		{
+			"Kaiser-Yang/blink-cmp-dictionary",
+			dependencies = { "nvim-lua/plenary.nvim" },
+		},
 		{ "saghen/blink.compat", opts = {}, version = "*" },
 	},
 	event = "InsertEnter",
 	enabled = true,
 	version = "*",
-	-- build = "cargo build --release",
 	opts_extend = {
 		"sources.completion.enabled_providers",
 		"sources.compat",
 		"sources.default",
 	},
 	opts = {
+		snippets = {
+			preset = "mini_snippets",
+			expand = function(snippet)
+				vim.snippet.expand(snippet)
+			end,
+			active = function(filter)
+				return vim.snippet.active(filter)
+			end,
+			jump = function(direction)
+				vim.snippet.jump(direction)
+			end,
+		},
 		appearance = {
 			use_nvim_cmp_as_default = false,
 			nerd_font_variant = "normal",
-			-- nerd_font_variant = "mono",
 		},
 		completion = {
 			ghost_text = {
@@ -68,11 +82,8 @@ return {
 			window = {
 				show_documentation = false,
 			},
-			-- NOTE: this feature is experimental and may change in the future,
-			-- so I'll leave it as disabled for now
 			enabled = false,
 		},
-		snippets = { preset = "mini_snippets" },
 		cmdline = {
 			enabled = true,
 			sources = function()
@@ -90,25 +101,41 @@ return {
 		},
 		sources = {
 			default = function(ctx)
+				local filetype = vim.bo.filetype
+				local defaults = { "lsp", "path", "snippets", "buffer" }
+				-- Filetype-specific completions
+				local filetype_completions = {
+					lua = { "lazydev", "codeium" },
+					markdown = { "markdown", "dictionary" },
+					text = { "markdown", "dictionary" },
+				}
+				-- Check for filetype matches first
+				if filetype_completions[filetype] then
+					vim.list_extend(defaults, filetype_completions[filetype])
+					return defaults
+				end
+				-- Check for comment nodes
 				local success, node = pcall(vim.treesitter.get_node)
-				if vim.bo.filetype == "lua" then
-					return { "lazydev", "lsp", "path", "codeium" }
-				elseif vim.bo.filetype == "markdown" then
-					-- don't need ai completion for markdown files
-					return { "snippets", "path", "buffer" }
-				elseif
-					success
+				local is_comment = success
 					and node
 					and vim.tbl_contains({ "comment", "line_comment", "block_comment" }, node:type())
-				then
-					-- don't need ai auto completion for comments either
+				if is_comment then
 					return { "buffer" }
-				else
-					return { "lsp", "path", "snippets", "buffer", "codeium" }
 				end
+				-- Default case
+				table.insert(defaults, "codeium")
+				return defaults
 			end,
 			-- compat = { "codeium" },
 			providers = {
+				dictionary = {
+					module = "blink-cmp-dictionary",
+					name = "Dict",
+					min_keyword_length = 3,
+					opts = {
+						dictionary_directories = { vim.fn.expand("~/.config/nvim/dictionary") },
+					},
+				},
 				lazydev = {
 					name = "LazyDev",
 					module = "lazydev.integrations.blink",
