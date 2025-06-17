@@ -12,6 +12,7 @@ return {
 				"shfmt",
 				"markdownlint-cli2",
 				"markdown-toc",
+				"markdown-oxide",
 			},
 		},
 		keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
