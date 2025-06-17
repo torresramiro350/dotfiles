@@ -97,7 +97,8 @@ return {
 				-- Filetype-specific completions
 				local filetype_completions = {
 					lua = { "lazydev", "codeium" },
-					markdown = { "markdown", "dictionary" },
+					-- markdown = { "markdown", "dictionary" },
+					markdown = { "dictionary" },
 					text = { "markdown", "dictionary" },
 				}
 				-- Check for filetype matches first
