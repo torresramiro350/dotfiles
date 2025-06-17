@@ -21,15 +21,6 @@ return {
 	opts = {
 		snippets = {
 			preset = "mini_snippets",
-			expand = function(snippet)
-				vim.snippet.expand(snippet)
-			end,
-			active = function(filter)
-				return vim.snippet.active(filter)
-			end,
-			jump = function(direction)
-				vim.snippet.jump(direction)
-			end,
 		},
 		appearance = {
 			use_nvim_cmp_as_default = false,
@@ -177,4 +168,7 @@ return {
 			["<S-Tab>"] = { "snippet_backward", "fallback" },
 		},
 	},
+	config = function(_, opts)
+		require("blink-cmp").setup(opts)
+	end,
 }
