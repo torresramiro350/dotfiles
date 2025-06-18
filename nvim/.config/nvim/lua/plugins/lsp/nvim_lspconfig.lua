@@ -192,8 +192,13 @@ return {
 				},
 				tinymist = {},
 			},
+			-- setup = {
+			-- 	["*"] = function(server, opts) end,
+			-- },
 		},
 		config = function(_, opts)
+			-- TODO: check how this code is defined to make use of it
+			-- require("lazyvim.util").lsp.on_attach(function(_, bufnr) end)
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 				callback = function(event)
@@ -260,38 +265,22 @@ return {
 			local has_blink, blink = pcall(require, "blink.cmp")
 			local have_mason, mlsp = pcall(require, "mason-lspconfig")
 
-			-- local capabilities = vim.tbl_deep_extend(
-			-- 	"force",
-			-- 	{},
-			-- 	vim.lsp.protocol.make_client_capabilities(),
-			-- 	has_blink and blink.get_lsp_capabilities() or {},
-			-- 	opts.capabilities or {}
-			-- )
+			local capabilities = vim.tbl_deep_extend(
+				"force",
+				{},
+				vim.lsp.protocol.make_client_capabilities(),
+				has_blink and blink.get_lsp_capabilities() or {},
+				opts.capabilities or {}
+			)
 
 			local ensure_installed = vim.tbl_keys(servers or {})
 
-			local function setup(server)
-				-- adapting this from neovim 0.11+
-				vim.lsp.config(server, server_opts)
-
-				-- for neovim 0.10 and earlier
-				-- local server_opts = vim.tbl_deep_extend("force", {
-				-- 	capabilities = vim.deepcopy(capabilities),
-				-- }, servers[server] or {})
-				-- if server_opts.enabled == false then
-				-- 	return
-				-- end
-				--
-				-- if opts.setup[server] then
-				-- 	if opts.setup[server](server, server_opts) then
-				-- 		return
-				-- 	end
-				-- elseif opts.setup["*"] then
-				-- 	if opts.setup["*"](server, server_opts) then
-				-- 		return
-				-- 	end
-				-- end
-				-- lspconfig[server].setup(server_opts)
+			local function setup(server_name)
+				local server = servers[server_name] or {}
+				local server_opts = vim.tbl_deep_extend("force", {
+					capabilities = vim.deepcopy(capabilities),
+				}, server)
+				vim.lsp.config(server_name, server_opts)
 			end
 			-- get all the servers that are available through mason-lspconfig
 			if have_mason then
