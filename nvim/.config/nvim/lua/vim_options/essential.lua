@@ -1,6 +1,6 @@
 -- [[ Setting options ]]
 
-vim.opt.winborder = "rounded"
+-- vim.opt.winborder = "rounded"
 
 vim.opt.conceallevel = 2
 -- backspace
