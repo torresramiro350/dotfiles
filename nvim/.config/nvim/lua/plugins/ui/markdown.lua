@@ -5,10 +5,14 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
 		ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
 		opts = {
+			pipe_table = { preset = "round" },
 			bulled = { enabled = true },
 			heading = {
 				sign = false,
-				icons = {},
+				icons = { "󰼏 ", "󰎨 " },
+				border = true,
+				min_width = 90,
+				width = "block",
 			},
 			checkbox = {
 				enabled = false,
@@ -20,7 +24,9 @@ return {
 			},
 			completions = {
 				-- leaving this as disabled (since it breaks functionality with blink)
-				blink = { enabled = false },
+				-- blink = { enabled = false },
+				-- the code below seems to work
+				completions = { lsp = { enabled = true } },
 			},
 		},
 		config = function(_, opts)
