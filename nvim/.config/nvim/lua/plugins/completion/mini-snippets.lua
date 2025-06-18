@@ -12,7 +12,6 @@ return {
 				MiniSnippets.default_select(snippets, insert)
 			end)
 		end
-		-- return ret
 		return {
 			snippets = { mini_snippets.gen_loader.from_lang() },
 			expand = {

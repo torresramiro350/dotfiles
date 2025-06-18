@@ -97,9 +97,8 @@ return {
 				-- Filetype-specific completions
 				local filetype_completions = {
 					lua = { "lazydev", "codeium" },
-					-- markdown = { "markdown", "dictionary" },
 					markdown = { "dictionary" },
-					text = { "markdown", "dictionary" },
+					text = { "dictionary" },
 				}
 				-- Check for filetype matches first
 				if filetype_completions[filetype] then
@@ -123,6 +122,7 @@ return {
 				dictionary = {
 					module = "blink-cmp-dictionary",
 					name = "Dict",
+					max_items = 5,
 					min_keyword_length = 3,
 					opts = {
 						dictionary_directories = { vim.fn.expand("~/.config/nvim/dictionary") },
