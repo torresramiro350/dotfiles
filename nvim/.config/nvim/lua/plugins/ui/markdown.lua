@@ -1,9 +1,11 @@
 return {
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
+		enabled = true,
 		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
 		ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
 		opts = {
+			bulled = { enabled = true },
 			heading = {
 				sign = false,
 				icons = {},
@@ -17,11 +19,13 @@ return {
 				right_pad = 1,
 			},
 			completions = {
-				blink = { enabled = true },
+				-- leaving this as disabled (since it breaks functionality with blink)
+				blink = { enabled = false },
 			},
 		},
 		config = function(_, opts)
-			require("render-markdown").setup(opts)
+			local render = require("render-markdown")
+			render.setup(opts)
 			Snacks.toggle({
 				name = "Render Markdown",
 				get = function()
