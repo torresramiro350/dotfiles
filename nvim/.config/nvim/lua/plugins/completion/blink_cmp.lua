@@ -122,6 +122,7 @@ return {
 				dictionary = {
 					module = "blink-cmp-dictionary",
 					name = "Dict",
+					max_items = 5,
 					min_keyword_length = 3,
 					opts = {
 						dictionary_directories = { vim.fn.expand("~/.config/nvim/dictionary") },
