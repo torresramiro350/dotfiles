@@ -54,7 +54,7 @@ return {
 				sh = { "shfmt", "shellharden" },
 				toml = { "taplo" },
 				tex = { "latexindent" },
-				typst = { "typstfmt" },
+				typst = { "prettypst" },
 			},
 		}
 		return opts
