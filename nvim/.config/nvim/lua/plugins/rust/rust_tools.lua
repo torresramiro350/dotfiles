@@ -1,11 +1,11 @@
 require("groups.utility_funcs")
 return {
-
 	"mrcjkb/rustaceanvim",
 	priority = 1000,
 	version = "^6", -- Recommended
-	lazy = false, -- This plugin is already lazy
+	event = { "BufReadPre" },
 	ft = { "rust" },
+	-- lazy = false, -- This plugin is already lazy
 	opts = {
 		-- LSP configuration
 		server = {
