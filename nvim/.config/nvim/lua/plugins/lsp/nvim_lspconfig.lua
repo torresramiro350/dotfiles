@@ -63,6 +63,7 @@ return {
 				},
 			},
 			diagnostics = {
+				update_in_insert = false,
 				severity_sort = true,
 				float = { border = "rounded", source = "if_many" },
 				underline = { severity = vim.diagnostic.severity.ERROR },
@@ -77,7 +78,7 @@ return {
 				virtual_text = {
 					current_line = true,
 					source = "if_many",
-					spacing = 2,
+					spacing = 4,
 					format = function(diagnostic)
 						local diagnostic_message = {
 							[vim.diagnostic.severity.ERROR] = diagnostic.message,
@@ -182,7 +183,17 @@ return {
 				-- Json
 				jsonls = { filetypes = { "json" } },
 				-- Yaml
-				yamlls = { filetypes = { "yaml", "yml" } },
+				yamlls = {
+					filetypes = { "yaml", "yml" },
+					capabilities = {
+						textDocument = {
+							foldingRange = {
+								dynamicRegistration = false,
+								lineFoldingOnly = true,
+							},
+						},
+					},
+				},
 				-- Julia (not really using it)
 				julials = {
 					filetypes = { "julia" },
