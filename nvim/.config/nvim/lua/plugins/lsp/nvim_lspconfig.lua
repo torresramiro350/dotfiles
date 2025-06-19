@@ -295,31 +295,21 @@ return {
 			local lspconfig = require("lspconfig")
 			local has_blink, blink = pcall(require, "blink.cmp")
 			local have_mason, mlsp = pcall(require, "mason-lspconfig")
-
-			local capabilities = vim.tbl_deep_extend(
-				"force",
-				{},
-				vim.lsp.protocol.make_client_capabilities(),
-				has_blink and blink.get_lsp_capabilities() or {},
-				opts.capabilities or {}
-			)
-
 			local ensure_installed = vim.tbl_keys(servers or {})
-
-			local function setup(server_name)
-				local server = servers[server_name] or {}
-				local server_opts = vim.tbl_deep_extend("force", {
-					capabilities = vim.deepcopy(capabilities),
-				}, server)
-				vim.lsp.config(server_name, server_opts)
-			end
 			-- get all the servers that are available through mason-lspconfig
 			if have_mason then
 				mlsp.setup({
 					ensure_installed = vim.tbl_deep_extend("force", ensure_installed, {}),
 					automatic_enable = true,
 					automatic_installation = true,
-					handlers = { setup },
+					handlers = {
+						function(server_name)
+							-- local server = servers[server_name]
+							-- local server_opts = servers[]
+							vim.lsp.config(server_name, servers[server_name])
+						end,
+					},
+					-- handlers = { setup },
 				})
 			end
 		end,
