@@ -291,8 +291,8 @@ return {
 			})
 
 			local servers = opts.servers
-			local lspconfig = require("lspconfig")
-			local has_blink, blink = pcall(require, "blink.cmp")
+			-- local lspconfig = require("lspconfig")
+			-- local has_blink, blink = pcall(require, "blink.cmp")
 			local have_mason, mlsp = pcall(require, "mason-lspconfig")
 			local ensure_installed = vim.tbl_keys(servers or {})
 			-- get all the servers that are available through mason-lspconfig
