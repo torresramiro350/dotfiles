@@ -230,6 +230,7 @@ return {
 		config = function(_, opts)
 			-- TODO: check how this code is defined to make use of it
 			-- require("lazyvim.util").lsp.on_attach(function(_, bufnr) end)
+			vim.diagnostic.config(opts.diagnostics)
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 				callback = function(event)
@@ -288,8 +289,6 @@ return {
 					nmap("gD", vim.lsp.buf.declaration, "Go to declaration")
 				end,
 			})
-
-			vim.diagnostic.config(opts.diagnostics)
 
 			local servers = opts.servers
 			local lspconfig = require("lspconfig")
