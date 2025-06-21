@@ -9,6 +9,8 @@ return {
 		opts = {
 			ensure_installed = {
 				"stylua",
+				"clangd",
+				"clang-format",
 				"shfmt",
 				"markdownlint-cli2",
 				"markdown-toc",
