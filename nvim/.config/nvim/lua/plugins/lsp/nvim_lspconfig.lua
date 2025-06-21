@@ -95,7 +95,11 @@ return {
 				lua_ls = {
 					settings = {
 						Lua = {
-							runtime = { version = "LuaJit" },
+							runtime = { version = "LuaJIT" },
+							diagnostics = {
+								globals = { "vim" },
+							},
+							library = { vim.env.VIMRUNTIME },
 							workspace = { checkThirdParty = false },
 							codeLens = { enable = true },
 							completion = {
