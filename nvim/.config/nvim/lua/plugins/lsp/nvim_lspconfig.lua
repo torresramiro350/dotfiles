@@ -95,11 +95,6 @@ return {
 				lua_ls = {
 					settings = {
 						Lua = {
-							runtime = { version = "LuaJIT" },
-							diagnostics = {
-								globals = { "vim" },
-							},
-							library = { vim.env.VIMRUNTIME },
 							workspace = { checkThirdParty = false },
 							codeLens = { enable = true },
 							completion = {
@@ -118,9 +113,6 @@ return {
 							},
 						},
 					},
-					filetypes = { "lua" },
-					cmd = { "lua-language-server" },
-					single_file_support = true,
 				},
 				basedpyright = {
 					settings = {
@@ -231,19 +223,13 @@ return {
 			-- },
 		},
 		config = function(_, opts)
-			vim.diagnostic.config(opts.diagnostics)
+			vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 				callback = function(event)
 					local bufnr = event.buf
 					local client_id = event.data.client_id
 					local client = vim.lsp.get_client_by_id(client_id)
-					-- enables the native lsp for vim (I'm using blink so not necessary)
-					-- if client:supports_method("textDocument/completion") then
-					-- 	vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
-					-- end
-
-					-- setup_codelens(client, bufnr)
 					if client == nil then
 						return
 					end
