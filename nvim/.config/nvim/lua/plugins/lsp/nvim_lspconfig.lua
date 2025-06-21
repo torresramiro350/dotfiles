@@ -234,6 +234,10 @@ return {
 					local bufnr = event.buf
 					local client_id = event.data.client_id
 					local client = vim.lsp.get_client_by_id(client_id)
+					-- enables the native lsp for vim (I'm using blink so not necessary)
+					-- if client:supports_method("textDocument/completion") then
+					-- 	vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
+					-- end
 
 					-- setup_codelens(client, bufnr)
 					if client == nil then
@@ -291,6 +295,7 @@ return {
 			local have_mason, mlsp = pcall(require, "mason-lspconfig")
 			local ensure_installed = vim.tbl_keys(servers or {})
 
+			-- vim.lsp.config("*", { capabilities = require("blink.cmp").get_lsp_capabilities() })
 			-- get all the servers that are available through mason-lspconfig
 			if have_mason then
 				mlsp.setup({
