@@ -60,9 +60,6 @@ return {
           -- stylua: ignore start
 					nmap("n", "]H", function() gs.nav_hunk("last") end, { buffer = bufnr, desc = "Last Hunk" })
 					nmap("n", "[H", function() gs.nav_hunk("first") end, { desc = "First Hunk" })
-					-- nmap("n", "<leader>td", gs.toggle_deleted, { desc = "[T]oggle deleted lines" })
-					-- nmap("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "[T]oggle git show [b]lame line" })
-					-- nmap("n", "<leader>tD", gs.toggle_deleted, { desc = "[T]oggle git show [D]eleted" })
 					nmap("n", "<leader>ghp", gs.preview_hunk, { desc = "Preview hunk line" })
 					nmap("n", "<leader>ghs", gs.stage_hunk, { desc = "Stage hunk" })
 					nmap("n", "<leader>ghr", gs.reset_hunk, { desc = "Reset hunk" })
