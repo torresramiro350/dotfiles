@@ -96,8 +96,7 @@ return {
 					settings = {
 						Lua = {
 							runtime = { version = "LuaJit" },
-							workspace = { checkThirdParty = false, library = { vim.env.VIMRUNTIME } },
-							telemetry = { enable = false },
+							workspace = { checkThirdParty = false },
 							codeLens = { enable = true },
 							completion = {
 								callSnippet = "Replace",
@@ -228,8 +227,6 @@ return {
 			-- },
 		},
 		config = function(_, opts)
-			-- TODO: check how this code is defined to make use of it
-			-- require("lazyvim.util").lsp.on_attach(function(_, bufnr) end)
 			vim.diagnostic.config(opts.diagnostics)
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
@@ -291,10 +288,9 @@ return {
 			})
 
 			local servers = opts.servers
-			-- local lspconfig = require("lspconfig")
-			-- local has_blink, blink = pcall(require, "blink.cmp")
 			local have_mason, mlsp = pcall(require, "mason-lspconfig")
 			local ensure_installed = vim.tbl_keys(servers or {})
+
 			-- get all the servers that are available through mason-lspconfig
 			if have_mason then
 				mlsp.setup({
@@ -303,12 +299,9 @@ return {
 					automatic_installation = true,
 					handlers = {
 						function(server_name)
-							-- local server = servers[server_name]
-							-- local server_opts = servers[]
 							vim.lsp.config(server_name, servers[server_name])
 						end,
 					},
-					-- handlers = { setup },
 				})
 			end
 		end,
