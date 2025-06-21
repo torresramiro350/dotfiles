@@ -78,6 +78,7 @@ return {
 					},
 				} or {},
 				virtual_text = {
+					prefix = "●",
 					current_line = true,
 					source = "if_many",
 					spacing = 4,
