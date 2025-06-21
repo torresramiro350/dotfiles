@@ -24,9 +24,9 @@ return {
 			},
 			completions = {
 				-- leaving this as disabled (since it breaks functionality with blink)
-				-- blink = { enabled = false },
+				-- blink = { enabled = true },
+				lsp = { enabled = true },
 				-- the code below seems to work
-				completions = { lsp = { enabled = true } },
 			},
 		},
 		config = function(_, opts)
