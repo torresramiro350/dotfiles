@@ -111,13 +111,12 @@ return {
 					and node
 					and vim.tbl_contains({ "comment", "line_comment", "block_comment" }, node:type())
 				if is_comment then
-					return { "buffer" }
+					return { "buffer", "dictionary" }
 				end
 				-- Default case
 				table.insert(defaults, "codeium")
 				return defaults
 			end,
-			-- compat = { "codeium" },
 			providers = {
 				dictionary = {
 					module = "blink-cmp-dictionary",
@@ -141,7 +140,6 @@ return {
 					async = true,
 				},
 			},
-			-- cmdline = function() end,
 		},
 		keymap = {
 			preset = "default",
