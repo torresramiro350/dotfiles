@@ -2,20 +2,7 @@ return {
 	"folke/noice.nvim",
 	event = "VeryLazy",
 	dependencies = {
-		{
-			"MunifTanjim/nui.nvim",
-			config = function()
-				local Popup = require("nui.popup")
-				Popup({
-					win_options = {
-						winhighlight = {
-							Normal = "NormalFloat",
-							FloatBorder = "FloatBorder",
-						},
-					},
-				})
-			end,
-		},
+		"MunifTanjim/nui.nvim",
 		-- "rcarriga/nvim-notify",
 	},
 	priority = 1000,
@@ -27,6 +14,7 @@ return {
 				["cmp.entry.get_documentation"] = true,
 			},
 		},
+		notify = { enabled = true },
 		routes = {
 			{
 				filter = {
@@ -68,10 +56,11 @@ return {
 		-- stylua: ignore end
 	},
 	config = function(_, opts)
-		if vim.o.filetype == "lazy" then
-			vim.cmd([[messages clear]])
-		else
-			require("noice").setup(opts)
-		end
+		require("noice").setup(opts)
+		-- if vim.o.filetype == "lazy" then
+		-- 	vim.cmd([[messages clear]])
+		-- else
+		-- 	require("noice").setup(opts)
+		-- end
 	end,
 }
