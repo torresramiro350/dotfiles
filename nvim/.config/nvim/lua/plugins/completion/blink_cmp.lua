@@ -3,6 +3,7 @@ return {
 	dependencies = {
 		"echasnovski/mini.snippets",
 		-- "rafamadriz/friendly-snippets",
+		-- "onsails/lspkind.nvim",
 		"Exafunction/codeium.nvim",
 		{
 			"Kaiser-Yang/blink-cmp-dictionary",
@@ -27,6 +28,16 @@ return {
 			nerd_font_variant = "normal",
 		},
 		completion = {
+			list = {
+				selection = {
+					preselect = function(ctx)
+						return not require("blink.cmp").snippet_active({ direction = 1 })
+					end,
+					auto_insert = function(ctx)
+						return vim.bo.filetype ~= "markdown"
+					end,
+				},
+			},
 			ghost_text = {
 				enabled = vim.g.ai_cmp,
 			},
@@ -36,13 +47,17 @@ return {
 					return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
 				end,
 				draw = {
+					columns = {
+						{ "label", "label_description", gap = 1 },
+						{ "kind_icon", "kind" },
+					},
 					treesitter = { "lsp" },
 					components = {
 						kind_icon = {
 							ellipsis = false,
 							text = function(ctx)
-								local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
-								return kind_icon
+								local kind_icon, _ = require("mini.icons").get("lsp", ctx.kind)
+								return " " .. kind_icon .. ctx.icon_gap .. " "
 							end,
 							-- (optional) use highlights from mini.icons
 							highlight = function(ctx)
