@@ -6,7 +6,7 @@ return {
 		ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
 		opts = {
 			pipe_table = { preset = "round" },
-			bulled = { enabled = true },
+			-- bulled = { enabled = true },
 			heading = {
 				sign = false,
 				icons = { "󰼏 ", "󰎨 " },
