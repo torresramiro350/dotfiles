@@ -158,7 +158,7 @@ return {
 		},
 		keymap = {
 			preset = "default",
-			["<C-space>"] = {
+			["<A-space>"] = {
 				function(cmp)
 					cmp.show({ providers = { "snippets" } })
 				end,
