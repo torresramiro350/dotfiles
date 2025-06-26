@@ -56,4 +56,5 @@ vim.lsp.enable({
 	"markdown_oxide",
 	"dockerls",
 	"tinymist",
+	"taplo",
 })
