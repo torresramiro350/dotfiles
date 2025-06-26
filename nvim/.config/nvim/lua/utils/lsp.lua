@@ -3,6 +3,7 @@ local Path = require("utils.path")
 local M = {}
 function M.get_default_keymaps()
 	return {
+		{ keys = "<leader>rn", func = vim.lsp.buf.rename, desc = "Rename buffer" },
 		{ keys = "<leader>ca", func = vim.lsp.buf.code_action, desc = "Code Actions" },
 		{ keys = "<leader>cA", func = M.action.source, desc = "Source Actions" },
 		{ keys = "<leader>cr", func = vim.lsp.buf.rename, desc = "Code Rename" },
