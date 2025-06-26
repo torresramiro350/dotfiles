@@ -41,7 +41,7 @@ return {
 				fish = { "fish_indent" },
 				cmake = { "cmake_format" },
 				python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
-				sh = { "shfmt", "shellharden" },
+				sh = { "shellharden", "shfmt" },
 				toml = { "taplo" },
 				tex = { "latexindent" },
 				typst = { "prettypst" },
