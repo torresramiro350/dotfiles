@@ -54,4 +54,6 @@ vim.lsp.enable({
 	"jsonls",
 	"neocmake",
 	"markdown_oxide",
+	"dockerls",
+	"tinymist",
 })
