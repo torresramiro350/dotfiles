@@ -1,19 +1,9 @@
 local Path = require("utils.path")
 
 local M = {}
-local function diagnostic_goto(direction, severity)
-	local go = vim.diagnostic["goto_" .. (direction and "next" or "prev")]
-	if type(severity) == "string" then
-		severity = vim.diagnostic.severity[severity]
-	end
-	return function()
-		go({ severity = severity })
-	end
-end
 function M.get_default_keymaps()
 	return {
 		{ keys = "<leader>ca", func = vim.lsp.buf.code_action, desc = "Code Actions" },
-		{ keys = "<leader>.", func = vim.lsp.buf.code_action, desc = "Code Actions" },
 		{ keys = "<leader>cA", func = M.action.source, desc = "Source Actions" },
 		{ keys = "<leader>cr", func = vim.lsp.buf.rename, desc = "Code Rename" },
 		{ keys = "<leader>cf", func = vim.lsp.buf.format, desc = "Code Format" },
@@ -60,7 +50,7 @@ M.action = setmetatable({}, {
 --- Get the path of the config file in the current directory or the root of the git repo
 ---@param filename string
 ---@return string | nil
-function M.get_config_path(filename)
+local function get_config_path(filename)
 	local current_dir = vim.fn.getcwd()
 	local config_file = current_dir .. "/" .. filename
 	if vim.fn.filereadable(config_file) == 1 then
