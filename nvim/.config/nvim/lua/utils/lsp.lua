@@ -1,7 +1,15 @@
 local Path = require("utils.path")
 
 local M = {}
-
+local function diagnostic_goto(direction, severity)
+	local go = vim.diagnostic["goto_" .. (direction and "next" or "prev")]
+	if type(severity) == "string" then
+		severity = vim.diagnostic.severity[severity]
+	end
+	return function()
+		go({ severity = severity })
+	end
+end
 function M.get_default_keymaps()
 	return {
 		{ keys = "<leader>ca", func = vim.lsp.buf.code_action, desc = "Code Actions" },
@@ -11,7 +19,17 @@ function M.get_default_keymaps()
 		{ keys = "<leader>cf", func = vim.lsp.buf.format, desc = "Code Format" },
 		{ keys = "<leader>k", func = vim.lsp.buf.hover, desc = "Documentation", has = "hoverProvider" },
 		{ keys = "K", func = vim.lsp.buf.hover, desc = "Documentation", has = "hoverProvider" },
-		{ keys = "gd", func = vim.lsp.buf.definition, desc = "Goto Definition", has = "definitionProvider" },
+		{
+			keys = "gk",
+			func = vim.lsp.buf.signature_help,
+			desc = "Signature Documentation",
+			has = "definitionProvider",
+		},
+		-- { "<leader>cd", func = vim.diagnostic.open_float, desc = "Line diagnostics" },
+		-- { "<leader>xl", func = vim.diagnostic.setloclist, desc = "Open location list" },
+		-- { "<leader>xq", func = vim.diagnostic.setqflist, desc = "Open quickfix list" },
+		-- { "<leader>Q", "<cmd>cclose<cr>", desc = "Close quickfixdesc =  list" },
+		-- { "<leader>L", "<cmd>lclose<cr>", desc = "Close location list" },
 	}
 end
 

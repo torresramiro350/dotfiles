@@ -6,8 +6,35 @@ nmap("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 nmap("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 nmap("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 
+-- diagnostic
+local function diagnostic_goto(direction, severity)
+	local go = vim.diagnostic["goto_" .. (direction and "next" or "prev")]
+	if type(severity) == "string" then
+		severity = vim.diagnostic.severity[severity]
+	end
+	return function()
+		go({ severity = severity })
+	end
+end
+nmap("n", "[d", diagnostic_goto(false), { desc = "Go to previous diagnostic message" })
+nmap("n", "]d", diagnostic_goto(true), { desc = "Go to next diagnostic message" })
+nmap("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Go to previous error" })
+nmap("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Go to next error" })
+nmap("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Go to previous warning" })
+nmap("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Go to next warning" })
+nmap("n", "]Q", vim.cmd.clast, { desc = "End of quickfix list" })
+nmap("n", "[Q", vim.cmd.cfirst, { desc = "Beginning of quickfix list" })
+nmap("n", "[l", vim.cmd.lnext, { desc = "Next loclist" })
+nmap("n", "]l", vim.cmd.lprev, { desc = "Previous loclist" })
+nmap("n", "]L", vim.cmd.llast, { desc = "End of loclist" })
+nmap("n", "[L", vim.cmd.lfirst, { desc = "Beginning of loclist" })
+nmap("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
+nmap("n", "<leader>xl", vim.diagnostic.setloclist, { desc = "Open location list" })
+nmap("n", "<leader>xq", vim.diagnostic.setqflist, { desc = "Open quickfix list" })
+nmap("n", "<leader>Q", "<cmd>cclose<cr>", { desc = "Close quickfix list" })
+nmap("n", "<leader>L", "<cmd>lclose<cr>", { desc = "Close location list" })
+
 -- Keymaps for better default experience
--- See `:help vim.keymap.set()`
 nmap({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
 -- some mappings for making life easier
@@ -27,13 +54,11 @@ nmap("n", "<C-q>", "<C-w>q", { desc = "Close split buffer" })
 -- nmap("n", "<leader>w", "<cmd>w<cr>", { desc = "Save changes" })
 nmap("n", "<leader>fs", "<cmd>w<cr>", { desc = "Save changes" })
 
--- moving between buffers
-
 -- Remap for dealing with word wrap
 nmap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 nmap("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
--- NOTE: these keybindings are for usage without smart-splits
+-- moving between buffers
 nmap("n", "<C-j>", "<c-w>j", { desc = "Move to lower split" })
 nmap("n", "<C-k>", "<c-w>k", { desc = "Move to upper split" })
 nmap("n", "<C-h>", "<c-w>h", { desc = "Move to left split" })
