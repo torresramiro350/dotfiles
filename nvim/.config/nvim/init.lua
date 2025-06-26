@@ -10,3 +10,6 @@ vim.cmd.colorscheme("catppuccin")
 -- load all the keymaps to a separate file
 require("keymaps.mappings")
 require("groups.init")
+require("core.autocmds")
+
+vim.lsp.enable({ "lua_ls", "basedpyright", "ruff", "bashls" })
