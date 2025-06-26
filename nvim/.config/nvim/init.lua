@@ -12,4 +12,14 @@ require("keymaps.mappings")
 require("groups.init")
 require("core.autocmds")
 
-vim.lsp.enable({ "lua_ls", "basedpyright", "ruff", "bashls" })
+vim.lsp.enable({
+	"lua_ls",
+	"basedpyright",
+	"ruff",
+	"bashls",
+	"clangd",
+	"yamlls",
+	"jsonls",
+	"neocmake",
+	"markdown_oxide",
+})

@@ -25,11 +25,7 @@ function M.get_default_keymaps()
 			desc = "Signature Documentation",
 			has = "definitionProvider",
 		},
-		-- { "<leader>cd", func = vim.diagnostic.open_float, desc = "Line diagnostics" },
-		-- { "<leader>xl", func = vim.diagnostic.setloclist, desc = "Open location list" },
-		-- { "<leader>xq", func = vim.diagnostic.setqflist, desc = "Open quickfix list" },
-		-- { "<leader>Q", "<cmd>cclose<cr>", desc = "Close quickfixdesc =  list" },
-		-- { "<leader>L", "<cmd>lclose<cr>", desc = "Close location list" },
+		{ keys = "<leader>cf", func = vim.lsp.buf.format, desc = "Code Format" },
 	}
 end
 
@@ -64,7 +60,7 @@ M.action = setmetatable({}, {
 --- Get the path of the config file in the current directory or the root of the git repo
 ---@param filename string
 ---@return string | nil
-local function get_config_path(filename)
+function M.get_config_path(filename)
 	local current_dir = vim.fn.getcwd()
 	local config_file = current_dir .. "/" .. filename
 	if vim.fn.filereadable(config_file) == 1 then
