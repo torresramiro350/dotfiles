@@ -9,7 +9,7 @@ vim.cmd.colorscheme("catppuccin")
 
 -- load all the keymaps to a separate file
 require("keymaps.mappings")
-require("groups.init")
+-- require("groups.init")
 require("core.autocmds")
 
 local diagnostics = {
