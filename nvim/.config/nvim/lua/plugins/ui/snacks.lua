@@ -10,7 +10,7 @@ return {
 			replace_netrw = true,
 		},
 		input = { enabled = true },
-		notifier = { enabled = true, timeout = 3000 },
+		notifier = { enabled = true, style = "fancy", level = vim.log.levels.INFO },
 		quickfile = { enabled = true },
 		statuscolumn = { enabled = true },
 		scroll = { enabled = true },
@@ -19,7 +19,11 @@ return {
 		layout = {
 			opts = {},
 		},
-		styles = {},
+		styles = {
+			notification = {
+				wo = { wrap = true },
+			},
+		},
 		-- your configuration comes here
 		-- or leave it empty to use the default settings
 		-- refer to the configuration section below
