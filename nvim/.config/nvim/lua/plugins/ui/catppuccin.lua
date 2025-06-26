@@ -55,14 +55,15 @@ return {
 					ok = { "italic" },
 				},
 				underlines = {
-					errors = { "undercurl" },
-					hints = { "undercurl" },
-					warnings = { "undercurl" },
-					information = { "undercurl" },
-					ok = { "undercurl" },
+					errors = { "underline" },
+					hints = { "underline" },
+					warnings = { "underline" },
+					information = { "underline" },
+					ok = { "underline" },
 				},
 				inlay_hints = {
-					background = true,
+					-- don't want a background for the inlay hints
+					background = false,
 				},
 			},
 			noice = true,
