@@ -15,9 +15,20 @@ local autocmd = vim.api.nvim_create_autocmd
 -- 	desc = "LSP: Disable hover capability from Ruff",
 -- })
 
+-- highlight yanked text
+local highlight_group = augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+	group = highlight_group,
+	pattern = "*",
+})
+
 -- LSP
 local completion = vim.g.completion_mode or "blink" -- or 'native'
-vim.api.nvim_create_autocmd("LspAttach", {
+autocmd("LspAttach", {
+	group = augroup("lsp_attach_disable_ruff_hover", { clear = true }),
 	callback = function(args)
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		if client == nil then
