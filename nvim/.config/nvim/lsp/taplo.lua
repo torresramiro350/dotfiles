@@ -1,4 +1,4 @@
-Lsp = require("utils.lsp")
+local Lsp = require("utils.lsp")
 return {
 	cmd = { "taplo", "lsp", "stdio" },
 	on_attach = Lsp.on_attach,
