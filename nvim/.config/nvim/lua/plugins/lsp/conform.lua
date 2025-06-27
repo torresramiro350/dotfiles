@@ -45,6 +45,7 @@ return {
 				toml = { "taplo" },
 				tex = { "latexindent" },
 				typst = { "prettypst" },
+				cmake = { "gersemi" },
 			},
 		}
 		return opts
