@@ -147,13 +147,8 @@ return {
 					module = "lazydev.integrations.blink",
 					score_offset = 100, -- show at a higher priority than lsp
 				},
-				codeium = {
-					name = "Codeium",
-					-- module = "blink.compat.source",
-					module = "codeium.blink",
-					score_offset = 100,
-					async = true,
-				},
+				-- module = "blink.compat.source",
+				codeium = { name = "Codeium", module = "codeium.blink", score_offset = 100, async = true },
 			},
 		},
 		keymap = {
