@@ -13,7 +13,8 @@ config.window_background_opacity = 1
 config.font_size = 10
 config.line_height = 1.15
 -- config.font = wezterm.font("JetBrains Mono")
-config.font = wezterm.font("Maple Mono NF", { weight = "Medium", italic = false })
+-- config.font = wezterm.font("Maple Mono NF", { weight = "Medium", italic = false })
+config.font = wezterm.font("Maple Mono", { weight = "Medium", italic = false })
 -- config.font = wezterm.font("JetBrains Mono", { weight = "DemiBold", italic = false })
 -- config.font = wezterm.font("JetBrainsMono NF", { weight = "DemiBold", italic = false })
 
