@@ -14,6 +14,9 @@ $git_status\
 $git_metrics\
 $fill\
 $memory_usage\
+$docker_context\
+$c\
+$cpp\
 $python\
 $conda\
 $cmake\
@@ -40,17 +43,14 @@ disabled = false
 [os]
 disabled = false
 style = 'bold blue'
-# format = "on [($name )]($style)"
 
 [username]
 style_user = 'bold green'
 format = ' [$user]($style) '
-# disabled = false
 disabled = true
 show_always = true
 
 [directory]
-# style = "bold fg:mantle bg:peach"
 truncation_symbol = '…/'
 format = "[ $path ]($style)"
 read_only = " 󰌾"
@@ -86,33 +86,14 @@ symbol = " "
 
 [c]
 symbol = " "
-detect_extensions = ['c', 'h', 'cxx', 'hxx']
-format = '[$symbol($version(-$name) )]($style)'
-commands = [
-  [
-    'cc',
-    '--version',
-  ],
-  [
-    'g++',
-    '--version',
-  ],
-  [
-    'gcc',
-    '--version',
-  ],
-  [
-    'clang',
-    '--version',
-  ],
-]
+
+[cpp]
+symbol = " "
 
 [cmake]
 symbol = "󰔷 "
-format = '[$symbol($version )]($style)'
 
 [conda]
-format = '[$symbol$environment]($style) '
 symbol = " "
 
 [crystal]
@@ -120,7 +101,6 @@ symbol = " "
 
 [dart]
 symbol = " "
-
 
 [docker_context]
 symbol = " "
@@ -133,9 +113,6 @@ symbol = " "
 
 [fennel]
 symbol = " "
-
-[fossil_branch]
-symbol = " "
 
 [git_branch]
 style = 'bold mauve'
@@ -174,7 +151,6 @@ symbol = " "
 [hg_branch]
 symbol = " "
 
-
 [java]
 symbol = " "
 
@@ -186,12 +162,6 @@ symbol = " "
 
 [lua]
 symbol = " "
-
-[memory_usage]
-format = '$symbol [${ram}( | ${swap})]($style) '
-threshold = 75                                   # usage percentage
-symbol = "󰍛 "
-disabled = false
 
 [meson]
 symbol = "󰔷 "
@@ -207,6 +177,12 @@ symbol = " "
 
 [ocaml]
 symbol = " "
+
+[memory_usage]
+format = '$symbol [${ram}( | ${swap})]($style) '
+threshold = 75                                   # usage percentage
+symbol = "󰍛 "
+disabled = false
 
 [os.symbols]
 Alpaquita = " "
