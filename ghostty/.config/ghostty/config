@@ -17,3 +17,10 @@ gtk-titlebar-hide-when-maximized = true
 
 # keybindings
 keybind = super+shift+comma=reload_config
+# custom-shader = "/home/rtorres/.config/ghostty/shaders/blur.fs"
+# custom-shader = "/home/rtorres/.config/ghostty/shaders/animated-gradient-shader.glsl"
+# custom-shader = "/home/rtorres/.config/ghostty/shaders/bettercrt.glsl"
+# custom-shader = "/home/rtorres/.config/ghostty/shaders/bloom.glsl"
+# custom-shader = "/home/rtorres/.config/ghostty/shaders/cineShader-Lava.glsl"
+# custom-shader = "/home/rtorres/.config/ghostty/shaders/galaxy.glsl"
+# custom-shader = "/home/rtorres/.config/ghostty/shaders/gears-and-belts.glsl"
