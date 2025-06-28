@@ -1,4 +1,3 @@
-require("groups.utility_funcs")
 return {
 	"Exafunction/windsurf.nvim",
 	dependencies = { "nvim-lua/plenary.nvim" },
