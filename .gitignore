@@ -1,2 +1,10 @@
 *.txt
 *.bak
+fish/.config/fish/completions
+fish/.config/fish/conf.d
+fish/.config/fish/functions
+yazi/.config/yazi/keymap.toml-1750246954740954
+yazi/.config/yazi/theme.toml-1748522753359149
+yazi/.config/yazi/theme.toml-1750246957444919
+yazi/.config/yazi/yazi.toml-1748522753342783
+yazi/.config/yazi/yazi.toml-1750246954738645

@@ -4,7 +4,7 @@ return {
 		"echasnovski/mini.snippets",
 		-- "rafamadriz/friendly-snippets",
 		-- "onsails/lspkind.nvim",
-		"Exafunction/codeium.nvim",
+		"Exafunction/windsurf.nvim",
 		{
 			"Kaiser-Yang/blink-cmp-dictionary",
 			dependencies = { "nvim-lua/plenary.nvim" },
@@ -148,9 +148,9 @@ return {
 					score_offset = 100, -- show at a higher priority than lsp
 				},
 				codeium = {
-					name = "codeium",
-					-- kind = "Codeium",
-					module = "blink.compat.source",
+					name = "Codeium",
+					-- module = "blink.compat.source",
+					module = "codeium.blink",
 					score_offset = 100,
 					async = true,
 				},
