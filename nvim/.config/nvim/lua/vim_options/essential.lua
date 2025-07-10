@@ -2,12 +2,14 @@ local opt = vim.opt
 local wo = vim.wo
 
 -- Basic settings
+opt.viewoptions = { "cursor", "folds" } -- keep the viewoption in cursot's last location
 opt.number = true
 opt.cursorline = true -- highlight current line
 opt.relativenumber = true -- relative numbers
 opt.scrolloff = 10 -- keep 10 lines above/below cursor
 opt.sidescrolloff = 8 -- keep 8 columns left/right of cursor
 opt.ruler = false -- Disable the default ruler
+-- TODO: find what this oes
 opt.list = true
 opt.laststatus = 3 -- draw the status line over the whole window
 
@@ -42,6 +44,7 @@ opt.conceallevel = 2 -- Don't hide markup
 opt.concealcursor = "" -- Don't hide curser line markup
 opt.lazyredraw = false -- Don't redraw during macros (false to work with noice)
 opt.synmaxcol = 300 -- Syntax highlight limit
+-- TODO: find what this oes
 opt.jumpoptions = "view"
 opt.inccommand = "nosplit" -- preview incremental substitute
 
