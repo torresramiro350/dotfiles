@@ -16,6 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	checker = { enabled = true },
 	-- { import = "plugins" }, -- enough if all plugins live in a single directory
+	{ import = "plugins.ai" },
 	{ import = "plugins.enhancements" },
 	{ import = "plugins.tmux" },
 	{ import = "plugins.completion" },
