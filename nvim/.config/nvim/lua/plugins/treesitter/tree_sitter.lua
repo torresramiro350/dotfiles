@@ -62,8 +62,6 @@ return {
 				"vimdoc",
 				"yaml",
 			},
-			-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-			auto_install = false,
 			incremental_selection = {
 				enable = true,
 				keymaps = {
@@ -71,45 +69,11 @@ return {
 					node_incremental = "<C-space>",
 					scope_incremental = false,
 					node_decremental = "<bs>",
-					-- init_selection = "gnn",
-					-- node_incremental = "grn",
-					-- scope_incremental = "grc",
-					-- node_decremental = "grm",
 				},
 			},
 			textobjects = {
-				lsp_interop = {
-					enable = true,
-					border = "rounded",
-					peek_definition_code = {
-						["<leader>df"] = "@function.outer",
-						["<leader>dF"] = "@class.outer",
-					},
-				},
-				select = {
-					enable = true,
-					lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-					keymaps = {
-						-- You can use the capture groups defined in textobjects.scm
-						["aa"] = "@parameter.outer",
-						["ia"] = "@parameter.inner",
-						["af"] = "@function.outer",
-						["if"] = "@function.inner",
-						["ac"] = "@class.outer",
-						["iC"] = "@class.inner",
-						["ic"] = "@comment.inner",
-						["oc"] = "@comment.outer",
-						["aF"] = "@custom.capture",
-					},
-				},
-				selection_modes = {
-					["@parameter.outer"] = "v", -- charwise
-					["@function.outer"] = "V", -- linewise
-					["@class.outer"] = "<c-v>", -- blockwise
-				},
 				move = {
 					enable = true,
-					set_jumps = true, -- whether to set jumps in the jumplist
 					goto_next_start = {
 						["]f"] = "@function.outer",
 						["]c"] = "@class.outer",
