@@ -20,6 +20,9 @@ return {
 		"sources.default",
 	},
 	opts = {
+		fuzzy = {
+			implementation = "prefer_rust",
+		},
 		snippets = {
 			preset = "mini_snippets",
 		},
