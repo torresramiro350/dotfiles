@@ -12,7 +12,7 @@ require("keymaps.mappings")
 -- require("groups.init")
 require("core.autocmds")
 -- load the diagnostics configuration
-require("lsp.diagnostics")
+require("utils.diagnostics")
 
 vim.lsp.enable({
 	"lua_ls",
