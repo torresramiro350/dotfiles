@@ -3,7 +3,7 @@ local wo = vim.wo
 
 -- Basic settings
 opt.viewoptions = { "cursor", "folds" } -- keep the viewoption in cursot's last location
-opt.number = true
+opt.number = true -- display line number
 opt.cursorline = true -- highlight current line
 opt.relativenumber = true -- relative numbers
 opt.scrolloff = 10 -- keep 10 lines above/below cursor
