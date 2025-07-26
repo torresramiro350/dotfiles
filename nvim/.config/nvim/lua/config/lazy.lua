@@ -14,7 +14,14 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
-	checker = { enabled = true },
+	defaults = {
+		lazy = false, -- set to true for all plugins to be lazy loaded
+		version = false, -- plugins with versions tend to be outdated often
+	},
+	checker = {
+		enabled = true, -- check for plugin update periodically
+		notify = false, -- notify of an update
+	},
 	-- { import = "plugins" }, -- enough if all plugins live in a single directory
 	{ import = "plugins.ai" },
 	{ import = "plugins.enhancements" },
