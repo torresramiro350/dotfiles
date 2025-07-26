@@ -39,13 +39,12 @@ return {
 				["markdown"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
 				["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
 				fish = { "fish_indent" },
-				cmake = { "cmake_format" },
+				cmake = { "cmake_format", "gersemi" },
 				python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
 				sh = { "shellharden", "shfmt" },
 				toml = { "taplo" },
 				tex = { "latexindent" },
 				typst = { "prettypst" },
-				cmake = { "gersemi" },
 			},
 		}
 		return opts
