@@ -1,6 +1,6 @@
 return {
 	"folke/flash.nvim",
-	event = { "BufReadPre", "BufNewFile" },
+	event = "VeryLazy",
 	specs = {
 		{
 			"folke/snacks.nvim",
