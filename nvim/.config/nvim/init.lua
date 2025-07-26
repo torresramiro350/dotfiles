@@ -2,7 +2,7 @@
 require("vim_options.essential")
 
 -- Load lazyvim's configuration
-require("lazyvim.init")
+require("config.lazy")
 
 -- vim.cmd.colorscheme("catppuccin-mocha")
 vim.cmd.colorscheme("catppuccin")
