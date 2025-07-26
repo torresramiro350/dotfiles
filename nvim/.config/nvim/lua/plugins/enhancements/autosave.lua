@@ -8,6 +8,7 @@ return {
 			local group = vim.api.nvim_create_augroup("autosave", {})
 			local augroup = vim.api.nvim_create_augroup
 			local autocmd = vim.api.nvim_create_autocmd
+			local execaucmds = vim.api.nvim_exec_autocmds
 
 			autocmd("User", {
 				pattern = "AutoSaveWritePost",
@@ -26,7 +27,7 @@ return {
 				group = visual_event_grup,
 				pattern = { "*:[vV\x16]*" },
 				callback = function()
-					vim.api.nvim_exec_autocmds("User", { pattern = "VisualEnter" })
+					execaucmds("User", { pattern = "VisualEnter" })
 				end,
 			})
 
@@ -34,7 +35,7 @@ return {
 				group = group,
 				pattern = { "[vV\x16]*:*" },
 				callback = function()
-					vim.api.nvim_exec_autocmds("User", { pattern = "VisualLeave" })
+					execaucmds("User", { pattern = "VisualLeave" })
 				end,
 			})
 
@@ -42,9 +43,9 @@ return {
 			local flash = require("flash")
 			local original_jump = flash.jump
 			flash.jump = function(opts)
-				vim.api.nvim_exec_autocmds("User", { pattern = "FlashJumpStart" })
+				execaucmds("User", { pattern = "FlashJumpStart" })
 				original_jump(opts)
-				vim.api.nvim_exec_autocmds("User", { pattern = "FlashJumpEnd" })
+				execaucmds("User", { pattern = "FlashJumpEnd" })
 			end
 
 			-- Disable auto-save when entering a snacks_input buffer
@@ -52,7 +53,7 @@ return {
 				pattern = "snacks_input",
 				group = group,
 				callback = function()
-					vim.api.nvim_exec_autocmds("User", { pattern = "SnacksInputEnter" })
+					execaucmds("User", { pattern = "SnacksInputEnter" })
 				end,
 			})
 
@@ -62,7 +63,7 @@ return {
 				callback = function(opts)
 					local ft = vim.bo[opts.buf].filetype
 					if ft == "snacks_input" then
-						vim.api.nvim_exec_autocmds("User", { pattern = "SnacksInputLeave" })
+						execaucmds("User", { pattern = "SnacksInputLeave" })
 					end
 				end,
 			})
@@ -71,7 +72,7 @@ return {
 				pattern = "snacks_picker_input",
 				group = group,
 				callback = function()
-					vim.api.nvim_exec_autocmds("User", { pattern = "SnacksPickerInputEnter" })
+					execaucmds("User", { pattern = "SnacksPickerInputEnter" })
 				end,
 			})
 
@@ -81,7 +82,7 @@ return {
 				callback = function(opts)
 					local ft = vim.bo[opts.buf].filetype
 					if ft == "snacks_picker_input" then
-						vim.api.nvim_exec_autocmds("User", { pattern = "SnacksPickerInputLeave" })
+						execaucmds("User", { pattern = "SnacksPickerInputLeave" })
 					end
 				end,
 			})
