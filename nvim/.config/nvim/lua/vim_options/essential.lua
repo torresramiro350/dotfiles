@@ -1,6 +1,8 @@
 local opt = vim.opt
 local wo = vim.wo
 
+vim.g.completion_mode = "blink" -- set default completion mode
+
 -- Basic settings
 opt.viewoptions = { "cursor", "folds" } -- keep the viewoption in cursot's last location
 opt.number = true -- display line number
