@@ -29,3 +29,18 @@ local diagnostics = {
 }
 
 vim.diagnostic.config(diagnostics)
+
+vim.lsp.enable({
+	"lua_ls",
+	"basedpyright",
+	"ruff",
+	"bashls",
+	"clangd",
+	"yamlls",
+	"jsonls",
+	"neocmake",
+	"markdown_oxide",
+	"dockerls",
+	"tinymist",
+	"taplo",
+})

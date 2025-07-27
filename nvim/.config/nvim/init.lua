@@ -16,17 +16,4 @@ require("config.autocmds")
 -- load the diagnostics configuration
 require("utils.diagnostics")
 
-vim.lsp.enable({
-	"lua_ls",
-	"basedpyright",
-	"ruff",
-	"bashls",
-	"clangd",
-	"yamlls",
-	"jsonls",
-	"neocmake",
-	"markdown_oxide",
-	"dockerls",
-	"tinymist",
-	"taplo",
-})
+
