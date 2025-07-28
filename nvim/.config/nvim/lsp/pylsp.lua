@@ -5,6 +5,7 @@ return {
 	settings = {
 		pylsp = {
 			plugins = {
+				pylint = { enabled = true },
 				pycodestyle = { enabled = false },
 				pyflakes = { enabled = false },
 				autopep8 = { enabled = false },
@@ -15,6 +16,7 @@ return {
 				mccabe = { enabled = false },
 				yapf = { enabled = false },
 			},
+			signature = { formatter = "ruff" },
 		},
 	},
 	root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" },
