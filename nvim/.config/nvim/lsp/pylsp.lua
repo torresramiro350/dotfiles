@@ -5,6 +5,11 @@ return {
 	settings = {
 		pylsp = {
 			plugins = {
+				pylsp_inlay_hints = {
+					enabled = true,
+					type_hints = true,
+					parameter_hints = true,
+				},
 				pylint = { enabled = true },
 				pycodestyle = { enabled = false },
 				pyflakes = { enabled = false },
