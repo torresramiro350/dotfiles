@@ -1,5 +1,5 @@
 -- NOTE: load in the general options to use with vim
-require("vim_options.essential")
+require("config.options")
 
 -- Load lazyvim's configuration
 require("config.lazy")
@@ -15,5 +15,3 @@ require("config.autocmds")
 
 -- load the diagnostics configuration
 require("utils.diagnostics")
-
-
