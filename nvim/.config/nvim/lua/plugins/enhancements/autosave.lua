@@ -127,7 +127,7 @@ return {
 				noautocmd = false,
 				lockmarks = false, -- lock marks when saving, see `:h lockmarks` for more details
 				debug = false,
-				debounce_delay = 2000, -- delay saving until after 2 seconds
+				debounce_delay = 3000, -- delay saving until after 2 seconds
 			}
 		end,
 		config = function(_, opts)
