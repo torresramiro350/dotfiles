@@ -38,7 +38,8 @@ opt.colorcolumn = "90" -- Show column at 90 characters
 opt.showmatch = true -- Highlight matching parenthesis
 opt.matchtime = 2 -- How long to show matching bracket
 opt.cmdheight = 1 -- Command line height
-opt.completeopt = "menuone,noinsert,noselect" -- Completion options
+-- refer to complete options: https://neovim.io/doc/user/options.html#'completeopt'
+opt.completeopt = "menu,menuone,noselect,fuzzy" -- Completion options
 opt.showmode = false -- Don't show mode in command line
 opt.pumheight = 10 -- Pop-up menu height
 opt.pumblend = 10 -- Popup menu transparency
