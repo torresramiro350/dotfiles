@@ -14,7 +14,7 @@ opt.ruler = false -- Disable the default ruler
 -- TODO: find what this oes
 opt.list = true
 opt.laststatus = 3 -- draw the status line over the whole window
-opt.textwidth = 80 -- set the maximum text width to be 80 characters
+opt.textwidth = 90 -- set the maximum text width to be 80 characters
 
 -- Indentation
 opt.tabstop = 2 -- tab width
