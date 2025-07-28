@@ -32,7 +32,8 @@ vim.diagnostic.config(diagnostics)
 
 vim.lsp.enable({
 	"lua_ls",
-	"basedpyright",
+	-- "basedpyright", -- trying out pylsp for now
+	"pylsp",
 	"ruff",
 	"bashls",
 	"clangd",
