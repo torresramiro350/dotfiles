@@ -12,6 +12,7 @@ return {
 		-- with eachother:
 		-- https://github.com/MeanderingProgrammer/render-markdown.nvim
 		ui = { enable = false },
+		legacy_commands = false,
 		workspaces = {
 			{
 				name = "work",
