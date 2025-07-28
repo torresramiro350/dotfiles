@@ -13,7 +13,9 @@ return {
 			end)
 		end
 		return {
-			snippets = { mini_snippets.gen_loader.from_lang() },
+			snippets = {
+				mini_snippets.gen_loader.from_lang({ lang_patterns = { markdown_inline = { "markdown.json" } } }),
+			},
 			expand = {
 				select = function(snippets, insert)
 					-- Close completion window on snippet select - vim.ui.select
