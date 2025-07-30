@@ -1,7 +1,7 @@
 local diagnostics = {
 	update_in_insert = false,
 	severity_sort = true,
-	float = { border = "rounded", source = "if_many" },
+	float = { border = "rounded", source = true },
 	underline = { severity = vim.diagnostic.severity.ERROR },
 	signs = vim.g.have_nerd_font and {
 		text = {
