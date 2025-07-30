@@ -17,9 +17,8 @@ local function diagnostic_goto(direction, severity)
 	-- end
 	return function()
 		vim.diagnostic.jump({
-			direction = direction and "next" or "prev",
-			severity = type(severity) == "string" and vim.diagnostic.severity[severity] or severity,
-			count = 1,
+			severity = vim.diagnostic.severity[severity],
+			count = direction and 1 or -1,
 		})
 	end
 end
