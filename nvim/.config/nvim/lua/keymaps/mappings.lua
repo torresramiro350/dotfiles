@@ -8,12 +8,19 @@ nmap("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 
 -- diagnostic
 local function diagnostic_goto(direction, severity)
-	local go = vim.diagnostic["goto_" .. (direction and "next" or "prev")]
-	if type(severity) == "string" then
-		severity = vim.diagnostic.severity[severity]
-	end
+	-- local go = vim.diagnostic["goto_" .. (direction and "next" or "prev")]
+	-- if type(severity) == "string" then
+	-- 	severity = vim.diagnostic.severity[severity]
+	-- end
+	-- return function()
+	-- 	go({ severity = severity })
+	-- end
 	return function()
-		go({ severity = severity })
+		vim.diagnostic.jump({
+			direction = direction and "next" or "prev",
+			severity = type(severity) == "string" and vim.diagnostic.severity[severity] or severity,
+			count = 1,
+		})
 	end
 end
 nmap("n", "[d", diagnostic_goto(false), { desc = "Go to previous diagnostic message" })
