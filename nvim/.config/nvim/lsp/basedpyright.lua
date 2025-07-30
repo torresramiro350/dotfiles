@@ -7,8 +7,11 @@ return {
 		basedpyright = {
 			analysis = {
 				autoSearchPaths = true,
-				diagnosticMode = "openFilesOnly",
 				useLibraryCodeForTypes = true,
+				diagnosticMode = "openFilesOnly",
+				inlayHints = {
+					callArgumentNames = true,
+				},
 			},
 		},
 	},
