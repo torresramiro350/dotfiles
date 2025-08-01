@@ -8,6 +8,7 @@ return {
 			light = "latte",
 			dark = "mocha",
 		},
+		float = { transparent = true, solid = false },
 		flavour = "auto",
 		dim_inactive = {
 			enabled = false,
@@ -81,12 +82,6 @@ return {
 			ts_rainbow = true,
 			which_key = true,
 			ufo = true,
-		},
-		color_overrides = {
-			mocha = {
-				-- base = "#1e1e2e",
-				-- base = "#181825",
-			},
 		},
 		highlight_overrides = {
 			mocha = function(mocha)
