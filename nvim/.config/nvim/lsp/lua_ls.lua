@@ -5,6 +5,10 @@ return {
 	cmd = { "lua-language-server" },
 	settings = {
 		Lua = {
+			diagnositcs = {
+				global = { "vim" },
+			},
+			runtime = { version = "LuaJIT" },
 			workspace = {
 				checkThirdParty = false,
 				library = {
