@@ -40,7 +40,6 @@ return {
 		},
 	},
 	opts = {
-		-- show diagnostics at target without changing the cursor position
 		modes = {
 			char = {
 				jump_labels = true,
