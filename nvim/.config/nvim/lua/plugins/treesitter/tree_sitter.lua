@@ -36,7 +36,8 @@ return {
 		end,
 		opts_extended = { "ensure_installed" },
 		opts = {
-			highlight = { enable = true, additional_vim_regex_highlighting = true },
+			-- highlight = { enable = true, additional_vim_regex_highlighting = true },
+			highlight = { enable = true },
 			indent = { enable = true },
 			-- Add languages to be installed here that you want installed for treesitter
 			ensure_installed = {
@@ -73,22 +74,7 @@ return {
 				},
 			},
 			textobjects = {
-				select = {
-					enable = false,
-				},
-				selection_modes = {
-					["@parameter.outer"] = "v", -- charwise
-					["@function.outer"] = "V", -- linewise
-					["@class.outer"] = "<c-v>", -- blockwise
-				},
-				lsp_interop = {
-					enable = true,
-					border = "rounded",
-					peek_definition_code = {
-						["<leader>df"] = "@function.outer",
-						["<leader>dF"] = "@class.outer",
-					},
-				},
+				select = { enable = false },
 				move = {
 					enable = true,
 					set_jumps = true, -- whether to set jumps in the jumplist
@@ -113,15 +99,6 @@ return {
 						["[F"] = "@function.outer",
 						["[C"] = "@class.outer",
 						["[A"] = "@parameter.inner",
-					},
-				},
-				swap = {
-					enable = true,
-					swap_next = {
-						["<leader>a"] = "@parameter.inner",
-					},
-					swap_previous = {
-						["<leader>A"] = "@parameter.inner",
 					},
 				},
 			},
