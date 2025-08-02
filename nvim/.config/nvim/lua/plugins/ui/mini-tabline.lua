@@ -1,7 +1,9 @@
 return {
   "echasnovski/mini.tabline",
   version = false,
-  event = { "BufNewFile", "BufReadPre" },
+  enabled = true,
+  -- version = "*",
+  event = { "BufRead", "BufReadPre", "BufNewFile" },
   config = function()
     local tabline = require("mini.tabline")
     tabline.setup({
