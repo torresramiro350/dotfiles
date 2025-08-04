@@ -12,6 +12,10 @@ return {
 			end,
 			always_show_bufferline = false,
 			diagnostics = "nvim_lsp",
+			diagnostics_indicator = function(count, level, _)
+				local icon = level:match("error") and " " or " "
+				return " " .. icon .. count
+			end,
 			offsets = {
 				{
 					filetype = "neo-tree",
