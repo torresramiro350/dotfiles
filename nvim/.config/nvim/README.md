@@ -1,16 +1,19 @@
-# Neovim configuration
+
 
 <!-- toc -->
 
-- [Configuration overview](#configuration-overview)
-  * [Acknowledgements](#acknowledgements)
-  * [Structure of the configuration](#structure-of-the-configuration)
-  * [Lazy loading](#lazy-loading)
-  * [UI](#ui)
-  * [colorscheme](#colorscheme)
-  * [LSP](#lsp)
+- [Neovim configuration](#neovim-configuration)
+  * [Configuration overview](#configuration-overview)
+    + [Acknowledgements](#acknowledgements)
+    + [Structure of the configuration](#structure-of-the-configuration)
+    + [Lazy loading](#lazy-loading)
+    + [UI](#ui)
+    + [colorscheme](#colorscheme)
+    + [LSP](#lsp)
 
 <!-- tocstop -->
+
+# Neovim configuration
 
 ## Configuration overview
 
