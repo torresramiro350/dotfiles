@@ -1,9 +1,16 @@
 return {
 	{
 		"OXY2DEV/markview.nvim",
+		dependencies = {
+			"echasnovski/mini.icons",
+		},
 		lazy = false,
 		ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
 		priority = 49, -- allow the loading of treesitter first
+		opts = { preview = { icon_provider = "mini" } },
+		config = function(_, opts)
+			require("markview").setup(opts)
+		end,
 	},
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
