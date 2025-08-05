@@ -34,6 +34,8 @@ return {
 			code = {
 				sign = false,
 				width = "block",
+				position = "right",
+				border = "thick",
 				right_pad = 1,
 			},
 			completions = {
