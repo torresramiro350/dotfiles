@@ -3,6 +3,7 @@ return {
 		"OXY2DEV/markview.nvim",
 		lazy = false,
 		ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
+		priority = 49, -- allow the loading of treesitter first
 	},
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
