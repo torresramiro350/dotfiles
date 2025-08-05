@@ -34,6 +34,7 @@ return {
 			code = {
 				sign = false,
 				width = "block",
+				min_width = 90,
 				position = "right",
 				border = "thick",
 				right_pad = 1,
