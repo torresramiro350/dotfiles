@@ -5,6 +5,7 @@ return {
 			"echasnovski/mini.icons",
 		},
 		lazy = false,
+		enabled = false,
 		ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
 		priority = 49, -- allow the loading of treesitter first
 		opts = { preview = { icon_provider = "mini" } },
@@ -14,9 +15,9 @@ return {
 	},
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
-		enabled = false,
+		enabled = true,
 		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
-		ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
+		ft = { "markdown", "norg", "rmd", "org", "codecompanion", "blink-cmp-documentation", "blink-cmp-signature" },
 		opts = {
 			pipe_table = { preset = "round" },
 			-- bulled = { enabled = true },
