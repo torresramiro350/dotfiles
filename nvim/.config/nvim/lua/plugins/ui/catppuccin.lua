@@ -41,6 +41,7 @@ return {
 			harpoon = true,
 			headlines = true,
 			markdown = true,
+			markview = true,
 			render_markdown = true,
 			mason = true,
 			mini = {

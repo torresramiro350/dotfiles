@@ -1,7 +1,12 @@
 return {
 	{
+		"OXY2DEV/markview.nvim",
+		lazy = false,
+		ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
+	},
+	{
 		"MeanderingProgrammer/render-markdown.nvim",
-		enabled = true,
+		enabled = false,
 		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
 		ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
 		opts = {
