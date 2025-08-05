@@ -19,6 +19,15 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
 		ft = { "markdown", "norg", "rmd", "org", "codecompanion", "blink-cmp-documentation", "blink-cmp-signature" },
 		opts = {
+			checkbox = {
+				custom = {
+					important = {
+						raw = "[~]",
+						rendered = "󰓎 ",
+						highlight = "DiagnosticWarn",
+					},
+				},
+			},
 			pipe_table = { preset = "round" },
 			-- bulled = { enabled = true },
 			heading = {
