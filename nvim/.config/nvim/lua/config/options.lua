@@ -34,7 +34,7 @@ opt.incsearch = true -- Show matches as you type
 -- Visual settings
 opt.termguicolors = true -- Enable 24-bit colors
 opt.signcolumn = "yes" -- Always show sign column
-opt.colorcolumn = "90" -- Show column at 90 characters
+opt.colorcolumn = "100" -- Show column at 90 characters
 opt.showmatch = true -- Highlight matching parenthesis
 opt.matchtime = 2 -- How long to show matching bracket
 opt.cmdheight = 1 -- Command line height

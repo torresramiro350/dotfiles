@@ -19,6 +19,9 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
 		ft = { "markdown", "norg", "rmd", "org", "codecompanion", "blink-cmp-documentation", "blink-cmp-signature" },
 		opts = {
+			dash = {
+				width = 120,
+			},
 			checkbox = {
 				custom = {
 					important = {
@@ -34,7 +37,7 @@ return {
 				sign = false,
 				icons = { "󰼏 ", "󰎨 " },
 				border = true,
-				min_width = 90,
+				min_width = 120,
 				width = "block",
 			},
 			checkbox = {
@@ -43,7 +46,7 @@ return {
 			code = {
 				sign = false,
 				width = "block",
-				min_width = 90,
+				min_width = 120,
 				position = "right",
 				border = "thick",
 				right_pad = 1,
