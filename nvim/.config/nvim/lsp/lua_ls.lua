@@ -6,7 +6,7 @@ return {
 	settings = {
 		Lua = {
 			diagnositcs = {
-				global = { "vim" },
+				global = { "vim", "require" },
 			},
 			runtime = { version = "LuaJIT" },
 			workspace = {
