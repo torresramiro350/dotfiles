@@ -8,6 +8,15 @@ return {
 			analysis = {
 				autoSearchPaths = true,
 				useLibraryCodeForTypes = true,
+				root_markers = {
+					"pyproject.toml",
+					"setup.py",
+					"setup.cfg",
+					"requirements.txt",
+					"Pipfile",
+					"pyrightconfig.json",
+					".git",
+				},
 				diagnosticMode = "openFilesOnly",
 				inlayHints = {
 					callArgumentNames = true,
