@@ -2,13 +2,12 @@ return {
 	"catppuccin/nvim",
 	name = "catppuccin",
 	priority = 1000,
-	lazy = true,
 	opts = {
 		background = {
 			light = "latte",
 			dark = "mocha",
 		},
-		float = { transparent = true, solid = false },
+		float = { transparent = false, solid = false },
 		flavour = "auto",
 		dim_inactive = {
 			enabled = false,
