@@ -19,9 +19,7 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
 		ft = { "markdown", "norg", "rmd", "org", "codecompanion", "blink-cmp-documentation", "blink-cmp-signature" },
 		opts = {
-			dash = {
-				width = 120,
-			},
+			dash = { width = 100 },
 			checkbox = {
 				custom = {
 					important = {
@@ -32,22 +30,18 @@ return {
 				},
 			},
 			pipe_table = { preset = "round" },
-			-- bulled = { enabled = true },
 			heading = {
-				sign = false,
+				sign = true,
 				icons = { "󰼏 ", "󰎨 " },
 				border = true,
-				min_width = 120,
+				min_width = 100,
 				width = "block",
-			},
-			checkbox = {
-				enabled = false,
 			},
 			code = {
-				sign = false,
+				sign = true,
 				width = "block",
-				min_width = 120,
-				position = "right",
+				min_width = 100,
+				position = "left",
 				border = "thick",
 				right_pad = 1,
 			},
