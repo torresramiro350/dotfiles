@@ -6,8 +6,8 @@ return {
 		},
 		lazy = false,
 		enabled = false,
-		ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
 		priority = 49, -- allow the loading of treesitter first
+		ft = { "markdown", "norg", "rmd", "org", "codecompanion", "blink-cmp-documentation", "blink-cmp-signature" },
 		opts = { preview = { icon_provider = "mini" } },
 		config = function(_, opts)
 			require("markview").setup(opts)
