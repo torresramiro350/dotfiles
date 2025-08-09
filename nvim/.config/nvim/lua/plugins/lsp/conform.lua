@@ -2,7 +2,7 @@ return {
 	"stevearc/conform.nvim",
 	dependencies = { "mason.nvim" },
 	lazy = true,
-	event = { "BufReadPre" },
+	event = { "BufReadPre", "BufNewFile" },
 	command = { "ConformInfo" },
 	opts = function()
 		local opts = {
