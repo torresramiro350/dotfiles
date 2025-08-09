@@ -47,7 +47,8 @@ nmap({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 -- some mappings for making life easier
 nmap("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Close all buffers" })
 -- for much easier access to escape
-nmap("i", "jj", "<Esc>", { desc = "Escape insert mode" })
+-- nmap("i", "jj", "<Esc>", { desc = "Escape insert mode" })
+nmap("i", "jk", "<Esc>", { desc = "Escape insert mode" })
 
 -- split buffers
 nmap("n", "|", "<cmd>vsplit<cr>", { desc = "Vertical split" })
