@@ -19,8 +19,7 @@ return {
 			end,
 		})
 		return {
-			use_icons = true,
-			set_vim_settings = true,
+			use_icons = vim.g.have_nerd_font,
 			content = {
 				active = function()
 					local check_macro_recording = function()
