@@ -1,6 +1,8 @@
 local opt = vim.opt
 local wo = vim.wo
 
+-- nerd fonts
+vim.g.have_nerd_font = true
 vim.g.completion_mode = "blink" -- set default completion mode
 
 -- Basic settings
@@ -93,9 +95,6 @@ vim.opt.splitkeep = "screen" -- Better splitting
 -- Key mappings
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
--- nerd fonts
-vim.g.have_nerd_font = true
 
 -- ai settings
 vim.g.ai_cmp = true
