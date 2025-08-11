@@ -7,7 +7,7 @@ return {
 		basedpyright = {
 			analysis = {
 				autoSearchPaths = true,
-				typeCheckingMode = "basic",
+				typeCheckingMode = "recommended",
 				diagnosticMode = "workspace",
 				useLibraryCodeForTypes = true,
 				inlayHints = {
