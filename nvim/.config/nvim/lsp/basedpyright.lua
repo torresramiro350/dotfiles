@@ -7,17 +7,9 @@ return {
 		basedpyright = {
 			analysis = {
 				autoSearchPaths = true,
+				typeCheckingMode = "strict",
+				diagnosticMode = "workspace",
 				useLibraryCodeForTypes = true,
-				root_markers = {
-					"pyproject.toml",
-					"setup.py",
-					"setup.cfg",
-					"requirements.txt",
-					"Pipfile",
-					"pyrightconfig.json",
-					".git",
-				},
-				diagnosticMode = "openFilesOnly",
 				inlayHints = {
 					callArgumentNames = true,
 				},
