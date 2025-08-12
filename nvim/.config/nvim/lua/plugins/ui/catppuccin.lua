@@ -3,6 +3,7 @@ return {
 	name = "catppuccin",
 	priority = 1000,
 	opts = {
+		auto_integrations = true, -- let capptuccin handle integrations
 		background = {
 			light = "latte",
 			dark = "mocha",
