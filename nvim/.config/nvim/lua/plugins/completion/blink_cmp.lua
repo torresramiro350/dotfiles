@@ -20,16 +20,9 @@ return {
 		"sources.default",
 	},
 	opts = {
-		fuzzy = {
-			implementation = "prefer_rust",
-		},
-		snippets = {
-			preset = "mini_snippets",
-		},
-		appearance = {
-			use_nvim_cmp_as_default = false,
-			nerd_font_variant = "normal",
-		},
+		fuzzy = { implementation = "prefer_rust" },
+		snippets = { preset = "mini_snippets" },
+		appearance = { nerd_font_variant = "normal" },
 		completion = {
 			list = {
 				selection = {
@@ -41,19 +34,14 @@ return {
 					end,
 				},
 			},
-			ghost_text = {
-				enabled = vim.g.ai_cmp,
-			},
+			ghost_text = { enabled = vim.g.ai_cmp },
 			menu = {
 				-- don't show completion when searching
 				auto_show = function(ctx)
 					return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
 				end,
 				draw = {
-					columns = {
-						{ "label", "label_description", gap = 1 },
-						{ "kind_icon", "kind" },
-					},
+					columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
 					treesitter = { "lsp" },
 					components = {
 						kind_icon = {
@@ -88,9 +76,7 @@ return {
 			},
 		},
 		signature = {
-			window = {
-				show_documentation = false,
-			},
+			window = { show_documentation = false },
 			enabled = false,
 		},
 		cmdline = {
