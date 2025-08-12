@@ -82,8 +82,8 @@ return {
 						["]f"] = "@function.outer",
 						["]c"] = "@class.outer",
 						["]a"] = "@parameter.inner",
-						["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
-						["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
+						-- ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
+						-- ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
 					},
 					goto_next_end = {
 						["]F"] = "@function.outer",
