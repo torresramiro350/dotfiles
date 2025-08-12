@@ -5,21 +5,14 @@ return {
 	settings = {
 		pylsp = {
 			plugins = {
-				pylsp_inlay_hints = {
-					enabled = true,
-					type_hints = true,
-					parameter_hints = true,
-				},
-				pylint = { enabled = true },
-				pycodestyle = { enabled = false },
 				pyflakes = { enabled = false },
+				pycodestyle = { enabled = false },
 				autopep8 = { enabled = false },
-				flake8 = { enabled = false },
+				yapf = { enabled = false },
+				mccabe = { enabled = false },
+				pylsp_mypy = { enabled = false },
 				pylsp_isort = { enabled = false },
 				pylsp_black = { enabled = false },
-				pylsp_mypy = { enabled = false },
-				mccabe = { enabled = false },
-				yapf = { enabled = false },
 			},
 			signature = { formatter = "ruff" },
 		},
