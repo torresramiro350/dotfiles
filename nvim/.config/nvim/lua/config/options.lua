@@ -17,8 +17,10 @@ opt.ruler = false -- Disable the default ruler
 opt.list = true
 opt.laststatus = 3 -- draw the status line over the whole window
 opt.textwidth = 90 -- set the maximum text width to be 80 characters
+opt.wildmode = "longest:full,full" -- completion mode for the command line
 
 -- Indentation
+opt.shiftround = true -- round indent
 opt.tabstop = 2 -- tab width
 opt.shiftwidth = 2 -- indent width
 opt.softtabstop = 2 -- soft tab stop
@@ -26,6 +28,8 @@ opt.expandtab = true -- use spaces instead of tabs
 opt.smartindent = true -- smart auto-indenting
 opt.autoindent = true -- copy indent from current line
 opt.breakindent = true -- Enable break indent
+opt.signcolumn = "yes" -- Always show sign column, otherwise it would shift the text each time
+opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 
 -- Search settings
 opt.ignorecase = true -- Case insensitive search
@@ -35,7 +39,6 @@ opt.incsearch = true -- Show matches as you type
 
 -- Visual settings
 opt.termguicolors = true -- Enable 24-bit colors
-opt.signcolumn = "yes" -- Always show sign column
 opt.colorcolumn = "100" -- Show column at 90 characters
 opt.showmatch = true -- Highlight matching parenthesis
 opt.matchtime = 2 -- How long to show matching bracket
@@ -106,3 +109,6 @@ vim.o.background = "dark"
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
+
+-- Session handling
+opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
