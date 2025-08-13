@@ -87,7 +87,7 @@ return {
 		highlight_overrides = {
 			mocha = function(mocha)
 				-- return { LineNr = { fg = mocha.lavender } }
-				return { LineNr = { fg = mocha.overlay0 } }
+				return { LineNr = { fg = mocha.overlay0 }, CursorLineNr = { fg = mocha.mauve } }
 			end,
 		},
 	},
