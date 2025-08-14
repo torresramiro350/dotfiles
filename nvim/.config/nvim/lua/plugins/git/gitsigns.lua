@@ -3,6 +3,7 @@ require("groups.utility_funcs")
 return {
 	"lewis6991/gitsigns.nvim",
 	event = { "BufReadPre", "BufReadPost" },
+	enabled = true,
 	cond = in_git(),
 	opts = function()
 		return {
