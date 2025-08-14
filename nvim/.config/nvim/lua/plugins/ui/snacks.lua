@@ -99,6 +99,10 @@ return {
     { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
     { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
     { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", },
+    {"<leader>gY", function() 
+      Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end, notify = false }) end,
+      desc= "Git Yank", mode = { "n", "x" }
+    },
     -- search
     { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
     { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
