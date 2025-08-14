@@ -25,6 +25,7 @@ return {
 		snippets = { preset = "mini_snippets" },
 		appearance = { nerd_font_variant = "normal" },
 		completion = {
+			accept = { auto_brackets = { enabled = true } },
 			list = {
 				selection = {
 					preselect = function(ctx)
