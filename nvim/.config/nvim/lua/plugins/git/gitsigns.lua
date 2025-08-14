@@ -25,12 +25,6 @@ return {
 			},
 			on_attach = function(bufnr)
 				local gs = package.loaded.gitsigns
-				-- local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
-				-- local next_hunk_repeat, prev_hunk_repeat =
-				-- 	ts_repeat_move.make_repeatable_move_pair(gs.next_hunk, gs.prev_hunk)
-				--
-				-- nmap({ "n", "x", "o" }, "]h", next_hunk_repeat)
-				-- nmap({ "n", "x", "o" }, "[h", prev_hunk_repeat)
 				nmap("n", "]h", function()
 					if vim.wo.diff then
 						vim.cmd.normal({ "]c", bang = true })
