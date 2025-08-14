@@ -91,3 +91,6 @@ nmap("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Resul
 nmap("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search Result" })
 nmap("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 nmap("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
+
+nmap("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
+nmap({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
