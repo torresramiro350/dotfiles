@@ -15,10 +15,11 @@ opt.scrolloff = 10 -- keep 10 lines above/below cursor
 opt.sidescrolloff = 8 -- keep 8 columns left/right of cursor
 opt.ruler = false -- Disable the default ruler
 -- TODO: find what this oes
-opt.list = true
 opt.laststatus = 3 -- draw the status line over the whole window
 opt.textwidth = 90 -- set the maximum text width to be 80 characters
 opt.wildmode = "longest:full,full" -- completion mode for the command line
+opt.virtualedit = "block" -- allow cursor to move where there is no text in visual block
+opt.winminwidth = 5 -- minimum window width
 
 -- Indentation
 opt.shiftround = true -- round indent
@@ -31,12 +32,22 @@ opt.autoindent = true -- copy indent from current line
 opt.breakindent = true -- Enable break indent
 opt.signcolumn = "yes" -- Always show sign column, otherwise it would shift the text each time
 opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
+opt.list = true -- show some invisible characters
+opt.fillchars = {
+	foldopen = "",
+	foldclose = "",
+	fold = " ",
+	foldsep = " ",
+	diff = "╱",
+	eob = " ",
+}
 
 -- Search settings
 opt.ignorecase = true -- Case insensitive search
 opt.smartcase = true -- Case sensitive if uppercase search
 opt.hlsearch = false -- Don't highlight search results
 opt.incsearch = true -- Show matches as you type
+opt.grepprg = "rg --vimgrep"
 
 -- Visual settings
 opt.termguicolors = true -- Enable 24-bit colors
