@@ -13,8 +13,8 @@ return {
 	},
 	event = "InsertEnter",
 	enabled = true,
-	version = not vim.g.use_blink_cmp and "*",
-	build = vim.g.use_blink_cmp and "cargo build --release",
+	version = not vim.g.use_blink_cmp_main and "1.*",
+	build = vim.g.use_blink_cmp_main and "cargo build --release",
 	opts_extend = {
 		"sources.completion.enabled_providers",
 		"sources.compat",

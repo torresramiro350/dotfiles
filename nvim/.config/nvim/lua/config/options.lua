@@ -4,7 +4,7 @@ local wo = vim.wo
 -- nerd fonts
 vim.g.have_nerd_font = true
 vim.g.completion_mode = "blink" -- set default completion mode
-vim.g.use_blink_cmp = true
+vim.g.use_blink_cmp_main = false
 
 -- Basic settings
 opt.viewoptions = { "cursor", "folds" } -- keep the viewoption in cursot's last location
