@@ -6,17 +6,18 @@ return {
 		return {
 			highlights = highlights.get(),
 			options = {
-				close_command = function(n)
-					Snacks.bufdelete(n)
-				end,
-				right_mouse_command = function(n)
-					Snacks.bufdelete(n)
-				end,
+        -- stylua: ignore start
+				close_command = function(n) Snacks.bufdelete(n) end,
+				right_mouse_command = function(n) Snacks.bufdelete(n) end,
+				-- stylua: ignore end
 				always_show_bufferline = false,
 				diagnostics = "nvim_lsp",
-				diagnostics_indicator = function(count, level, _)
-					local icon = level:match("error") and " " or " "
-					return " " .. icon .. count
+				diagnostics_indicator = function(_, _, diag)
+					-- diagnostics_indicator = function(count, level, _)
+					local icons = { Error = "󰅚 ", Warning = "󰀪 ", Info = "󰋽 ", Hint = "󰌶 " }
+					local ret = (diag.error and icons.Error .. diag.error .. " " or "")
+						.. (diag.warning and icons.Warning .. diag.warning .. " " or "")
+					return vim.trim(ret)
 				end,
 				offsets = {
 					{
