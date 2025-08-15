@@ -17,9 +17,10 @@ return {
 			},
 			pipe_table = { preset = "round" },
 			heading = {
-				sign = true,
-				icons = { "󰼏 ", "󰎨 " },
-				border = true,
+				sign = false,
+				-- icons = { "󰼏 ", "󰎨 " },
+				icons = { "󰎤 ", "󰎧 ", "󰎪 ", "󰎭 ", "󰎱 ", "󰎳 " },
+				border = false,
 				min_width = 100,
 				width = "block",
 			},
