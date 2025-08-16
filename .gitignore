@@ -8,3 +8,5 @@ yazi/.config/yazi/theme.toml-1748522753359149
 yazi/.config/yazi/theme.toml-1750246957444919
 yazi/.config/yazi/yazi.toml-1748522753342783
 yazi/.config/yazi/yazi.toml-1750246954738645
+kitty/.config/kitty/kitty.conf.bak
+fish/.config/fish/.config/fish/functions/fzf_key_bindings.fish
