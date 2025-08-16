@@ -3,7 +3,8 @@ return {
 		"echasnovski/mini.comment",
 		version = false,
 		-- event = "VeryLazy",
-		event = { "BufEnter" },
+		-- event = { "BufEnter" },
+		event = { "BufReadPre", "BufNewFile" },
 		opts = function()
 			local ts_context = require("ts_context_commentstring.internal")
 			return {
