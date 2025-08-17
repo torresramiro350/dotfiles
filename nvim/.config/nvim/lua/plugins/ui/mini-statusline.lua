@@ -18,7 +18,7 @@ return {
 				vim.cmd("redrawstatus")
 			end,
 		})
-		return {
+		local opts = {
 			use_icons = vim.g.have_nerd_font,
 			content = {
 				active = function()
@@ -40,7 +40,7 @@ return {
 					local search = MiniStatusline.section_searchcount({ trunc_width = 75 })
 					local macro = check_macro_recording()
 					return MiniStatusline.combine_groups({
-						{ hl = mode_hl, strings = { mode } },
+						{ hl = mode_hl, strings = { mode:upper() } },
 						{ hl = "MiniStatuslineDevinfo", strings = { git, diff, diagnostics, lsp } },
 						"%<", -- Mark general truncate point
 						{ hl = "MiniStatuslineFilename", strings = { filename } },
@@ -52,6 +52,7 @@ return {
 				end,
 			},
 		}
+		return opts
 	end,
 	config = function(_, opts)
 		local statusline = require("mini.statusline")
