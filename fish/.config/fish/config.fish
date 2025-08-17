@@ -57,6 +57,54 @@ function fzum -d "View all unmerged commits across all local branches"
         --ansi --preview="$viewUnmergedCommits"
 end
 
+function fzf-complete -d 'fzf completion and print selection back to commandline'
+    # As of 2.6, fish's "complete" function does not understand
+    # subcommands. Instead, we use the same hack as __fish_complete_subcommand and
+    # extract the subcommand manually.
+    set -l cmd (commandline -co) (commandline -ct)
+    switch $cmd[1]
+        case env sudo
+            for i in (seq 2 (count $cmd))
+                switch $cmd[$i]
+                    case '-*'
+                    case '*=*'
+                    case '*'
+                        set cmd $cmd[$i..-1]
+                        break
+                end
+            end
+    end
+    set cmd (string join -- ' ' $cmd)
+
+    set -l complist (complete -C$cmd)
+    set -l result
+    string join -- \n $complist | sort | eval (__fzfcmd) -m --select-1 --exit-0 --header '(commandline)' | cut -f1 | while read -l r
+        set result $result $r
+    end
+
+    set prefix (string sub -s 1 -l 1 -- (commandline -t))
+    for i in (seq (count $result))
+        set -l r $result[$i]
+        switch $prefix
+            case "'"
+                commandline -t -- (string escape -- $r)
+            case '"'
+                if string match '*"*' -- $r >/dev/null
+                    commandline -t -- (string escape -- $r)
+                else
+                    commandline -t -- '"'$r'"'
+                end
+            case '~'
+                commandline -t -- (string sub -s 2 (string escape -n -- $r))
+            case '*'
+                commandline -t -- (string escape -n -- $r)
+        end
+        [ $i -lt (count $result) ]; and commandline -i ' '
+    end
+
+    commandline -f repaint
+end
+
 alias dnfin="sudo dnf in"
 alias dnfup="sudo dnf up --refresh"
 alias dnfrm="sudo dnf remove"
@@ -156,6 +204,7 @@ set -gx SKIM_DEFAULT_OPTIONS $SKIM_DEFAULT_OPTIONS "\
 --color=fg:#cdd6f4,bg:#1e1e2e,matched:#313244,matched_bg:#f2cdcd,current:#cdd6f4,current_bg:#45475a,current_match:#1e1e2e,current_match_bg:#f5e0dc,spinner:#a6e3a1,info:#cba6f7,prompt:#89b4fa,cursor:#f38ba8,selected:#eba0ac,header:#94e2d5,border:#6c7086"
 
 set -Ux FZF_COMPLETION_TRIGGER '~~'
+bind \t fzf-complete
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 if test -f /home/rtorres/miniforge3/bin/conda
