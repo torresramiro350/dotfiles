@@ -3,7 +3,7 @@ return {
 	event = { "BufEnter", "BufReadPre" },
 	opts = function()
 		local highlights = require("catppuccin.groups.integrations.bufferline")
-		return {
+		local opts = {
 			highlights = highlights.get(),
 			options = {
         -- stylua: ignore start
@@ -13,7 +13,6 @@ return {
 				always_show_bufferline = false,
 				diagnostics = "nvim_lsp",
 				diagnostics_indicator = function(_, _, diag)
-					-- diagnostics_indicator = function(count, level, _)
 					local icons = { Error = "󰅚 ", Warning = "󰀪 ", Info = "󰋽 ", Hint = "󰌶 " }
 					local ret = (diag.error and icons.Error .. diag.error .. " " or "")
 						.. (diag.warning and icons.Warning .. diag.warning .. " " or "")
@@ -32,6 +31,7 @@ return {
 				},
 			},
 		}
+		return opts
 	end,
 	config = function(_, opts)
 		require("bufferline").setup(opts)
