@@ -4,7 +4,7 @@ return {
 	opts = function()
 		local highlights = require("catppuccin.groups.integrations.bufferline")
 		local opts = {
-			highlights = highlights.get(),
+			highlights = highlights.get_theme(),
 			options = {
         -- stylua: ignore start
 				close_command = function(n) Snacks.bufdelete(n) end,
