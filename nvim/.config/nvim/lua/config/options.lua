@@ -50,6 +50,7 @@ opt.smartcase = true -- Case sensitive if uppercase search
 opt.hlsearch = false -- Don't highlight search results
 opt.incsearch = true -- Show matches as you type
 opt.grepprg = "rg --vimgrep"
+opt.grepformat = "%f:%l:%c:%m" -- filename, line number, colon, content
 
 -- Visual settings
 opt.termguicolors = true -- Enable 24-bit colors
