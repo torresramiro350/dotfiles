@@ -35,6 +35,5 @@ require("lazy").setup({
 	{ import = "plugins.rust" },
 	{ import = "plugins.sessions" },
 	{ import = "plugins.treesitter" },
-	{ import = "plugins.typing" },
 	{ import = "plugins.ui" },
 })
