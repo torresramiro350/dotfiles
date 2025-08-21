@@ -3,10 +3,7 @@ return {
 	event = { "BufNewFile", "BufReadPre" },
 	version = false,
 	opts = {
-		options = {
-			-- Whether to use for editing directories
-			use_as_default_explorer = false, -- use neotree for that
-		},
+		options = { use_as_default_explorer = true },
 		windows = {
 			true,
 			width_focus = 30,
@@ -88,14 +85,14 @@ return {
 	end,
 	keys = {
 		{
-			"<leader>fm",
+			"-",
 			function()
 				require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
 			end,
 			desc = "Open mini.files (Directory of Current File)",
 		},
 		{
-			"fM",
+			"<leader>e",
 			function()
 				require("mini.files").open(vim.uv.cwd(), true)
 			end,
