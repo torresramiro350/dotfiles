@@ -7,6 +7,7 @@ vim.g.completion_mode = "blink" -- set default completion mode
 vim.g.use_blink_cmp_main = false
 
 -- Basic settings
+opt.wrap = false -- no wrapping of code
 opt.viewoptions = { "cursor", "folds" } -- keep the viewoption in cursot's last location
 opt.number = true -- display line number
 opt.cursorline = true -- highlight current line
@@ -18,6 +19,7 @@ opt.ruler = false -- Disable the default ruler
 opt.laststatus = 3 -- draw the status line over the whole window
 opt.textwidth = 90 -- set the maximum text width to be 80 characters
 opt.wildmode = "longest:full,full" -- completion mode for the command line
+opt.wildignorecase = true -- case-insentive tab completion in commands
 opt.virtualedit = "block" -- allow cursor to move where there is no text in visual block
 opt.winminwidth = 5 -- minimum window width
 
@@ -74,12 +76,23 @@ opt.backup = false -- Don't create backup files
 opt.writebackup = false -- Don't create backup before writing
 opt.swapfile = false -- Don't create swap files
 opt.undofile = true -- Persistent undo
-opt.undodir = vim.fn.expand("~/.vim/undodir") -- Undo directory
 opt.updatetime = 300 -- Faster compeltion
 opt.timeoutlen = 500 -- Key timeout duration
 opt.ttimeoutlen = 0 -- Key code timeout
 opt.autoread = true -- Auto relaod files changed outside vim
-opt.autowrite = false -- Don't autosave
+opt.autowrite = false -- Don't autosave on some events
+opt.diffopt:append("vertical") -- vertical diff splits
+opt.diffopt:append("algorithm:patience") -- better diff algorithm
+opt.diffopt:append("linematch:60") -- better diff highlighting (smart line matching)
+
+-- Undo directory
+local undodir = "~/.local/share/nvim/undodir" -- undo directory path
+opt.undodir = vim.fn.expand(undodir)
+local undodir_path = vim.fn.expand(undodir) -- expand full path
+if vim.fn.isdirectory(undodir_path) == 0 then
+	vim.fn.mkdir(undodir_path, "p") -- create it, if it doens't exist
+end
+-- opt.undodir = vim.fn.expand("~/.vim/undodir") -- Undo directory
 
 -- Behavior settings
 opt.hidden = true -- Allow hidden buffers
@@ -88,7 +101,7 @@ opt.backspace = "indent,eol,start" -- Better backspace behavior
 opt.autochdir = false -- Don't auto change directory
 opt.iskeyword:append("-") -- Treat dash as part of word
 opt.path:append("**") -- include subdirectories in search
-opt.selection = "exclusive" -- selection behavior
+opt.selection = "inclusive" -- use inclusive selection
 opt.mouse = "a" -- Enable mouse support
 opt.mousemoveevent = true
 opt.clipboard:append("unnamedplus") -- Use system clipboard
@@ -97,7 +110,7 @@ opt.encoding = "UTF-8" -- Set encoding
 
 -- Folding settings
 opt.foldmethod = "expr" -- Use expression for folding
-opt.foldexpr = "nvim_treesitter#foldexpr()" -- use treesitter for folding
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- use treesitter for folding
 opt.foldlevel = 99 -- Start with all folds open
 vim.opt.foldenable = true
 vim.opt.foldcolumn = "0"
