@@ -6,9 +6,7 @@ return {
 		animate = {},
 		dim = {},
 		picker = {},
-		explorer = {
-			replace_netrw = true,
-		},
+		explorer = { enabled = false },
 		input = { enabled = true },
 		notifier = { enabled = true, style = "fancy", level = vim.log.levels.INFO },
 		quickfile = { enabled = true },
@@ -76,7 +74,7 @@ return {
     { "<leader>n",       function() Snacks.picker.notifications() end, desc = "Notification History" },
     { "<leader>;",       function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<leader>/",       function() Snacks.picker.lines({}) end, desc = "Buffer Lines" },
-    { "<leader>e",       function() Snacks.explorer() end, desc = "File Explorer" },
+    -- { "<leader>e",       function() Snacks.explorer() end, desc = "File Explorer" },
     -- { "<leader>?",       function() Snacks.picker.files() end,           desc = "Find Files" },
     -- Find
     { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
