@@ -74,7 +74,7 @@ return {
 			nvim_surround = true,
 			notify = true,
 			octo = true,
-			snacks = { enabled = true, picker_style = "nvchad_outlined" },
+			snacks = { enabled = true, indent_scope_color = "lavender", picker_style = "nvchad_outlined" },
 			telescope = {
 				enabled = true,
 			},
