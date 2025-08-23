@@ -22,6 +22,16 @@ return {
 		"sources.default",
 	},
 	opts = {
+		-- disable the cmp if the buffer name matches oil (might decide to use this plugin
+		-- later down the line) or minifiles, otherwise it throws an
+		-- error (see issue #277: https://github.com/Exafunction/windsurf.nvim/issues/277)
+		enabled = function()
+			local path = vim.api.nvim_buf_get_name(0)
+			if string.find(path, "minifiles://", 1, true) == 1 or string.find(path, "oil://", 1, true) == 1 then
+				return false
+			end
+			return true
+		end,
 		fuzzy = { implementation = "prefer_rust" },
 		snippets = { preset = "mini_snippets" },
 		appearance = { nerd_font_variant = "normal" },
