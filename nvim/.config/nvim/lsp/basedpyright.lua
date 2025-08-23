@@ -7,6 +7,7 @@ return {
 	on_attach = Lsp.on_attach,
 	settings = {
 		basedpyright = {
+			disableOrganizeImports = true,
 			analysis = {
 				autoImportCompletions = true,
 				autoSearchPaths = true,
