@@ -7,14 +7,17 @@ return {
 	cmd_env = { RUFF_TRACE = "messages" },
 	init_options = {
 		settings = {
+			showSyntaxErrors = true,
 			lint = { enable = true, preview = true },
 			format = { preview = true },
 			configurationPreference = "filesystemFirst",
 			organizeImport = true,
 			lineLength = 88,
 			logLevel = "error",
+			codeAction = {
+				fixViolation = { enable = true },
+				disableRuleComment = { enable = true },
+			},
 		},
 	},
-	settings = { format = { ["quote-style"] = "double" } },
-	root_markers = { "pyproject.toml", "ruff.toml", ".ruff.toml", ".git" },
 }
