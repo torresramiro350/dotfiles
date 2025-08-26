@@ -14,7 +14,7 @@ return {
 				["cmp.entry.get_documentation"] = true,
 			},
 		},
-		notify = { enabled = true },
+		notify = { enabled = false },
 		routes = {
 			{
 				filter = {
