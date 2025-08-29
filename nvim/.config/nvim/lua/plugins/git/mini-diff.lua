@@ -52,6 +52,7 @@ return {
 				},
 			},
 		}
+		return opts
 	end,
 	config = function(_, opts)
 		require("mini.diff").setup(opts)
