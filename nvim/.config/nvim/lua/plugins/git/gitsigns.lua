@@ -42,7 +42,7 @@ return {
           -- stylua: ignore start
 					nmap("n", "]H", function() gitsigns.nav_hunk("last") end, { buffer = bufnr, desc = "Last Hunk" })
 					nmap("n", "[H", function() gitsigns.nav_hunk("first") end, { desc = "First Hunk" })
-					nmap("n", "<leader>ghp", gitsigns.preview_hunk, { desc = "Preview hunk line" })
+					nmap("n", "<leader>ghp", gitsigns.preview_hunk_inline, { desc = "Preview hunk line" })
 					nmap("n", "<leader>ghs", gitsigns.stage_hunk, { desc = "Stage hunk" })
 					nmap("n", "<leader>ghr", gitsigns.reset_hunk, { desc = "Reset hunk" })
           nmap('v', '<leader>ghs', function() gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, { desc="Stage hunk" })
