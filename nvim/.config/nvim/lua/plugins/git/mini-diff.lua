@@ -34,10 +34,11 @@ return {
 				end, 200)
 			end,
 		}):map("<leader>uG")
-		return {
+		local opts = {
 			mappings = {
 				reset = "<leader>ghr",
 				apply = "<leader>ghs",
+				textobject = "gh",
 				goto_first = "[H",
 				goto_prev = "[h",
 				goto_next = "]h",
