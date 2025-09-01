@@ -3,10 +3,6 @@ return {
 	version = "*", -- recommended, use latest release instead of latest commit
 	lazy = true,
 	ft = "markdown",
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-		"ibhagwan/fzf-lua",
-	},
 	opts = {
 		-- disabling this in favor of the ui from render markdown as they might not play ncie
 		-- with eachother:

@@ -4,7 +4,7 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim", -- required
 		"sindrets/diffview.nvim", -- optional - Diff integration
-		"ibhagwan/fzf-lua", -- optional
+		"folke/snacks.nvim", -- optional
 	},
 	opts = {},
 	config = function(_, opts)
