@@ -25,7 +25,7 @@ return {
 				width = "block",
 			},
 			code = {
-				sign = true,
+				sign = false,
 				width = "block",
 				min_width = 100,
 				position = "left",
