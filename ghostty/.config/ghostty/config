@@ -1,6 +1,7 @@
 # controlling the font appearance
-font-family = JetBrains Mono
-font-size = 10.5
+# font-family = JetBrainsMono Nerd Font
+font-family = Maple Mono
+font-size = 10
 font-style = "Medium"
 adjust-cell-height = 5%
 # adjust-cell-width = 0%
