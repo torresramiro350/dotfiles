@@ -12,19 +12,9 @@ end
 config.window_background_opacity = 1
 config.font_size = 10
 config.line_height = 1.15
--- config.font = wezterm.font("JetBrains Mono")
--- config.font = wezterm.font("Maple Mono NF", { weight = "Medium", italic = false })
-config.font = wezterm.font("Maple Mono", { weight = "Medium", italic = false })
--- config.font = wezterm.font("JetBrains Mono", { weight = "DemiBold", italic = false })
--- config.font = wezterm.font("JetBrainsMono NF", { weight = "DemiBold", italic = false })
+config.font = wezterm.font("Maple Mono", { weight = "DemiBold", italic = false })
 
 config.window_decorations = "TITLE | RESIZE"
--- config.window_decorations = "RESIZE|TITLE|INTEGRATED_BUTTONS"
-config.window_frame = {
-	font = wezterm.font({ family = "Adwaitas Mono", weight = "Bold", italic = false }),
-	font_size = 11,
-}
-
 config.window_padding = {
 	left = 0,
 	right = 0,
@@ -36,7 +26,7 @@ config.check_for_updates = false
 config.use_ime = true
 config.enable_scroll_bar = false
 config.enable_tab_bar = false
-config.enable_wayland = true
+config.enable_wayland = false
 
 config.hide_tab_bar_if_only_one_tab = true
 
