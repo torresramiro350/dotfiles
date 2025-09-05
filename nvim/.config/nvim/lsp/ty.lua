@@ -1,0 +1,6 @@
+local Lsp = require("utils.lsp")
+return {
+	filetypes = { "python" },
+	cmd = { "ty", "server" },
+	on_attach = Lsp.on_attach,
+}
