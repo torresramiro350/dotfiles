@@ -3,7 +3,7 @@ return {
 	dependencies = {
 		"echasnovski/mini.snippets",
 		-- "rafamadriz/friendly-snippets",
-		-- "onsails/lspkind.nvim",
+		"onsails/lspkind.nvim",
 		"Exafunction/windsurf.nvim", -- it's somewhat good for now
 		-- "giuxtaposition/blink-cmp-copilot", -- for when I have money
 		{
@@ -60,22 +60,49 @@ return {
 						kind_icon = {
 							ellipsis = false,
 							text = function(ctx)
-								local kind_icon, _ = require("mini.icons").get("lsp", ctx.kind)
-								return " " .. kind_icon .. ctx.icon_gap .. " "
+								local icon = ctx.kind_icon
+								if vim.tbl_contains({ "Path" }, ctx.source_name) then
+									local dev_icon, _
+									require("nvim-web-devicons").get_icon(ctx.label)
+									if dev_icon then
+										icon = dev_icon
+									end
+								else
+									icon = require("lspkind").symbolic(ctx.kind, { mode = "symbol" })
+								end
+								return icon .. ctx.icon_gap
 							end,
-							-- (optional) use highlights from mini.icons
 							highlight = function(ctx)
-								local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
+								local hl = ctx.kind_hl
+								if vim.tbl_contains({ "Path" }, ctx.source_name) then
+									local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
+									if dev_icon then
+										hl = dev_hl
+									end
+								end
 								return hl
 							end,
 						},
-						kind = {
-							-- (optional) use highlights from mini.icons
-							highlight = function(ctx)
-								local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
-								return hl
-							end,
-						},
+						-- NOTE: for usage with mini icons
+						-- kind_icon = {
+						-- 	ellipsis = false,
+						-- 	text = function(ctx)
+						-- 		local kind_icon, _ = require("mini.icons").get("lsp", ctx.kind)
+						-- 		return " " .. kind_icon .. ctx.icon_gap .. " "
+						-- 	end,
+						-- 	-- (optional) use highlights from mini.icons
+						-- 	highlight = function(ctx)
+						-- 		local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
+						-- 		return hl
+						-- 	end,
+						-- },
+						-- kind = {
+						-- 	-- (optional) use highlights from mini.icons
+						-- 	highlight = function(ctx)
+						-- 		local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
+						-- 		return hl
+						-- 	end,
+						-- },
 					},
 				},
 				border = "rounded",

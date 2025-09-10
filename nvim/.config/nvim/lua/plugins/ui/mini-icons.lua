@@ -3,6 +3,7 @@ return {
 	-- event = "VimEnter",
 	lazy = true,
 	version = false,
+	enabled = false,
 	opts = {
 		files = {
 			["bash.tmpl"] = { glyph = "", hl = "MiniIconsGreen" },
