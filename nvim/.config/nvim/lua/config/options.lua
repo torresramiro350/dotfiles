@@ -125,10 +125,6 @@ vim.opt.splitkeep = "screen" -- Better splitting
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- ai settings
-vim.g.ai_cmp = true
-vim.g.copilot_no_tab_map = false
-
 -- Place all the general Neovim options
 vim.g.gitblame_display_virtual_text = 1
 vim.o.background = "dark"

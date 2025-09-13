@@ -44,7 +44,7 @@ return {
 					end,
 				},
 			},
-			ghost_text = { enabled = vim.g.ai_cmp },
+			ghost_text = { enabled = true },
 			menu = {
 				-- don't show completion when searching
 				auto_show = function(ctx)
