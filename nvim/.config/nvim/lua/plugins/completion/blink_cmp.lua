@@ -2,10 +2,7 @@ return {
 	"saghen/blink.cmp",
 	dependencies = {
 		"echasnovski/mini.snippets",
-		-- "rafamadriz/friendly-snippets",
 		"onsails/lspkind.nvim",
-		"Exafunction/windsurf.nvim", -- it's somewhat good for now
-		-- "giuxtaposition/blink-cmp-copilot", -- for when I have money
 		{
 			"Kaiser-Yang/blink-cmp-dictionary",
 			dependencies = { "nvim-lua/plenary.nvim" },
@@ -140,8 +137,7 @@ return {
 				local defaults = { "lsp", "path", "snippets", "buffer" }
 				-- Filetype-specific completions
 				local filetype_completions = {
-					lua = { "lazydev", "codeium" },
-					-- lua = { "lazydev", "copilot" }, -- for when/if I have money
+					lua = { "lazydev" },
 					markdown = { "dictionary" },
 					text = { "dictionary" },
 				}
@@ -158,9 +154,6 @@ return {
 				if is_comment then
 					return { "buffer", "dictionary" }
 				end
-				-- Default case
-				table.insert(defaults, "codeium")
-				-- table.insert(defaults, "copilot") -- for when/if I have money
 				return defaults
 			end,
 			providers = {
@@ -178,9 +171,6 @@ return {
 					module = "lazydev.integrations.blink",
 					score_offset = 100, -- show at a higher priority than lsp
 				},
-				-- module = "blink.compat.source",
-				codeium = { name = "Codeium", module = "codeium.blink", score_offset = 100, async = true },
-				-- copilot = { name = "Copilot", module = "blink-cmp-copilot", score_offset = 100, async = true },
 			},
 		},
 		keymap = {
