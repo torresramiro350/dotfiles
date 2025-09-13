@@ -2,7 +2,6 @@ return {
 	"saghen/blink.cmp",
 	dependencies = {
 		"echasnovski/mini.snippets",
-		"onsails/lspkind.nvim",
 		{
 			"Kaiser-Yang/blink-cmp-dictionary",
 			dependencies = { "nvim-lua/plenary.nvim" },
