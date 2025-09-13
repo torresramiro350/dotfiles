@@ -51,6 +51,7 @@ return {
 					return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
 				end,
 				draw = {
+					padding = { 0, 1 }, -- padding only on the right side
 					columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
 					treesitter = { "lsp" },
 					components = {
