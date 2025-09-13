@@ -22,8 +22,6 @@ require("lazy").setup({
 		enabled = true, -- check for plugin update periodically
 		notify = false, -- notify of an update
 	},
-	-- { import = "plugins" }, -- enough if all plugins live in a single directory
-	{ import = "plugins.ai" },
 	{ import = "plugins.enhancements" },
 	{ import = "plugins.tmux" },
 	{ import = "plugins.completion" },
