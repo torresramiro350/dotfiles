@@ -1,12 +1,17 @@
 # controlling the font appearance
-# font-family = JetBrainsMono Nerd Font
-font-family = Maple Mono
+
+# font-family = JetBrains Mono
+# font-family = Maple Mono
+font-family = MapleMono NF
 font-size = 10
 font-style = "SemiBold"
-# font-style = "Medium"
-adjust-cell-height = 5%
+font-style-bold = "ExtraBold"
+font-style-italic = "SemiBold Italic"
+font-style-bold-italic = "Bold Italic"
+font-thicken = true
+font-thicken-strength = 0
+adjust-cell-height = 10%
 bold-is-bright = true
-# adjust-cell-width = 0%
 
 theme = dark:"catppuccin-mocha", light:"catppuccin-latte"
 shell-integration = fish
@@ -14,9 +19,6 @@ window-theme = ghostty
 adw-toolbar-style = raised 
 window-padding-x = 2,4
 gtk-titlebar-hide-when-maximized = true
-# adds a +20% -> 1
-
-# macos-option-as-alt = true
 
 # keybindings
 keybind = super+shift+comma=reload_config
