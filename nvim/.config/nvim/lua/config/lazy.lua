@@ -30,7 +30,6 @@ require("lazy").setup({
 	{ import = "plugins.notes" },
 	{ import = "plugins.git" },
 	{ import = "plugins.lsp" },
-	{ import = "plugins.rust" },
 	{ import = "plugins.sessions" },
 	{ import = "plugins.treesitter" },
 	{ import = "plugins.ui" },
