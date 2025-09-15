@@ -22,8 +22,6 @@ require("lazy").setup({
 		enabled = true, -- check for plugin update periodically
 		notify = false, -- notify of an update
 	},
-	-- { import = "plugins" }, -- enough if all plugins live in a single directory
-	{ import = "plugins.ai" },
 	{ import = "plugins.enhancements" },
 	{ import = "plugins.tmux" },
 	{ import = "plugins.completion" },
@@ -32,7 +30,6 @@ require("lazy").setup({
 	{ import = "plugins.notes" },
 	{ import = "plugins.git" },
 	{ import = "plugins.lsp" },
-	{ import = "plugins.rust" },
 	{ import = "plugins.sessions" },
 	{ import = "plugins.treesitter" },
 	{ import = "plugins.ui" },

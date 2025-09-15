@@ -2,10 +2,6 @@ return {
 	"saghen/blink.cmp",
 	dependencies = {
 		"echasnovski/mini.snippets",
-		-- "rafamadriz/friendly-snippets",
-		"onsails/lspkind.nvim",
-		"Exafunction/windsurf.nvim", -- it's somewhat good for now
-		-- "giuxtaposition/blink-cmp-copilot", -- for when I have money
 		{
 			"Kaiser-Yang/blink-cmp-dictionary",
 			dependencies = { "nvim-lua/plenary.nvim" },
@@ -47,62 +43,34 @@ return {
 					end,
 				},
 			},
-			ghost_text = { enabled = vim.g.ai_cmp },
+			ghost_text = { enabled = true },
 			menu = {
 				-- don't show completion when searching
 				auto_show = function(ctx)
 					return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
 				end,
 				draw = {
+					padding = { 0, 1 }, -- padding only on the right side
 					columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
 					treesitter = { "lsp" },
 					components = {
 						kind_icon = {
-							ellipsis = false,
 							text = function(ctx)
-								local icon = ctx.kind_icon
-								if vim.tbl_contains({ "Path" }, ctx.source_name) then
-									local dev_icon, _
-									require("nvim-web-devicons").get_icon(ctx.label)
-									if dev_icon then
-										icon = dev_icon
-									end
-								else
-									icon = require("lspkind").symbolic(ctx.kind, { mode = "symbol" })
-								end
-								return icon .. ctx.icon_gap
+								local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
+								return " " .. kind_icon .. ctx.icon_gap .. " "
 							end,
+							-- (optional) use highlights from mini.icons
 							highlight = function(ctx)
-								local hl = ctx.kind_hl
-								if vim.tbl_contains({ "Path" }, ctx.source_name) then
-									local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
-									if dev_icon then
-										hl = dev_hl
-									end
-								end
+								local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
 								return hl
 							end,
 						},
-						-- NOTE: for usage with mini icons
-						-- kind_icon = {
-						-- 	ellipsis = false,
-						-- 	text = function(ctx)
-						-- 		local kind_icon, _ = require("mini.icons").get("lsp", ctx.kind)
-						-- 		return " " .. kind_icon .. ctx.icon_gap .. " "
-						-- 	end,
-						-- 	-- (optional) use highlights from mini.icons
-						-- 	highlight = function(ctx)
-						-- 		local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
-						-- 		return hl
-						-- 	end,
-						-- },
-						-- kind = {
-						-- 	-- (optional) use highlights from mini.icons
-						-- 	highlight = function(ctx)
-						-- 		local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
-						-- 		return hl
-						-- 	end,
-						-- },
+						kind = {
+							highlight = function(ctx)
+								local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
+								return hl
+							end,
+						},
 					},
 				},
 				border = "rounded",
@@ -140,8 +108,7 @@ return {
 				local defaults = { "lsp", "path", "snippets", "buffer" }
 				-- Filetype-specific completions
 				local filetype_completions = {
-					lua = { "lazydev", "codeium" },
-					-- lua = { "lazydev", "copilot" }, -- for when/if I have money
+					lua = { "lazydev" },
 					markdown = { "dictionary" },
 					text = { "dictionary" },
 				}
@@ -158,9 +125,6 @@ return {
 				if is_comment then
 					return { "buffer", "dictionary" }
 				end
-				-- Default case
-				table.insert(defaults, "codeium")
-				-- table.insert(defaults, "copilot") -- for when/if I have money
 				return defaults
 			end,
 			providers = {
@@ -178,9 +142,6 @@ return {
 					module = "lazydev.integrations.blink",
 					score_offset = 100, -- show at a higher priority than lsp
 				},
-				-- module = "blink.compat.source",
-				codeium = { name = "Codeium", module = "codeium.blink", score_offset = 100, async = true },
-				-- copilot = { name = "Copilot", module = "blink-cmp-copilot", score_offset = 100, async = true },
 			},
 		},
 		keymap = {
