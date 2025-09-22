@@ -90,6 +90,7 @@ return {
 			-- highlight = { enable = true, additional_vim_regex_highlighting = true },
 			highlight = { enable = true },
 			indent = { enable = true },
+			folds = { enable = true },
 			-- Add languages to be installed here that you want installed for treesitter
 			ensure_installed = {
 				"bash",
@@ -127,7 +128,8 @@ return {
 		},
 		config = function(_, opts)
 			-- require("nvim-treesitter.configs").setup(opts)
-			require("nvim-treesitter").setup(opts)
+			local TS = require("nvim-treesitter")
+			TS.setup(opts)
 		end,
 	},
 }
