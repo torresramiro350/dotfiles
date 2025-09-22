@@ -1,7 +1,6 @@
 return {
 	"p00f/clangd_extensions.nvim",
 	lazy = true,
-	ft = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
 	config = function() end,
 	keys = {
 		{ "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },

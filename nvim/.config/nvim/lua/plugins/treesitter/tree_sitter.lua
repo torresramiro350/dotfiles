@@ -19,10 +19,61 @@ return {
 		end,
 	},
 	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		branch = "main",
+		event = "VeryLazy",
+		opts = {},
+		keys = function()
+			local moves = {
+				goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
+				goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
+				goto_previous_start = {
+					["[f"] = "@function.outer",
+					["[c"] = "@class.outer",
+					["[a"] = "@parameter.inner",
+				},
+				goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
+			}
+			local ret = {} ---@type LazyKeysSpec[]
+			for method, keymaps in pairs(moves) do
+				for key, query in pairs(keymaps) do
+					local desc = query:gsub("@", ""):gsub("%..*", "")
+					desc = desc:sub(1, 1):upper() .. desc:sub(2)
+					desc = (key:sub(1, 1) == "[" and "Prev " or "Next ") .. desc
+					desc = desc .. (key:sub(2, 2) == key:sub(2, 2):upper() and " End" or " Start")
+					ret[#ret + 1] = {
+						key,
+						function()
+							-- don't use treesitter if in diff mode and the key is one of the c/C keys
+							if vim.wo.diff and key:find("[cC]") then
+								return vim.cmd("normal! " .. key)
+							end
+							require("nvim-treesitter-textobjects.move")[method](query, "textobjects")
+						end,
+						desc = desc,
+						mode = { "n", "x", "o" },
+						silent = true,
+					}
+				end
+			end
+			return ret
+		end,
+		config = function(_, opts)
+			local TS = require("nvim-treesitter-textobjects")
+			if not TS.setup then
+				error("Please use `:Lazy` and update `nvim-treesitter`", 0)
+				return
+			end
+			TS.setup(opts)
+		end,
+	},
+	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
+		version = false,
 		build = ":TSUpdate",
 		event = { "BufReadPre", "BufReadPost" },
-		cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
+		cmd = { "TSUpdateSync", "TSUpdate", "TSLog", "TSInstall" },
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 		},
@@ -30,10 +81,10 @@ return {
 			{ "<c-space>", desc = "Increment Selection" },
 			{ "<bs>", desc = "Decrement Selection", mode = "x" },
 		},
-		init = function(plugin)
-			require("lazy.core.loader").add_to_rtp(plugin)
-			require("nvim-treesitter.query_predicates")
-		end,
+		-- init = function(plugin)
+		-- 	require("lazy.core.loader").add_to_rtp(plugin)
+		-- 	require("nvim-treesitter.query_predicates")
+		-- end,
 		opts_extended = { "ensure_installed" },
 		opts = {
 			-- highlight = { enable = true, additional_vim_regex_highlighting = true },
@@ -73,38 +124,10 @@ return {
 					node_decremental = "<bs>",
 				},
 			},
-			textobjects = {
-				select = { enable = false },
-				move = {
-					enable = true,
-					set_jumps = true, -- whether to set jumps in the jumplist
-					goto_next_start = {
-						["]f"] = "@function.outer",
-						["]c"] = "@class.outer",
-						["]a"] = "@parameter.inner",
-						-- ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
-						-- ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
-					},
-					goto_next_end = {
-						["]F"] = "@function.outer",
-						["]C"] = "@class.outer",
-						["]A"] = "@parameter.outer",
-					},
-					goto_previous_start = {
-						["[f"] = "@function.outer",
-						["[c"] = "@class.outer",
-						["[a"] = "@parameter.inner",
-					},
-					goto_previous_end = {
-						["[F"] = "@function.outer",
-						["[C"] = "@class.outer",
-						["[A"] = "@parameter.inner",
-					},
-				},
-			},
 		},
 		config = function(_, opts)
-			require("nvim-treesitter.configs").setup(opts)
+			-- require("nvim-treesitter.configs").setup(opts)
+			require("nvim-treesitter").setup(opts)
 		end,
 	},
 }
