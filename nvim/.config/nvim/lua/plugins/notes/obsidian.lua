@@ -1,7 +1,6 @@
 return {
 	"obsidian-nvim/obsidian.nvim",
 	version = "*", -- recommended, use latest release instead of latest commit
-	lazy = true,
 	ft = "markdown",
 	opts = {
 		-- disabling this in favor of the ui from render markdown as they might not play ncie
