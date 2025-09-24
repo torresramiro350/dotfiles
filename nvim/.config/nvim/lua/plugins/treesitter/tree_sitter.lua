@@ -71,8 +71,13 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		branch = "main",
 		version = false,
-		build = ":TSUpdate",
-		event = { "BufReadPre", "BufReadPost" },
+		-- build = ":TSUpdate",
+		build = function()
+			local TS = require("nvim-treesitter")
+			TS.update(nil, { summary = true })
+		end,
+		lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
+		event = { "VeryLazy" },
 		cmd = { "TSUpdateSync", "TSUpdate", "TSLog", "TSInstall" },
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
