@@ -4,31 +4,19 @@ return {
 	priority = 1000,
 	enabled = true,
 	opts = {
-		auto_integrations = true, -- let capptuccin handle integrations
-		background = {
-			light = "latte",
-			dark = "mocha",
-		},
+		auto_integrations = false, -- let capptuccin handle integrations
+		background = { light = "latte", dark = "mocha" },
 		float = { transparent = false, solid = false },
 		flavour = "auto",
-		dim_inactive = {
-			enabled = false,
-			shade = "dark",
-			percentage = 0.15,
-		},
+		dim_inactive = { enabled = false, shade = "dark", percentage = 0.15 },
 		term_colors = true,
 		no_italic = false,
+		no_bold = false,
 		styles = {
 			comments = { "italic" },
 			conditionals = { "italic" },
-			loops = { "italic" },
-			functions = { "italic" },
-			keywords = { "italic" },
-			types = { "italic" },
-			properties = { "italic" },
 		},
 		integrations = {
-			--defaults
 			blink_cmp = { enabled = true, style = "bordered" },
 			cmp = true,
 			diffview = true,
@@ -39,17 +27,12 @@ return {
 			gitsigns = true,
 			gitgutter = true,
 			lsp_trouble = true,
-			harpoon = true,
 			headlines = true,
 			markdown = true,
-			markview = true,
 			render_markdown = true,
 			mason = true,
-			mini = {
-				enabled = true,
-			},
-			native_lsp = {
-				enabled = true,
+			mini = { enabled = true },
+			lsp_styles = {
 				virtual_text = {
 					errors = { "italic" },
 					hints = { "italic" },
@@ -64,10 +47,7 @@ return {
 					information = { "underline" },
 					ok = { "underline" },
 				},
-				inlay_hints = {
-					-- don't want a background for the inlay hints
-					background = false,
-				},
+				inlay_hints = { background = false },
 			},
 			noice = true,
 			neotree = true,
@@ -75,10 +55,7 @@ return {
 			nvim_surround = true,
 			notify = true,
 			octo = true,
-			snacks = { enabled = true, indent_scope_color = "lavender", picker_style = "nvchad_outlined" },
-			telescope = {
-				enabled = true,
-			},
+			snacks = { enabled = true, indent_scope_color = "lavender" },
 			treesitter = true,
 			treesitter_context = true,
 			ts_rainbow = true,
@@ -87,7 +64,6 @@ return {
 		},
 		highlight_overrides = {
 			mocha = function(mocha)
-				-- return { LineNr = { fg = mocha.lavender } }
 				return { LineNr = { fg = mocha.overlay0 }, CursorLineNr = { fg = mocha.mauve } }
 			end,
 		},
