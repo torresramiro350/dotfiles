@@ -1,9 +1,11 @@
 return {
 	"mfussenegger/nvim-dap",
 	event = { "BufReadPre", "BufReadPost" },
+	enabled = true,
 	dependencies = {
 		"rcarriga/nvim-dap-ui",
 		"nvim-neotest/nvim-nio",
+		{ "theHamsta/nvim-dap-virtual-text", opts = {} },
 		{
 			"rcarriga/nvim-dap-ui",
 			keys = {
@@ -28,26 +30,20 @@ return {
 				end
 			end,
 		},
-		-- virtual text for the debugger
-		{
-			"theHamsta/nvim-dap-virtual-text",
-			opts = {},
-		},
-		{
-			"mfussenegger/nvim-dap-python",
-			ft = "python",
-			event = { "BufReadPre", "BufReadPost" },
-			config = function()
-				local dap_python = require("dap-python")
-				dap_python.setup("/home/rtorres/miniforge3/envs/swgo_fast/bin/python")
-			end,
-			keys = {
-      -- stylua: ignore start
-      { "<leader>dPt", function() require('dap-python').test_method() end, desc = "Debug Method", ft = "python" },
-      { "<leader>dPc", function() require('dap-python').test_class() end, desc = "Debug Class", ft = "python" },
-				-- stylua: ignore end
-			},
-		},
+		-- {
+		-- 	"mfussenegger/nvim-dap-python",
+		-- 	ft = "python",
+		-- 	config = function()
+		-- 		local dap_python = require("dap-python")
+		-- 		dap_python.setup("uv")
+		-- 	end,
+		-- 	keys = {
+		--     -- stylua: ignore start
+		--     { "<leader>dPt", function() require('dap-python').test_method() end, desc = "Debug Method", ft = "python" },
+		--     { "<leader>dPc", function() require('dap-python').test_class() end, desc = "Debug Class", ft = "python" },
+		-- 		-- stylua: ignore end
+		-- 	},
+		-- },
 	},
 	config = function()
 		vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
