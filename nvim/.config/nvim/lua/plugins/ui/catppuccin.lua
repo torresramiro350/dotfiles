@@ -21,11 +21,11 @@ return {
 		styles = {
 			comments = { "italic" },
 			conditionals = { "italic" },
-			loops = {},
-			functions = {},
-			keywords = {},
-			types = {},
-			properties = {},
+			loops = { "italic" },
+			functions = { "italic" },
+			keywords = { "italic" },
+			types = { "italic" },
+			properties = { "italic" },
 		},
 		lsp_styles = {
 			-- enabled = true,

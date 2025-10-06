@@ -9,8 +9,9 @@ return {
 		opts = {
 			ensure_installed = {
 				"stylua",
+				"lua-language-server",
 				"clangd",
-				"clang-format",
+				"cpplint",
 				"bash-language-server",
 				"shellharden",
 				"beautysh",

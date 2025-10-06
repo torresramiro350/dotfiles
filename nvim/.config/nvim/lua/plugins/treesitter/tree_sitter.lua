@@ -1,5 +1,77 @@
 return {
 	{
+		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
+		version = false,
+		enabled = true,
+		lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
+		build = function()
+			local TS = require("nvim-treesitter")
+			TS.update(nil, { summary = true })
+		end,
+		event = { "VeryLazy" },
+		cmd = { "TSUpdateSync", "TSUpdate", "TSLog", "TSInstall" },
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+		},
+		keys = {
+			{ "<c-space>", desc = "Increment Selection" },
+			{ "<bs>", desc = "Decrement Selection", mode = "x" },
+		},
+		opts_extended = { "ensure_installed" },
+		opts = {
+			highlight = { enable = true },
+			indent = { enable = true },
+			folds = { enable = true },
+			auto_install = true,
+			incremental_selection = {
+				enable = true,
+				keymaps = {
+					init_selection = "<C-space>",
+					node_incremental = "<C-space>",
+					scope_incremental = false,
+					node_decremental = "<bs>",
+				},
+			},
+			ensure_installed = {
+				"bash",
+				"c",
+				"cpp",
+				"cmake",
+				"go",
+				"json",
+				"lua",
+				"luadoc",
+				"luap",
+				"markdown",
+				"markdown_inline",
+				"ninja",
+				"rst",
+				"python",
+				"printf",
+				"rust",
+				"regex",
+				"toml",
+				"vim",
+				"vimdoc",
+				"yaml",
+			},
+		},
+		config = function(_, opts)
+			-- require("nvim-treesitter.configs").setup(opts)
+			local TS = require("nvim-treesitter")
+			TS.setup(opts)
+			vim.api.nvim_create_autocmd("FileType", {
+				group = vim.api.nvim_create_augroup("my_nvim_treesitter", { clear = true }),
+				callback = function()
+					if vim.tbl_get(opts, "highlight", "enable") ~= false then
+						pcall(vim.treesitter.start)
+					end
+				end,
+			})
+		end,
+	},
+	{
 		"nvim-treesitter/nvim-treesitter-context",
 		event = "VeryLazy",
 		opts = function()
@@ -64,76 +136,6 @@ return {
 				error("Please use `:Lazy` and update `nvim-treesitter`", 0)
 				return
 			end
-			TS.setup(opts)
-		end,
-	},
-	{
-		"nvim-treesitter/nvim-treesitter",
-		branch = "main",
-		version = false,
-		-- build = ":TSUpdate",
-		build = function()
-			local TS = require("nvim-treesitter")
-			TS.update(nil, { summary = true })
-		end,
-		lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
-		event = { "VeryLazy" },
-		cmd = { "TSUpdateSync", "TSUpdate", "TSLog", "TSInstall" },
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter-textobjects",
-		},
-		keys = {
-			{ "<c-space>", desc = "Increment Selection" },
-			{ "<bs>", desc = "Decrement Selection", mode = "x" },
-		},
-		-- init = function(plugin)
-		-- 	require("lazy.core.loader").add_to_rtp(plugin)
-		-- 	require("nvim-treesitter.query_predicates")
-		-- end,
-		opts_extended = { "ensure_installed" },
-		opts = {
-			-- highlight = { enable = true, additional_vim_regex_highlighting = true },
-			highlight = { enable = true },
-			indent = { enable = true },
-			folds = { enable = true },
-			-- Add languages to be installed here that you want installed for treesitter
-			ensure_installed = {
-				"bash",
-				"c",
-				"cpp",
-				"cmake",
-				"go",
-				"json",
-				"lua",
-				"luadoc",
-				"luap",
-				"markdown",
-				"markdown_inline",
-				"ninja",
-				"rst",
-				"python",
-				"printf",
-				"rust",
-				"regex",
-				"toml",
-				"vim",
-				"vimdoc",
-				"yaml",
-			},
-			auto_install = true,
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "<C-space>",
-					node_incremental = "<C-space>",
-					scope_incremental = false,
-					node_decremental = "<bs>",
-				},
-			},
-		},
-		config = function(_, opts)
-			-- require("nvim-treesitter.configs").setup(opts)
-			local TS = require("nvim-treesitter")
 			TS.setup(opts)
 		end,
 	},
