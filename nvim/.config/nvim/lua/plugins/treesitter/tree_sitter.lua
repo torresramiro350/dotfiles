@@ -4,11 +4,12 @@ return {
 		branch = "main",
 		version = false,
 		enabled = true,
+		build = ":TSUpdate",
 		lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
-		build = function()
-			local TS = require("nvim-treesitter")
-			TS.update(nil, { summary = true })
-		end,
+		-- build = function()
+		-- 	local TS = require("nvim-treesitter")
+		-- 	TS.update(nil, { summary = true })
+		-- end,
 		event = { "VeryLazy" },
 		cmd = { "TSUpdateSync", "TSUpdate", "TSLog", "TSInstall" },
 		dependencies = {
@@ -38,6 +39,7 @@ return {
 				"c",
 				"cpp",
 				"cmake",
+				"dockerfile",
 				"go",
 				"json",
 				"lua",
@@ -61,11 +63,33 @@ return {
 			-- require("nvim-treesitter.configs").setup(opts)
 			local TS = require("nvim-treesitter")
 			TS.setup(opts)
+			TS.install(opts.ensure_installed)
+			local installed = TS.get_installed(true)
 			vim.api.nvim_create_autocmd("FileType", {
-				group = vim.api.nvim_create_augroup("my_nvim_treesitter", { clear = true }),
+				pattern = {
+					"cpp",
+					"c",
+					"dockerfile",
+					"json",
+					"jsonc",
+					"lua",
+					"markdown",
+					"python",
+					"sh",
+					"toml",
+					"vim",
+					"xml",
+					"yaml",
+				},
 				callback = function()
-					if vim.tbl_get(opts, "highlight", "enable") ~= false then
+					if vim.tbl_get(opts, "highlight", "enable") then
 						pcall(vim.treesitter.start)
+					end
+					if vim.tbl_get(opts, "indent", "enable") then
+						vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+					end
+					if vim.tbl_get(opts, "folds", "enable") then
+						vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 					end
 				end,
 			})
