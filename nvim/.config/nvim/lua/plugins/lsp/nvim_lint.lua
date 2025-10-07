@@ -10,7 +10,6 @@ return {
 			cmake = { "cmakelint" },
 			cpp = { "cpplint" },
 			rst = { "rstcheck", "rstlint" },
-			-- restructuredtext = { "rstcheck", "rstlint" },
 		},
 		linters = {},
 	},

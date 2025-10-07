@@ -1,10 +1,9 @@
 return {
 	"Civitasv/cmake-tools.nvim",
-	-- ft = { "cmake" },
-	-- event = { "BufRead CMakeLists.txt" },
 	lazy = true,
 	init = function()
-		-- load the plugin only if the current directory contains a CMakeLists.txt file
+		-- load the plugin only if the current directory contains
+		-- a CMakeLists.txt file
 		local loaded = false
 		local function check()
 			local cwd = vim.uv.cwd()
@@ -37,14 +36,7 @@ return {
 		cmake_generate_options = { "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" },
 		cmake_kits_path = os.getenv("HOME") .. "/cmake-kits/cmake-kits.json",
 	},
-	-- config = function()
-	-- 	local home = os.getenv("HOME")
-	-- 	require("cmake-tools").setup({
-	-- 		cmake_command = "cmake",
-	-- 		ctest_command = "ctest",
-	-- 		cmake_build_directory = "build/${variant:buildType}",
-	-- 		cmake_generate_options = { "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" },
-	-- 		cmake_kits_path = home .. "/cmake-kits/cmake-kits.json",
-	-- 	})
-	-- end,
+	config = function(_, opts)
+		require("cmake-tools").setup(opts)
+	end,
 }
