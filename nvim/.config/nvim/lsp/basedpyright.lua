@@ -5,5 +5,18 @@ return {
 	filetypes = { "python" },
 	cmd = { "basedpyright-langserver", "--stdio" },
 	on_attach = Lsp.on_attach,
-	settings = {},
+	settings = {
+		basedpyright = {
+			analysis = {
+				autoSearchPaths = true,
+				diagnosticMode = "openFilesOnly",
+				inlayHints = {
+					callArgumentNamesMatching = true,
+					functionReturnTypes = true,
+					callArgumentNames = true,
+					variableTypes = false,
+				},
+			},
+		},
+	},
 }
