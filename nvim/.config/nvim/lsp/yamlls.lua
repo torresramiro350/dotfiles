@@ -2,6 +2,7 @@ local Lsp = require("utils.lsp")
 return {
 	on_attach = Lsp.on_attach,
 	filetypes = { "yaml", "yml" },
+	cmd = { "yaml-language-server", "--stdio" },
 	capabilities = {
 		textDocument = {
 			foldingRange = {
