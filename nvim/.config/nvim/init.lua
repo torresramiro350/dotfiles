@@ -7,4 +7,5 @@ require("keymaps.mappings")
 -- load my autocmds
 require("config.autocmds")
 -- load the lsp diagnostics configuration
-require("utils.diagnostics")
+require("lsp.lsp")
+-- require("utils.diagnostics")
