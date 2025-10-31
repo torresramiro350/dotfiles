@@ -6,33 +6,6 @@ nmap("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 nmap("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 nmap("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 
--- diagnostic
-local function diagnostic_goto(direction, severity)
-	return function()
-		vim.diagnostic.jump({
-			severity = vim.diagnostic.severity[severity],
-			count = direction and 1 or -1,
-			float = true,
-		})
-	end
-end
-nmap("n", "[d", diagnostic_goto(false), { desc = "Go to previous diagnostic message" })
-nmap("n", "]d", diagnostic_goto(true), { desc = "Go to next diagnostic message" })
-nmap("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Go to previous error" })
-nmap("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Go to next error" })
-nmap("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Go to previous warning" })
-nmap("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Go to next warning" })
-nmap("n", "]Q", vim.cmd.clast, { desc = "End of quickfix list" })
-nmap("n", "[Q", vim.cmd.cfirst, { desc = "Beginning of quickfix list" })
-nmap("n", "[l", vim.cmd.lnext, { desc = "Next loclist" })
-nmap("n", "]l", vim.cmd.lprev, { desc = "Previous loclist" })
-nmap("n", "]L", vim.cmd.llast, { desc = "End of loclist" })
-nmap("n", "[L", vim.cmd.lfirst, { desc = "Beginning of loclist" })
-nmap("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
-nmap("n", "<leader>xl", vim.diagnostic.setloclist, { desc = "Open location list" })
-nmap("n", "<leader>xq", vim.diagnostic.setqflist, { desc = "Open quickfix list" })
-nmap("n", "<leader>Q", "<cmd>cclose<cr>", { desc = "Close quickfix list" })
-nmap("n", "<leader>L", "<cmd>lclose<cr>", { desc = "Close location list" })
 
 -- Keymaps for better default experience
 nmap({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
