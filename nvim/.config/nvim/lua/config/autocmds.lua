@@ -1,4 +1,5 @@
 -- local augroup = vim.api.nvim_create_augroup
+require("groups.utility_funcs")
 local autocmd = vim.api.nvim_create_autocmd
 local function augroup(name)
 	return vim.api.nvim_create_augroup("my_nvim_" .. name, { clear = true })
@@ -148,6 +149,37 @@ autocmd("LspAttach", {
 			if client:supports_method("textDocument/inlayHints") then
 				vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
 			end
+
+			-- diagnostic
+			local function diagnostic_goto(direction, severity)
+				return function()
+					vim.diagnostic.jump({
+						severity = vim.diagnostic.severity[severity],
+						count = direction and 1 or -1,
+						float = true,
+					})
+				end
+			end
+			-- code actions
+			nmap("n", "<leader>rs", "<cmd>LspRestart<cr>", { desc = "Restart server" })
+			nmap({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Show code actions" })
+			nmap("n", "[d", diagnostic_goto(false), { desc = "Go to previous diagnostic message" })
+			nmap("n", "]d", diagnostic_goto(true), { desc = "Go to next diagnostic message" })
+			nmap("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Go to previous error" })
+			nmap("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Go to next error" })
+			nmap("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Go to previous warning" })
+			nmap("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Go to next warning" })
+			nmap("n", "]Q", vim.cmd.clast, { desc = "End of quickfix list" })
+			nmap("n", "[Q", vim.cmd.cfirst, { desc = "Beginning of quickfix list" })
+			nmap("n", "[l", vim.cmd.lnext, { desc = "Next loclist" })
+			nmap("n", "]l", vim.cmd.lprev, { desc = "Previous loclist" })
+			nmap("n", "]L", vim.cmd.llast, { desc = "End of loclist" })
+			nmap("n", "[L", vim.cmd.lfirst, { desc = "Beginning of loclist" })
+			nmap("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
+			nmap("n", "<leader>xl", vim.diagnostic.setloclist, { desc = "Open location list" })
+			nmap("n", "<leader>xq", vim.diagnostic.setqflist, { desc = "Open quickfix list" })
+			nmap("n", "<leader>Q", "<cmd>cclose<cr>", { desc = "Close quickfix list" })
+			nmap("n", "<leader>L", "<cmd>lclose<cr>", { desc = "Close location list" })
 		end
 	end,
 })
