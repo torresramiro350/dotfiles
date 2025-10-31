@@ -1,7 +1,7 @@
-local Lsp = require("utils.lsp")
+-- local Lsp = require("utils.lsp")
 
 return {
-	on_attach = Lsp.on_attach,
+	-- on_attach = Lsp.on_attach,
 	cmd = { "ruff", "server" },
 	filetypes = { "python" },
 	cmd_env = { RUFF_TRACE = "messages" },

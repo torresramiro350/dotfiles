@@ -1,4 +1,3 @@
-local Lsp = require("utils.lsp")
 return {
 	filetypes = { "python" },
 	cmd = { "pylsp" },

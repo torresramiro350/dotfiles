@@ -1,6 +1,6 @@
-local Lsp = require("utils.lsp")
+-- local Lsp = require("utils.lsp")
 return {
-	on_attach = Lsp.on_attach,
+	-- on_attach = Lsp.on_attach,
 	filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
 	cmd = {
 		"clangd",
