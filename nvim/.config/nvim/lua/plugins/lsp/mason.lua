@@ -8,25 +8,36 @@ return {
 		},
 		opts = {
 			ensure_installed = {
+				-- lua
 				"stylua",
 				"lua-language-server",
+				-- c/cpp
 				"clangd",
 				"cpplint",
+				-- bash
 				"bash-language-server",
+				"shfmt",
 				"shellharden",
+				"shellcheck",
 				"beautysh",
+				-- docker
 				"docker-language-server",
+				-- cmake
 				"cmake-language-server",
 				"cmakelint",
 				"gersemi",
+				-- markdown
 				"markdownlint-cli2",
 				"markdown-toc",
 				"markdown-oxide",
+				-- toml
 				"taplo",
 				"pyproject-fmt",
+				-- yaml
 				"yaml-language-server",
 				"yamllint",
 				"yamlfmt",
+				-- json
 				"json-lsp",
 				"prettier",
 				"prettierd",
