@@ -162,6 +162,15 @@ autocmd("LspAttach", {
 			end
 			-- code actions
 			nmap("n", "<leader>rs", "<cmd>LspRestart<cr>", { desc = "Restart server" })
+			nmap("n", "<leader>co", function()
+				vim.lsp.buf.code_action({
+					apply = true,
+					context = {
+						only = { "source.organizeImports" },
+						diagnostics = {},
+					},
+				})
+			end, { desc = "Organize imports" })
 			nmap({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Show code actions" })
 			nmap("n", "[d", diagnostic_goto(false), { desc = "Go to previous diagnostic message" })
 			nmap("n", "]d", diagnostic_goto(true), { desc = "Go to next diagnostic message" })
