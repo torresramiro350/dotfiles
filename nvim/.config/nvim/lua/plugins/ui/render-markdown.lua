@@ -6,7 +6,8 @@ return {
 		ft = { "markdown", "norg", "rmd", "org", "codecompanion", "blink-cmp-documentation", "blink-cmp-signature" },
 		opts = {
 			latex = {
-				position = "below",
+				position = "center",
+				bottom_pad = 1,
 			},
 			dash = { width = 100 },
 			checkbox = {
