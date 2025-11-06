@@ -101,6 +101,11 @@ return {
       Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end, notify = false }) end,
       desc= "Git Yank", mode = { "n", "x" }
     },
+    -- gh
+    { "<leader>gi", function () Snacks.picker.gh_issue() end, desc = "GitHub issues (open)" },
+    { "<leader>gI", function() Snacks.picker.gh_issue({ state = "all" }) end, desc = "GitHub Issues (all)" },
+    { "<leader>gp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
+    { "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub Pull Requests (all)" },
     -- search
     { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
     { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
@@ -127,6 +132,8 @@ return {
     { "gr",         function() Snacks.picker.lsp_references() end, nowait = true,                        desc = "References" },
     { "gI",         function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
     { "gy",         function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
+    { "gai", function() Snacks.picker.lsp_incoming_calls() end, desc = "C[a]lls Incoming" },
+    { "gao", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing" },
     { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
     { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "Worskapce symbols" },
     -- quality of life improvements
