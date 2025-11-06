@@ -154,20 +154,20 @@ autocmd("FileType", {
 })
 
 -- enable cursor line only in active window enable
-autocmd({ "WinEnter", "BufEnter" }, {
-	group = augroup("active_cursorline"),
-	callback = function()
-		vim.opt_local.cursorline = true
-	end,
-})
+-- autocmd({ "WinEnter", "BufEnter" }, {
+-- 	group = augroup("active_cursorline"),
+-- 	callback = function()
+-- 		vim.opt_local.cursorline = true
+-- 	end,
+-- })
 
 -- show cursorline only in active window disable
-autocmd({ "WinLeave", "BufLeave" }, {
-	group = "active_cursorline",
-	callback = function()
-		vim.opt_local.cursorline = false
-	end,
-})
+-- autocmd({ "WinLeave", "BufLeave" }, {
+-- 	group = "active_cursorline",
+-- 	callback = function()
+-- 		vim.opt_local.cursorline = false
+-- 	end,
+-- })
 
 -- Auto create dir when saving a file, in case some intermediate directory does not exist
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
