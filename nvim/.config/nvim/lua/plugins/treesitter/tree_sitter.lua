@@ -4,12 +4,8 @@ return {
 		branch = "main",
 		version = false,
 		enabled = true,
+		lazy = false,
 		build = ":TSUpdate",
-		lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
-		-- build = function()
-		-- 	local TS = require("nvim-treesitter")
-		-- 	TS.update(nil, { summary = true })
-		-- end,
 		event = { "VeryLazy" },
 		cmd = { "TSUpdateSync", "TSUpdate", "TSLog", "TSInstall" },
 		dependencies = {
@@ -69,24 +65,7 @@ return {
 			TS.install(opts.ensure_installed)
 			local installed = TS.get_installed(true)
 			vim.api.nvim_create_autocmd("FileType", {
-				pattern = {
-					"cpp",
-					"c",
-					"cmake",
-					"dockerfile",
-					"json",
-					"jsonc",
-					"lua",
-					"make",
-					"markdown",
-					"python",
-					"sh",
-					"ssh_config",
-					"toml",
-					"vim",
-					"xml",
-					"yaml",
-				},
+				group = vim.api.nvim_create_augroup("treesitter", { clear = true }),
 				callback = function()
 					if vim.tbl_get(opts, "highlight", "enable") then
 						pcall(vim.treesitter.start)

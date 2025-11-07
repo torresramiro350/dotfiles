@@ -5,10 +5,6 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
 		ft = { "markdown", "norg", "rmd", "org", "codecompanion", "blink-cmp-documentation", "blink-cmp-signature" },
 		opts = {
-			latex = {
-				position = "center",
-				bottom_pad = 1,
-			},
 			dash = { width = 100 },
 			checkbox = {
 				custom = {

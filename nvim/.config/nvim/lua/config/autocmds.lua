@@ -2,7 +2,7 @@
 require("groups.utility_funcs")
 local autocmd = vim.api.nvim_create_autocmd
 local function augroup(name)
-	return vim.api.nvim_create_augroup("my_nvim_" .. name, { clear = true })
+	return vim.api.nvim_create_augroup(name, { clear = true })
 end
 
 autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
@@ -32,22 +32,64 @@ autocmd("TextYankPost", {
 	end,
 })
 
+-- ide like highlight when stopping cursor
+-- leaving it out for later
+-- autocmd("CursorMoved", {
+-- 	group = augroup("LspReferenceHighlight"),
+-- 	desc = "Highlight references under cursor",
+-- 	callback = function()
+-- 		if vim.fn.mode ~= "i" then
+-- 			local clients = vim.lsp.get_clients({ bufnr = 0 })
+-- 			local supports_highlight = false
+-- 			for _, client in ipairs(clients) do
+-- 				if client.server_capabilities.documentHighlightProvider then
+-- 					supports_highlight = true
+-- 					break -- Found a supporting client, no need to check further
+-- 				end
+-- 			end
+--
+-- 			if supports_highlight then
+-- 				vim.lsp.buf.clear_references()
+-- 				vim.lsp.buf.document_highlight()
+-- 			end
+-- 		end
+-- 	end,
+-- })
+--
+-- -- ide like heighlight when stopping cursor
+-- autocmd("CursorMovedI", {
+-- 	group = "LspReferenceHighlight",
+-- 	desc = "Clear highlights when entering insert mode",
+-- 	callback = function()
+-- 		vim.lsp.buf.clear_references()
+-- 	end,
+-- })
+
 -- go to last loc when opening a buffer
 autocmd("BufReadPost", {
 	group = augroup("last_loc"),
 	callback = function(event)
 		local exclude = { "gitcommit" }
 		local buf = event.buf
-		if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
+		if vim.tbl_contains(exclude, vim.bo[buf].filetype) then
 			return
 		end
-		vim.b[buf].lazyvim_last_loc = true
 		local mark = vim.api.nvim_buf_get_mark(buf, '"')
-		local lcount = vim.api.nvim_buf_line_count(buf)
-		if mark[1] > 0 and mark[1] <= lcount then
+		local line_count = vim.api.nvim_buf_line_count(buf)
+		if mark[1] > 0 and mark[1] <= line_count then
 			pcall(vim.api.nvim_win_set_cursor, 0, mark)
+			-- defer centering slightly so it's applied render
+			vim.schedule(function()
+				vim.cmd("normal! zz")
+			end)
 		end
 	end,
+})
+
+-- open help in vertical split
+autocmd("FileType", {
+	pattern = "help",
+	command = "wincmd L",
 })
 
 -- make it easier to close man-files when opened inline
@@ -111,6 +153,22 @@ autocmd("FileType", {
 	end,
 })
 
+-- enable cursor line only in active window enable
+-- autocmd({ "WinEnter", "BufEnter" }, {
+-- 	group = augroup("active_cursorline"),
+-- 	callback = function()
+-- 		vim.opt_local.cursorline = true
+-- 	end,
+-- })
+
+-- show cursorline only in active window disable
+-- autocmd({ "WinLeave", "BufLeave" }, {
+-- 	group = "active_cursorline",
+-- 	callback = function()
+-- 		vim.opt_local.cursorline = false
+-- 	end,
+-- })
+
 -- Auto create dir when saving a file, in case some intermediate directory does not exist
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 	group = augroup("auto_create_dir"),
@@ -161,8 +219,12 @@ autocmd("LspAttach", {
 				end
 			end
 			-- code actions
-			nmap("n", "<leader>rs", "<cmd>LspRestart<cr>", { desc = "Restart server" })
-			nmap("n", "<leader>co", function()
+			Snacks.keymap.set("n", "<leader>rs", "<cmd>LspRestart<cr>", { desc = "Restart server" })
+			Snacks.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {
+				lsp = { method = "textDocument/codeAction" },
+				desc = "Code Action",
+			})
+			Snacks.keymap.set("n", "<leader>co", function()
 				vim.lsp.buf.code_action({
 					apply = true,
 					context = {
@@ -171,24 +233,23 @@ autocmd("LspAttach", {
 					},
 				})
 			end, { desc = "Organize imports" })
-			nmap({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Show code actions" })
-			nmap("n", "[d", diagnostic_goto(false), { desc = "Go to previous diagnostic message" })
-			nmap("n", "]d", diagnostic_goto(true), { desc = "Go to next diagnostic message" })
-			nmap("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Go to previous error" })
-			nmap("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Go to next error" })
-			nmap("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Go to previous warning" })
-			nmap("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Go to next warning" })
-			nmap("n", "]Q", vim.cmd.clast, { desc = "End of quickfix list" })
-			nmap("n", "[Q", vim.cmd.cfirst, { desc = "Beginning of quickfix list" })
-			nmap("n", "[l", vim.cmd.lnext, { desc = "Next loclist" })
-			nmap("n", "]l", vim.cmd.lprev, { desc = "Previous loclist" })
-			nmap("n", "]L", vim.cmd.llast, { desc = "End of loclist" })
-			nmap("n", "[L", vim.cmd.lfirst, { desc = "Beginning of loclist" })
-			nmap("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
-			nmap("n", "<leader>xl", vim.diagnostic.setloclist, { desc = "Open location list" })
-			nmap("n", "<leader>xq", vim.diagnostic.setqflist, { desc = "Open quickfix list" })
-			nmap("n", "<leader>Q", "<cmd>cclose<cr>", { desc = "Close quickfix list" })
-			nmap("n", "<leader>L", "<cmd>lclose<cr>", { desc = "Close location list" })
+			Snacks.keymap.set("n", "[d", diagnostic_goto(false), { desc = "Go to previous diagnostic message" })
+			Snacks.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Go to next diagnostic message" })
+			Snacks.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Go to previous error" })
+			Snacks.keymap.set("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Go to next error" })
+			Snacks.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Go to previous warning" })
+			Snacks.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Go to next warning" })
+			Snacks.keymap.set("n", "]Q", vim.cmd.clast, { desc = "End of quickfix list" })
+			Snacks.keymap.set("n", "[Q", vim.cmd.cfirst, { desc = "Beginning of quickfix list" })
+			Snacks.keymap.set("n", "[l", vim.cmd.lnext, { desc = "Next loclist" })
+			Snacks.keymap.set("n", "]l", vim.cmd.lprev, { desc = "Previous loclist" })
+			Snacks.keymap.set("n", "]L", vim.cmd.llast, { desc = "End of loclist" })
+			Snacks.keymap.set("n", "[L", vim.cmd.lfirst, { desc = "Beginning of loclist" })
+			Snacks.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
+			Snacks.keymap.set("n", "<leader>xl", vim.diagnostic.setloclist, { desc = "Open location list" })
+			Snacks.keymap.set("n", "<leader>xq", vim.diagnostic.setqflist, { desc = "Open quickfix list" })
+			Snacks.keymap.set("n", "<leader>Q", "<cmd>cclose<cr>", { desc = "Close quickfix list" })
+			Snacks.keymap.set("n", "<leader>L", "<cmd>lclose<cr>", { desc = "Close location list" })
 		end
 	end,
 })

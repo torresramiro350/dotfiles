@@ -25,6 +25,7 @@ return {
 				},
 				opts = {
 					ensure_installed = {
+						"codelldb",
 						"cpplint",
 						"cmakelint",
 						"gersemi",
