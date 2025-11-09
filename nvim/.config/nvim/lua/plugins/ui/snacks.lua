@@ -6,6 +6,7 @@ return {
 		animate = {},
 		dim = {},
 		picker = {},
+		gh = {},
 		explorer = { enabled = false },
 		input = { enabled = true },
 		notifier = { enabled = true, style = "fancy", level = vim.log.levels.INFO },
@@ -97,7 +98,7 @@ return {
     { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
     { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
     { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", },
-    {"<leader>gY", function() 
+    {"<leader>gY", function()
       Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end, notify = false }) end,
       desc= "Git Yank", mode = { "n", "x" }
     },
