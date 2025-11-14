@@ -20,7 +20,8 @@ function fs -d "Switch tmux session"
 end
 
 function fssh -d "Fuzzy-find ssh host via ag and ssh into it"
-    ag --ignore-case '^host [^*]' ~/.ssh/config | cut -d ' ' -f 2 | fzf | read -l result; and ssh "$result"
+    # ag --ignore-case '^host [^*]' ~/.ssh/config | cut -d ' ' -f 2 | fzf | read -l result; and ssh "$result"
+    rg --ignore-case '^host [^*]' ~/.ssh/config | cut -d ' ' -f 2 | fzf | read -l result; and ssh "$result"
 end
 
 function fco -d "Fuzzy-find and checkout a branch"
@@ -113,7 +114,8 @@ alias flatupd="flatpak update"
 alias x="exit"
 # alias cp="xcp"
 
-alias nv='/usr/bin/nvim'
+alias nv="/usr/bin/nvim"
+alias vimdiff="nvim -d"
 # alias nv='/home/rtorres/nvim-linux64/bin/nvim'
 
 alias mkdir='mkdir -pv'
@@ -200,27 +202,8 @@ set -gx _ZO_FZF_OPTS $FZF_DEFAULT_OPTS "\
 set -gx SKIM_DEFAULT_OPTIONS "\
 --border --height 20 --layout reverse"
 
-set -gx SKIM_DEFAULT_OPTIONS $SKIM_DEFAULT_OPTIONS "\
---color=fg:#cdd6f4,bg:#1e1e2e,matched:#313244,matched_bg:#f2cdcd,current:#cdd6f4,current_bg:#45475a,current_match:#1e1e2e,current_match_bg:#f5e0dc,spinner:#a6e3a1,info:#cba6f7,prompt:#89b4fa,cursor:#f38ba8,selected:#eba0ac,header:#94e2d5,border:#6c7086"
-
 set -Ux FZF_COMPLETION_TRIGGER '~~'
 bind \t fzf-complete
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-if test -f /home/rtorres/miniforge3/bin/conda
-    eval /home/rtorres/miniforge3/bin/conda "shell.fish" hook $argv | source
-else
-    if test -f "/home/rtorres/miniforge3/etc/fish/conf.d/conda.fish"
-        . "/home/rtorres/miniforge3/etc/fish/conf.d/conda.fish"
-    else
-        set -x PATH /home/rtorres/miniforge3/bin $PATH
-    end
-end
-
-if test -f "/home/rtorres/miniforge3/etc/fish/conf.d/mamba.fish"
-    source "/home/rtorres/miniforge3/etc/fish/conf.d/mamba.fish"
-end
-# <<< conda initialize <<<
 
 set PATH $HOME/.cargo/bin $PATH
 # Set up fzf key bindings
