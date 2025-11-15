@@ -11,25 +11,12 @@ return {
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 		},
-		keys = {
-			{ "<c-space>", desc = "Increment Selection" },
-			{ "<bs>", desc = "Decrement Selection", mode = "x" },
-		},
 		opts_extended = { "ensure_installed" },
 		opts = {
 			highlight = { enable = true },
 			indent = { enable = true },
 			folds = { enable = true },
 			auto_install = true,
-			-- incremental_selection = {
-			-- 	enable = true,
-			-- 	keymaps = {
-			-- 		init_selection = "<C-space>",
-			-- 		node_incremental = "<C-space>",
-			-- 		scope_incremental = false,
-			-- 		node_decremental = "<bs>",
-			-- 	},
-			-- },
 			ensure_installed = {
 				"bash",
 				"c",
@@ -115,7 +102,7 @@ return {
 				},
 				goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
 			}
-			local ret = {} ---@type LazyKeysSpec[]
+			local ret = {}
 			for method, keymaps in pairs(moves) do
 				for key, query in pairs(keymaps) do
 					local desc = query:gsub("@", ""):gsub("%..*", "")
