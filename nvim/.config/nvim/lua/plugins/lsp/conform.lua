@@ -12,7 +12,13 @@ return {
 				quiet = false, -- not recommended to change
 				lsp_format = "fallback", -- not recommended to change
 			},
-			format_on_save = { lsp_format = "fallback" },
+			-- format_on_save = { lsp_format = "fallback" },
+			format_on_save = function(bufnr)
+				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+					return
+				end
+				return { lsp_format = "fallback" }
+			end,
 			formatters = {
 				["markdown-toc"] = {
 					condition = function(_, ctx)
