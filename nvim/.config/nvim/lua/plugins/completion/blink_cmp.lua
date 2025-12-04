@@ -2,6 +2,7 @@ return {
 	"saghen/blink.cmp",
 	dependencies = {
 		"echasnovski/mini.snippets",
+		"onsails/lspkind.nvim",
 		{
 			"Kaiser-Yang/blink-cmp-dictionary",
 			dependencies = { "nvim-lua/plenary.nvim" },
@@ -56,19 +57,43 @@ return {
 					components = {
 						kind_icon = {
 							text = function(ctx)
-								local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
-								return " " .. kind_icon .. ctx.icon_gap .. " "
+								if vim.tbl_contains({ "Path" }, ctx.source_name) then
+									local mini_icon, _ = require("mini.icons").get_icon(ctx.item.data.type, ctx.label)
+									if mini_icon then
+										return mini_icon .. ctx.icon_gap
+									end
+								end
+								-- local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
+								-- return " " .. kind_icon .. ctx.icon_gap .. " "
+								local icon = require("lspkind").symbolic(ctx.kind, { mode = "symbol" })
+								return icon .. ctx.icon_gap
 							end,
 							-- (optional) use highlights from mini.icons
 							highlight = function(ctx)
-								local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
-								return hl
+								-- local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
+								-- return hl
+								if vim.tbl_contains({ "Path" }, ctx.source_name) then
+									local mini_icon, mini_hl =
+										require("mini.icons").get_icon(ctx.item.data.type, ctx.label)
+									if mini_icon then
+										return mini_hl
+									end
+								end
+								return ctx.kind_hl
 							end,
 						},
 						kind = {
 							highlight = function(ctx)
-								local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
-								return hl
+								-- local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
+								-- return hl
+								if vim.tbl_contains({ "Path" }, ctx.source_name) then
+									local mini_icon, mini_hl =
+										require("mini.icons").get_icon(ctx.item.data.type, ctx.label)
+									if mini_icon then
+										return mini_hl
+									end
+								end
+								return ctx.kind_hl
 							end,
 						},
 					},
