@@ -10,7 +10,7 @@ return {
 			showSyntaxErrors = true,
 			lint = { enable = true, preview = true },
 			format = { preview = true },
-			configurationPreference = "filesystemFirst",
+			configurationPreference = "editorFirst",
 			organizeImport = true,
 			lineLength = 88,
 			logLevel = "error",

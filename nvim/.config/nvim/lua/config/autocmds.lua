@@ -183,6 +183,39 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 	end,
 })
 
+-- toggle formatting
+vim.api.nvim_create_user_command("FormatDisable", function(args)
+	if args.bang then
+		vim.b.disable_autoformat = true
+		vim.notify("Formatting disabled for this buffer")
+	else
+		vim.g.disable_autoformat = true
+		vim.notify("Formatting disabled globally")
+	end
+end, { desc = "Disable autoformat-on-save", bang = true })
+
+vim.api.nvim_create_user_command("FormatEnable", function()
+	vim.b.disable_autoformat = false
+	vim.g.disable_autoformat = false
+	vim.notify("Formatting re-enabled")
+end, { desc = "Re-enable autoformat-on-save" })
+
+vim.api.nvim_create_user_command("FormatToggle", function(args)
+	local buf_state = vim.b.disable_autoformat
+	local global_state = vim.g.disable_autoformat
+	local is_disabled = buf_state or global_state
+
+	if is_disabled then
+		vim.cmd("FormatEnable")
+	else
+		if args.bang then
+			vim.cmd("FormatDisable!")
+		else
+			vim.cmd("FormatDisable")
+		end
+	end
+end, { desc = "Toggle autoformat-on-save", bang = true })
+
 -- LSP
 local completion = vim.g.completion_mode or "blink" or "native"
 autocmd("LspAttach", {
@@ -233,6 +266,18 @@ autocmd("LspAttach", {
 					},
 				})
 			end, { desc = "Organize imports" })
+			Snacks.keymap.set(
+				{ "n", "x" },
+				"<leader>uf",
+				"<cmd>FormatToggle<cr>",
+				{ desc = "Toggle formatting globally" }
+			)
+			Snacks.keymap.set(
+				{ "n", "x" },
+				"<leader>uF",
+				"<cmd>FormatToggle!<cr>",
+				{ desc = "Toggle formatting for current buffer" }
+			)
 			Snacks.keymap.set("n", "[d", diagnostic_goto(false), { desc = "Go to previous diagnostic message" })
 			Snacks.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Go to next diagnostic message" })
 			Snacks.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Go to previous error" })
