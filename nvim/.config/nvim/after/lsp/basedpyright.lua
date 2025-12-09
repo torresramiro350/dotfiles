@@ -5,6 +5,7 @@ return {
 	cmd = { "basedpyright-langserver", "--stdio" },
 	settings = {
 		basedpyright = {
+			disableOrganizeImports = true,
 			analysis = {
 				autoSearchPaths = true,
 				diagnosticMode = "openFilesOnly",
