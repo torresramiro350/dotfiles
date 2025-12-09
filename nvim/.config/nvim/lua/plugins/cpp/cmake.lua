@@ -24,10 +24,10 @@ return {
 		})
 	end,
 	keys = {
-		{ "<leader>cg", "<cmd>CMakeGenerate<cr>", desc = "CMake Generate" },
-		{ "<leader>cb", "<cmd>CMakeBuild<cr>", desc = "CMake Build" },
-		{ "<leader>cc", "<cmd>CMakeClean<cr>", desc = "CMake Clean" },
-		{ "<leader>ci", "<cmd>CMakeInstall<cr>", desc = "CMake Install" },
+		{ "<leader>Cg", "<cmd>CMakeGenerate<cr>", desc = "CMake Generate" },
+		{ "<leader>Cb", "<cmd>CMakeBuild<cr>", desc = "CMake Build" },
+		{ "<leader>Cc", "<cmd>CMakeClean<cr>", desc = "CMake Clean" },
+		{ "<leader>Ci", "<cmd>CMakeInstall<cr>", desc = "CMake Install" },
 	},
 	opts = {
 		cmake_command = "cmake",
