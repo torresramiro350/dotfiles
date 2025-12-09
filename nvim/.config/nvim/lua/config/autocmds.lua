@@ -252,6 +252,31 @@ autocmd("LspAttach", {
 				end
 			end
 			-- code actions
+			Snacks.keymap.set(
+				"n",
+				"<leader>cc",
+				vim.lsp.codelens.run,
+				{ desc = "Run Codelens", lsp = { method = "textDocument/codeLens" } }
+			)
+			Snacks.keymap.set(
+				"n",
+				"<leader>cC",
+				vim.lsp.codelens.refresh,
+				{ desc = "Run Codelens", lsp = { method = "textDocument/codeLens" } }
+			)
+			Snacks.keymap.set(
+				"n",
+				"K",
+				vim.lsp.buf.hover,
+				{ desc = "Documentation", lsp = { method = "textDocument/hover" } }
+			)
+			Snacks.keymap.set(
+				"n",
+				"gK",
+				vim.lsp.buf.signature_help,
+				{ desc = "Signature Documentation", lsp = { method = "textDocument/signatureHelp" } }
+			)
+			Snacks.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Code Rename" })
 			Snacks.keymap.set("n", "<leader>rs", "<cmd>LspRestart<cr>", { desc = "Restart server" })
 			Snacks.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {
 				lsp = { method = "textDocument/codeAction" },

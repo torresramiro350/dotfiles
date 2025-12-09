@@ -8,6 +8,7 @@ return {
 			analysis = {
 				autoSearchPaths = true,
 				diagnosticMode = "openFilesOnly",
+				autoFormatStrings = true,
 				inlayHints = {
 					callArgumentNamesMatching = true,
 					functionReturnTypes = true,
