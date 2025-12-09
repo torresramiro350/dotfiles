@@ -1,10 +1,10 @@
 git:
-  paging:
-    colorArg: always
-    pager: delta --diff-so-fancy --dark --paging=never --syntax-theme=Catppuccin-mocha
-    # pager: diff-so-fancy
-    # externalDiffCommand: difft --color=always --display=inline
-    # externalDiffCommand: difft --color=always --display=inline
+  pagers:
+    - colorArg: always
+      pager: delta --diff-so-fancy --dark --paging=never --syntax-theme=Catppuccin-mocha
+      # pager: diff-so-fancy
+      # externalDiffCommand: difft --color=always --display=inline
+      # externalDiffCommand: difft --color=always --display=inline
 gui:
   theme:
     # lightTheme: false

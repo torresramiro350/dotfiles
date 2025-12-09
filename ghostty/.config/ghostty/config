@@ -4,10 +4,11 @@
 # font-family = MapleMono NF
 font-size = 10
 font-family = JetBrains Mono
-font-style = "Medium"
+# font-family = Iosevka Term
+font-style = "SemiBold"
 font-style-bold = "ExtraBold"
-font-style-italic = "Medium Italic"
-font-style-bold-italic = "Bold Italic"
+font-style-italic = "SemiBold Italic"
+font-style-bold-italic = "ExtraBold Italic"
 
 font-thicken = true
 font-thicken-strength = 0
