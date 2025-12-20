@@ -106,6 +106,32 @@ function fzf-complete -d 'fzf completion and print selection back to commandline
     commandline -f repaint
 end
 
+function field -d "Select field, including specifying the delimiter"
+    set -l field_num $argv[1]
+    set -l field_delim $argv[2]
+    if test -z $field_num
+        set field_num 1
+    end
+    if test -z $field_delim
+        set field_delim " "
+    end
+    # awk -F "\${2:- }" "{ print \${1:-1} }"
+    awk -F "$field_delim" "{ print \$$field_num }"
+end
+
+function total -d "Sum the total for a selected column"
+    set -l field_num $argv[1]
+    set -l field_delim $argv[2]
+    if test -z $field_num
+        set field_num 1
+    end
+    if test -z $field_delim
+        set field_delim " "
+    end
+
+    awk -F "$field_delim" "{ s += \$$field_num } END { print s }"
+end
+
 alias dnfin="sudo dnf in"
 alias dnfup="sudo dnf up --refresh"
 alias dnfrm="sudo dnf remove"
