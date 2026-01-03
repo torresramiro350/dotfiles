@@ -25,7 +25,8 @@ return {
 			},
 			python = {
 				template = {
-					annotation_convention = "reST",
+					-- annotation_convention = "reST",
+					annotation_convention = "numpydoc",
 				},
 			},
 			c = {
