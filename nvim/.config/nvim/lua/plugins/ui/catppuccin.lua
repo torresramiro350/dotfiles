@@ -2,7 +2,7 @@ return {
 	"catppuccin/nvim",
 	name = "catppuccin",
 	priority = 1000,
-	enabled = true,
+	enabled = false,
 	opts = {
 		auto_integrations = true, -- let capptuccin handle integrations
 		background = {
@@ -55,7 +55,8 @@ return {
 		},
 		integrations = {
 			--defaults
-			blink_cmp = { enabled = true, style = "bordered" },
+			blink_cmp = { style = "bordered" },
+			blink_pairs = true,
 			cmp = true,
 			diffview = true,
 			dap = true,
@@ -99,6 +100,6 @@ return {
 	},
 	config = function(_, opts)
 		require("catppuccin").setup(opts)
-		vim.cmd.colorscheme("catppuccin")
+		vim.cmd.colorscheme("catppuccin-nvim")
 	end,
 }

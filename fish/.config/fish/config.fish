@@ -189,19 +189,19 @@ alias la="eza --icons --long --header --tree --level=1 --git --hyperlink --group
 # alias ltt="eza --icons --long --tree --header --level=2 --hyperlink --group-directories-first"
 
 set -gx PATH $PATH "/home/rtorres/.local/bin"
+set -gx PATH $PATH "/home/rtorres/.codon/bin"
 
 set -gx EDITOR /usr/bin/nvim
 # set -gx EDITOR "/home/rtorres/nvim-linux64/bin/nvim"
 set -gx FZF_DEFAULT_COMMAND "fd --type f --strip-cwd-prefix"
 
-# --border 
-set -Ux FZF_DEFAULT_OPTS "\
---height 40% --tmux center,60%,40% --layout reverse \
---color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
---color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
---color=selected-bg:#45475a \
---color=border:#313244,label:#cdd6f4"
+set -gx FZF_DEFAULT_OPTS "\
+  --height 40% --tmux center,60%,40% --layout reverse --border \
+  --color=fg:#908caa,bg:#191724,hl:#ebbcba \
+	--color=fg+:#e0def4,bg+:#26233a,hl+:#ebbcba \
+	--color=border:#403d52,header:#31748f,gutter:#191724 \
+	--color=spinner:#f6c177,info:#9ccfd8 \
+	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
 
 set -gx FZF_COMPLETION_OPTS "--border --info=inline"
 
@@ -236,11 +236,24 @@ set PATH $HOME/.cargo/bin $PATH
 fzf --fish | source
 
 # >>> mamba initialize >>>
-# !! Contents within this block are managed by 'micromamba shell init' !!
-set -gx MAMBA_EXE "/home/rtorres/.local/bin/micromamba"
+# !! Contents within this block are managed by 'mamba shell init' !!
+set -gx MAMBA_EXE /home/rtorres/miniforge3/bin/mamba
 set -gx MAMBA_ROOT_PREFIX "/home/rtorres/.local/share/mamba"
 $MAMBA_EXE shell hook --shell fish --root-prefix $MAMBA_ROOT_PREFIX | source
 # <<< mamba initialize <<<
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+if test -f /home/rtorres/miniforge3/bin/conda
+    eval /home/rtorres/miniforge3/bin/conda "shell.fish" hook $argv | source
+else
+    if test -f "/home/rtorres/miniforge3/etc/fish/conf.d/conda.fish"
+        . "/home/rtorres/miniforge3/etc/fish/conf.d/conda.fish"
+    else
+        set -x PATH /home/rtorres/miniforge3/bin $PATH
+    end
+end
+# <<< conda initialize <<<
 
 zoxide init fish | source
 starship init fish | source

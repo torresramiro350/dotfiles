@@ -19,7 +19,7 @@ return {
 		usePlaceholders = true,
 		completeUnimported = true,
 		clangdFileStatus = true,
-		fallbackFlags = { "-std=c20" },
+		fallbackFlags = { "-std=c++17" },
 	},
 	root_markers = {
 		".clangd",

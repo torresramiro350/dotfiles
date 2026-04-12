@@ -9,7 +9,7 @@ return {
 				"clangd",
 				"bashls",
 				"dockerls",
-				"cmake",
+				"neocmake",
 				"marksman",
 				"taplo",
 				"yamlls",
