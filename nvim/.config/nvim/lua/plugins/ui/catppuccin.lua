@@ -24,7 +24,6 @@ return {
 			loops = { "italic" },
 			functions = {},
 			keywords = { "italic" },
-			properties = {},
 			strings = {},
 			variables = {},
 			numbers = {},
