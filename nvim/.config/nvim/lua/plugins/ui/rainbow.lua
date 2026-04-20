@@ -1,6 +1,6 @@
 return {
 	"HiPhish/rainbow-delimiters.nvim",
-	enabled = false,
+	enabled = true,
 	event = { "BufRead" },
 	opts = {},
 	config = function(_, opts)
