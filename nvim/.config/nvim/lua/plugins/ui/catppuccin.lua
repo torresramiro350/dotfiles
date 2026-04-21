@@ -2,7 +2,7 @@ return {
 	"catppuccin/nvim",
 	name = "catppuccin",
 	priority = 1000,
-	enabled = true,
+	enabled = false,
 	opts = {
 		auto_integrations = true, -- let capptuccin handle integrations
 		background = {
