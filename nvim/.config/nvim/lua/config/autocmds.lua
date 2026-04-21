@@ -247,7 +247,10 @@ autocmd("LspAttach", {
 					vim.diagnostic.jump({
 						severity = vim.diagnostic.severity[severity],
 						count = direction and 1 or -1,
-						float = true,
+						-- float = true,
+						on_jump = function(diagnostic)
+							vim.diagnostic.open_float(nil, { scope = "cursor" })
+						end,
 					})
 				end
 			end
