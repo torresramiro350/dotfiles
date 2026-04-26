@@ -53,7 +53,7 @@ return {
 		label = {
 			uppercase = true,
 			rainbow = {
-				enabled = true,
+				enabled = false,
 				-- shade = 2,
 				shade = 3,
 			},
@@ -66,6 +66,26 @@ return {
     { "r",     mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
     { "R",     mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
     { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    {"<leader>cD", mode={'n'} , function ()
+      require('flash').jump({
+        matcher=function (win)
+          return vim.tbl_map(
+            function (diag)
+              return {
+                pos = { diag.lnum + 1, diag.col },
+                end_pos = { diag.end_lnum + 1, diag.end_col - 1 },
+              }
+            end, vim.diagnostic.get(vim.api.nvim_win_get_buf(win)))
+        end,
+        action = function (match, state)
+          vim.api.nvim_win_call(match.win, function ()
+            vim.api.nvim_win_set_cursor(match.win, match.pos)
+            vim.diagnostic.open_float()
+          end)
+          state:restore()
+        end,
+      })
+    end},
 		-- stylua: ignore end
 		{
 			"<c-space>",
