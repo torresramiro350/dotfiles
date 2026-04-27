@@ -3,7 +3,7 @@ return {
 		ty = {
 			inlayHints = { variableTypes = false },
 			completions = { autoImport = true },
-			diagnosticMode = "workspace",
+			diagnosticMode = "openFilesOnly",
 		},
 	},
 	filetypes = { "python" },
