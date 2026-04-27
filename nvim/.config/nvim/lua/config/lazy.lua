@@ -33,4 +33,5 @@ require("lazy").setup({
 	{ import = "plugins.sessions" },
 	{ import = "plugins.treesitter" },
 	{ import = "plugins.ui" },
+	{ import = "plugins.ai" },
 })

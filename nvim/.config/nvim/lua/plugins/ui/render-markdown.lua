@@ -1,7 +1,7 @@
 return {
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
-		enabled = false,
+		enabled = true,
 		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
 		ft = { "markdown", "norg", "rmd", "org", "codecompanion", "blink-cmp-documentation", "blink-cmp-signature" },
 		opts = {

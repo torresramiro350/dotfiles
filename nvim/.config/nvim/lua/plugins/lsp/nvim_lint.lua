@@ -4,7 +4,6 @@ return {
 	opts = {
 		events = { "BufWritePost", "BufReadPost", "InsertLeave" },
 		linters_by_ft = {
-			make = { "checkmake" },
 			markdown = { "markdownlint-cli2" },
 			python = { "ruff" },
 			bash = { "shellcheck" },

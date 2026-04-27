@@ -24,7 +24,6 @@ return {
 			loops = { "italic" },
 			functions = {},
 			keywords = { "italic" },
-			properties = {},
 			strings = {},
 			variables = {},
 			numbers = {},
@@ -55,7 +54,8 @@ return {
 		},
 		integrations = {
 			--defaults
-			blink_cmp = { enabled = true, style = "bordered" },
+			blink_cmp = { style = "bordered" },
+			blink_pairs = true,
 			cmp = true,
 			diffview = true,
 			dap = true,
@@ -99,6 +99,6 @@ return {
 	},
 	config = function(_, opts)
 		require("catppuccin").setup(opts)
-		vim.cmd.colorscheme("catppuccin")
+		vim.cmd.colorscheme("catppuccin-nvim")
 	end,
 }
