@@ -6,6 +6,12 @@ nmap("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 nmap("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 nmap("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 
+-- escape terminal mode
+nmap("t", "<esc><esc>", "<C-\\><C-n>", { desc = "Escape terminal mode" })
+nmap("n", "<leader>fT", function()
+	Snacks.terminal()
+end, { desc = "Terminal (cwd)" })
+
 -- Keymaps for better default experience
 nmap({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
