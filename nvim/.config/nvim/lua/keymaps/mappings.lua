@@ -7,10 +7,20 @@ nmap("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 nmap("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 
 -- escape terminal mode
+local function get_root_dir()
+	local root_markers = { ".git", "lua" }
+	local cur_buf_name = vim.api.nvim_buf_get_name(0)
+	if cur_buf_name ~= "" then
+		return vim.fn.getcwd()
+	end
+	local root_dir = vim.fs.root(cur_buf_name, root_markers)
+	return root_dir or vim.fn.getcwd()
+end
 nmap("t", "<esc><esc>", "<C-\\><C-n>", { desc = "Escape terminal mode" })
-nmap("n", "<leader>fT", function()
-	Snacks.terminal()
-end, { desc = "Terminal (cwd)" })
+  -- stylua: ignore start
+nmap("n", "<leader>fT", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })
+nmap("n", "<leader>ft", function() Snacks.terminal(nil ,{ cwd=get_root_dir() }) end, { desc = "Terminal (cwd)" })
+-- stylua: ignore end
 
 -- Keymaps for better default experience
 nmap({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
@@ -22,9 +32,8 @@ nmap("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Close all buffers" })
 nmap("i", "jk", "<Esc>", { desc = "Escape insert mode" })
 
 -- split buffers
-nmap("n", "|", "<cmd>vsplit<cr>", { desc = "Vertical split" })
--- nmap("n", "-", "<cmd>split<cr>", { desc = "Horizontal split" })
-nmap("n", "\\", "<cmd>split<cr>", { desc = "Horizontal split" })
+nmap("n", "<leader>|", "<cmd>vsplit<cr>", { desc = "Vertical split" })
+nmap("n", "<leader>-", "<cmd>split<cr>", { desc = "Horizontal split" })
 
 -- close split buffer
 nmap("n", "<C-q>", "<C-w>q", { desc = "Close split buffer" })
