@@ -39,10 +39,8 @@ vim.lsp.enable({
 	"yamlls",
 	"jsonls",
 	"neocmake",
-	-- "markdown_oxide",
 	"marksman",
 	"harper_ls",
 	"dockerls",
-	-- "tinymist",
 	"taplo",
 })
