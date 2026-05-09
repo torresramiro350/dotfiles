@@ -1,14 +1,11 @@
 return {
-	cmd = {
-		"taplo",
-		"lsp",
-		"stdio",
-	},
+	cmd = { "taplo", "lsp", "stdio" },
 	filetypes = { "toml" },
 	root_markers = {
-		"pyproject.toml",
-		"pixi.toml",
+		".taplo.toml",
 		"taplo.toml",
+		"pixi.toml",
+		"pyproject.toml",
 		".git",
 	},
 }

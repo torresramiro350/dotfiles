@@ -32,19 +32,15 @@ vim.diagnostic.config(diagnostics)
 
 vim.lsp.enable({
 	"lua_ls",
-	-- "basedpyright", -- trying out pylsp for now
-	-- -- "pylsp",
-	"ty", -- not ready just yet for testing
+	"ty",
 	"ruff",
 	"bashls",
 	"clangd",
 	"yamlls",
 	"jsonls",
 	"neocmake",
-	-- "markdown_oxide",
 	"marksman",
 	"harper_ls",
 	"dockerls",
-	-- "tinymist",
 	"taplo",
 })

@@ -10,6 +10,22 @@ return {
 			width_preview = 30,
 		},
 	},
+	keys = {
+		{
+			"fm",
+			function()
+				require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
+			end,
+			desc = "Open mini.files (Directory of Current File)",
+		},
+		{
+			"<leader>fM",
+			function()
+				require("mini.files").open(vim.uv.cwd(), true)
+			end,
+			desc = "Open mini.files (cwd)",
+		},
+	},
 	config = function(_, opts)
 		require("mini.files").setup(opts)
 		local show_dotfiles = true
@@ -69,10 +85,10 @@ return {
 					buffer = buf_id,
 					desc = "Set cwd",
 				})
-				map_split(buf_id, opts.mappings and opts.mappings.go_in_horizontal or "<C-s>", "horizontal", false)
-				map_split(buf_id, opts.mappings and opts.mappings.go_in_vertical or "<C-v>", "vertical", false)
-				map_split(buf_id, opts.mappings and opts.mappings.go_in_horizontal_plus or "<C-S>", "horizontal", true)
-				map_split(buf_id, opts.mappings and opts.mappings.go_in_vertical_plus or "<C-V>", "vertical", true)
+				map_split(buf_id, opts.mappings and opts.mappings.go_in_horizontal or "<C-w>s", "horizontal", false)
+				map_split(buf_id, opts.mappings and opts.mappings.go_in_vertical or "<C-w>v", "vertical", false)
+				map_split(buf_id, opts.mappings and opts.mappings.go_in_horizontal_plus or "<C-w>S", "horizontal", true)
+				map_split(buf_id, opts.mappings and opts.mappings.go_in_vertical_plus or "<C-w>V", "vertical", true)
 			end,
 		})
 
@@ -83,20 +99,4 @@ return {
 			end,
 		})
 	end,
-	keys = {
-		{
-			"-",
-			function()
-				require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
-			end,
-			desc = "Open mini.files (Directory of Current File)",
-		},
-		{
-			"<leader>e",
-			function()
-				require("mini.files").open(vim.uv.cwd(), true)
-			end,
-			desc = "Open mini.files (cwd)",
-		},
-	},
 }
