@@ -22,13 +22,5 @@ return {
 		picker = {
 			name = "snacks.pick",
 		},
-		completion = {
-			-- Set to false to disable completion.
-			nvim_cmp = false,
-			blink = true,
-			-- Trigger completion at 2 chars.
-			min_chars = 2,
-			create_new = true,
-		},
 	},
 }
