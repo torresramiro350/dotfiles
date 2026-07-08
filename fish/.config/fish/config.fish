@@ -132,19 +132,20 @@ function total -d "Sum the total for a selected column"
     awk -F "$field_delim" "{ s += \$$field_num } END { print s }"
 end
 
-alias dnfin="sudo dnf in"
-alias dnfup="sudo dnf up --refresh"
-alias dnfrm="sudo dnf remove"
+alias install="sudo dnf in"
+alias upgrade="sudo dnf up --refresh"
+alias remove="sudo dnf remove"
 alias flatupd="flatpak update"
 
+alias rm="rm -I --preserve-root"
+alias cp="cp -i"
+alias mv="mv -i"
+alias mkdir="mkdir -pv"
 alias x="exit"
-# alias cp="xcp"
 
-alias nv="/usr/bin/nvim"
+# alias nv="/usr/bin/nvim"
+alias nv="/home/linuxbrew/.linuxbrew/bin/nvim"
 alias vimdiff="nvim -d"
-# alias nv='/home/rtorres/nvim-linux64/bin/nvim'
-
-alias mkdir='mkdir -pv'
 
 alias syncdir='rsync -r -auzvhP'
 alias syncfiles='rsync -auzvhP'
@@ -160,13 +161,6 @@ alias txnew="tmux new -s"
 alias txls="tmux list-sessions"
 alias txkill="tmux kill-session -t"
 alias txkillall="tmux kill-server"
-
-# directories 
-alias .1="cd .."
-alias .2="cd ../.."
-alias .3="cd ../../.."
-alias .4="cd ../../../.."
-alias .5="cd ../../../../.."
 
 # Git 
 alias lg="lazygit"
@@ -185,13 +179,10 @@ alias fishconfig="nvim $HOME/.config/fish/config.fish"
 alias ls="eza --icons --git --group-directories-first"
 alias ll="eza --icons --long --header --tree --level=1 --header --git --hyperlink --group-directories-first"
 alias la="eza --icons --long --header --tree --level=1 --git --hyperlink --group-directories-first --all"
-# alias lt="eza --icons --long --tree --header --level=1 --hyperlink --group-directories-first"
-# alias ltt="eza --icons --long --tree --header --level=2 --hyperlink --group-directories-first"
 
 set -gx PATH $PATH "/home/rtorres/.local/bin"
 set -gx PATH $PATH "/home/rtorres/.codon/bin"
-
-set -gx EDITOR /usr/bin/nvim
+set -gx EDITOR "/home/linuxbrew/.linuxbrew/bin/nvim"
 # set -gx EDITOR "/home/rtorres/nvim-linux64/bin/nvim"
 set -gx FZF_DEFAULT_COMMAND "fd --type f --strip-cwd-prefix"
 
@@ -259,3 +250,8 @@ zoxide init fish | source
 starship init fish | source
 
 enable_transience
+
+# opencode
+fish_add_path /home/rtorres/.opencode/bin
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv fish)"
