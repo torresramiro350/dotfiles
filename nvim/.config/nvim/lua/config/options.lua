@@ -127,7 +127,7 @@ vim.g.maplocalleader = " "
 
 -- Place all the general Neovim options
 vim.g.gitblame_display_virtual_text = 1
-vim.o.background = "dark"
+-- vim.o.background = "auto"
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
