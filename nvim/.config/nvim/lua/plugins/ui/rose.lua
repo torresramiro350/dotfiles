@@ -8,6 +8,11 @@ return {
 			CurSearch = { fg = "base", bg = "leaf", inherit = false },
 			Search = { fg = "text", bg = "leaf", blend = 20, inherit = false },
 		},
+		styles = {
+			bold = true,
+			italic = true,
+			transparency = false,
+		},
 	},
 	config = function(opts)
 		require("rose-pine").setup(opts)
