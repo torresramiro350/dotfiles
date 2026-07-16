@@ -1,6 +1,6 @@
-require("groups.utility_funcs")
 return {
 	"danymat/neogen",
+	enabled = false,
 	dependencies = { "nvim-treesitter/nvim-treesitter" },
 	event = { "BufNewFile ", "BufReadPre" },
 	cmd = "Neogen",
