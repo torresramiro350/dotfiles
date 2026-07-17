@@ -1,5 +1,6 @@
 return {
 	"jeangiraldoo/codedocs.nvim",
+	event = "VeryLazy",
 	keys = {
 		{
 			"<leader>cn",
@@ -26,7 +27,17 @@ return {
 			},
 			c = {
 				filetypes = { "c", "cpp" },
-				default_style = "doxygen",
+				default_style = "Doxygen",
+				styles = {
+					Doxygen = {},
+				},
+			},
+			bash = {
+				filetypes = { "sh", "bash" },
+				default_style = "Google",
+				styles = {
+					Google = {},
+				},
 			},
 		},
 	},
