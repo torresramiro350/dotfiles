@@ -32,38 +32,18 @@ autocmd("TextYankPost", {
 	end,
 })
 
--- ide like highlight when stopping cursor
--- leaving it out for later
--- autocmd("CursorMoved", {
--- 	group = augroup("LspReferenceHighlight"),
--- 	desc = "Highlight references under cursor",
--- 	callback = function()
--- 		if vim.fn.mode ~= "i" then
--- 			local clients = vim.lsp.get_clients({ bufnr = 0 })
--- 			local supports_highlight = false
--- 			for _, client in ipairs(clients) do
--- 				if client.server_capabilities.documentHighlightProvider then
--- 					supports_highlight = true
--- 					break -- Found a supporting client, no need to check further
--- 				end
--- 			end
---
--- 			if supports_highlight then
--- 				vim.lsp.buf.clear_references()
--- 				vim.lsp.buf.document_highlight()
--- 			end
--- 		end
--- 	end,
--- })
---
--- -- ide like heighlight when stopping cursor
--- autocmd("CursorMovedI", {
--- 	group = "LspReferenceHighlight",
--- 	desc = "Clear highlights when entering insert mode",
--- 	callback = function()
--- 		vim.lsp.buf.clear_references()
--- 	end,
--- })
+--  disable inlay hints in insert mode
+autocmd("InsertEnter", {
+	callback = function()
+		vim.lsp.inlay_hint.enable(false)
+	end,
+})
+
+autocmd("InsertLeave", {
+	callback = function()
+		vim.lsp.inlay_hint.enable(true)
+	end,
+})
 
 -- go to last loc when opening a buffer
 autocmd("BufReadPost", {
@@ -277,7 +257,7 @@ autocmd("LspAttach", {
 				{ desc = "Signature Documentation", lsp = { method = "textDocument/signatureHelp" } }
 			)
 			Snacks.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Code Rename" })
-			Snacks.keymap.set("n", "<leader>rs", "<cmd>LspRestart<cr>", { desc = "Restart server" })
+			Snacks.keymap.set("n", "<leader>rs", "<cmd>lsp restart<cr>", { desc = "Restart server" })
 			Snacks.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {
 				lsp = { method = "textDocument/codeAction" },
 				desc = "Code Action",
@@ -293,13 +273,13 @@ autocmd("LspAttach", {
 			end, { desc = "Organize imports" })
 			Snacks.keymap.set(
 				{ "n", "x" },
-				"<leader>uf",
+				"<leader>uF",
 				"<cmd>FormatToggle<cr>",
 				{ desc = "Toggle formatting globally" }
 			)
 			Snacks.keymap.set(
 				{ "n", "x" },
-				"<leader>uF",
+				"<leader>uf",
 				"<cmd>FormatToggle!<cr>",
 				{ desc = "Toggle formatting for current buffer" }
 			)
