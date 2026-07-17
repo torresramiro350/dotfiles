@@ -27,7 +27,7 @@ return {
 				opts = {
 					ensure_installed = {
 						"codelldb",
-						"cpplint",
+						-- "cpplint",
 						"cmakelint",
 						"gersemi",
 						"markdownlint-cli2",
