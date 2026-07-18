@@ -21,4 +21,14 @@ return {
 		{ "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
 		{ "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
 	},
+	opts = {
+		terminal = {
+			split_side = "right",
+			split_width_percentage = 0.25,
+			diff_split_width_percentage = 0.20,
+			provider = "snacks",
+			auto_close = true,
+			auto_insert = true,
+		},
+	},
 }
