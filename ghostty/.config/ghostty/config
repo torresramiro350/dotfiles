@@ -15,7 +15,9 @@ font-thicken-strength = 0
 adjust-cell-height = 20%
 bold-is-bright = true
 
-theme = dark:"Catppuccin Mocha", light:"Catppuccin Latte"
+# theme = dark:"Catppuccin Mocha", light:"Catppuccin Latte"
+theme = dark:rose-pine,light:rose-pine-dawn
+# theme = dark:Rose Pine,light:Rose Pine Dawn
 shell-integration = fish
 window-theme = ghostty
 adw-toolbar-style = raised 
