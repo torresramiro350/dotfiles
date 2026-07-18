@@ -29,7 +29,7 @@ return {
 						"codelldb",
 						-- "cpplint",
 						"cmakelint",
-						"gersemi",
+						-- "gersemi",
 						"markdownlint-cli2",
 						"markdown-toc",
 						"prettier",
