@@ -5,7 +5,9 @@ return {
 	opts = {
 		animate = {},
 		dim = {},
-		picker = {},
+		picker = {
+			ui_select = true,
+		},
 		gh = {},
 		explorer = { enabled = false },
 		input = { enabled = true },
