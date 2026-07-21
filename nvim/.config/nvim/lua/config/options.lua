@@ -1,6 +1,9 @@
 local opt = vim.opt
 local wo = vim.wo
 
+-- enables project local configurations
+vim.o.exrc = true
+
 -- nerd fonts
 vim.g.have_nerd_font = true
 vim.g.completion_mode = "blink" -- set default completion mode
