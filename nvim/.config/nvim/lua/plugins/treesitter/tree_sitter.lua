@@ -39,7 +39,6 @@ return {
 				"ssh_config",
 				"regex",
 				"toml",
-				"tmux",
 				"vim",
 				"vimdoc",
 				"yaml",
