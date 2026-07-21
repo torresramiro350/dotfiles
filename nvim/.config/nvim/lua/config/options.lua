@@ -1,15 +1,13 @@
 local opt = vim.opt
 local wo = vim.wo
 
--- enables project local configurations
-vim.o.exrc = true
-
 -- nerd fonts
 vim.g.have_nerd_font = true
 vim.g.completion_mode = "blink" -- set default completion mode
 vim.g.use_blink_cmp_main = false
 
 -- Basic settings
+opt.exrc = true -- enables project local configurations
 opt.wrap = false -- no wrapping of code
 opt.viewoptions = { "cursor", "folds" } -- keep the viewoption in cursot's last location
 opt.number = true -- display line number
