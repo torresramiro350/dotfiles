@@ -1,6 +1,6 @@
 return {
 	"stevearc/overseer.nvim",
-	event = { "VeryLazy" },
+	event = { "BufReadPost", "BufNewFile" },
 	keys = {
 		{ "<leader>or", "<cmd>OverseerRun<cr>", desc = "Run task" },
 		{ "<leader>ot", "<cmd>OverseerToggle<cr>", desc = "Toggle task list" },
