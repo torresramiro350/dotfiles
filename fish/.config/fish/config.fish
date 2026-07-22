@@ -143,8 +143,8 @@ alias mv="mv -i"
 alias mkdir="mkdir -pv"
 alias x="exit"
 
-# alias nv="/usr/bin/nvim"
-alias nv="/home/linuxbrew/.linuxbrew/bin/nvim"
+alias nv="/usr/bin/nvim"
+# alias nv="/home/linuxbrew/.linuxbrew/bin/nvim"
 alias vimdiff="nvim -d"
 
 alias syncdir='rsync -r -auzvhP'
@@ -248,6 +248,7 @@ end
 
 zoxide init fish | source
 starship init fish | source
+wtp shell-init fish | source
 
 enable_transience
 
