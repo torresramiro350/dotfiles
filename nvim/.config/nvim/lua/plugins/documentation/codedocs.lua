@@ -1,6 +1,6 @@
 return {
 	"jeangiraldoo/codedocs.nvim",
-	event = "VeryLazy",
+	event = { "BufReadPost", "BufNewFile" },
 	keys = {
 		{
 			"<leader>cn",
@@ -26,7 +26,7 @@ return {
 				},
 			},
 			c = {
-				filetypes = { "c", "cpp" },
+				-- filetypes = { "c", "cpp", "h", "hpp" },
 				default_style = "Doxygen",
 				styles = {
 					Doxygen = {},
