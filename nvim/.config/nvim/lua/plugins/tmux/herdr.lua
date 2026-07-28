@@ -21,7 +21,7 @@ return {
 		ignored_buftypes = { "nofile", "quickfix", "prompt", "help", "terminal" },
 		ignored_filetypes = {
 			"neo-tree",
-			"snacks_dashboard",
+			-- "snacks_dashboard",
 			"snacks_explorer",
 			"snacks_picker",
 			"dadbod-ui",

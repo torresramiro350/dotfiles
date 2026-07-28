@@ -41,9 +41,15 @@ return {
 					action = function()
 						Snacks.gitbrowse()
 					end,
+					enabled = function()
+						return Snacks.git.get_root() ~= nil
+					end,
 				},
 				function()
 					local in_git = Snacks.git.get_root()
+					if not in_git then
+						return {}
+					end
 					local cmds = {
 						{
 							title = "Notifications",
