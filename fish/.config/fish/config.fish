@@ -182,7 +182,8 @@ alias la="eza --icons --long --header --tree --level=1 --git --hyperlink --group
 
 set -gx PATH $PATH "/home/rtorres/.local/bin"
 set -gx PATH $PATH "/home/rtorres/.codon/bin"
-set -gx EDITOR "/home/linuxbrew/.linuxbrew/bin/nvim"
+set -gx EDITOR /usr/bin/nvim
+# set -gx EDITOR "/home/linuxbrew/.linuxbrew/bin/nvim"
 # set -gx EDITOR "/home/rtorres/nvim-linux64/bin/nvim"
 set -gx FZF_DEFAULT_COMMAND "fd --type f --strip-cwd-prefix"
 
@@ -221,6 +222,14 @@ set -gx SKIM_DEFAULT_OPTIONS "\
 
 set -Ux FZF_COMPLETION_TRIGGER '~~'
 bind \t fzf-complete
+bind \e\ch backward-delete-char
+bind \e\cj execute
+bind \e\ck kill-line
+bind \e\cl clear-screen
+bind \e\ca beginning-of-line
+bind \e\ce end-of-line
+bind \e\cf forward-char
+bind \e\cb backward-char
 
 set PATH $HOME/.cargo/bin $PATH
 # Set up fzf key bindings
