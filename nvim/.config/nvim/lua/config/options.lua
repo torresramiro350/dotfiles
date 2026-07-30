@@ -18,7 +18,7 @@ opt.sidescrolloff = 8 -- keep 8 columns left/right of cursor
 opt.ruler = false -- Disable the default ruler
 -- TODO: find what this oes
 opt.laststatus = 3 -- draw the status line over the whole window
-opt.textwidth = 90 -- set the maximum text width to be 80 characters
+opt.textwidth = 100 -- set the maximum text width to be 80 characters
 opt.wildmode = "longest:full,full" -- completion mode for the command line
 opt.wildignorecase = true -- case-insentive tab completion in commands
 opt.virtualedit = "block" -- allow cursor to move where there is no text in visual block
