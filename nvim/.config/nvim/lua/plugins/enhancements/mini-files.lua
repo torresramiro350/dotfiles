@@ -5,7 +5,7 @@ return {
 	opts = {
 		options = { use_as_default_explorer = true },
 		windows = {
-			true,
+			preview = true,
 			width_focus = 30,
 			width_preview = 30,
 		},
