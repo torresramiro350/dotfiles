@@ -46,11 +46,13 @@ nmap("n", "<leader>fs", "<cmd>w<cr>", { desc = "Save changes" })
 nmap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 nmap("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
--- moving between buffers
-nmap("n", "<C-j>", "<c-w>j", { desc = "Move to lower split" })
-nmap("n", "<C-k>", "<c-w>k", { desc = "Move to upper split" })
-nmap("n", "<C-h>", "<c-w>h", { desc = "Move to left split" })
-nmap("n", "<C-h>", "<c-w>l", { desc = "Move to right split" })
+-- moving between buffers (herdr-splits.nvim owns these keys when HERDR_ENV=1)
+if vim.env.HERDR_ENV ~= "1" then
+	nmap("n", "<C-j>", "<c-w>j", { desc = "Move to lower split" })
+	nmap("n", "<C-k>", "<c-w>k", { desc = "Move to upper split" })
+	nmap("n", "<C-h>", "<c-w>h", { desc = "Move to left split" })
+	nmap("n", "<C-l>", "<c-w>l", { desc = "Move to right split" })
+end
 -- resize split lines
 nmap("n", "<C-up>", "<cmd>resize -2<cr>", { desc = "Increase buffer size" })
 nmap("n", "<C-down>", "<cmd>resize +2<cr>", { desc = "Increase buffer size down" })

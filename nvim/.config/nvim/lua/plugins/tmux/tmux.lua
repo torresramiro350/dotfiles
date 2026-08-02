@@ -1,5 +1,6 @@
 return {
 	event = "VeryLazy",
+	enabled = false,
 	-- event = "VimEnter",
 	"christoomey/vim-tmux-navigator",
 	cmd = {
@@ -14,6 +15,6 @@ return {
 		{ "<c-j>", "<cmd> TmuxNavigateDown<CR>" },
 		{ "<c-k>", "<cmd> TmuxNavigateUp<CR>" },
 		{ "<c-l>", "<cmd> TmuxNavigateRight<CR>" },
-		{ "<c-\\>", "<cmd> TmuxNavigatePrevious<CR>" },
+		-- { "<c-\\>", "<cmd> TmuxNavigatePrevious<CR>" },
 	},
 }
