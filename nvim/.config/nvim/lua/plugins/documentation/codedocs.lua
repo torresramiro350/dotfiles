@@ -14,30 +14,16 @@ return {
 			python = {
 				filetypes = { "python" },
 				default_style = "reST",
-				styles = {
-					reST = {
-						default_annot = "comment",
-						annots = {
-							func = {},
-							class = {},
-							comment = {},
-						},
-					},
-				},
 			},
-			c = {
-				-- filetypes = { "c", "cpp", "h", "hpp" },
+			cpp = {
 				default_style = "Doxygen",
-				styles = {
-					Doxygen = {},
-				},
+			},
+			lua = {
+				default_style = "EmmyLua",
 			},
 			bash = {
 				filetypes = { "sh", "bash" },
 				default_style = "Google",
-				styles = {
-					Google = {},
-				},
 			},
 		},
 	},
