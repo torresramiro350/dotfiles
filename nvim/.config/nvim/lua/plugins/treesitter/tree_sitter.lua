@@ -45,11 +45,9 @@ return {
 			},
 		},
 		config = function(_, opts)
-			-- require("nvim-treesitter.configs").setup(opts)
 			local TS = require("nvim-treesitter")
 			TS.setup(opts)
 			TS.install(opts.ensure_installed)
-			local installed = TS.get_installed(true)
 			vim.api.nvim_create_autocmd("FileType", {
 				group = vim.api.nvim_create_augroup("treesitter", { clear = true }),
 				callback = function()
