@@ -30,5 +30,8 @@ return {
 			auto_close = true,
 			auto_insert = true,
 		},
+		diff_opts = {
+			layout = "unified",
+		},
 	},
 }
