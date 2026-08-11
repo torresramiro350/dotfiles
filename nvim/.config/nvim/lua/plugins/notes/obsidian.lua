@@ -10,14 +10,13 @@ return {
 		ui = { enable = false },
 		legacy_commands = false,
 		workspaces = {
-			{
-				name = "work",
-				path = "~/Documents/vaults/science-notes",
-			},
-			{
-				name = "personal",
-				path = "~/Documents/vaults/personal",
-			},
+			{ name = "work", path = "~/Documents/vaults/second-brain/" },
+		},
+		frontmatter = { enabled = true }, -- let the template's frontmatter be the only block
+		templates = {
+			folder = "templates",
+			date_format = "YYYY-MM-DD",
+			time_format = "HH:mm",
 		},
 		picker = {
 			name = "snacks.pick",
