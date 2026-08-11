@@ -1,18 +1,17 @@
 # Neovim configuration
 
-<!-- toc -->
-
-- [Configuration overview](#configuration-overview)
-  * [Acknowledgements](#acknowledgements)
-
-<!-- tocstop -->
+<!--toc:start-->
+- [Neovim configuration](#neovim-configuration)
+  - [Configuration overview](#configuration-overview)
+    - [Acknowledgements](#acknowledgements)
+<!--toc:end-->
 
 ## Configuration overview
 
+> [!NOTE]
+> First configuration after using other `Neovim` distros. There's lots of rooms
+> for improvements, but this is working for me so far.
+
 ### Acknowledgements
 
-> [!NOTE]
-> First configuration after using other Nvim distros. There's lots of rooms for improvements,
-> but this is working for me so far
-
-Taking great inspiration from Kickstart
+Taking great inspiration from [Kickstart](https://github.com/nvim-lua/kickstart.nvim)
