@@ -238,12 +238,9 @@ autocmd("LspAttach", {
 				vim.lsp.codelens.run,
 				{ desc = "Run Codelens", lsp = { method = "textDocument/codeLens" } }
 			)
-			Snacks.keymap.set(
-				"n",
-				"<leader>cC",
-				vim.lsp.codelens.refresh,
-				{ desc = "Run Codelens", lsp = { method = "textDocument/codeLens" } }
-			)
+			Snacks.keymap.set("n", "<leader>cC", function()
+				return vim.lsp.codelens.enable(true)
+			end, { desc = "Run Codelens", lsp = { method = "textDocument/codeLens" } })
 			Snacks.keymap.set(
 				"n",
 				"K",
