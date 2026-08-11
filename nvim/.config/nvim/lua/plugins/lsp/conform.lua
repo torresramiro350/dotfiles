@@ -1,7 +1,6 @@
 return {
 	"stevearc/conform.nvim",
 	dependencies = { "mason.nvim" },
-	-- lazy = true,
 	event = { "BufNewFile", "BufRead" },
 	command = { "ConformInfo" },
 	opts = function()
@@ -42,8 +41,10 @@ return {
 				lua = { "stylua" },
 				yaml = { "yamlfmt" },
 				json = { "prettierd", "prettier" },
-				["markdown"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
-				["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
+				["markdown"] = { "rumdl", "markdown-toc" },
+				["markdown.mdx"] = { "rumdl", "markdown-toc" },
+				-- ["markdown"] = { "rumdl", "markdownlint-cli2", "markdown-toc" },
+				-- ["markdown.mdx"] = { "rumdl", "markdownlint-cli2", "markdown-toc" },
 				fish = { "fish_indent" },
 				makefile = { "bake" },
 				cmake = { "cmake_format", "gersemi" },
