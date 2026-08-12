@@ -1,9 +1,8 @@
 name: Check Lua Formatting
 on:
   push:
-    branches:
-      - main
-    pull_request:
+    branches: [main]
+  pull_request:
 jobs:
   stylua-check:
     name: Stylua Check
@@ -13,6 +12,6 @@ jobs:
         uses: actions/checkout@v7
       - name: Stylua check
         uses: JohnnyMorganz/stylua-action@v5
-        with: ${{ secrets.GITHUB_TOKEN }}
-        version: latest
-        args: --check .
+        with:
+          version: latest
+          args: --check .
