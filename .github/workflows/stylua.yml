@@ -14,4 +14,4 @@ jobs:
         uses: JohnnyMorganz/stylua-action@v5
         with:
           version: latest
-          args: --check .
+          args: --check nvim/.config/nvim/
