@@ -11,7 +11,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v7
       - name: Stylua check
-        uses: JohnnyMorganz/stylua-action@v6
+        uses: JohnnyMorganz/stylua-action@v5
         with:
           version: latest
           args: --check nvim/.config/nvim/
