@@ -1,7 +1,7 @@
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --diff-so-fancy --dark --paging=never --syntax-theme=Catppuccin-mocha
+      command: delta --diff-so-fancy --dark --paging=never --syntax-theme=Catppuccin-mocha
       # pager: diff-so-fancy
       # externalDiffCommand: difft --color=always --display=inline
       # externalDiffCommand: difft --color=always --display=inline

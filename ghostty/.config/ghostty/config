@@ -5,7 +5,8 @@
 font-size = 10
 font-family = JetBrains Mono
 # font-family = Iosevka Term
-font-style = "SemiBold"
+# font-style = "SemiBold"
+font-style = "Medium"
 font-style-bold = "ExtraBold"
 font-style-italic = "SemiBold Italic"
 font-style-bold-italic = "ExtraBold Italic"
@@ -16,8 +17,9 @@ adjust-cell-height = 20%
 bold-is-bright = true
 
 # theme = dark:"Catppuccin Mocha", light:"Catppuccin Latte"
-theme = dark:rose-pine,light:rose-pine-dawn
-# theme = dark:Rose Pine,light:Rose Pine Dawn
+# theme = dark:rose-pine,light:rose-pine-dawn
+# theme = Nordfox
+theme = dark:Rose Pine,light:Rose Pine Dawn
 shell-integration = fish
 window-theme = ghostty
 adw-toolbar-style = raised 
