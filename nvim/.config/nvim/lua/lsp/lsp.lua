@@ -42,5 +42,6 @@ vim.lsp.enable({
 	"marksman",
 	"harper_ls",
 	"dockerls",
+	"rumdl",
 	"taplo",
 })
