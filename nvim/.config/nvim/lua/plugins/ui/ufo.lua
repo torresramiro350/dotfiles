@@ -2,7 +2,8 @@ return {
 	"kevinhwang91/nvim-ufo",
 	dependencies = { "kevinhwang91/promise-async" },
 	event = { "BufRead", "BufNewFile" },
-	enabled = true,
+	-- enabled = true,
+	enabled = false,
 	keys = function()
 		local ufo = require("ufo")
 		local peek_under_cursor = function()
