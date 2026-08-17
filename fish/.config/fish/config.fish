@@ -1,7 +1,7 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
 
-    # atuin init fish | source
+    atuin init fish | source
 end
 
 function starship_transient_prompt_func
@@ -10,40 +10,60 @@ end
 
 # function fzf-bcd-widget -d 'cd backwards'
 function fcd -d 'cd backwards'
-    pwd | awk -v RS=/ '/\n/ {exit} {p=p $0 "/"; print p}' | tac | eval (__fzfcmd) +m --select-1 --exit-0 $FZF_BCD_OPTS | read -l result
+    pwd \
+        | awk -v RS=/ '/\n/ {exit} {p=p $0 "/"; print p}' \
+        | tac \
+        | eval (__fzfcmd) +m --select-1 --exit-0 $FZF_BCD_OPTS \
+        | read -l result
     [ "$result" ]; and cd $result
     commandline -f repaint
 end
 
 function fs -d "Switch tmux session"
-    tmux list-sessions -F "#{session_name}" | fzf | read -l result; and tmux switch-client -t "$result"
+    tmux list-sessions -F "#{session_name}" \
+        | fzf \
+        | read -l result; and tmux switch-client -t "$result"
 end
 
 function fssh -d "Fuzzy-find ssh host via ag and ssh into it"
-    # ag --ignore-case '^host [^*]' ~/.ssh/config | cut -d ' ' -f 2 | fzf | read -l result; and ssh "$result"
-    rg --ignore-case '^host [^*]' ~/.ssh/config | cut -d ' ' -f 2 | fzf | read -l result; and ssh "$result"
+    rg --ignore-case '^host [^*]' ~/.ssh/config \
+        | cut -d ' ' -f 2 \
+        | fzf \
+        | read -l result; and ssh "$result"
 end
 
 function fco -d "Fuzzy-find and checkout a branch"
-    git branch --all | grep -v HEAD | string trim | fzf | read -l result; and git checkout "$result"
+    git branch --all \
+        | grep -v HEAD \
+        | string trim \
+        | fzf \
+        | read -l result; and git checkout "$result"
 end
 
 function fco -d "Use `fzf` to choose which branch to check out" --argument-names branch
     set -q branch[1]; or set branch ''
-    git for-each-ref --format='%(refname:short)' refs/heads | fzf --height 10% --layout=reverse --border --query=$branch --select-1 | xargs git checkout
+    git for-each-ref --format='%(refname:short)' refs/heads \
+        | fzf --height 10% --layout=reverse --border --query=$branch --select-1 \
+        | xargs git checkout
 end
 
 function fcoc -d "Fuzzy-find and checkout a commit"
-    git log --pretty=oneline --abbrev-commit --reverse | fzf --tac +s -e | awk '{print $1;}' | read -l result; and git checkout "$result"
+    git log --pretty=oneline --abbrev-commit --reverse \
+        | fzf --tac +s -e \
+        | awk '{print $1;}' \
+        | read -l result; and git checkout "$result"
 end
 
 function snag -d "Pick desired files from a chosen branch"
     # use fzf to choose source branch to snag files FROM
-    set branch (git for-each-ref --format='%(refname:short)' refs/heads | fzf --height 20% --layout=reverse --border)
+    set branch (git for-each-ref --format='%(refname:short)' refs/heads \
+    | fzf --height 20% --layout=reverse --border)
     # avoid doing work if branch isn't set
     if test -n "$branch"
         # use fzf to choose files that differ from current branch
-        set files (git diff --name-only $branch | fzf --height 20% --layout=reverse --border --multi)
+        set files (
+          git diff --name-only $branch | fzf --height 20% --layout=reverse --border --multi
+        )
     end
     # avoid checking out branch if files aren't specified
     if test -n "$files"
@@ -54,7 +74,8 @@ end
 function fzum -d "View all unmerged commits across all local branches"
     set viewUnmergedCommits "echo {} | head -1 | xargs -I BRANCH sh -c 'git log master..BRANCH --no-merges --color --format=\"%C(auto)%h - %C(green)%ad%Creset - %s\" --date=format:\'%b %d %Y\''"
 
-    git branch --no-merged master --format "%(refname:short)" | fzf --no-sort --reverse --tiebreak=index --no-multi \
+    git branch --no-merged master --format "%(refname:short)" \
+        | fzf --no-sort --reverse --tiebreak=index --no-multi \
         --ansi --preview="$viewUnmergedCommits"
 end
 
@@ -224,6 +245,7 @@ set -Ux FZF_COMPLETION_TRIGGER '~~'
 bind \t fzf-complete
 bind \e\ch backward-delete-char
 bind \e\cj execute
+bind \e\cw backward-kill-word
 bind \e\ck kill-line
 bind \e\cl clear-screen
 bind \e\ca beginning-of-line
@@ -260,6 +282,8 @@ starship init fish | source
 wtp shell-init fish | source
 
 enable_transience
+bind \cr _atuin_search
+bind -M insert \cr _atuin_search
 
 # opencode
 fish_add_path /home/rtorres/.opencode/bin
