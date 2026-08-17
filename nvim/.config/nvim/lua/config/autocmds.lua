@@ -5,6 +5,16 @@ local function augroup(name)
 	return vim.api.nvim_create_augroup(name, { clear = true })
 end
 
+-- autocmd("FileType", {
+-- 	pattern = "make",
+-- 	callback = function()
+-- 		vim.lsp.start({
+-- 			name = "makefile-lsp",
+-- 			cmd = { "makefile-lsp" },
+-- 		})
+-- 	end,
+-- })
+
 autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 	group = augroup("checktime"),
 	callback = function()

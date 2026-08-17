@@ -44,4 +44,5 @@ vim.lsp.enable({
 	"dockerls",
 	"rumdl",
 	"taplo",
+	"makefile_lsp",
 })
