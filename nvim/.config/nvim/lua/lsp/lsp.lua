@@ -43,6 +43,6 @@ vim.lsp.enable({
 	"harper_ls",
 	"dockerls",
 	"rumdl",
-	"taplo",
+	"tombi",
 	"makefile_lsp",
 })
