@@ -1,9 +1,10 @@
 return {
 	settings = {
 		ty = {
-			inlayHints = { variableTypes = false },
+			inlayHints = { variableTypes = false, callArgumentNames = true },
 			completions = { autoImport = true },
-			diagnosticMode = "workspace",
+			diagnosticMode = "openFilesOnly",
+			completeFunctionParentheses = true,
 		},
 	},
 	filetypes = { "python" },
