@@ -1,25 +1,41 @@
+local function get_mini_icon(ctx)
+	if ctx.source_name == "Path" then
+		local is_unknown_type =
+			vim.tbl_contains({ "link", "socket", "fifo", "char", "block", "unknown" }, ctx.item.data.type)
+		local mini_icon, mini_hl, _ = require("mini.icons").get(
+			is_unknown_type and "os" or ctx.item.data.type,
+			is_unknown_type and "" or ctx.label
+		)
+		if mini_icon then
+			return mini_icon, mini_hl
+		end
+	end
+	local mini_icon, mini_hl, _ = require("mini.icons").get("lsp", ctx.kind)
+	return mini_icon, mini_hl
+end
+
 return {
 	"saghen/blink.cmp",
+
 	dependencies = {
+		"saghen/blink.lib",
 		"echasnovski/mini.snippets",
 		"onsails/lspkind.nvim",
-		{
-			"Kaiser-Yang/blink-cmp-dictionary",
-			dependencies = { "nvim-lua/plenary.nvim" },
-		},
+		{ "Kaiser-Yang/blink-cmp-dictionary", dependencies = { "nvim-lua/plenary.nvim" } },
 		{ "saghen/blink.compat", opts = {}, version = "*" },
 	},
-	event = "InsertEnter",
+	build = function()
+		require("blink.cmp").build():pwait()
+	end,
+	event = { "InsertEnter", "CmdlineEnter" },
 	enabled = true,
-	version = not vim.g.use_blink_cmp_main and "1.*",
-	build = vim.g.use_blink_cmp_main and "cargo build --release",
 	opts_extend = {
 		"sources.completion.enabled_providers",
 		"sources.compat",
 		"sources.default",
 	},
 	opts = {
-		fuzzy = { implementation = "prefer_rust" },
+		fuzzy = { implementation = "prefer_rust_with_warning" },
 		snippets = { preset = "mini_snippets" },
 		appearance = { nerd_font_variant = "normal" },
 		completion = {
@@ -36,35 +52,31 @@ return {
 			},
 			ghost_text = { enabled = true },
 			menu = {
-				-- don't show completion when searching
-				auto_show = function(ctx)
-					return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
-				end,
 				draw = {
-					padding = { 0, 1 }, -- padding only on the right side
 					columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
-					treesitter = { "lsp" },
 					components = {
 						kind_icon = {
 							text = function(ctx)
-								-- local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
-								return " " .. ctx.kind_icon .. ctx.icon_gap .. " "
+								local kind_icon, kind_hl = get_mini_icon(ctx)
+								return " " .. kind_icon .. ctx.icon_gap .. " "
 							end,
-							-- (optional) use highlights from mini.icons
 							highlight = function(ctx)
-								local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
+								local _, hl = get_mini_icon(ctx)
 								return hl
 							end,
-							-- (optional) use highlights from mini.icons
 						},
 						kind = {
 							highlight = function(ctx)
-								local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
+								local _, hl = get_mini_icon(ctx)
 								return hl
 							end,
 						},
 					},
 				},
+				auto_show = function(ctx)
+					return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
+				end,
+
 				border = "rounded",
 			},
 			documentation = {
@@ -80,31 +92,25 @@ return {
 			enabled = false,
 		},
 		cmdline = {
-			enabled = true,
-			sources = function()
-				local type = vim.fn.getcmdtype()
-				-- Search forward and backward
-				if type == "/" or type == "?" then
-					return { "buffer" }
-				end
-				-- Commands
-				if type == ":" or type == "@" then
-					return { "cmdline" }
-				end
-				return {}
-			end,
+			keymap = { preset = "inherit" },
+			completion = {
+				ghost_text = { enabled = true },
+				menu = {
+					auto_show = function(ctx)
+						return vim.fn.getcmdtype() == ":"
+					end,
+				},
+			},
 		},
 		sources = {
 			default = function(ctx)
 				local filetype = vim.bo.filetype
 				local defaults = { "lsp", "path", "snippets", "buffer" }
-				-- Filetype-specific completions
 				local filetype_completions = {
 					lua = { "lazydev" },
 					markdown = { "dictionary" },
 					text = { "dictionary" },
 				}
-				-- Check for filetype matches first
 				if filetype_completions[filetype] then
 					vim.list_extend(defaults, filetype_completions[filetype])
 					return defaults
