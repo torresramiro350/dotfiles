@@ -138,7 +138,15 @@ return {
 				lazydev = {
 					name = "LazyDev",
 					module = "lazydev.integrations.blink",
-					score_offset = 100, -- show at a higher priority than lsp
+					score_offset = 100,
+				},
+				cmdline = {
+					min_keyword_length = function(ctx)
+						if ctx.mode == "cmdline" and string.find(ctx.line, " ") == nil then
+							return 3
+						end
+						return 0
+					end,
 				},
 			},
 		},
