@@ -29,6 +29,8 @@ git clone https://github.com/torresramiro350/dotfiles.git
 - navigate to repo
 - install the dotfiles
 
+Example:
+
 ```bash
 stow kitty
 ```
