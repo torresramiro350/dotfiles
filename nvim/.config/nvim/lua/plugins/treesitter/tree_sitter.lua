@@ -87,49 +87,79 @@ return {
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		branch = "main",
 		event = "VeryLazy",
-		opts = {},
-		keys = function()
-			local moves = {
+		opts = {
+			move = {
+				enable = true,
+				set_jumps = true,
+				keys = {
+      -- stylua: ignore start
 				goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
 				goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
-				goto_previous_start = {
-					["[f"] = "@function.outer",
-					["[c"] = "@class.outer",
-					["[a"] = "@parameter.inner",
-				},
+				goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
 				goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
-			}
-			local ret = {}
-			for method, keymaps in pairs(moves) do
-				for key, query in pairs(keymaps) do
-					local desc = query:gsub("@", ""):gsub("%..*", "")
-					desc = desc:sub(1, 1):upper() .. desc:sub(2)
-					desc = (key:sub(1, 1) == "[" and "Prev " or "Next ") .. desc
-					desc = desc .. (key:sub(2, 2) == key:sub(2, 2):upper() and " End" or " Start")
-					ret[#ret + 1] = {
-						key,
-						function()
-							-- don't use treesitter if in diff mode and the key is one of the c/C keys
+				},
+				-- stylua: ignore end
+			},
+		},
+		config = function(_, opts)
+			local TS = require("nvim-treesitter-textobjects")
+			if not TS.setup then
+				vim.notify(
+					"nvim-treesitter-textobjects: please update via your plugin manager (`main` branch required)",
+					vim.log.levels.ERROR
+				)
+				return
+			end
+			TS.setup(opts)
+
+			local function has_textobjects(ft)
+				local lang = vim.treesitter.language.get_lang(ft) or ft
+				local ok, query = pcall(vim.treesitter.query.get, lang, "textobjects")
+				return ok and query ~= nil
+			end
+
+			local function attach(buf)
+				local ft = vim.bo[buf].filetype
+				if not (vim.tbl_get(opts, "move", "enable") and has_textobjects(ft)) then
+					return
+				end
+
+				local moves = vim.tbl_get(opts, "move", "keys") or {}
+
+				for method, keymaps in pairs(moves) do
+					for key, query in pairs(keymaps) do
+						local queries = type(query) == "table" and query or { query }
+						local parts = {}
+						for _, q in ipairs(queries) do
+							local part = q:gsub("@", ""):gsub("%..*", "")
+							part = part:sub(1, 1):upper() .. part:sub(2)
+							table.insert(parts, part)
+						end
+						local desc = table.concat(parts, " or ")
+						desc = (key:sub(1, 1) == "[" and "Prev " or "Next ") .. desc
+						desc = desc .. (key:sub(2, 2) == key:sub(2, 2):upper() and " End" or " Start")
+
+						vim.keymap.set({ "n", "x", "o" }, key, function()
 							if vim.wo.diff and key:find("[cC]") then
 								return vim.cmd("normal! " .. key)
 							end
 							require("nvim-treesitter-textobjects.move")[method](query, "textobjects")
-						end,
-						desc = desc,
-						mode = { "n", "x", "o" },
-						silent = true,
-					}
+						end, {
+							buffer = buf,
+							desc = desc,
+							silent = true,
+						})
+					end
 				end
 			end
-			return ret
-		end,
-		config = function(_, opts)
-			local TS = require("nvim-treesitter-textobjects")
-			if not TS.setup then
-				error("Please use `:Lazy` and update `nvim-treesitter`", 0)
-				return
-			end
-			TS.setup(opts)
+
+			vim.api.nvim_create_autocmd("FileType", {
+				group = vim.api.nvim_create_augroup("treesitter_textobjects_moves", { clear = true }),
+				callback = function(ev)
+					attach(ev.buf)
+				end,
+			})
+			vim.tbl_map(attach, vim.api.nvim_list_bufs())
 		end,
 	},
 }
