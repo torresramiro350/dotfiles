@@ -109,7 +109,7 @@ return {
 				local filetype_completions = {
 					lua = { "lazydev" },
 					markdown = { "dictionary" },
-					text = { "dictionary" },
+					tex = { "dictionary" },
 				}
 				if filetype_completions[filetype] then
 					vim.list_extend(defaults, filetype_completions[filetype])
