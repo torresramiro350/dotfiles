@@ -1,4 +1,6 @@
 # controlling the font appearance
+window-height = 54
+window-width = 235
 
 # font-family = Maple Mono
 # font-family = MapleMono NF
