@@ -7,6 +7,7 @@ return {
 			function()
 				require("codedocs").generate()
 			end,
+			desc = "Insert annotation",
 		},
 	},
 	opts = {
