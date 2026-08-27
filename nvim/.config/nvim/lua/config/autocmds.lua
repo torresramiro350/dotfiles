@@ -5,16 +5,6 @@ local function augroup(name)
 	return vim.api.nvim_create_augroup(name, { clear = true })
 end
 
--- autocmd("FileType", {
--- 	pattern = "make",
--- 	callback = function()
--- 		vim.lsp.start({
--- 			name = "makefile-lsp",
--- 			cmd = { "makefile-lsp" },
--- 		})
--- 	end,
--- })
-
 autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 	group = augroup("checktime"),
 	callback = function()
@@ -216,7 +206,7 @@ autocmd("LspAttach", {
 			return
 		end
 		-- NOTE: Disable hover in favor of pyright/basedpyright
-		if client.name == "ruff" then
+		if client.name == "ruff" or client.name == "shuck" then
 			client.server_capabilities.hoverProvider = false
 		end
 

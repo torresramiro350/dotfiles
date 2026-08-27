@@ -45,4 +45,5 @@ vim.lsp.enable({
 	"rumdl",
 	"tombi",
 	"makefile_lsp",
+	"shuck",
 })
